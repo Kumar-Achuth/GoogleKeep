@@ -1,47 +1,125 @@
-<!-- <div class="heading"> -->
-    <div class="container1" fxLayout="column" fxLayout.xs="row">
-        <div class="item item-1" fxFlex fxFlexOffset="8%"></div>
-        <div class="item item-2" fxFlex fxFlexOffset="8%" fxFlexOrder="3"> </div>
-<div class="container" 
-fxLayout ="row"
-fxLayout.xs="column" 
-fxLayoutAlign="center" 
-fxLayoutGap="10px" 
-fxLayoutGap.xs="0">
-<div class="item item-3" fxFlex="31%"></div>
-<div class="item item-4" fxFlex="31%" fxFlexOrder="3"></div>
-<div class="item item-5" fxFlex >
-  <div class="clas">
-    <mat-card>
-      <mat-card-title id = "center">
-        <img src="./images/google.svg" height="50" width="150"><br>
-       Login</mat-card-title>
-      <mat-card-content fxLayout="column">
-        <div>
-         
-          <mat-form-field class = "width" >
-            <input matInput placeholder="Username" required>
-          </mat-form-field>
-    
-          <mat-form-field class = "width">
-            <input matInput placeholder="Password" required>
-          </mat-form-field>
-        <br>
-        <!-- <nav>
-            <a routerLink="/signup">  Forgot Password ? </a>
-          </nav> -->
-       
-        </div>
-       
-      </mat-card-content>
-      <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
-        <nav>
-          <a routerLink="/signup"> Create New Account </a>
-        </nav>
-        <button mat-raised-button color="primary">Login</button>
-
+<div class="container1" fxLayout="column" fxLayout.xs="row">
+  <div class="item item-1" fxFlex fxFlexOffset="10%"></div>
+  <div class="item item-2" fxFlex fxFlexOffset="8%" fxFlexOrder="3"> </div>
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div class="item item-3" fxFlex="31%"></div>
+    <div class="item item-4" fxFlex="31%" fxFlexOrder="3"></div>
+    <div class="item item-5" fxFlex>
+      <mat-card>
+        <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+            <div leftPane> 
+      <div class="clas">
+        <!-- <mat-card> -->
+          <mat-card-title id="center">
+            <img src="./images/google.svg" height="50" width="150"><br>
+            <div style="font-family :BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,'Open Sans'">
+              Login to Your Account</div>
+          </mat-card-title>
+          <mat-card-content fxLayout="column">
+            <div>
+              <mat-form-field class="width">
+                <input matInput placeholder="Username" required>
+              </mat-form-field>
+              <br>
+            </div>
+          </mat-card-content>
+          <div class="button"fxLayout="row" fxLayoutAlign="space-between">
+            <nav>
+              <a routerLink="/signup" > Create New Account </a> 
+            </nav>
+            <button mat-raised-button color = "primary"(click)="isLeftVisible = !isLeftVisible">Next</button> 
+          </div>
+        <!-- </mat-card> -->
       </div>
-    </mat-card>
+    </div>
+    <div rightPane>
+        <div>
+            <!-- <mat-card> -->
+              <mat-card-title id="center">
+                <img src="./images/google.svg" height="50" width="150"><br>
+                <div style="font-family :BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,'Open Sans'">
+                  Login to Your Account</div>
+              </mat-card-title>
+              <mat-card-content fxLayout="column">
+                <div>
+                    <mat-form-field class = "width">
+                        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                      </mat-form-field>
+                  <br>
+                </div>
+              </mat-card-content>
+              <div class=button fxLayout="row" fxLayoutAlign="space-between">
+                <nav>
+                  <a routerLink="/signup"> Create New Account </a>
+                </nav>
+                <button mat-raised-button color = "primary"(click)="isLeftVisible = !isLeftVisible">Back</button>
+                <nav>
+                    <a routerLink="/home"> <button mat-raised-button color="primary">Login</button></a>
+                  </nav>
+              </div>
+            <!-- </mat-card> -->
+          </div>
+          </div>
+        </my-slide-panel> 
+      </mat-card>
   </div>
-  </div></div></div>
-<!-- </div> -->
+</div>
+</div>
+<!-- </ng-content></div> -->
+
+
+
+
+
+
+
+
+<!-- <div rightPane>
+<div class="container1" fxLayout="column" fxLayout.xs="row">
+  <div class="item item-1" fxFlex fxFlexOffset="8%"></div>
+  <div class="item item-2" fxFlex fxFlexOffset="8%" fxFlexOrder="3"> </div>
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div class="item item-3" fxFlex="31%"></div>
+    <div class="item item-4" fxFlex="33%" fxFlexOrder="3"></div>
+    <div class="item item-5" fxFlex>
+      <div class="clas">
+        <mat-card>
+          <mat-card-title id="center">
+            <img src="./images/google.svg" height="50" width="150"><br>
+            <div style="font-family :BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,'Open Sans'">
+              Login to Your Account</div>
+          </mat-card-title>
+          <mat-card-content fxLayout="column">
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  </mat-form-field>
+              <br>
+            </div>
+          </mat-card-content>
+          <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
+            <nav>
+              <a routerLink="/signup"> Create New Account </a>
+            </nav>
+            <button mat-raised-button color="primary">Back</button>
+            <button mat-raised-button color="primary">Login</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</my-slide-panel> -->
+
+
+
+
+<!-- <my-slide-panel [activePane]="isLeftVisible ? 'left' : 'right'">
+    <div leftPane>LEFT</div>
+    <div rightPane>RIGHT</div>
+  </my-slide-panel>
+   -->
+ 

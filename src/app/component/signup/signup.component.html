@@ -1,7 +1,7 @@
 <!-- <div class="heading"> -->
 <div class="container1" fxLayout="column" fxLayout.xs="row">
-  <div class="item item-1" fxFlex fxFlexOffset="-0.29%"></div>
-  <div class="item item-2" fxFlex fxFlexOffset="-1.5%" fxFlexOrder="3"></div>
+  <div class="item item-1" fxFlex fxFlexOffset="0.5%"></div>
+  <div class="item item-2" fxFlex fxFlexOffset="-0.9%" fxFlexOrder="3"></div>
   <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
     <div class="item item-3" fxFlex="33%"></div>
     <div class="item item-4" fxFlex="33%" fxFlexOrder="3"></div>
@@ -9,9 +9,12 @@
       <div class="clas">
         <mat-card>
           <mat-card-title>
-            <img src="./images/google.svg" height="50" width="150">
+            <img src="./images/google.svg" height="50" width="100">
             <br>
-            SignUp - New Account </mat-card-title>
+            <div style="font-family : BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 'Open Sans'">
+              Create your Google Account
+            </div>
+          </mat-card-title>
           <mat-card-content fxLayout="column">
             <div>
               <mat-form-field>
@@ -23,21 +26,26 @@
               </mat-form-field>
             </div>
             <div>
-                <mat-form-field>
-                    <input matInput placeholder="Enter your email" required>
-                  </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Enter your email" required>
+              </mat-form-field>
               &nbsp;
               <mat-form-field>
                 <input matInput placeholder="Username" required>
               </mat-form-field>
             </div>
-            <!-- <div> -->
+            <!-- <div>  -->
             <mat-form-field>
-              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required>
               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-form-field>
             <!-- &nbsp; -->
-            <!-- </div> -->
+            <!-- <mat-form-field>
+                <input matInput placeholder="Confirm Password" [type]="hide ? 'password' : 'text'" required>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </mat-form-field> -->
+              <!-- </div> -->
+
             <mat-form-field hintLabel="">
               <input matInput #input maxlength="10" placeholder="Enter Phone Number">
             </mat-form-field>
@@ -45,15 +53,17 @@
             <div fxLayout="row" fxLayoutAlign="space-between">
               <mat-card id="size">
                 <!-- <mat-radio-group> -->
-                  <button mat-button  color ="disabled"> Basic Scheme<br>
-                  <h5> </h5></button>
+                <button mat-button color="disabled"> Basic  <br> Free 30 Days Trial
+                  <h5> </h5>
+                </button>
                 <!-- </mat-radio-group> -->
               </mat-card>
               &nbsp;
               <mat-card id="size1">
                 <!-- <mat-radio-group> -->
-                  <button style="height : 55px; width : 150px " mat-button color="disabled">  Advanced Scheme  <br>
-                  <h5></h5></button>
+                <button  mat-button color="disabled"> Advanced <br> Premium At 9.99$ only
+                  <h5></h5>
+                </button>
                 <!-- </mat-radio-group> -->
               </mat-card>
             </div>
@@ -66,7 +76,6 @@
             <button mat-raised-button color="primary">Submit</button>
           </div>
         </mat-card>
-        <h5>CopyRights Issued By Google  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;    Help  Settings  Privacy</h5>
       </div>
     </div>
   </div>
