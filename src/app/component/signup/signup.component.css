@@ -54,13 +54,13 @@ padding-left: 2%;
     .mat-radio-button ~ .mat-radio-button {
       padding-right: 16px;
     }
-    #size
+    .size
     {
-      background-color: lightsalmon;
+      background-color: crimson;
       height: 50%;
       width : 50%;
     }
-    #size1
+    .size1
     {
       background-color: lightblue;
       height: 50%;

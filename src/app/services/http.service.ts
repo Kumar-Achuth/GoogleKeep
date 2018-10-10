@@ -6,10 +6,18 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
+  url = 'http://34.213.106.173/api/';
 
   constructor(private http: HttpClient) { }
-  // configUrl = 'assets/config.json';
-  getConfig() {
-    return this.http.get('http://34.213.106.173/api/user/service');
+  getConfig(url){
+     url= this.url+url;
+     return this.http.get(url);
   }
+
+  postCOnfig(url,body){
+    url=this.url+url;
+    return this.http.post(url,body);
+  }
+  // getService(){
+  //   this.http.get<any>(this.url);
 }

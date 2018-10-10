@@ -1,4 +1,3 @@
-<!-- <div class="heading"> -->
 <div class="container1" fxLayout="column" fxLayout.xs="row">
   <div class="item item-1" fxFlex fxFlexOffset="0.5%"></div>
   <div class="item item-2" fxFlex fxFlexOffset="-0.9%" fxFlexOrder="3"></div>
@@ -6,6 +5,7 @@
     <div class="item item-3" fxFlex="33%"></div>
     <div class="item item-4" fxFlex="33%" fxFlexOrder="3"></div>
     <div class="item item-5" fxFlex>
+      <!-- <form [formGroup] = "signupForm" (ngSubmit) = "onSubmit(signupForm.value)"> -->
       <div class="clas">
         <mat-card>
           <mat-card-title>
@@ -18,66 +18,57 @@
           <mat-card-content fxLayout="column">
             <div>
               <mat-form-field>
-                <input matInput placeholder="First Name" required>
+                <input matInput placeholder="First Name"  [(ngModel)]="model.FirstName"  #FirstName="ngModel" required>
               </mat-form-field>
               &nbsp;
               <mat-form-field>
-                <input matInput placeholder="Last Name" required>
+                <input matInput placeholder="Last Name" [(ngModel)]="model.LastName"  #LastName="ngModel" required>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field>
-                <input matInput placeholder="Enter your email" required>
+                <input matInput placeholder="Enter your email" [(ngModel)]="model.Email"  #Email="ngModel"  required>
+                <mat-error *ngIf="emailId.invalid">{{getErrorMessage()}}</mat-error>
+                <!-- <input matInput placeholder="Enter your Email" [(ngModel)]="model.Email"  #Email="ngModel" required> -->
               </mat-form-field>
               &nbsp;
               <mat-form-field>
-                <input matInput placeholder="Username" required>
+                <input matInput placeholder="Username" [(ngModel)]="model.UserName"  #UserName="ngModel" required>
               </mat-form-field>
             </div>
-            <!-- <div>  -->
             <mat-form-field>
-              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" required>
+              <input matInput placeholder="Enter your password" [(ngModel)]="model.password"  #password="ngModel" [type]="hide ? 'password' : 'text'" required>
               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-form-field>
-            <!-- &nbsp; -->
-            <!-- <mat-form-field>
-                <input matInput placeholder="Confirm Password" [type]="hide ? 'password' : 'text'" required>
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-              </mat-form-field> -->
-              <!-- </div> -->
-
             <mat-form-field hintLabel="">
-              <input matInput #input maxlength="10" placeholder="Enter Phone Number">
+              <input matInput #input maxlength="10" placeholder="Enter Phone Number" required>
             </mat-form-field>
             <h4>Services</h4>
             <div fxLayout="row" fxLayoutAlign="space-between">
-              <mat-card id="size">
-                <!-- <mat-radio-group> -->
-                <button mat-button color="disabled"> Basic  <br> Free 30 Days Trial
-                  <h5> </h5>
-                </button>
-                <!-- </mat-radio-group> -->
+              <mat-card class="size" [@basicAnime]="value ? 'open': 'closed'" (click)="Basic()"> Basic<br>
+                <h4>Ability to add only title and description</h4>
               </mat-card>
-              &nbsp;
-              <mat-card id="size1">
-                <!-- <mat-radio-group> -->
-                <button  mat-button color="disabled"> Advanced <br> Premium At 9.99$ only
-                  <h5></h5>
-                </button>
-                <!-- </mat-radio-group> -->
+              &nbsp;&nbsp;&nbsp;
+              <mat-card class="size1" [@advanceAnime]="value1 ? 'open': 'closed'" (click)="Advance()"> Advanced <br>
+                <h4>Ability to add title, description, images, labels, checklist and colors</h4>
               </mat-card>
             </div>
           </mat-card-content>
           <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
+              <nav>
+                  <a routerLink="/login">Existing User
+                  </a>
+                </nav>
+              <button mat-raised-button color="primary" value="reset">Reset</button>
             <nav>
-              <a routerLink="/login"> Login </a>
+              <a routerLink="/login"> <button mat-raised-button color="primary" (click) = "send()">Submit</button>
+              </a>
             </nav>
-            <button mat-raised-button color="primary" value="reset">Reset</button>
-            <button mat-raised-button color="primary">Submit</button>
+
           </div>
         </mat-card>
       </div>
+      <!-- </form> -->
     </div>
   </div>
 </div>
-<!-- </div> -->
