@@ -14,7 +14,7 @@ export class HttpService {
      return this.http.get(url);
   }
 
-  postCOnfig(url,body){
+  postConfig(url,body){
     url=this.url+url;
     return this.http.post(url,body);
   }

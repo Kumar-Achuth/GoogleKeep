@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { HttpService } from '../../services/http.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,10 +10,38 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  Email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor() { }
+  constructor(private myHttpService: HttpService) { }
 
   ngOnInit() {
   }
+  getErrorMessage() {
+    return this.Email.hasError('required') ? 'You must enter a value' :
+      this.Email.hasError('email') ? 'Not a valid email' :
+        '';
+  }
+  submitted = false;
+ 
+  onSubmit() { 
+    this.submitted = true; 
+  }
+
+/**   For going to next animations function */
+
+  isLeftVisible = false;
+
+
+  goTo()
+  {
+    if(!this.Email.invalid)
+    {
+    this.isLeftVisible = !this.isLeftVisible
+  }
+  else
+  {
+    alert('invalid')
+    }
+}
 
 }
