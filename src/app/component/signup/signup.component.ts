@@ -49,10 +49,10 @@ export class SignupComponent implements OnInit {
   hide = true;
   records = {};
   basic: any;
+  message : any;
   advance: any;
   value = true;
   value1 = true;
-  signupForm: FormGroup;
   form: any = {};
   Email = new FormControl('', [Validators.required, Validators.email]);
   FirstName = new FormControl('',[Validators.required,Validators.pattern('[a-zA-Z]*')]);
@@ -133,9 +133,11 @@ export class SignupComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
+          this.message = "Successful Registration"
         },
         error => {
           console.log("Error", error);
+          this.message = "Registration UnSuccessful "
         }
       )
   }

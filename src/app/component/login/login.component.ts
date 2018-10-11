@@ -30,17 +30,19 @@ export class LoginComponent implements OnInit {
 /**   For going to next animations function */
 
   isLeftVisible = false;
-
+message1 : any;
 
   goTo()
   {
     if(!this.Email.invalid)
     {
-    this.isLeftVisible = !this.isLeftVisible
+    this.isLeftVisible = !this.isLeftVisible;
+    this.message1 = "Please Enter The Password "
   }
   else
   {
-    alert('invalid')
+    alert('Invalid EmailId')
+    this.message1 = "Incorrect EmailId"
     }
 }
 
