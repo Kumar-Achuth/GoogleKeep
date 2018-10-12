@@ -20,8 +20,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpService } from './services/http.service';
-import { HomeComponent } from './component/home/home.component';
 import { SlidePanelComponent } from './component/slide-panel/slide-panel.component';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
+
 
 
 @NgModule({
@@ -29,8 +33,10 @@ import { SlidePanelComponent } from './component/slide-panel/slide-panel.compone
     AppComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent,
-    SlidePanelComponent
+    SlidePanelComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,8 @@ import { SlidePanelComponent } from './component/slide-panel/slide-panel.compone
     MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule ,
-    HttpClientInMemoryWebApiModule
+    HttpClientInMemoryWebApiModule,
+    MatSnackBarModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

@@ -1,42 +1,4 @@
-/* .example-container {
-    display: flex;
-    flex-direction: column;
-    text-align: justify;
-    padding-top: 3%;
-padding-left: 2%;
-    height: fit-content
-    /* align-content: center;
- } */
-  
-  /* mat-card
-  {
-      align-content: center;
-      padding-left: 10%;
-      padding-right: 30%;
-      padding-top: 3%;
-      width: 60%;
-  }
-  #padding
-{
-  padding-top: 10%;
-  padding-left: 15%;;
-  align-content: center;
-} */
 
-/* #example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  .example-full-width {
-    width: 100%;
-  }
-
-
-   */
-   /* .row-height {
-    height: 100%;
-    } */
 
     .heading{
       display: flex;
@@ -48,24 +10,54 @@ padding-left: 2%;
     .clas
     {
       width: 450px;
-      /* height : 550px */
-      /* border-radius: 5%; */
+      
     }
     .mat-radio-button ~ .mat-radio-button {
       padding-right: 16px;
     }
-    .size
+    .select
     {
-      background-color: crimson;
-      height: 50%;
-      width : 50%;
+      cursor: pointer;
+      background-color: lightgreen;
+      height: 70%;
+      width :70%;
     }
-    .size1
+    .notSelect
     {
-      background-color: lightblue;
-      height: 50%;
-      width : 50%;
+      cursor: pointer;
+      background-color:lightskyblue ;
+      height: 70%;
+      width : 70%;
     }
-    
-
+  
+    .letter1
+    {
+      color : blue;
+    font-size: 40px;
+    }
+    .letter2
+    {
+color : red;
+font-size : 40px;
+    }
+    .letter3
+    {
+color : green;
+font-size: 40px;
+    }
+    .letter4
+    {
+      color : blue;
+      font-size: 40px;
+    }
+  .letter5
+  {
+    font-size: 40px;
+color : red;
+  }
+.letter6
+{
+  font-size: 40px;
+color : yellow;
+}
   

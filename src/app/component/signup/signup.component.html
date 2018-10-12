@@ -1,84 +1,69 @@
-   <div class="container1" fxLayout="column" fxLayout.xs="row">
-  <div class="item item-1" fxFlex fxFlexOffset="1.9%"></div>
+<div class="container1" fxLayout="column" fxLayout.xs="row">
+  <div class="item item-1" fxFlex fxFlexOffset="0.1%"></div>
   <div class="item item-2" fxFlex fxFlexOffset="-0.9%" fxFlexOrder="3"></div>
   <form>
-  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-    <div class="item item-3" fxFlex="33%"></div>
-    <div class="item item-4" fxFlex="33%" fxFlexOrder="3"></div>
-    <div class="item item-5" fxFlex>
-      <div class="clas">
-        <mat-card>
-           <!-- <form> -->
-          <mat-card-title>
-            <img src="./images/google.svg" height="50" width="150">
-            <br>
-            <div style="font-family : BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 'Open Sans'">
-              Create your Google Account
-            </div>
-          </mat-card-title>
-          <mat-card-content fxLayout="column">
-            <div>
-              <mat-form-field>
-                <input matInput placeholder="First Name"  [(ngModel)]="model.FirstName" [formControl]="FirstName" minlength="3" maxlength="30" required>
-                <mat-error *ngIf = "FirstName.invalid"> {{getErrorMessageFirstName()}}</mat-error>
-              </mat-form-field>
-              &nbsp;
-              <mat-form-field>
-                <input matInput placeholder="Last Name" [(ngModel)]="model.LastName" [formControl]="LastName"  minlength="3" maxlength="30" required>
-                <mat-error *ngIf = "LastName.invalid"> {{getErrorMessageLastName()}}</mat-error>
-              </mat-form-field>
-            </div>
-            <!-- <div> -->
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <div class="item item-3" fxFlex="33%"></div>
+      <div class="item item-4" fxFlex="33%" fxFlexOrder="3"></div>
+      <div class="item item-5" fxFlex>
+        <div class="clas">
+          <mat-card>
+            <mat-card-title>
+              <div class="letters" fxLayout="row">
+                <div class="letter1">F</div>
+                <div class="letter2">U</div>
+                <div class="letter3">N</div>
+                <div class="letter4">D</div>
+                <div class="letter5">O</div>
+                <div class="letter6">O</div>
+              </div>
+              <br>
+              <div style="font-family : BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 'Open Sans'">
+                Create your Google Account
+              </div>
+            </mat-card-title>
+            <mat-card-content fxLayout="column">
+              <div>
+                <mat-form-field>
+                  <input matInput placeholder="First Name" [(ngModel)]="model.FirstName" [formControl]="FirstName"
+                    minlength="3" maxlength="30" required>
+                  <mat-error *ngIf="FirstName.invalid"> {{getErrorMessageFirstName()}}</mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field>
+                  <input matInput placeholder="Last Name" [(ngModel)]="model.LastName" [formControl]="LastName"
+                    minlength="3" maxlength="30" required>
+                  <mat-error *ngIf="LastName.invalid"> {{getErrorMessageLastName()}}</mat-error>
+                </mat-form-field>
+              </div>
               <mat-form-field>
                 <input matInput placeholder="Enter your Email" [(ngModel)]="model.Email" [formControl]="Email" required>
-                <mat-error *ngIf = "Email.invalid"> {{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="Email.invalid"> {{getErrorMessage()}}</mat-error>
               </mat-form-field>
-              <!-- &nbsp; -->
-              <!-- <mat-form-field>
-                <input matInput placeholder="Username" [(ngModel)]="model.UserName"  [formControl]="UserName" required>
-                <mat-error *ngIf="UserName.invalid">{{getErrorMessageUserName()}}</mat-error>
-              </mat-form-field> -->
-            <!-- </div> -->
-            <mat-form-field>
-              <input matInput placeholder="Enter your password" [(ngModel)]="model.password" [formControl] = "password" [type]="hide ? 'password' : 'text'" required>
-              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-              <mat-error *ngIf="password.invalid">{{getErrorMessagepassword()}}</mat-error>
-            </mat-form-field>
-            <!-- <mat-form-field hintLabel="">
-              <input matInput placeholder="Enter Phone Number" type="text"  minlength="10" maxlength="10" [formControl] = "PhoneNumber" required>
-              <mat-error *ngIf="PhoneNumber.invalid">{{getErrorMessagePhoneNumber()}}</mat-error>
-            </mat-form-field> -->
-            <h4>Services</h4>
-            <div fxLayout="row" fxLayoutAlign="space-between">
-              <mat-card class="size" [@basicAnime]="value ? 'open': 'closed'" (click)="Basic()"> Basic<br>
-                <h4>Ability to add only title and description</h4>
-              </mat-card>
-              &nbsp;&nbsp;&nbsp;
-              <mat-card class="size1" [@advanceAnime]="value1 ? 'open': 'closed'" (click)="Advance()"> Advanced <br>
-                <h4>Ability to add title, description, images, labels, checklist and colors</h4>
-              </mat-card>
+              <mat-form-field>
+                <input matInput placeholder="Enter your password" [(ngModel)]="model.password" [formControl]="password"
+                  [type]="hide ? 'password' : 'text'" required>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error *ngIf="password.invalid">{{getErrorMessagepassword()}}</mat-error>
+              </mat-form-field>
+              <h4> Select Your Service</h4>
+              <div class="size" fxLayout="row" fxLayoutAlign="space-between">
+                <span *ngFor="let card of cards" style="padding : 15px;">
+                  <mat-card (click)="selectCards(card)" [ngClass]="card.select ? 'select' : 'notSelect'">
+                    <h4><i>{{card.name}}</i></h4>
+                    <h4>{{card.description}}</h4>
+                  </mat-card>
+                </span>
+              </div>
+            </mat-card-content>
+            <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
+              <a routerLink="/login">Existing User</a>
+              <button mat-raised-button color="primary" type="reset" value="reset">Reset</button>
+              <button mat-raised-button color="primary" (click)="send()">Submit</button>
             </div>
-          </mat-card-content>
-         <!-- <br> -->
-          <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
-              <nav>
-                  <a routerLink="/login">Existing User</a>
-                </nav>
-              <button mat-raised-button color="primary" type= "reset" value="reset">Reset</button>
-              <button mat-raised-button color="primary" (click) = "send()">Submit</button>
-          </div>
-        <!-- </form> -->
-        </mat-card>
-        <br>
-        <!-- <mat-card> -->
-        <div style="text-align : center; font-display: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 'Open Sans'  ">
-       {{message}}
-       </div>
-      <!-- </mat-card> -->
+          </mat-card>
+        </div>
       </div>
-  
     </div>
-  </div>
   </form>
 </div>
-
