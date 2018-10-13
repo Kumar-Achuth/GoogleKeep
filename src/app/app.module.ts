@@ -24,7 +24,14 @@ import { SlidePanelComponent } from './component/slide-panel/slide-panel.compone
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
-import { HomePageComponent } from './component/home-page/home-page.component';
+// import { SideBarComponent } from './component/side-bar/side-bar.component';
+// import { ToolBarComponent } from './component/tool-bar/tool-bar.component';
+import { HomeComponent } from './component/home/home.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material';
+
 
 
 
@@ -36,7 +43,10 @@ import { HomePageComponent } from './component/home-page/home-page.component';
     SlidePanelComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    HomePageComponent
+    // SideBarComponent,
+    // ToolBarComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +66,13 @@ import { HomePageComponent } from './component/home-page/home-page.component';
     ReactiveFormsModule,
     HttpClientModule ,
     HttpClientInMemoryWebApiModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    LayoutModule,
+    MatListModule,
+    
+
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

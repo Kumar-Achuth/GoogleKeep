@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -27,10 +27,13 @@ model : any = {};
         '';
   }
 
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar ) { }
+  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar, private router:Router,
+    public route:ActivatedRoute, ) { }
+    public accessToken=this.route.snapshot.params.forgotToken;
 
   ngOnInit() {
   }
+  public input = new FormData();
 
   match() {
     let pass =  this.model.password;
@@ -41,6 +44,7 @@ model : any = {};
      this.snackBar.open("Password Mismatch" , "failed" , {
        duration:3000
      })
+
      return false;
     }
     else
@@ -48,22 +52,22 @@ model : any = {};
      this.snackBar.open("Password" , "Generated" , {
        duration:3000
     })
-   }
-     this.myHttpService
-       .replaceData('/user/reset-password', {
-         "newPassword": this.model.password,
-       })
-       .subscribe(
-         (data) => {
-           console.log("POST Request is successful ", data);
+   
+    
+   var body={
+    "newPassword": this.model.password
+  }
+  this.input.append('newPassword', this.model.password);
+  console.log(this.input)
+  this.myHttpService.postReset("user/reset-password",body,this.accessToken).subscribe(response=>{
+    console.log("successfull",response);
+  },error=>{
+    console.log("failed",error)
+  })
+  console.log("accessToken",this.accessToken)
  
-         },
-         error => {
-           console.log("Error", error);
-         })
    }
- 
-
-
-
+  }
 }
+
+

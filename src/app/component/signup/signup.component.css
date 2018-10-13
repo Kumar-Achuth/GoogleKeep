@@ -60,4 +60,8 @@ color : red;
   font-size: 40px;
 color : yellow;
 }
+.caps
+{
+  text-transform: uppercase;
+}
   
