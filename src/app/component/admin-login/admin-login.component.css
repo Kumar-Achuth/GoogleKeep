@@ -1,0 +1,63 @@
+
+
+    .heading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 97vh;
+        width: 100%;
+      }
+      .clas
+      {
+        width: 450px;
+        
+      }
+      .mat-radio-button ~ .mat-radio-button {
+        padding-right: 16px;
+      }
+      .select
+      {
+        cursor: pointer;
+        background-color: lightgreen;
+        height: 70%;
+        width :70%;
+      }
+      .notSelect
+      {
+        cursor: pointer;
+        background-color:lightskyblue ;
+        height: 70%;
+        width : 70%;
+      }
+    
+      .letter1
+      {
+        color : blue;
+      font-size: 40px;
+      }
+      .letter2
+      {
+  color : red;
+  font-size : 40px;
+      }
+      .letter3
+      {
+  color : green;
+  font-size: 40px;
+      }
+      .letter4
+      {
+        color : blue;
+        font-size: 40px;
+      }
+    .letter5
+    {
+      font-size: 40px;
+  color : red;
+    }
+  .letter6
+  {
+    font-size: 40px;
+  color : yellow;
+  }
+    

@@ -1,29 +1,92 @@
 .sidenav-container {
-  height: 100%;
+  height: fit-content;
+  background-color: lightgrey;
 }
+/* .toolbar{
+  background-color:  #fb0;
+  width: auto;
+} */
 .sidenav {
-  width: 200px;
+  width: 250px;
+  margin-top: 65px;
+  background-color:rgb(211, 211, 211)
 }
 .mat-toolbar.mat-primary {
   position: sticky;
-  top: 0;
+  top: 0;  
 }
-.color
+.mat-drawer.mat-drawer-side {
+  top:0;
+  height:100%;
+}
+/* .mat-toolbar.mat-primary {
+  background:#fb0 ;  
+} */
+.toolbar
 {
-  padding-left: 15%;
-  background-color: #fb0;
+  background: #fb0;
+  position: relative;
+  display: flex;
+
 }
-.search1
+.title-header{
+padding-left: 30px;
+color:black;
+padding-right: 32px;
+}
+.toggle{
+  color: black;
+  opacity: 0.54;
+}
+.searchBar{
+  background-color: rgb(235, 174, 22);
+  display: flex;
+  align-items: center;
+  height:46px;
+  width:699px;
+  color: black;
+  border-radius: 5px;
+ padding-left: 1%;
+}
+.material-icons{
+  font-size: 30px;
+  margin-right: 8px;
+  color: black;
+  opacity: 0.6;
+
+}.search
 {
-  padding-left: 30px;
+  height:41px;
+  width:693px;
+  color: black;
+  opacity: 1;
+  background-color:  rgb(235, 174, 22);
+  border:0px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 1%;
+  display: flex;
 }
-.space
-{ 
-  padding-top: 0.90%;
-  padding-left: 100px;
+.refresh-icon{
+  padding-top: 19px;
+  padding-bottom: 11px;
+  padding-left: 50px;
+  padding-right: 30px;
+  display: flex;
 }
-.space1
+.view-agenda{
+ padding-top: 19px; 
+ padding-bottom: 11px;
+}
+.one
 {
-  padding-top: 0.90%;
-  padding-left: 30px;
+  cursor: pointer;
+}
+.division
+{
+  background-color:lightgrey;
+}
+input:focus
+{
+background-color: white;
 }

@@ -1,0 +1,45 @@
+<div class="container1" fxLayout="column" fxLayout.xs="row">
+  <div class="item item-1" fxFlex fxFlexOffset="8%"></div>
+  <div class="item item-2" fxFlex fxFlexOffset="8%" fxFlexOrder="3"></div>
+  <form>
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <div class="item item-3" fxFlex="33%"></div>
+      <div class="item item-4" fxFlex="33%" fxFlexOrder="3"></div>
+      <div class="item item-5" fxFlex>
+        <div class="clas">
+          <mat-card>
+            <mat-card-title>
+              <div class="letters" fxLayout="row">
+                <div class="letter1">F</div>
+                <div class="letter2">U</div>
+                <div class="letter3">N</div>
+                <div class="letter4">D</div>
+                <div class="letter5">O</div>
+                <div class="letter6">O</div>
+              </div>
+              <br>
+              <div style="font-family : BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 'Open Sans'">
+                Admin Login Page
+              </div>
+            </mat-card-title>
+            <mat-card-content fxLayout="column">
+              <mat-form-field class="width">
+                <input matInput placeholder="Enter Email" [(ngModel)]="model.Email" [formControl]="Email" required>
+                <mat-error *ngIf="Email.invalid"> {{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="EnterPasword" [(ngModel)]="model.password" [formControl]="password" [type]="hide ? 'password' : 'text'"
+                  required>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </mat-form-field>
+            </mat-card-content>
+            <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
+              <button mat-raised-button color="primary" type="reset" value="reset">Reset</button>
+            <a routerlink = "/adminDashboard">  <button mat-raised-button color="primary" type="submit" value="submit" (click)="match()">Submit</button></a>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

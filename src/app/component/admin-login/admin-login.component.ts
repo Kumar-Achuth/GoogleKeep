@@ -3,13 +3,12 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { MatSnackBar } from '@angular/material';
 
-
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
   hide = true;
   Email = new FormControl('', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   password = new FormControl('',[Validators.required])
@@ -23,40 +22,6 @@ model : any = {}
       this.Email.hasError('pattern') ? 'Not a valid email' :
         '';
   }
-  submitted = false;
-
-  onSubmit() {
-    this.submitted = true;
-  }
-
-  /**   For going to next animations function */
-
-  isLeftVisible = false;
-  message1: any;
-
-  goTo() {
-    if (!this.Email.invalid) {
-      this.isLeftVisible = !this.isLeftVisible;
-    }
-    else {
-      this.snackBar.open("Login", "Failed", {
-        duration: 1000
-      })
-    }
-  }
-
-  emailValidation()
-{
-  if(!this.Email.invalid && this.Email.valid){
-    this.isLeftVisible = !this.isLeftVisible;
-
-}
-else{
-  this.snackBar.open("Invalid", "Input",{
-    duration : 1000
-    })
-}
-}
   loginValidation(){
     {
       if(this.password.valid){
