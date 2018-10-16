@@ -9,8 +9,6 @@ import { NotesComponent } from './component/notes/notes.component';
 import { ReminderComponent } from './component/reminder/reminder.component';
 import { ArchiveComponent } from './component/archive/archive.component';
 import { TrashComponent } from './component/trash/trash.component';
-import { AdminLoginComponent } from './component/admin-login/admin-login.component';
-import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
                        { path : 'signup', component: SignupComponent },
@@ -24,8 +22,6 @@ const routes: Routes = [
                     {path  : 'trash', component : TrashComponent}]
                        
                        },
-                       {path : 'adminDashboard' , component : AdminDashboardComponent},
-                       { path : 'adminLogin' , component : AdminLoginComponent},
                        { path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 @NgModule({

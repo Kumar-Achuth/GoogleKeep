@@ -1,6 +1,7 @@
 .sidenav-container {
   height: fit-content;
   background-color: lightgrey;
+  /* position: fixed; */
 }
 /* .toolbar{
   background-color:  #fb0;
@@ -8,6 +9,7 @@
 } */
 .sidenav {
   width: 250px;
+  /* position: absolute; */
   margin-top: 65px;
   background-color:rgb(211, 211, 211)
 }
@@ -80,7 +82,12 @@ padding-right: 32px;
 }
 .one
 {
+  padding-top: 3%;
   cursor: pointer;
+}
+.two
+{
+padding-top: 1.5%;
 }
 .division
 {

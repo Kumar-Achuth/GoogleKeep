@@ -33,8 +33,6 @@ import { NotesComponent } from './component/notes/notes.component';
 import { ReminderComponent } from './component/reminder/reminder.component';
 import { ArchiveComponent } from './component/archive/archive.component';
 import { TrashComponent } from './component/trash/trash.component';
-import { AdminLoginComponent } from './component/admin-login/admin-login.component';
-import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 import { MatMenuModule} from '@angular/material/menu';
 
 
@@ -53,8 +51,6 @@ import { MatMenuModule} from '@angular/material/menu';
     ReminderComponent,
     ArchiveComponent,
     TrashComponent,
-    AdminLoginComponent,
-    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
