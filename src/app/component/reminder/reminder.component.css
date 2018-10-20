@@ -1,0 +1,18 @@
+.size{
+    align-content: center;
+    padding-left: 25%;
+    padding-right:35%;
+}
+mat-form-field
+{
+    width: 100%;;
+}
+.click
+{
+  cursor: pointer;
+}
+.noteButton
+{
+    float: right;
+    padding-right: 2%;
+}

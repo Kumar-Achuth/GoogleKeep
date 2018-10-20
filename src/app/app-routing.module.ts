@@ -18,8 +18,8 @@ const routes: Routes = [
                        { path : 'home' , component : HomeComponent, children : [
                        { path : 'notes', component : NotesComponent},
                        { path : 'reminder' , component : ReminderComponent},
-                      { path : 'archive' , component : ArchiveComponent},
-                    {path  : 'trash', component : TrashComponent}]
+                       { path : 'archive' , component : ArchiveComponent},
+                       { path : 'trash', component : TrashComponent}]
                        
                        },
                        { path: '', redirectTo: 'login', pathMatch: 'full'}

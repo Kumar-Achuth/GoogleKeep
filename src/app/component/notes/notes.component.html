@@ -1,3 +1,94 @@
-<p>
-  notes works!
-</p>
+<mat-card class="size">
+  <!-- <mat-accordion> -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Take a Note ...
+      </mat-panel-title>
+      <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
+        <div class="click">
+          <i class="material-icons" mat-raised-button matTooltip="New List">
+            list
+          </i>
+        </div>
+        &nbsp;&nbsp;
+        <div class="click">
+          <i class="material-icons" matTooltip="New Note with Image">
+            photo
+          </i>
+        </div>
+        &nbsp;&nbsp;
+        <div class="click">
+          <i class="material-icons" matTooltip="New Note with Drawing">
+            create
+          </i>
+        </div>
+      </div>
+
+    </mat-expansion-panel-header>
+
+    <div class="title">
+      <mat-form-field>
+        <input aria-multiline="true" role="textbox" matInput placeholder="Title">
+      </mat-form-field>
+      <div class="pin">
+
+      </div>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="Content">
+      </mat-form-field>
+      <br>
+    </div>
+    <br>
+    <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
+      <div class="click">
+        <i class="material-icons" matTooltip="Add as a reminder">
+          touch_app
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="Collaborator">
+          person_add
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="Change Color">
+          color_lens
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="Add Photo">
+          photo
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="Archive">
+          archive
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="More">
+          more_vert
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="Undo">
+          undo
+        </i>
+      </div>
+      <div class="click">
+        <i class="material-icons" matTooltip="Redo" aria-disabled="true">
+          redo
+        </i>
+      </div>
+      <div class="close">
+          <div class="example-button-row">
+              <button mat-button>Close</button>
+            </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+  <!-- </mat-accordion> -->
+</mat-card>
