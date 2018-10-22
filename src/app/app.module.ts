@@ -38,6 +38,13 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import { MatTooltipModule} from '@angular/material/tooltip';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule} from '@angular/material';
+import { AddReminderComponent } from './component/add-reminder/add-reminder.component';
+import { CollaboratorComponent } from './component/collaborator/collaborator.component';
+import { ChangeColorComponent } from './component/change-color/change-color.component';
+import { AddPhotoComponent } from './component/add-photo/add-photo.component';
+import { AddArchiveComponent } from './component/add-archive/add-archive.component';
+import { MoreComponent } from './component/more/more.component';
+import { AddNotesComponent } from './component/add-notes/add-notes.component';
 
 
 
@@ -55,6 +62,13 @@ import { MatNativeDateModule} from '@angular/material';
     ReminderComponent,
     ArchiveComponent,
     TrashComponent,
+    AddReminderComponent,
+    CollaboratorComponent,
+    ChangeColorComponent,
+    AddPhotoComponent,
+    AddArchiveComponent,
+    MoreComponent,
+    AddNotesComponent,
   ],
   imports: [
     BrowserModule,

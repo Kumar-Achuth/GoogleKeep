@@ -1,7 +1,8 @@
 .sidenav-container {
-  height: fit-content;
+  height: 582px;
   background-color: rgb(221,221,230);
   /* position: fixed; */
+  /* width: fit-content */
 }
 /* .toolbar{
   background-color:  #fb0;
@@ -10,6 +11,7 @@
 .sidenav {
   width: 250px;
   /* position: absolute; */
+  overflow-y: scroll;
   margin-top: 65px;
   background-color:rgb(221,221,230)
 }
@@ -56,7 +58,8 @@ padding-right: 32px;
   color: black;
   opacity: 0.6;
 
-}.search
+}
+.search
 {
   height:41px;
   width:693px;

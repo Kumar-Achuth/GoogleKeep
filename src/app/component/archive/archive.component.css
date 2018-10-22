@@ -1,0 +1,23 @@
+
+
+.RfDI4d-neVct-Ne3sFf-haAclf:not(.G0jgYd) {
+    margin-top: 20vh;
+}
+.RfDI4d-neVct-Ne3sFf-haAclf {
+    /* display: -webkit-box; */
+    /* display: -moz-box; */
+    /* display: -ms-flexbox; */
+    /* display: -webkit-flex; */
+    display: flex;
+    /* -webkit-align-items: center; */
+    align-items: center;
+    /* -webkit-flex-direction: column; */
+    flex-direction: column;
+}
+.neVct-Ne3sFf-Bz112c {
+    -webkit-background-size: 120px 120px;
+    background-size: 120px 120px;
+    height: 120px;
+    margin: 20px;
+    width: 120px;
+}

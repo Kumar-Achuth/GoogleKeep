@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-
+public hide : boolean = true;
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  close()
+  {
+      this.hide=!this.hide; 
   }
 
 }
