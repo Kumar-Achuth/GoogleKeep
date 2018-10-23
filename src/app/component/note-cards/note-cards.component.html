@@ -1,0 +1,26 @@
+<div  fxLayout = "row wrap"  fxLayoutAlign = "space-around" fxLayoutGap="20px" style="margin-top:50px">
+  <div *ngFor = 'let x of array' >
+  <mat-card>
+    <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
+        <app-add-reminder>
+        </app-add-reminder>
+        <app-collaborator>
+        </app-collaborator>
+        <app-change-color>
+        </app-change-color>
+        <app-add-photo>
+        </app-add-photo>
+        <app-add-archive>
+        </app-add-archive>
+        <app-more>
+        </app-more>
+        <div class="close">
+            <div class="example-button-row">
+                <button mat-button >CLOSE</button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+</div>
+
+</div>

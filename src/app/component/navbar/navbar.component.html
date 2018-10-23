@@ -11,20 +11,28 @@
           <input class="search" type="input" placeholder="search">
         </div>
         <div class="equal" fxlayout="row" fxLayoutAlign="space-around" fxFlex="1 1 auto">
-          <div class="one"  matTooltip= "Cloud Sync">
+          <div class="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
-          <div class="one"><i class="material-icons"  matTooltip= "Grid View">
+          <div class="one"><i class="material-icons" matTooltip="Grid View">
               view_agenda
             </i></div>
-          <div class="one"  matTooltip= "Google apps">
+          <div class="one" matTooltip="Google apps">
             <mat-icon>apps</mat-icon>
           </div>
-          <div class="two"  matTooltip= "Google Account">
-            <button mat-mini-fab [matMenuTriggerFor]="appMenu">K</button>
-            <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-              <button mat-menu-item routerLink="/signup">Add account</button>
-              <button mat-menu-item routerLink="/login">Log out </button>
+          <div class="two" matTooltip="Google Account">
+            <button mat-mini-fab [matMenuTriggerFor]="appMenu">{{firstName | slice : 0:1}}</button>
+            <mat-menu  class = "padding" #appMenu="matMenu" [overlapTrigger]="false">
+              <button mat-mini-fab [matMenuTriggerFor]="appMenu">{{firstName | slice: 0:1}} </button>
+              <div style="float : right">
+                  <div>{{firstName}} | {{lastName}}</div>
+                  <div>{{email}}</div>
+                </div>
+              <hr>
+              <div fxFlex="row" fxLayoutAlign = "space-between">
+                <button mat-menu-item routerLink="/signup">Add account</button>
+                <button mat-menu-item (click)="doLogout()">Log out </button>
+              </div>
             </mat-menu>
           </div>
         </div>
@@ -33,24 +41,24 @@
         <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
           [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async)">
           <mat-nav-list>
-            <a mat-list-item routerLink='/home/notes'><i class="material-icons"  matTooltip= "Notes">
+            <a mat-list-item routerLink='/home/notes'><i class="material-icons" matTooltip="Notes">
                 assignment
               </i>Notes</a>
-            <a mat-list-item routerLink='/home/reminder'><i class="material-icons"  matTooltip= "Reminders">
+            <a mat-list-item routerLink='/home/reminder'><i class="material-icons" matTooltip="Reminders">
                 touch_app
               </i>Reminders</a>
             <hr>
-              <a mat-list-item ><i class="material-icons" >
-                  add
-                  </i>Create New Label </a>
-              <hr>
-            <a mat-list-item routerLink="/home/archive"><i class="material-icons"  matTooltip= "Archive" >
+            <a mat-list-item><i class="material-icons">
+                add
+              </i>Create New Label </a>
+            <hr>
+            <a mat-list-item routerLink="/home/archive"><i class="material-icons" matTooltip="Archive">
                 archive
               </i>Archive</a>
-            <a mat-list-item routerLink="/home/trash"><i class="material-icons"  matTooltip= "Trash">
+            <a mat-list-item routerLink="/home/trash"><i class="material-icons" matTooltip="Trash">
                 delete
               </i>Trash</a>
-            <a mat-list-item href="#"> <i class="material-icons"  matTooltip= "Settings">
+            <a mat-list-item> <i class="material-icons" matTooltip="Settings">
                 settings
               </i>
               Settings</a>
@@ -59,11 +67,11 @@
         </mat-sidenav>
         <mat-sidenav-content>
           <router-outlet>
-            
+
             <!--  content goes here -->
           </router-outlet>
         </mat-sidenav-content>
       </mat-sidenav-container>
     </div>
-    </div>
   </div>
+</div>

@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { HttpService } from '../../services/http.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,12 +14,47 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+   token= localStorage.getItem('token');
+
+  model : any = {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
-    
-  constructor(private breakpointObserver: BreakpointObserver) {}
+    // token = localStorage.getItem('token');
+
+  constructor(private myHttpService: HttpService,private snackBar: MatSnackBar, public route:ActivatedRoute,private breakpointObserver: BreakpointObserver, private router : Router) {}
+  
+  doLogout()
+  {
+    console.log(this.token);
+    this.myHttpService.postLogout('user/logout', this.token).subscribe(response=>{
+      console.log("Successfull",response);
+      this.snackBar.open("Logout ", "Successful",{
+        duration : 1000
+        })
+      localStorage.removeItem('token');
+      localStorage.removeItem('firstName');
+      localStorage.removeItem('email');
+      localStorage.removeItem('lastName');
+      localStorage.removeItem('userId');
+
+      this.router.navigateByUrl('/login');
+      console.log("I am removed", this.token);
+    },error=>{
+      console.log("Failed")
+    })
+  }
+  firstName : any;
+  lastName : any;
+  email : any;
+  ngOnInit()
+  {
+      this.firstName = localStorage.getItem('firstName');
+      this.lastName = localStorage.getItem('lastName');
+      this.email = localStorage.getItem('email');
+
+  }
   
   }

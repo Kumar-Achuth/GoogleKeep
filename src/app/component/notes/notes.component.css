@@ -1,4 +1,4 @@
-mat-card
+/* mat-card
 {
     position: fixed;
     width: 40%;
@@ -31,7 +31,6 @@ mat-form-field
     outline: none;
     width: 100%;
     word-wrap: break-word;
-    /* min-height: 20px; */
     font-weight: bold;
 }
 .edit
@@ -42,7 +41,6 @@ mat-form-field
     outline: none;
     width: 100%;
     word-wrap: break-word;
-    /* min-height: 20px; */
 
 }
 [contentEditable=true]:empty:not(:focus):before{
@@ -61,13 +59,7 @@ mat-form-field
     margin-top: 2%;
     cursor: text;
 }
-/* .title3
-{
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top: 9%;
-    cursor: text;
-} */
+
 .space
 {
     padding-top: 4%;
@@ -76,39 +68,6 @@ mat-form-field
 
 
 
+ */
 
-
-/* 
-.click1
-{
-   float: left;
-  cursor: pointer;
-}
-.click2
-{    padding-left: 50%;
-  cursor: pointer;
-}
-.click3
-{
-    padding-left: 100%;
-  cursor: pointer;
-}
-.click4
-{
-    padding-left: 150%;
-  cursor: pointer;
-}
-.click5
-{
-    padding-left: 200%;
-  cursor: pointer;
-}
-.click6
-{
-    padding-left: 250%;
-  cursor: pointer;
-}
-.buttons
-{
-    padding-top: 3%;
-} */
+ 

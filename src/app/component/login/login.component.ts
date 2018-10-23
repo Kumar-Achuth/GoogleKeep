@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   Email = new FormControl('', [Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   password = new FormControl('',[Validators.required])
 model : any = {}
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
+  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,private router : Router) { }
 
   ngOnInit() {
   }
@@ -71,6 +72,13 @@ else{
           this.snackBar.open("Login ", "Successful",{
             duration : 1000
             })
+            localStorage.setItem("token", data['id']);
+            localStorage.setItem("email", data['email']);
+            localStorage.setItem("firstName", data['firstName']);
+            localStorage.setItem("lastName", data['lastName']);
+            localStorage.setItem("userId", data['userId']);
+
+            this.router.navigateByUrl('/home')
         },
         error => {
           console.log("Error", error);

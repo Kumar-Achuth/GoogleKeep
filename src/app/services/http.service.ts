@@ -49,4 +49,27 @@ export class HttpService {
     }
     return formBody.join('&');
   }
+  postLogout(url,token){
+    url = this.url+url;
+   console.log(token)
+   const httpOptions = {
+     headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+       'Authorization' : token
+     })
+   };
+   return this.http.post(url,{},httpOptions)
+  }
+
+  postNotes(url,input,token){
+url = this.url+url;
+console.log(token);
+const httpOptions = {
+  headers : new HttpHeaders({
+    'Content-Type' : 'application/x-www-form-urlencoded',
+    'Authorization' : token
+  })
+}
+return this.http.post(url,this.getFormUrlEncoded(input),httpOptions)
+  }
 }

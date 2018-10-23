@@ -2,36 +2,26 @@
   height: 582px;
   background-color: rgb(221,221,230);
   /* position: fixed; */
-  /* width: fit-content */
 }
-/* .toolbar{
-  background-color:  #fb0;
-  width: auto;
-} */
 .sidenav {
   width: 250px;
-  /* position: absolute; */
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   margin-top: 65px;
   background-color:rgb(221,221,230)
 }
 .mat-toolbar.mat-primary {
-  position: sticky;
+  position: fixed;
   top: 0;  
 }
 .mat-drawer.mat-drawer-side {
   top:0;
   height:100%;
 }
-/* .mat-toolbar.mat-primary {
-  background:#fb0 ;  
-} */
 .toolbar
 {
   background: #fb0;
   position: relative;
   display: flex;
-
 }
 .title-header{
 padding-left: 30px;
@@ -50,14 +40,13 @@ padding-right: 32px;
   width:699px;
   color: black;
   border-radius: 5px;
- padding-left: 1%;
+  padding-left: 1%;
 }
 .material-icons{
   font-size: 30px;
   margin-right: 8px;
   color: black;
   opacity: 0.6;
-
 }
 .search
 {
@@ -92,32 +81,12 @@ padding-right: 32px;
 {
 padding-top: 1.5%;
 }
-/* .division
-{
-  background-color:lightgrey;
-} */
 input:focus
 {
 background-color: white;
 }
-
-
-/* 
-.size{
-  align-content: center;
-  padding-left: 25%;
-  padding-right:35%;
-}
-mat-form-field
+.padding
 {
-  width: 100%;;
+  height: fit-content;
+  width: 60%;
 }
-.click
-{
-cursor: pointer;
-}
-.noteButton
-{
-  float: right;
-  padding-right: 2%;
-} */

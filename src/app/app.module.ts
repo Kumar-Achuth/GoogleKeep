@@ -45,6 +45,10 @@ import { AddPhotoComponent } from './component/add-photo/add-photo.component';
 import { AddArchiveComponent } from './component/add-archive/add-archive.component';
 import { MoreComponent } from './component/more/more.component';
 import { AddNotesComponent } from './component/add-notes/add-notes.component';
+import { AuthService} from './component/auth.service';
+import { AuthGuard} from './component/auth.guard';
+import { NoteCardsComponent } from './component/note-cards/note-cards.component';
+
 
 
 
@@ -69,6 +73,7 @@ import { AddNotesComponent } from './component/add-notes/add-notes.component';
     AddArchiveComponent,
     MoreComponent,
     AddNotesComponent,
+    NoteCardsComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,7 +109,7 @@ import { AddNotesComponent } from './component/add-notes/add-notes.component';
 
 
   ],
-  providers: [HttpService],
+  providers: [HttpService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
