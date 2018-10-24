@@ -1,4 +1,4 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:40px">
+<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:20px">
         <mat-card *ngIf="hide">
             <span (click)="hide=!hide"> Take a Note ...</span>
             <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
@@ -40,7 +40,7 @@
                 </app-more>
                 <div class="close">
                     <div class="example-button-row">
-                        <button mat-button (click)="close()">CLOSE</button>
+                        <button mat-button (click)="addNotes()">CLOSE</button>
                     </div>
                 </div>
             </div>

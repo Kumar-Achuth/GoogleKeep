@@ -1,5 +1,14 @@
-<div class="click">
-    <i class="material-icons" matTooltip="More">
+<!-- <div class="click">
+  <button mat-icon-button>  <i class="material-icons" matTooltip="More">
       more_vert
-    </i>
+    </i></button>
+  </div> -->
+
+  <mat-icon class = "space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu"><i class="material-icons" matTooltip="More">
+    more_vert
+  </i></mat-icon>
+  <mat-menu #appMenu = "matMenu" [overlapTrigger]="false">
+    <div style="padding : 20px">
+    <button mat-button [matMenuTriggerFor]="appMenu">Trash</button>
   </div>
+  </mat-menu>

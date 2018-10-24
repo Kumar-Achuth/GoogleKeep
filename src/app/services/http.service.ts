@@ -72,4 +72,18 @@ const httpOptions = {
 }
 return this.http.post(url,this.getFormUrlEncoded(input),httpOptions)
   }
+
+  getNotes(url,token){
+    url =this.url +url;
+    // console.log(token);
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization' : token
+      })
+    };
+    return this.http.get(url,httpOptions)
+  }
+
+
 }

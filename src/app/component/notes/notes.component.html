@@ -52,9 +52,9 @@
     </div>
    
     </div> -->
-      <app-add-notes>
+      <app-add-notes (newEvent) = "eventEntry($event)">
 
       </app-add-notes>    
-      <app-note-cards>
+      <app-note-cards [cardsArray]  =  "cards">
 
       </app-note-cards>

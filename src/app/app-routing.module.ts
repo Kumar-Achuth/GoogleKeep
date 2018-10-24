@@ -16,7 +16,7 @@ const routes: Routes = [
                        { path : 'login', component: LoginComponent  },
                        { path : 'forgotPassword', component : ForgotPasswordComponent},
                        { path : 'resetpassword/:forgotToken', component : ResetPasswordComponent},
-                       { path : 'home' , component : HomeComponent, canActivate : [AuthGuard], children : [
+                       { path : 'home' , component : HomeComponent,  children : [
                        { path : 'notes', component : NotesComponent},
                        { path : 'reminder' , component : ReminderComponent},
                        { path : 'archive' , component : ArchiveComponent},

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HttpService } from '../../services/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-note-cards',
@@ -7,13 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoteCardsComponent implements OnInit {
 array : any =[]
-  constructor() { }
+cards : any =[];
+accessToken = localStorage.getItem('token');
+@Input() cardsArray;
+
+  constructor(private myHttpService: HttpService, private router : Router) { }
 
   ngOnInit() {
-    for( var i = 0; i <5; i++)
-    {
-    this.array.push(i)
-    }
+   
   }
+
+  
+
 
 }
