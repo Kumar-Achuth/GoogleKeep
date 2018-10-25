@@ -1,4 +1,27 @@
-<div class="RfDI4d-neVct-Ne3sFf-haAclf JqEhuc" >
+<!-- <div class="RfDI4d-neVct-Ne3sFf-haAclf JqEhuc" >
     <div class="neVct-Ne3sFf-Bz112c"></div>
     <div class="neVct-Ne3sFf-fmcmS">Your archived notes appear here</div>
-    </div>
+    </div> -->
+
+              <div  fxLayout = "row wrap"  fxLayoutAlign = "center center" fxLayoutGap="10px" style="margin-top:15px">
+            <div *ngFor = 'let notes of cards'>
+              <mat-card style="margin-top : 10px;" >
+              <mat-card-title><div [innerHtml] = "notes.title"></div></mat-card-title>
+              <mat-card-content><div  [innerHtml]="notes.description"></div></mat-card-content>
+                 <div class="space" fxLayout="row" fxLayoutAlign="space-between">
+                  <app-add-reminder>
+                  </app-add-reminder>
+                  <app-collaborator>
+                  </app-collaborator>
+                  <app-change-color>
+                  </app-change-color>
+                  <app-add-photo>
+                  </app-add-photo>
+                  <app-add-archive>
+                  </app-add-archive>
+                  <app-more>
+                  </app-more>
+              </div>
+          </mat-card>
+          </div>
+          </div>

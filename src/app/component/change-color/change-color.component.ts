@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-change-color',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./change-color.component.css']
 })
 export class ChangeColorComponent implements OnInit {
-
-  constructor() { }
+  accessToken = localStorage.getItem('token');
+@Input() color;
+  constructor(private myHttpService: HttpService) { }
 
   ngOnInit() {
   }
 
+  colors(id)
+  {
+  this.myHttpService.postColor('/notes/changesColorNotes',
+      {
+        "color": id,
+        "noteIdList": [this.color.id]
+      }, this.accessToken).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          console.log(id);
+          console.log(this.color.id);
+        },
+        error => {
+          console.log("Error", error);
+        })
+    }
 }

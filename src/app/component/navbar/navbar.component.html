@@ -25,11 +25,11 @@
             <mat-menu  class = "padding" #appMenu="matMenu" [overlapTrigger]="false">
               <button mat-mini-fab [matMenuTriggerFor]="appMenu">{{firstName | slice: 0:1}} </button>
               <div style="float : right">
-                  <div>{{firstName}} | {{lastName}}</div>
+                  <div>{{firstName}}{{lastName}}</div>
                   <div>{{email}}</div>
                 </div>
               <hr>
-              <div fxFlex="row" fxLayoutAlign = "space-between">
+              <div fxLayout="row" fxLayoutAlign = "space-around">
                 <button mat-menu-item routerLink="/signup">Add account</button>
                 <button mat-menu-item (click)="doLogout()">Log out </button>
               </div>
@@ -48,8 +48,9 @@
                 touch_app
               </i>Reminders</a>
             <hr>
-            <a mat-list-item><i class="material-icons">
-                add
+            <a mat-list-item> Labels </a>
+            <a mat-list-item><i class="material-icons" matTooltip="Create New Label">
+             create
               </i>Create New Label </a>
             <hr>
             <a mat-list-item routerLink="/home/archive"><i class="material-icons" matTooltip="Archive">

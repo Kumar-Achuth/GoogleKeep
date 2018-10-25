@@ -1,14 +1,13 @@
-<!-- <div class="click">
-  <button mat-icon-button>  <i class="material-icons" matTooltip="More">
-      more_vert
-    </i></button>
-  </div> -->
-
   <mat-icon class = "space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu"><i class="material-icons" matTooltip="More">
     more_vert
   </i></mat-icon>
   <mat-menu #appMenu = "matMenu" [overlapTrigger]="false">
-    <div style="padding : 20px">
-    <button mat-button [matMenuTriggerFor]="appMenu">Trash</button>
+    <div style="padding : 1px">
+    <button mat-button (click) = "postToTrash(trash)">Delete Note</button><br>
+    <button mat-button>Add Label</button><br>
+    <button mat-button>Add Drawing</button><br>
+    <button mat-button>Make a Copy</button><br>
+    <button mat-button>Show Checkboxes</button><br>
+    <button mat-button>Copy to Google Docs</button><br>
   </div>
   </mat-menu>

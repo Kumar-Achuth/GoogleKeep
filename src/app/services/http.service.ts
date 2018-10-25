@@ -85,5 +85,56 @@ return this.http.post(url,this.getFormUrlEncoded(input),httpOptions)
     return this.http.get(url,httpOptions)
   }
 
+  postTrash(url,body, token )
+{
+  url = this.url+url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : token
+    })
+  };
+  return this.http.post(url,body,httpOptions)
+}
 
+getTrashNotes(url,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization' : token
+    })
+  };
+  return this.http.get(url,httpOptions)
+}
+postArchive(url,body,token){
+  url = this.url + url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : token
+    })
+  };
+  return this.http.post(url,body,httpOptions)
+}
+getArchiveNotes(url,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization' : token
+    })
+  };
+  return this.http.get(url,httpOptions)
+}
+postColor(url, body, token) {
+  url = this.url+ url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    })
+  };
+  return this.http.post(url, body, httpOptions);
+}
 }

@@ -26,8 +26,8 @@ addNotes()
 {
   this.body =
   {
-    'title':document.getElementById('titleId').textContent,
-    'description' :document.getElementById('notesId').textContent ,
+    'title':document.getElementById('titleId').innerHTML,
+    'description' :document.getElementById('notesId').innerHTML ,
     'labelIdList' : '',
     'checklist' : '',
     'isPined' : 'false',

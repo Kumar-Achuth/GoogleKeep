@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { Router } from '@angular/router';
 
@@ -12,13 +12,19 @@ array : any =[]
 cards : any =[];
 accessToken = localStorage.getItem('token');
 @Input() cardsArray;
+@Output() trashEvent = new EventEmitter();
 
   constructor(private myHttpService: HttpService, private router : Router) { }
 
   ngOnInit() {
    
   }
+  deleteEvent(event)
+  {
+    this.trashEvent.emit({
 
+    })
+  }
   
 
 
