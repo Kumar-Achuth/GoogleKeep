@@ -137,4 +137,24 @@ postColor(url, body, token) {
   };
   return this.http.post(url, body, httpOptions);
 }
+noteUpdate(url,body,token){
+url = this.url + url;
+const httpOptions = {
+  headers : new HttpHeaders({
+    'Content-Type' : 'application/x-www-form-urlencoded',
+  'Authorization' : token
+  })
+};
+return this.http.post(url,this.getFormUrlEncoded(body),httpOptions)
+}
+addLabel(url, body, token) {
+  url = this.url+ url;
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    })
+  };
+  return this.http.post(url, body, httpOptions);
+}
 }

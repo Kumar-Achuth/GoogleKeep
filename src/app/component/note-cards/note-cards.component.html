@@ -1,15 +1,15 @@
-<div  fxLayout = "row wrap" fxLayoutAlign = "start start"  fxLayoutGap="10px" style="margin-top:15px ">
+<div  fxLayout = "row wrap" fxLayoutAlign = "center center"  fxLayoutGap="10px" style="margin-top:15px ">
   <div *ngFor = 'let notes of cardsArray'>
-    <mat-card style="margin-top : 10px; "[style.backgroundColor] = "notes.color" >
-    <mat-card-title><div [innerHtml] = "notes.title"></div></mat-card-title>
-    <mat-card-content><div  [innerHtml]="notes.description"></div></mat-card-content>
-       <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
+    <mat-card  class="styles" style="margin-top : 10px; " [style.backgroundColor] = "notes.color">
+    <mat-card-title  (click)="openDialog(notes)" (updateEvent) = "deleteEvent($event)"><div [innerHtml] = "notes.title"></div></mat-card-title>
+    <mat-card-content  (click)="openDialog(notes)"><div  [innerHtml]="notes.description"></div></mat-card-content>
+       <div class="space" fxLayout="row" fxLayoutAlign="space-between" >
         <app-add-reminder>
         </app-add-reminder>
-        <app-collaborator>
+        <app-collaborator >
         </app-collaborator>
         <app-change-color [color] = "notes">
-        </app-change-color >
+        </app-change-color>
         <app-add-photo>
         </app-add-photo>
         <app-add-archive [archive]= "notes" >

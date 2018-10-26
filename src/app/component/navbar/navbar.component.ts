@@ -6,6 +6,8 @@ import { HttpService } from '../../services/http.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { LabelsComponent } from '../labels/labels.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class NavbarComponent {
     );
     // token = localStorage.getItem('token');
 
-  constructor(private myHttpService: HttpService,private snackBar: MatSnackBar, public route:ActivatedRoute,private breakpointObserver: BreakpointObserver, private router : Router) {}
+  constructor(private myHttpService: HttpService,private snackBar: MatSnackBar, public route:ActivatedRoute,private breakpointObserver: BreakpointObserver, private router : Router,public dialog: MatDialog) {}
   
   doLogout()
   {
@@ -56,5 +58,18 @@ export class NavbarComponent {
       this.email = localStorage.getItem('email');
 
   }
-  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(LabelsComponent, {
+      width: '250px',
+      height : 'fit-content',
+      backdropClass : '',
+      data: ''
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.trashEvent.emit({})
+      // this.animal = result;
+    });
+  }
   }

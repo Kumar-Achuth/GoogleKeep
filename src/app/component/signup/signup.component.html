@@ -23,18 +23,22 @@
               </div>
             </mat-card-title>
             <mat-card-content fxLayout="column">
-              <div>
+              <div fxLayout = "row wrap" fxlayoutAlign = "space-between" >
+                <div>
                 <mat-form-field>
                   <input matInput placeholder="First Name" [(ngModel)]="model.FirstName" [formControl]="FirstName"
                     minlength="3" maxlength="30" required>
                   <mat-error *ngIf="FirstName.invalid"> {{getErrorMessageFirstName()}}</mat-error>
                 </mat-form-field>
                 &nbsp;
+              </div>
+              <div>
                 <mat-form-field>
                   <input matInput placeholder="Last Name" [(ngModel)]="model.LastName" [formControl]="LastName"
                     minlength="3" maxlength="30" required>
                   <mat-error *ngIf="LastName.invalid"> {{getErrorMessageLastName()}}</mat-error>
                 </mat-form-field>
+              </div>
               </div>
               <mat-form-field>
                 <input matInput placeholder="Enter your Email" [(ngModel)]="model.Email" [formControl]="Email" required>

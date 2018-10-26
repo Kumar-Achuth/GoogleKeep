@@ -48,6 +48,9 @@ import { AddNotesComponent } from './component/add-notes/add-notes.component';
 import { AuthService} from './component/auth.service';
 import { AuthGuard} from './component/auth.guard';
 import { NoteCardsComponent } from './component/note-cards/note-cards.component';
+import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
+import { LabelsComponent } from './component/labels/labels.component';
+import { NewlabelComponent } from './component/newlabel/newlabel.component';
 
 
 
@@ -74,6 +77,9 @@ import { NoteCardsComponent } from './component/note-cards/note-cards.component'
     MoreComponent,
     AddNotesComponent,
     NoteCardsComponent,
+    UpdateNotesComponent,
+    LabelsComponent,
+    NewlabelComponent,
   ],
   imports: [
     BrowserModule,

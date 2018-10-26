@@ -1,0 +1,76 @@
+mat-card
+{
+    padding: 8px;
+    width: 40%;
+}
+
+.click
+{
+  cursor: pointer;
+}
+.noteButton
+{
+    float: right;
+    padding-right: 2%;
+}
+.example-button-row button,
+.example-button-row a {
+  margin-right: 4px;
+}
+.close
+{
+    /* padding: 30px; */
+    float: right;
+    padding-bottom: 2%;
+}
+.reset
+{
+    /* padding-top: 12%; */
+    border: none;
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    word-wrap: break-word;
+    border-bottom-color: black;
+    /* font-weight: bold; */
+}
+.edit
+{
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    word-wrap: break-word;
+}
+.edit1
+{
+    padding-top: 12%;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    width: fit-content;
+    word-wrap: break-word;
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+.space
+{
+    padding-top: 4%;
+}
+.editlabel
+{
+   float: left;
+}
+.pad
+{
+    padding-left: 3%;
+    padding-top: 3%;
+}
+.padding
+{
+    padding-top: 12%;
+}
+
+
+
+

@@ -4,5 +4,5 @@
 }
 mat-card
 {
-    width : 40%;
+    width : fit-content;
 }
