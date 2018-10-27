@@ -17,7 +17,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class NavbarComponent {
    token= localStorage.getItem('token');
-
+   labelArray : any =[]
   model : any = {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -51,6 +51,7 @@ export class NavbarComponent {
   firstName : any;
   lastName : any;
   email : any;
+ 
   ngOnInit()
   {
       this.firstName = localStorage.getItem('firstName');
@@ -71,5 +72,21 @@ export class NavbarComponent {
       // this.trashEvent.emit({})
       // this.animal = result;
     });
+  }
+
+arr = [];
+  getLabels(){
+   
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
+      console.log("Successfull",data);
+      this.arr = data['data'].label;
+      console.log("i am a array",this.arr);
+      
+      for(var i= 0 ; i <= data['data'].length-1;i++)
+      {
+        this.labelArray.push(data[' label'][i]);
+      }
+      console.log(this.labelArray)
+    })
   }
   }

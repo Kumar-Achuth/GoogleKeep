@@ -48,7 +48,8 @@
                 touch_app
               </i>Reminders</a>
             <hr>
-            <a mat-list-item > Labels </a>
+            <a mat-list-item (click) = "getLabels()"> Labels </a>
+            <!-- <a mat-list-item ></a> -->
             <a mat-list-item (click) = "openDialog()"><i class="material-icons" matTooltip="Edit Label">
              create
               </i>Create New Label </a>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output , EventEmitter} from '@angular/core';
 import { Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { NoteCardsComponent } from '../note-cards/note-cards.component';
 import { HttpService } from '../../services/http.service';
 
@@ -44,10 +44,6 @@ accessToken = localStorage.getItem('token');
         this.dialogRef.close();
   }
 
- // updateNote(){
-  //   this.myHttpService.noteUpdate('notes/updateNotes',this.body,this.accessToken).subscribe(data => {
-  //     console.log('response', data);
-  //   })
-  // }
+
 
 }

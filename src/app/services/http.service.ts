@@ -157,4 +157,15 @@ addLabel(url, body, token) {
   };
   return this.http.post(url, body, httpOptions);
 }
+getLabels(url,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization' : token
+    })
+  };
+  return this.http.get(url,httpOptions)
+
+}
 }

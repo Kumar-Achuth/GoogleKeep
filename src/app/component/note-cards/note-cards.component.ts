@@ -15,7 +15,6 @@ cards : any =[];
 body : any = {}
 accessToken = localStorage.getItem('token');
 @Input() cardsArray;
-@Input() update;
 @Output() trashEvent = new EventEmitter();
 
   constructor(private myHttpService: HttpService, private router : Router,public dialog: MatDialog) { }
@@ -40,8 +39,8 @@ accessToken = localStorage.getItem('token');
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.trashEvent.emit({})
-      // this.animal = result;
+      this.trashEvent.emit({
+      })
     });
   }
 

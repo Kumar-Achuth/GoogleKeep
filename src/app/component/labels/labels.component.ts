@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef } from '@angular/material';
@@ -12,8 +12,9 @@ export class LabelsComponent implements OnInit {
 body : any ={}
 hide = true;
 @Output() newEvent = new EventEmitter();
-
+@Input() trash;
     accessToken = localStorage.getItem('token');
+   id =  localStorage.getItem('userId');
 
   constructor(private myHttpService: HttpService,public dialogRef: MatDialogRef<NavbarComponent>) { }
 
@@ -24,22 +25,18 @@ hide = true;
     this.body =
     {
         "label": document.getElementById('labelId').innerHTML,
-        "isDeleted": true,
-        "userId": "string" 
+        "isDeleted": false,
+        "userId": this.id
     }
-  
-    console.log(this.body);
-    
+    console.log(this.body); 
   this.myHttpService.addLabel('/noteLabels',this.body,this.accessToken).subscribe(response=>{
     console.log("successfull",response);
     this.dialogRef.close();
     this.newEvent.emit({
     })
-  
   },error=>{
     console.log("failed",error)
   })
   console.log("accessToken",this.accessToken)
   }
-  
 }

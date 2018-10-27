@@ -1,4 +1,4 @@
-<div fxLayout = "row" fxLayoutAlign = "center center" >
+<div fxLayout = "row" fxLayoutAlign = "center center"  >
   <div class="trash" >
     Notes in Trash are deleted after 7 days.
     </div>&nbsp;&nbsp;&nbsp;
@@ -6,7 +6,7 @@
         <button mat-button>Empty Trash</button> 
     </div>
     </div>
-    <div  fxLayout = "row wrap"  fxLayoutAlign = "center center" fxLayoutGap="10px" style="margin-top:15px">
+    <div  fxLayout = "row wrap"  fxLayoutAlign = "center center" fxLayoutGap="10px" style="margin-top:250px;">
   <div *ngFor = 'let notes of cards'>
     <mat-card style="margin-top : 10px;" [style.backgroundColor] = "notes.color" >
     <mat-card-title><div [innerHtml] = "notes.title"></div></mat-card-title>
