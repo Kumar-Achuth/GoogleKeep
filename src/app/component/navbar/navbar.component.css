@@ -1,6 +1,8 @@
 .sidenav-container {
   height: 582px;
+  /* width: 500px; */
   background-color: rgb(221,221,230);
+  /* position: fixed; */
   /* position: fixed; */
 }
 .sidenav {

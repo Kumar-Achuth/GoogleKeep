@@ -48,11 +48,16 @@
                 touch_app
               </i>Reminders</a>
             <hr>
-            <a mat-list-item (click) = "getLabels()"> Labels </a>
-            <!-- <a mat-list-item ></a> -->
+            <a mat-list-item > Labels </a>
+              <div *ngFor = "let labels of labelArray">
+                <a mat-list-item routerLink="/home/newlabel">
+                  <mat-icon class="margin">label_outline</mat-icon>
+                  <span class = "margin2" >{{labels.label}}</span>
+                </a>
+              </div>
             <a mat-list-item (click) = "openDialog()"><i class="material-icons" matTooltip="Edit Label">
              create
-              </i>Create New Label </a>
+              </i>Edit Labels</a>
             <hr>
             <a mat-list-item routerLink="/home/archive"><i class="material-icons" matTooltip="Archive">
                 archive
@@ -69,7 +74,6 @@
         </mat-sidenav>
         <mat-sidenav-content>
           <router-outlet>
-
             <!--  content goes here -->
           </router-outlet>
         </mat-sidenav-content>

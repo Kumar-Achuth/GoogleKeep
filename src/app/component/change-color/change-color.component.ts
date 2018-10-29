@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { HttpService } from '../../services/http.service';
 export class ChangeColorComponent implements OnInit {
   accessToken = localStorage.getItem('token');
 @Input() color;
+@Output() colorEmit = new EventEmitter();
+@Output() changeColor = new EventEmitter();
   constructor(private myHttpService: HttpService) { }
 
   ngOnInit() {
@@ -16,6 +18,10 @@ export class ChangeColorComponent implements OnInit {
 
   colors(id)
   {
+    this.colorEmit.emit(id)
+    console.log(id);
+    if(this.color!=undefined)
+    {
   this.myHttpService.postColor('/notes/changesColorNotes',
       {
         "color": id,
@@ -25,9 +31,13 @@ export class ChangeColorComponent implements OnInit {
           console.log("POST Request is successful ", data);
           console.log(id);
           console.log(this.color.id);
+          localStorage.setItem('colorId',this.color.id);
+          this.changeColor.emit({
+ })
         },
         error => {
           console.log("Error", error);
         })
     }
+  }
 }

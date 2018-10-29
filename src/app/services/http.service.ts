@@ -168,4 +168,18 @@ getLabels(url,token){
   return this.http.get(url,httpOptions)
 
 }
+deleteLabel(url,body){
+    url = this.url+url;
+    return this.http.delete(url,body); 
+}
+getUpdatedLabel(url,body,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : token
+    })
+  };
+  return this.http.post(url,body,token)
+}
 }

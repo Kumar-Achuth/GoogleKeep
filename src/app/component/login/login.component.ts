@@ -77,7 +77,6 @@ else{
             localStorage.setItem("firstName", data['firstName']);
             localStorage.setItem("lastName", data['lastName']);
             localStorage.setItem("userId", data['userId']);
-
             this.router.navigateByUrl('/home')
         },
         error => {

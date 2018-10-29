@@ -11,6 +11,7 @@ import { MatDialogRef } from '@angular/material';
 export class LabelsComponent implements OnInit {
 body : any ={}
 hide = true;
+labelArray1  : any = [];
 @Output() newEvent = new EventEmitter();
 @Input() trash;
     accessToken = localStorage.getItem('token');
@@ -19,6 +20,18 @@ hide = true;
   constructor(private myHttpService: HttpService,public dialogRef: MatDialogRef<NavbarComponent>) { }
 
   ngOnInit() {
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
+      console.log("Get request is Successful",data);
+      for(var i= 0 ; i< data['data']['details'].length; i++)
+      {
+        if(data['data']['details'][i].isDeleted == false){
+          this.labelArray1.push(data['data']['details'][i])
+        }
+        else{
+          console.log('Ok')
+        }
+      }
+    })
   }
   addLabels()
   {
@@ -36,7 +49,13 @@ hide = true;
     })
   },error=>{
     console.log("failed",error)
+    this.dialogRef.close();
   })
   console.log("accessToken",this.accessToken)
+  }
+  deleteThisLabel(id){
+    this.myHttpService.deleteLabel('/noteLabels/'+id+'/deleteNoteLabel',this.accessToken).subscribe(response=>{
+      console.log("successfull",response);
+    })
   }
 }

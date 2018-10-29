@@ -22,7 +22,7 @@
             </div>
         </mat-card>
    
-        <mat-card *ngIf="!hide">
+        <mat-card *ngIf="!hide" [style.backgroundColor] = "color">
             <div contenteditable="true" id="titleId"  class="reset" data-text="Title"></div>
             <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
             <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
@@ -30,7 +30,7 @@
                 </app-add-reminder>
                 <app-collaborator>
                 </app-collaborator>
-                <app-change-color>
+                <app-change-color (colorEmit) = colorChanges($event) >
                 </app-change-color>
                 <app-add-photo>
                 </app-add-photo>

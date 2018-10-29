@@ -1,6 +1,6 @@
-<div  fxLayout = "row wrap" fxLayoutAlign = "center center"  fxLayoutGap="10px" style="margin-top:15px ">
-  <div *ngFor = 'let notes of cardsArray'>
-    <mat-card  class="styles" style="margin-top : 10px; " [style.backgroundColor] = "notes.color">
+<div  fxLayout = "row wrap" fxLayoutAlign = "center"  fxLayoutGap="10px" style="margin-top:25px ">
+  <div *ngFor = 'let notes of cardsArray' fxFlex ="0 1 calc(30% - 32px)">
+    <mat-card  style="margin-top : 10px; border-radius: 10px; " [style.backgroundColor] = "notes.color">
     <mat-card-title  (click)="openDialog(notes)" ><div [innerHtml] = "notes.title"></div></mat-card-title>
     <mat-card-content  (click)="openDialog(notes)"><div  [innerHtml]="notes.description"></div></mat-card-content>
        <div class="space" fxLayout="row" fxLayoutAlign="space-between" >
@@ -8,7 +8,7 @@
         </app-add-reminder>
         <app-collaborator >
         </app-collaborator>
-        <app-change-color [color] = "notes">
+        <app-change-color [color] = "notes" (changeColor) = "deleteEvent($event)">
         </app-change-color>
         <app-add-photo>
         </app-add-photo>

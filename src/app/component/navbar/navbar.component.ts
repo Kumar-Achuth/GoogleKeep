@@ -58,6 +58,21 @@ export class NavbarComponent {
       this.lastName = localStorage.getItem('lastName');
       this.email = localStorage.getItem('email');
 
+
+      this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
+        console.log("Successfull",data);        
+        for(var i= 0 ; i< data['data']['details'].length; i++)
+        {
+          if(data['data']['details'][i].isDeleted == false){
+            this.labelArray.push(data['data']['details'][i])
+          }
+          else{
+            console.log('Ok')
+          }
+        }
+        console.log(data['data'].details)
+      })
+
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelsComponent, {
@@ -75,18 +90,18 @@ export class NavbarComponent {
   }
 
 arr = [];
-  getLabels(){
+  // getLabels(){
    
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
-      console.log("Successfull",data);
-      this.arr = data['data'].label;
-      console.log("i am a array",this.arr);
+  //   this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
+  //     console.log("Successfull",data);
+  //     this.arr = data['data'].label;
+  //     console.log("i am a array",this.arr);
       
-      for(var i= 0 ; i <= data['data'].length-1;i++)
-      {
-        this.labelArray.push(data[' label'][i]);
-      }
-      console.log(this.labelArray)
-    })
-  }
+  //     for(var i= 0 ; i <= data['data'].length-1;i++)
+  //     {
+  //       this.labelArray.push(data[' label'][i]);
+  //     }
+  //     console.log(this.labelArray)
+  //   })
+  // }
   }

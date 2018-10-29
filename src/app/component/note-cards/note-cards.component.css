@@ -1,7 +1,7 @@
 .space
 {
     padding-top: 4%;
-    opacity: 0;
+    /* opacity: 0; */
     
 }
 .space:hover{opacity: 1;}

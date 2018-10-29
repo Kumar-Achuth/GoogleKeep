@@ -21,14 +21,14 @@ const routes: Routes = [
                        { path : 'resetpassword/:forgotToken', component : ResetPasswordComponent},
                        { path : 'home' , component : HomeComponent, canActivate : [AuthGuard],  children : [
                        { path : 'notes', component : NotesComponent},
-                       { path : 'labels', component : LabelsComponent},
+                       { path : 'newlabel', component : NewlabelComponent},
                        { path : 'reminder' , component : ReminderComponent},
                        { path : 'archive' , component : ArchiveComponent},
                        { path : 'trash', component : TrashComponent},
                        { path : '', redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
                        
                        },
-                       { path : 'newlabel', component : NewlabelComponent},
+                       { path : 'labels', component : LabelsComponent},                    
                        {path : 'updateNotes', component : UpdateNotesComponent},
                        { path: '', redirectTo: 'login', pathMatch: 'full'}
 ];

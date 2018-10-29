@@ -81,9 +81,21 @@
     
     
 </div> <hr>
+
+<div *ngFor = "let index of labelArray1">
+    <a mat-list-item>
+        <span class= "delete" (click) = "deleteThisLabel(index.id)"><i class="material-icons" matTooltip="Delete Label">
+            delete
+          </i></span>
+      <span contenteditable="true"  class = "names" > {{index.label}} </span>
+     <span class="spacing"> <i class="material-icons"  matTooltip="Rename Label">
+        create
+         </i></span>
+    </a>
+  </div>
         <div class="close">
             <div class="example-button-row">
-                <button mat-button (click) = "addLabels(trash)">CLOSE</button>
+                <button mat-button (click) = "addLabels(trash)">Done</button>
             </div>
         </div>
     </div>

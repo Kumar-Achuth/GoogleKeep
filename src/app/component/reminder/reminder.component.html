@@ -1,99 +1,49 @@
-<!-- 
-
- <mat-card class="size">
-    <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-         Take a Note ...
-        </mat-panel-title>
-         <div class = "noteButton" fxLayout = "row" fxLayoutAlign= "space-evenly" >
-         <div class = "click"> 
-         <i class="material-icons"  matTooltip= "New List">
-            list
-            </i>
-          </div>
-          &nbsp;&nbsp;
-          <div class="click">
-              <i class="material-icons"  matTooltip= "New Note with Image">
-                  photo
-                  </i>
-          </div>
-          &nbsp;&nbsp;
-          <div class="click">
-              <i class="material-icons"  matTooltip= "New Note with Drawing">
-                  create
-                  </i>      
-          </div>
-        </div>
-        
-          </mat-expansion-panel-header>
-      <div class = "title">
-          <mat-form-field>
-            <input matInput placeholder="Title">
-          </mat-form-field>
-      <br>
-          <mat-form-field>
-            <input matInput placeholder="Content">
-          </mat-form-field>
-          <br>
-          <mat-form-field >
-              <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-          <br>
-          <div class = "buttons" fxLayout = "row" fxLayoutAlign = "space-between">
+<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:20px">
+    <mat-card *ngIf="hide">
+        <span (click)="hide=!hide"> Take a Note ...</span>
+        <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
             <div class="click">
-          <i class="material-icons" matTooltip= "Add as a reminder">
-              touch_app
-            </i>
-          </div>
-          <div class="click">
-            <i class="material-icons" matTooltip= "Collaborator">
-                person_add
+                <i class="material-icons" mat-raised-button matTooltip="New List">
+                    list
                 </i>
+            </div>
+            &nbsp;&nbsp;
+            <div class="click">
+                <i class="material-icons" matTooltip="New Note with Image">
+                    photo
+                </i>
+            </div>
+            &nbsp;&nbsp;
+            <div class="click">
+                <i class="material-icons" matTooltip="New Note with Drawing">
+                    create
+                </i>
+            </div>
+        </div>
+    </mat-card>
+  
+    <mat-card *ngIf="!hide">
+        <div contenteditable="true" id="titleId"  class="reset" data-text="Title"></div>
+        <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
+        <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
+            <app-add-reminder>
+            </app-add-reminder>
+            <app-collaborator>
+            </app-collaborator>
+            <app-change-color>
+            </app-change-color>
+            <app-add-photo>
+            </app-add-photo>
+            <app-add-archive>
+            </app-add-archive>
+            <app-more>
+            </app-more>
+            <div class="close">
+                <div class="example-button-row">
+                    <button mat-button (click)="addNotes()">CLOSE</button>
                 </div>
-                <div class="click">
-                <i class="material-icons" matTooltip= "Change Color">
-                    color_lens
-                    </i>
-                    </div>
-                    <div class="click">
-                        <i class="material-icons" matTooltip= "Add Photo">
-                            photo
-                            </i>
-                            </div>
-                            <div class="click">
-                            <i class="material-icons"  matTooltip= "Archive">
-                                archive
-                                </i>
-                                </div>
-                                <div class="click">
-                                <i class="material-icons" matTooltip= "More">
-                                    more_vert
-                                    </i>
-                                    </div>
-                                    <div class="click">
-                                    <i class="material-icons" matTooltip= "Undo">
-                                        undo
-                                        </i>
-                                        </div>
-                                        <div class="click">
-                                        <i class="material-icons" matTooltip= "Redo">
-                                            redo
-                                            </i>
-                                            </div>
-                                            <div class="click">
-                                            <i class="material-icons" matTooltip= "Close">
-                                                close
-                                                </i>
-                                                </div>
-                                              </div>
-                        
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card>  -->
-
-    
+            </div>
+        </div>
+        <br>
+    </mat-card>
+  </div>
