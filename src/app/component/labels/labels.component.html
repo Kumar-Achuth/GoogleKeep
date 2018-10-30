@@ -1,97 +1,42 @@
-<!-- <div fxLayout='column' fxLayoutAlign="center center" style="margin-top:20px">
-    <mat-card *ngIf="hide">
-        <span (click)="hide=!hide"> Take a Note ...</span>
-        <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
-            <div class="click">
-                <i class="material-icons" mat-raised-button matTooltip="New List">
-                    list
-                </i>
-            </div>
-            &nbsp;&nbsp;
-            <div class="click">
-                <i class="material-icons" matTooltip="New Note with Image">
-                    photo
-                </i>
-            </div>
-            &nbsp;&nbsp;
-            <div class="click">
-                <i class="material-icons" matTooltip="New Note with Drawing">
-                    create
-                </i>
-            </div>
-        </div>
-    </mat-card>
-    <mat-card *ngIf="!hide">
-        <div contenteditable="true" id="titleId"  class="reset" data-text="Title"></div>
-        <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
-        <div contenteditable="true" id="labelId" class="edit1" data-text="Add Label"></div>
-        <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
-            <app-add-reminder>
-            </app-add-reminder>
-            <app-collaborator>
-            </app-collaborator>
-            <app-change-color>
-            </app-change-color>
-            <app-add-photo>
-            </app-add-photo>
-            <app-add-archive>
-            </app-add-archive>
-            <app-more>
-            </app-more>
-            <div class="close">
-                <div class="example-button-row">
-                    <button mat-button (click)="addNotes()">CLOSE</button>
-                </div>
-            </div>
-        </div>
-        <br>
-    </mat-card>
-</div> -->
-
-
-<!-- <div fxLayout='column' fxLayoutAlign="center center" style="margin-top:50px">
-<mat-card fxFlex *ngIf = true>
-
-</mat-card>
-
-<mat-card fxFlex *ngIf = false>
-
-</mat-card>
-</div> -->
-<!-- <app-add-notes>
-  
-  </app-add-notes> -->
-
-
-   <div  class="pad">
+<div  class="pad">
 <div class="editlabel">
 <b>Edit Label</b>
 
 </div><br>
 <div fxLayout="row" fxLayoutAlign = "space-around start" class = "padding">
-
-    <i class="material-icons" mat-Tooltip = "CLOSE">
+    <i class="material-icons" mat-Tooltip = "CLOSE" (click)="clear()">
         clear
         </i>
     
-<div contenteditable="true" id="labelId" aria-placeholder="Create New Label" class="reset" data-text="Create New Label"></div><br>
+<div contenteditable="true" #labelId aria-placeholder="Create New Label" class="reset" data-text="Create New Label"></div><br>
 <i class="material-icons">
     done
-    </i>
-    
-    
-</div> <hr>
+    </i>   
+</div><hr>
 
 <div *ngFor = "let index of labelArray1">
+<div *ngIf = "editShow != index.id">
     <a mat-list-item>
         <span class= "delete" (click) = "deleteThisLabel(index.id)"><i class="material-icons" matTooltip="Delete Label">
             delete
           </i></span>
-      <span contenteditable="true"  class = "names" > {{index.label}} </span>
-     <span class="spacing"> <i class="material-icons"  matTooltip="Rename Label">
+      <span contenteditable="false"  id = "newLabelId" class = "names" [innerHTML]= "index.label"> </span>
+     <span class="spacing"> <i class="material-icons"  matTooltip="Rename Label" (click) = "edit(index.id)">
         create
          </i></span>
     </a>
+</div>
+<div *ngIf = "editShow == index.id">
+    <a mat-list-item>
+        <span class= "delete" (click) = "deleteThisLabel(index.id)"><i class="material-icons" matTooltip="Delete Label">
+            delete
+          </i></span>
+      <span contenteditable="true"  #labelsId  class = "names"  [innerHTML]= "index.label"> </span>
+     <span class="spacing"> <i class="material-icons"  matTooltip="Rename Label" (click) = "updateTheLabel(index.id)">
+      done
+         </i></span>
+    </a>
+</div>
   </div>
         <div class="close">
             <div class="example-button-row">

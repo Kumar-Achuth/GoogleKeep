@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef } from '@angular/material';
@@ -11,7 +11,14 @@ import { MatDialogRef } from '@angular/material';
 export class LabelsComponent implements OnInit {
 body : any ={}
 hide = true;
+editShow : any;
+input : any = {};
 labelArray1  : any = [];
+
+@ViewChild('labelsId') labelsId: ElementRef;
+@ViewChild('labelId') labelId: ElementRef;
+
+
 @Output() newEvent = new EventEmitter();
 @Input() trash;
     accessToken = localStorage.getItem('token');
@@ -37,7 +44,7 @@ labelArray1  : any = [];
   {
     this.body =
     {
-        "label": document.getElementById('labelId').innerHTML,
+        "label": this.labelId.nativeElement.innerHTML,
         "isDeleted": false,
         "userId": this.id
     }
@@ -58,4 +65,27 @@ labelArray1  : any = [];
       console.log("successfull",response);
     })
   }
+ 
+  updateTheLabel(id){
+    this.myHttpService.getUpdatedLabel('/noteLabels/'+id+'/updateNoteLabel', {
+      "label" : this.labelsId.nativeElement.innerHTML,
+      "isDeleted": false,
+      "id": id,
+      "userId": this.id
+    },this.accessToken).subscribe(response=>{
+      console.log("successfull",response);
+    })
+  }
+
+
+  edit(id){
+    this.editShow=id;
+  }
+
+  clear(){
+    this.labelId.nativeElement.innerHTML='';
+ }
+
+
+
 }

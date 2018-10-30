@@ -25,6 +25,31 @@
   <mat-card *ngIf="!hide">
       <div contenteditable="true" id="titleId"  class="reset" data-text="Title"></div>
       <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
+     
+     
+     
+     
+     
+       <div contenteditable="true" class="reset">
+        <mat-chip-list #chipList>
+          <mat-chip [selectable]="selectable"
+                   [removable]="removable" (removed)="remove(fruit)">
+            {{fruit.label}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New fruit..."
+                   [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+         </mat-chip-list>
+      </div> 
+
+
+
+
+
+
       <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
           <app-add-reminder>
           </app-add-reminder>

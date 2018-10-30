@@ -54,6 +54,7 @@ export class NavbarComponent {
  
   ngOnInit()
   {
+    this.labelArray=[]
       this.firstName = localStorage.getItem('firstName');
       this.lastName = localStorage.getItem('lastName');
       this.email = localStorage.getItem('email');

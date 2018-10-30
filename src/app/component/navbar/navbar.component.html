@@ -52,7 +52,7 @@
               <div *ngFor = "let labels of labelArray">
                 <a mat-list-item routerLink="/home/newlabel">
                   <mat-icon class="margin">label_outline</mat-icon>
-                  <span class = "margin2" >{{labels.label}}</span>
+                  <span class = "margin2" [innerHTML] = "labels.label"></span>
                 </a>
               </div>
             <a mat-list-item (click) = "openDialog()"><i class="material-icons" matTooltip="Edit Label">

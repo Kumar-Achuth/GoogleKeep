@@ -51,6 +51,8 @@ import { NoteCardsComponent } from './component/note-cards/note-cards.component'
 import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
 import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -111,7 +113,10 @@ import { NewlabelComponent } from './component/newlabel/newlabel.component';
     MatExpansionModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule,
+    MatCheckboxModule
+
 
 
   ],

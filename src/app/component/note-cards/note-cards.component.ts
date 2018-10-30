@@ -11,6 +11,7 @@ import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 })
 export class NoteCardsComponent implements OnInit {
 array : any =[]
+labelArray = [];
 cards : any =[];
 body : any = {}
 accessToken = localStorage.getItem('token');
@@ -20,6 +21,20 @@ accessToken = localStorage.getItem('token');
   constructor(private myHttpService: HttpService, private router : Router,public dialog: MatDialog) { }
   @Output() dialogEvent = new EventEmitter();
   ngOnInit() {
+
+
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
+      console.log("Successfull",data);        
+      for(var i= 0 ; i< data['data']['details'].length; i++)
+      {
+        if(data['data']['details'][i].isDeleted == false){
+          this.labelArray.push(data['data']['details'][i])
+        }
+        else{
+          console.log('Ok')
+        }
+      }
+    })
    
   }
   deleteEvent(event)

@@ -46,6 +46,9 @@ mat-card
 {
     padding-top: 4%;
 }
+.example-chip-list {
+    width: 100%;
+  }
 
 
 

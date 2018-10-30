@@ -180,6 +180,16 @@ getUpdatedLabel(url,body,token){
       'Authorization' : token
     })
   };
-  return this.http.post(url,body,token)
+  return this.http.post(url,body,httpOptions)
+}
+goLabel(url,body,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : token
+    })
+  };
+  return this.http.post(url,body,httpOptions)
 }
 }

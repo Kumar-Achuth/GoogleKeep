@@ -2,12 +2,18 @@
     more_vert
   </i></mat-icon>
   <mat-menu #appMenu = "matMenu" [overlapTrigger]="false">
-    <div style="padding : 1px">
+    <div >
     <button mat-button (click) = "postToTrash(trash)">Delete Note</button><br>
-    <button mat-button>Add Label</button><br>
+    <button mat-menu-item  [matMenuTriggerFor]="labelMenu" >AddLabel</button><br>
     <button mat-button>Add Drawing</button><br>
     <button mat-button>Make a Copy</button><br>
     <button mat-button>Show Checkboxes</button><br>
     <button mat-button>Copy to Google Docs</button><br>
   </div>
+  </mat-menu>
+
+  <mat-menu #labelMenu = "matMenu" [overlapTrigger]="false">
+    <div *ngFor = "let index of labelArray">
+      <mat-checkbox  (click) = "goAndGetLabel(index.id)">{{index.label}}</mat-checkbox>
+    </div>
   </mat-menu>

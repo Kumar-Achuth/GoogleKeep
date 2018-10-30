@@ -3,6 +3,14 @@
     <mat-card  style="margin-top : 10px; border-radius: 10px; " [style.backgroundColor] = "notes.color">
     <mat-card-title  (click)="openDialog(notes)" ><div [innerHtml] = "notes.title"></div></mat-card-title>
     <mat-card-content  (click)="openDialog(notes)"><div  [innerHtml]="notes.description"></div></mat-card-content>
+    <div *ngFor = "let index of notes.noteLabels">
+    <mat-chip-list>
+    <mat-chip>
+    {{index.label}}
+    <!-- <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon> -->
+  </mat-chip>
+</mat-chip-list>
+</div>
        <div class="space" fxLayout="row" fxLayoutAlign="space-between" >
         <app-add-reminder>
         </app-add-reminder>

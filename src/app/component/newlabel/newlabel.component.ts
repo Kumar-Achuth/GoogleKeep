@@ -1,7 +1,17 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatChipInputEvent } from '@angular/material';
 import { Router } from '@angular/router';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+
+
+
+export interface Fruit {
+  name: string;
+}
+
+
+
 
 @Component({
   selector: 'app-newlabel',
@@ -9,6 +19,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./newlabel.component.css']
 })
 export class NewlabelComponent implements OnInit {
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruits: Fruit[] = [
+    {name: 'Lemon'},
+    {name: 'Lime'},
+    {name: 'Apple'},
+  ];
+
+
+
+
   public hide : boolean = true;
   body:any={}
   @Output() newEvent = new EventEmitter();
@@ -43,4 +68,32 @@ accessToken = localStorage.getItem('token');
   console.log("accessToken",this.accessToken)
   }
   
+
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.fruits.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(fruit: Fruit): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+
+
+
 }
