@@ -192,4 +192,37 @@ goLabel(url,body,token){
   };
   return this.http.post(url,body,httpOptions)
 }
+deleteChip(url,body,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : token
+    })
+  };
+  return this.http.post(url,body,httpOptions)
+}
+checkAdd(url,body,token){
+  url =this.url +url;
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization' : token
+    })
+  };
+  return this.http.post(url,body,httpOptions) 
+}
+
+postCheckList(url,input,token){
+  url = this.url+url;
+  console.log(token);
+  const httpOptions = {
+    headers : new HttpHeaders({
+      'Content-Type' : 'application/x-www-form-urlencoded',
+      'Authorization' : token
+    })
+  }
+  return this.http.post(url,this.getFormUrlEncoded(input),httpOptions)
+    }
+  
 }

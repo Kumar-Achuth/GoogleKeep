@@ -58,6 +58,15 @@ accessToken = localStorage.getItem('token');
       })
     });
   }
-
+  deleteChips(id,label){
+    this.myHttpService.deleteChip('notes/'+id+'/addLabelToNotes/'+label+'/remove',
+    {"noteId" : id, "lableId": label},
+    this.accessToken).subscribe(data => {
+      console.log('response', data);
+      this.trashEvent.emit({
+      })
+    })
+  }
+  
 
 }

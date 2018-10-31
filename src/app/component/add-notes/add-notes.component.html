@@ -1,9 +1,9 @@
 <div fxLayout='column' fxLayoutAlign="center center" style="margin-top:20px">
-        <mat-card *ngIf="hide">
-            <span (click)="hide=!hide"> Take a Note ...</span>
+        <mat-card *ngIf="hide" (click)="hide=!hide">
+            <span > Take a Note ...</span>
             <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
                 <div class="click">
-                    <i class="material-icons" mat-raised-button matTooltip="New List">
+                    <i class="material-icons" mat-raised-button matTooltip="New List" (click) = "toggle()">
                         list
                     </i>
                 </div>
@@ -24,7 +24,15 @@
    
         <mat-card *ngIf="!hide" [style.backgroundColor] = "color">
             <div contenteditable="true" id="titleId"  class="reset" data-text="Title"></div>
+            <div *ngIf = "show == 0">
             <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
+        </div>
+        <div *ngIf = "show == 1" fxLayout = "row" class = "topping">
+            <hr>
+            <mat-icon>add</mat-icon>
+        <input id="notesId" placeholder="List Item" class="edit1" (keydown.enter)="onKeydown($event)">
+                <hr>
+            </div>
             <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
                 <app-add-reminder>
                 </app-add-reminder>
@@ -47,13 +55,3 @@
             <br>
         </mat-card>
 </div>
-
-<!-- <div fxLayout='column' fxLayoutAlign="center center" style="margin-top:50px">
-    <mat-card fxFlex *ngIf = true>
-
-    </mat-card>
-
-    <mat-card fxFlex *ngIf = false>
-
-    </mat-card>
-</div> -->

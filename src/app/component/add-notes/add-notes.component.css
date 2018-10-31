@@ -28,7 +28,7 @@ mat-card
     outline: none;
     width: 100%;
     word-wrap: break-word;
-    font-weight: bold;
+    font-style: bold;
 }
 .edit
 {
@@ -44,6 +44,17 @@ mat-card
 }
 .space
 {
+    padding-top: 4%;
+}
+.edit1
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+    width: 100%;
+    word-wrap: break-word;
+}
+.topping{
     padding-top: 4%;
 }
 

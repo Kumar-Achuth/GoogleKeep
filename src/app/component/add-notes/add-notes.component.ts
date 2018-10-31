@@ -10,50 +10,76 @@ import { Router } from '@angular/router';
 })
 export class AddNotesComponent implements OnInit {
   public hide : boolean = true;
-  body:any={}
-  color : any ;
+  body:any={};
+  show : any = 0;
+  color : any = "#fafafa";
+  accessToken = localStorage.getItem('token');
   @Output() newEvent = new EventEmitter();
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,private router : Router) { }
-accessToken = localStorage.getItem('token');
 
   ngOnInit() {
   }
-  // close()
-  // {
-  //     this.hide=!this.hide; 
-  // }
-
-addNotes()
-{
-  this.body =
+  toggle()
   {
-    'title':document.getElementById('titleId').innerHTML,
-    'description' :document.getElementById('notesId').innerHTML ,
-    'labelIdList' : '',
-    'checklist' : '',
-    'isPined' : 'false',
-    'color' : this.color
+    this.show = 1;
   }
-
-  console.log(this.body);
-  
-this.myHttpService.postNotes('notes/addNotes',this.body,this.accessToken).subscribe(response=>{
+addNotes()
+{  
+this.myHttpService.postNotes('notes/addNotes', {
+  'title':document.getElementById('titleId').innerHTML,
+  'description' :document.getElementById('notesId').innerHTML ,
+  'labelIdList' : '',
+  'checklist' : '',
+  'isPined' : 'false',
+  'color' : this.color
+},this.accessToken).subscribe(response=>{
   console.log("successfull",response);
   this.newEvent.emit({
   })
-  this.hide=!this.hide; 
+  this.hide=!this.hide;
   this.color = "#fafafa";
-
-},error=>{
-  this.hide=!this.hide; 
+  this.show = 0;
+},error=>{ 
   console.log("failed",error)
-  this.color = "#fafafa"
+  this.color = "#fafafa";
+  this.hide=!this.hide;
+  this.show = 0;
 })
-console.log("accessToken",this.accessToken)
 }
 colorChanges(event){
   console.log(event);
   this.color = event;
-  
 }
+onKeydown(event) {
+  if (event.key==="Enter") {
+    console.log(event);
+  }
+}
+
+addChecklist()
+{  
+this.myHttpService.postCheckList('notes/addNotes', {
+  'title':document.getElementById('titleId').innerHTML,
+  'description' :document.getElementById('notesId').innerHTML ,
+  'labelIdList' : '',
+  'checklist' : [],
+  'isPined' : 'false',
+  'color' : this.color
+},this.accessToken).subscribe(response=>{
+  console.log("successfull",response);
+  this.newEvent.emit({
+  })
+  this.hide=!this.hide;
+  this.color = "#fafafa";
+  this.show = 0;
+},error=>{ 
+  console.log("failed",error)
+  this.color = "#fafafa";
+  this.hide=!this.hide;
+  this.show = 0;
+})
+}
+
+
+
 }

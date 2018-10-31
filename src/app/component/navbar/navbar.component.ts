@@ -90,7 +90,7 @@ export class NavbarComponent {
     });
   }
 
-arr = [];
+// arr = [];
   // getLabels(){
    
   //   this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{

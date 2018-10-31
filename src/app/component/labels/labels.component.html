@@ -8,7 +8,7 @@
         clear
         </i>
     
-<div contenteditable="true" #labelId aria-placeholder="Create New Label" class="reset" data-text="Create New Label"></div><br>
+<div contenteditable="true" #labelId aria-placeholder="Create New Label" class="reset" data-text="Create New Label" (click) = "addLabels()"></div><br>
 <i class="material-icons">
     done
     </i>   
@@ -40,7 +40,7 @@
   </div>
         <div class="close">
             <div class="example-button-row">
-                <button mat-button (click) = "addLabels(trash)">Done</button>
+                <button mat-button (click) = "addLabels()">Done</button>
             </div>
         </div>
     </div>
