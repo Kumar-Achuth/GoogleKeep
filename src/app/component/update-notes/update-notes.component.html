@@ -1,7 +1,17 @@
 <div class="style1" fxLayout = "row wrap" fxLayoutAlign = "center center" >
-    <div class="styles" [style.backgroundColor] = "data.color" >
+    <div class="styles" [style.backgroundColor] = "data.color"  >
         <div contenteditable="true" id="titleId"  class="reset" [innerHtml] = "data.title" data-text=""></div><br>
         <div contenteditable="true" id="notesId" class="edit"  [innerHtml] = "data.description" data-text=""></div>
+       <div fxLayout="row" fxLayoutAlign="space-between center" > 
+        <div class= "chips" *ngFor = "let index of data.noteLabels">
+        <mat-chip-list>
+            <mat-chip>
+            {{index.label}}
+            <mat-icon matChipRemove (click) = "deleteChips(index.id)">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+    </div>
+</div>
        <div class="space" fxLayout="row" fxLayoutAlign="space-between" >
         <app-add-reminder>
         </app-add-reminder>
@@ -13,7 +23,7 @@
         </app-add-photo>
         <app-add-archive>
         </app-add-archive>
-        <app-more>
+        <app-more [trash] = "data">
         </app-more>
         <div class="close">
             <div class="example-button-row">

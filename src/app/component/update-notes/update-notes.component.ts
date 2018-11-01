@@ -9,6 +9,7 @@ export interface DialogData {
   title: string;
   description: string;
   id : string;
+  label : string;
 }
 
 
@@ -21,10 +22,8 @@ export class UpdateNotesComponent implements OnInit {
 body : any ={}
 @Output() updateEvent = new EventEmitter();
 accessToken = localStorage.getItem('token');
-
   constructor( public dialogRef: MatDialogRef<NoteCardsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private myHttpService: HttpService,) { }
-  
   
     ngOnInit() {
   }
@@ -33,17 +32,23 @@ accessToken = localStorage.getItem('token');
       "noteId" : [this.data.id],
       "title" :document.getElementById('titleId').innerHTML ,
       "description" : document.getElementById('notesId').innerHTML
-
     },this.accessToken).subscribe(data => {
           console.log('response', data);
           this.dialogRef.close();
           this.updateEvent.emit({
-
           })
         })
         this.dialogRef.close();
   }
+  deleteChips(label){
+    this.myHttpService.deleteChip('notes/'+this.data.id+'/addLabelToNotes/'+label+'/remove',
+    {"noteId" : this.data.id, "lableId": label},
+    this.accessToken).subscribe(data => {
+      console.log('response', data);
+      this.updateEvent.emit({
+      })
+    })
+  }
 
-
-
+ 
 }

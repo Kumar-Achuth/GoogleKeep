@@ -27,18 +27,7 @@ labelArray1  : any = [];
   constructor(private myHttpService: HttpService,public dialogRef: MatDialogRef<NavbarComponent>) { }
 
   ngOnInit() {
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
-      console.log("Get request is Successful",data);
-      for(var i= 0 ; i< data['data']['details'].length; i++)
-      {
-        if(data['data']['details'][i].isDeleted == false){
-          this.labelArray1.push(data['data']['details'][i])
-        }
-        else{
-          console.log('Ok')
-        }
-      }
-    })
+ this.getAllLabels();
   }
   addLabels()
   {
@@ -51,17 +40,19 @@ labelArray1  : any = [];
     console.log(this.body); 
   this.myHttpService.addLabel('/noteLabels',this.body,this.accessToken).subscribe(response=>{
     console.log("successfull",response);
-    this.dialogRef.close();
-    this.newEvent.emit({
-    })
+    // this.dialogRef.close();
+    this.getAllLabels();
+    // this.newEvent.emit({
+    // })
   },error=>{
     console.log("failed",error)
-    this.dialogRef.close();
+    // this.dialogRef.close();
   })
   console.log("accessToken",this.accessToken)
   }
   deleteThisLabel(id){
     this.myHttpService.deleteLabel('/noteLabels/'+id+'/deleteNoteLabel',this.accessToken).subscribe(response=>{
+      this.getAllLabels();
       console.log("successfull",response);
     })
   }
@@ -85,7 +76,26 @@ labelArray1  : any = [];
   clear(){
     this.labelId.nativeElement.innerHTML='';
  }
-
+ close(){
+  this.dialogRef.close();
+ }
+getAllLabels(){
+  let  newArray=[];
+  this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
+    console.log("Get request is Successful",data);
+    for(var i= 0 ; i< data['data']['details'].length; i++)
+    {
+      if(data['data']['details'][i].isDeleted == false){
+        newArray.push(data['data']['details'][i])
+        
+      }
+      else{
+        console.log('Ok')
+      }
+    }
+    this.labelArray1 = newArray;
+  })
+}
 
 
 }

@@ -4,16 +4,18 @@
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
   <div>
     <button mat-button (click)="postToTrash(trash)">Delete Note</button><br>
-    <button mat-menu-item [matMenuTriggerFor]="labelMenu">AddLabel</button><br>
+    <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)= "$event.stopPropagation()">AddLabel</button><br>
     <button mat-button>Add Drawing</button><br>
     <button mat-button>Make a Copy</button><br>
     <button mat-button>Show Checkboxes</button><br>
     <button mat-button>Copy to Google Docs</button><br>
   </div>
 </mat-menu>
-
+<div (click) ="$event.stopPropagation()">
 <mat-menu #labelMenu="matMenu" [overlapTrigger]="false">
-  <div *ngFor="let index of labelArray">
-    <mat-checkbox (click)="goAndGetLabel(index.id)">{{index.label}}</mat-checkbox>
+  <mat-icon fxFlex = 15 >search</mat-icon>
+  <input placeholder="Enter Label" fxFlex = 85 (click) ="$event.stopPropagation()" [(ngModel)]= "search" >
+   <div *ngFor="let index of labelArray | searchBar : search"  >
+    <mat-checkbox (click)=" $event.stopPropagation(); goAndGetLabel(index.id)">{{index.label}}</mat-checkbox>
   </div>
-</mat-menu>
+</mat-menu></div>

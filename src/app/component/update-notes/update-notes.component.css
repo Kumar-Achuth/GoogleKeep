@@ -53,14 +53,21 @@ mat-card
 {
     padding-top: 10%;
 }
-/* .styles
+.styles
 {
-   padding: 1%; 
+   padding-left: 20px;
+   padding-right: 20px; 
+   padding-bottom: 20px;
+   padding-top: 20px;
 }
-.style1
+/* .style1
 {
     padding: 10%;
 } */
+.chips{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
 
 
 

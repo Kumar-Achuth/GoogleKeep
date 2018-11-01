@@ -53,6 +53,7 @@ import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { LabelFilterPipe } from './pipes/label-filter.pipe';
 
 
 
@@ -82,6 +83,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     UpdateNotesComponent,
     LabelsComponent,
     NewlabelComponent,
+    LabelFilterPipe,
   ],
   imports: [
     BrowserModule,

@@ -8,15 +8,15 @@
         <span class="title-header"><b>Fundoo</b> Notes</span>
         <div class="searchBar">
           <i class="material-icons">search </i>
-          <input class="search" type="input" placeholder="search">
+          <input class="search" type="input" placeholder="search" [(ngModel)]="globalSearch">
         </div>
         <div class="equal" fxlayout="row" fxLayoutAlign="space-around" fxFlex="1 1 auto">
           <div class="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
           <div class="one"><i class="material-icons" matTooltip="Grid View">
-              view_agenda
-            </i></div>
+              view_agenda</i>
+            </div>
           <div class="one" matTooltip="Google apps">
             <mat-icon>apps</mat-icon>
           </div>
@@ -49,7 +49,7 @@
               </i>Reminders</a>
             <hr>
             <a mat-list-item> Labels </a>
-            <div *ngFor="let labels of labelArray">
+            <div *ngFor="let labels of labelArray trackBy : val?.id">
               <a mat-list-item routerLink="/home/newlabel">
                 <mat-icon class="margin">label_outline</mat-icon>
                 <span class="margin2" [innerHTML]="labels.label"></span>

@@ -50,35 +50,36 @@ colorChanges(event){
   console.log(event);
   this.color = event;
 }
-onKeydown(event) {
+onKeydown(event,key) {
   if (event.key==="Enter") {
     console.log(event);
+    // this.letterArray.push({})
   }
 }
 
-addChecklist()
-{  
-this.myHttpService.postCheckList('notes/addNotes', {
-  'title':document.getElementById('titleId').innerHTML,
-  'description' :document.getElementById('notesId').innerHTML ,
-  'labelIdList' : '',
-  'checklist' : [],
-  'isPined' : 'false',
-  'color' : this.color
-},this.accessToken).subscribe(response=>{
-  console.log("successfull",response);
-  this.newEvent.emit({
-  })
-  this.hide=!this.hide;
-  this.color = "#fafafa";
-  this.show = 0;
-},error=>{ 
-  console.log("failed",error)
-  this.color = "#fafafa";
-  this.hide=!this.hide;
-  this.show = 0;
-})
-}
+// addChecklist()
+// {  
+// this.myHttpService.postCheckList('notes/addNotes', {
+//   'title':document.getElementById('titleId').innerHTML,
+//   'description' :document.getElementById('notesId').innerHTML ,
+//   'labelIdList' : '',
+//   'checklist' : [],
+//   'isPined' : 'false',
+//   'color' : this.color
+// },this.accessToken).subscribe(response=>{
+//   console.log("successfull",response);
+//   this.newEvent.emit({
+//   })
+//   this.hide=!this.hide;
+//   this.color = "#fafafa";
+//   this.show = 0;
+// },error=>{ 
+//   console.log("failed",error)
+//   this.color = "#fafafa";
+//   this.hide=!this.hide;
+//   this.show = 0;
+// })
+// }
 
 
 

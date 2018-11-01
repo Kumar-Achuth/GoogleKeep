@@ -1,4 +1,4 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:20px">
+<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:100px">
         <mat-card *ngIf="hide" (click)="hide=!hide">
             <span > Take a Note ...</span>
             <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
@@ -30,9 +30,18 @@
         <div *ngIf = "show == 1" fxLayout = "row" class = "topping">
             <hr>
             <mat-icon>add</mat-icon>
-        <input id="notesId" placeholder="List Item" class="edit1" (keydown.enter)="onKeydown($event)">
-                <hr>
+            <!-- <div *ngFor = "let key of save"> -->
+        <input id="notesId" placeholder="List Item" class="edit1"  (keydown.enter)="onKeydown($event)">            
+    <!-- </div> -->
+    <hr>
             </div>
+            <div >
+                    <mat-chip-list>
+                    <mat-chip >
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+                </div>
             <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
                 <app-add-reminder>
                 </app-add-reminder>

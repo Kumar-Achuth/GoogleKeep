@@ -58,22 +58,9 @@ export class NavbarComponent {
       this.firstName = localStorage.getItem('firstName');
       this.lastName = localStorage.getItem('lastName');
       this.email = localStorage.getItem('email');
-
-
-      this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
-        console.log("Successfull",data);        
-        for(var i= 0 ; i< data['data']['details'].length; i++)
-        {
-          if(data['data']['details'][i].isDeleted == false){
-            this.labelArray.push(data['data']['details'][i])
-          }
-          else{
-            console.log('Ok')
-          }
-        }
-        console.log(data['data'].details)
-      })
-
+  this.getLabels();
+  
+     
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelsComponent, {
@@ -84,6 +71,7 @@ export class NavbarComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getLabels();
       console.log('The dialog was closed');
       // this.trashEvent.emit({})
       // this.animal = result;
@@ -91,18 +79,23 @@ export class NavbarComponent {
   }
 
 // arr = [];
-  // getLabels(){
-   
-  //   this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
-  //     console.log("Successfull",data);
-  //     this.arr = data['data'].label;
-  //     console.log("i am a array",this.arr);
-      
-  //     for(var i= 0 ; i <= data['data'].length-1;i++)
-  //     {
-  //       this.labelArray.push(data[' label'][i]);
-  //     }
-  //     console.log(this.labelArray)
-  //   })
-  // }
+  getLabels(){
+    let newArray=[];
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
+      console.log("Successfull",data);        
+      for(var i= 0 ; i< data['data']['details'].length; i++)
+      {
+        if(data['data']['details'][i].isDeleted == false){
+          newArray.push(data['data']['details'][i])
+        }
+        else{
+          console.log('Ok')
+        }
+      }
+      this.labelArray=newArray;
+      console.log(data['data'].details)
+    })
+
+    
+  }
   }

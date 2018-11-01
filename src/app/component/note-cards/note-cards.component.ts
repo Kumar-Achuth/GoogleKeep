@@ -21,29 +21,13 @@ accessToken = localStorage.getItem('token');
   constructor(private myHttpService: HttpService, private router : Router,public dialog: MatDialog) { }
   @Output() dialogEvent = new EventEmitter();
   ngOnInit() {
-
-
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
-      console.log("Successfull",data);        
-      for(var i= 0 ; i< data['data']['details'].length; i++)
-      {
-        if(data['data']['details'][i].isDeleted == false){
-          this.labelArray.push(data['data']['details'][i])
-        }
-        else{
-          console.log('Ok')
-        }
-      }
-    })
-   
+   this.getAllLabels();
   }
   deleteEvent(event)
   {
     this.trashEvent.emit({
     })
   }
-  
-  
   openDialog(notes): void {
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',
@@ -51,9 +35,9 @@ accessToken = localStorage.getItem('token');
       backdropClass : '',
       data: notes
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.getAllLabels();
       this.trashEvent.emit({
       })
     });
@@ -67,6 +51,22 @@ accessToken = localStorage.getItem('token');
       })
     })
   }
+getAllLabels(){
+  // let newArray=[];
+  this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
+    let newArray=[];
+    console.log("Successfull",data);        
+    for(var i= 0 ; i< data['data']['details'].length; i++)
+    {
+      if(data['data']['details'][i].isDeleted == false){
+        newArray.push(data['data']['details'][i])
+      }
+      else{
+        console.log('Ok')
+      }
+    }
+    this.labelArray=newArray;
+  }) 
+}
   
-
 }

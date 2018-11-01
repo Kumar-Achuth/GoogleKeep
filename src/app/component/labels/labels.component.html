@@ -1,20 +1,24 @@
 <div  class="pad">
 <div class="editlabel">
 <b>Edit Label</b>
-
 </div><br>
 <div fxLayout="row" fxLayoutAlign = "space-around start" class = "padding">
-    <i class="material-icons" mat-Tooltip = "CLOSE" (click)="clear()">
+   <div fxFlex = 15 >
+    <i class="material-icons"  style="cursor : pointer" mat-Tooltip = "CLOSE" (click)="clear()">
         clear
         </i>
-    
-<div contenteditable="true" #labelId aria-placeholder="Create New Label" class="reset" data-text="Create New Label" (click) = "addLabels()"></div><br>
-<i class="material-icons">
+    </div>
+    <div fxFlex = 70>
+<div contenteditable="true" #labelId aria-placeholder="Create New Label" class="reset" data-text="Create New Label"></div><br>
+</div>
+<div fxFlex = 15>
+<i class="material-icons"  style="cursor : pointer" (click) = "addLabels()" mat-Tooltip = "Create">
     done
-    </i>   
+    </i>
+</div>   
 </div><hr>
 
-<div *ngFor = "let index of labelArray1">
+<div *ngFor = "let index of labelArray1 trackBy : val?.id">
 <div *ngIf = "editShow != index.id">
     <a mat-list-item>
         <span class= "delete" (click) = "deleteThisLabel(index.id)"><i class="material-icons" matTooltip="Delete Label">
@@ -40,7 +44,7 @@
   </div>
         <div class="close">
             <div class="example-button-row">
-                <button mat-button (click) = "addLabels()">Done</button>
+                <button mat-button (click) = "close()">Done</button>
             </div>
         </div>
     </div>
