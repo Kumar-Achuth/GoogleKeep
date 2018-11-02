@@ -3,6 +3,8 @@ import { HttpService } from '../../services/http.service';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { GlobalSearchService } from '../../services/global-search.service';
 
 @Component({
   selector: 'app-note-cards',
@@ -17,8 +19,18 @@ body : any = {}
 accessToken = localStorage.getItem('token');
 @Input() cardsArray;
 @Output() trashEvent = new EventEmitter();
+@Input() globalSearch;
 
-  constructor(private myHttpService: HttpService, private router : Router,public dialog: MatDialog) { }
+  constructor(private myHttpService: HttpService, private router : Router,public dialog: MatDialog , public data : GlobalSearchService) {this.data.deletedLabel.subscribe(message => {
+console.log(message);
+if(message){
+  this.trashEvent.emit({
+  })
+}
+  })
+}
+
+
   @Output() dialogEvent = new EventEmitter();
   ngOnInit() {
    this.getAllLabels();
@@ -52,9 +64,9 @@ accessToken = localStorage.getItem('token');
     })
   }
 getAllLabels(){
-  // let newArray=[];
+  let newArray=[];
   this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
-    let newArray=[];
+    // let newArray=[];
     console.log("Successfull",data);        
     for(var i= 0 ; i< data['data']['details'].length; i++)
     {

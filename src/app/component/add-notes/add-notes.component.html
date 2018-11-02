@@ -35,9 +35,9 @@
     <!-- </div> -->
     <hr>
             </div>
-            <div >
+            <div *ngFor = "let index of labelName" >
                     <mat-chip-list>
-                    <mat-chip >
+                    <mat-chip >{{index.label}}
                     <mat-icon matChipRemove>cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
@@ -53,8 +53,36 @@
                 </app-add-photo>
                 <app-add-archive>
                 </app-add-archive>
-                <app-more>
+                <app-more (addEvent)="instantLabel($event)">
                 </app-more>
+              
+              
+<!--               
+                <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu"><i class="material-icons" matTooltip="More">
+                        more_vert
+                      </i></mat-icon>
+                    <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+                      <div>
+                        <button mat-button (click)="postToTrash(trash)">Delete Note</button><br>
+                        <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)= "$event.stopPropagation()">AddLabel</button><br>
+                        <button mat-button>Add Drawing</button><br>
+                        <button mat-button>Make a Copy</button><br>
+                        <button mat-button>Show Checkboxes</button><br>
+                        <button mat-button>Copy to Google Docs</button><br>
+                      </div>
+                    </mat-menu>
+                    <div (click) ="$event.stopPropagation()">
+                    <mat-menu #labelMenu="matMenu" [overlapTrigger]="false">
+                      <mat-icon fxFlex = 15 >search</mat-icon>
+                      <input placeholder="Enter Label" fxFlex = 85 (click) ="$event.stopPropagation()" [(ngModel)]= "search" >
+                       <div *ngFor="let index of labelArray | searchBar : search"  >
+                        <mat-checkbox (click)=" $event.stopPropagation(); goAndGetLabel(index.id)">{{index.label}}</mat-checkbox>
+                      </div>
+                    </mat-menu>
+                    </div>
+ -->
+
+
                 <div class="close">
                     <div class="example-button-row">
                         <button mat-button (click)="addNotes()">CLOSE</button>

@@ -16,4 +16,9 @@
 .spacebetween{
     margin-left: 5px;
 }
-
+/* .cards{
+    width:80%;
+} */
+::ng-deep.mat-card{
+    width : 87%;
+}

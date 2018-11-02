@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { MatSnackBar, MatChipInputEvent } from '@angular/material';
-import { Router } from '@angular/router';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-newlabel',
@@ -10,43 +9,31 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
   styleUrls: ['./newlabel.component.css']
 })
 export class NewlabelComponent implements OnInit {
-
-  public hide: boolean = true;
-  body: any = {}
-  @Output() newEvent = new EventEmitter();
+  params : any;
+  label: any;
+  labelArray: any;
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar, private router: Router) { }
   accessToken = localStorage.getItem('token');
   ngOnInit() {
-  }
-
-  addNotes() {
-    this.body =
-      {
-        'title': document.getElementById('titleId').innerHTML,
-        'description': document.getElementById('notesId').innerHTML,
-        'labelIdList': '',
-        'checklist': '',
-        'isPined': 'false',
+    // this.router.params.subscribe(
+    //   (params:Params)=>{
+    //   this.label= params['label']
+    //   this.getNoteLabels(this.label)
+    //   console.log("I m here now");
+    //   })
       }
-
-    console.log(this.body);
-
-    this.myHttpService.postNotes('notes/addNotes', this.body, this.accessToken).subscribe(response => {
-      console.log("successfull", response);
-      this.newEvent.emit({
-      })
-      this.hide = !this.hide;
-
-    }, error => {
-      console.log("failed", error)
-      this.hide = !this.hide;
-    })
-    console.log("accessToken", this.accessToken)
-  }
-
-
-
-
-
+      
+getNoteLabels(label){
+  this.myHttpService.getindividualLabel('notes/getNotesListByLabel/'+ this.label+'',null,this.accessToken).subscribe(
+    (data) => {
+    console.log("GET Request is successful ", data);
+    this.labelArray=data['data'].data ;
+    console.log(this.labelArray)
+    }),
+    error => {
+    console.log("Error", error);
+    }
+}
 
 }
+

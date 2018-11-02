@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef }
 import { HttpService } from '../../services/http.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef } from '@angular/material';
+import { GlobalSearchService } from '../../services/global-search.service';
 
 @Component({
   selector: 'app-labels',
@@ -24,13 +25,20 @@ labelArray1  : any = [];
     accessToken = localStorage.getItem('token');
    id =  localStorage.getItem('userId');
 
-  constructor(private myHttpService: HttpService,public dialogRef: MatDialogRef<NavbarComponent>) { }
+  constructor(public data : GlobalSearchService, private myHttpService: HttpService,public dialogRef: MatDialogRef<NavbarComponent>) { }
 
   ngOnInit() {
  this.getAllLabels();
   }
   addLabels()
   {
+    var duplicate = this.labelId.nativeElement.innerHTML;
+    for(var i=0; i< this.labelArray1.length; i++){
+      if(this.labelArray1[i].label == duplicate){
+        alert(' Duplicate Values Not Allowed ')
+        return false;
+      }
+    }
     this.body =
     {
         "label": this.labelId.nativeElement.innerHTML,
@@ -40,13 +48,11 @@ labelArray1  : any = [];
     console.log(this.body); 
   this.myHttpService.addLabel('/noteLabels',this.body,this.accessToken).subscribe(response=>{
     console.log("successfull",response);
-    // this.dialogRef.close();
     this.getAllLabels();
     // this.newEvent.emit({
     // })
   },error=>{
     console.log("failed",error)
-    // this.dialogRef.close();
   })
   console.log("accessToken",this.accessToken)
   }
@@ -54,6 +60,7 @@ labelArray1  : any = [];
     this.myHttpService.deleteLabel('/noteLabels/'+id+'/deleteNoteLabel',this.accessToken).subscribe(response=>{
       this.getAllLabels();
       console.log("successfull",response);
+      this.data.deleteMessage(true)
     })
   }
  
@@ -64,11 +71,10 @@ labelArray1  : any = [];
       "id": id,
       "userId": this.id
     },this.accessToken).subscribe(response=>{
+      this.getAllLabels();
       console.log("successfull",response);
     })
   }
-
-
   edit(id){
     this.editShow=id;
   }
@@ -80,14 +86,14 @@ labelArray1  : any = [];
   this.dialogRef.close();
  }
 getAllLabels(){
-  let  newArray=[];
+  // let  newArray=[];
   this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.accessToken).subscribe(data=>{
+    let  newArray=[];
     console.log("Get request is Successful",data);
     for(var i= 0 ; i< data['data']['details'].length; i++)
     {
       if(data['data']['details'][i].isDeleted == false){
-        newArray.push(data['data']['details'][i])
-        
+        newArray.push(data['data']['details'][i]) 
       }
       else{
         console.log('Ok')

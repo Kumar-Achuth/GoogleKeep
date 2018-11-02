@@ -13,6 +13,7 @@ import { AuthGuard} from './component/auth.guard';
 import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
 import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
+import { GlobalSearchComponent } from './component/global-search/global-search.component';
 
 const routes: Routes = [
                        { path : 'signup', component: SignupComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
                        { path : 'reminder' , component : ReminderComponent},
                        { path : 'archive' , component : ArchiveComponent},
                        { path : 'trash', component : TrashComponent},
+                       { path : 'globalSearch', component : GlobalSearchComponent},
                        { path : '', redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
                        
                        },

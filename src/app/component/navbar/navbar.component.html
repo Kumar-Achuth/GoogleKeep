@@ -8,7 +8,7 @@
         <span class="title-header"><b>Fundoo</b> Notes</span>
         <div class="searchBar">
           <i class="material-icons">search </i>
-          <input class="search" type="input" placeholder="search" [(ngModel)]="globalSearch">
+          <input class="search" type="input" placeholder="search" [(ngModel)]="globalSearch" name="search" (click)="goSearch()" (keydown)="lookFor()">
         </div>
         <div class="equal" fxlayout="row" fxLayoutAlign="space-around" fxFlex="1 1 auto">
           <div class="one" matTooltip="Cloud Sync">
@@ -50,10 +50,12 @@
             <hr>
             <a mat-list-item> Labels </a>
             <div *ngFor="let labels of labelArray trackBy : val?.id">
+              <div *ngIf= "labels.isDeleted==false">
               <a mat-list-item routerLink="/home/newlabel">
                 <mat-icon class="margin">label_outline</mat-icon>
                 <span class="margin2" [innerHTML]="labels.label"></span>
               </a>
+            </div>
             </div>
             <a mat-list-item (click)="openDialog()"><i class="material-icons" matTooltip="Edit Label">
                 create

@@ -5,7 +5,7 @@
        <div fxLayout="row" fxLayoutAlign="space-between center" > 
         <div class= "chips" *ngFor = "let index of data.noteLabels">
         <mat-chip-list>
-            <mat-chip>
+            <mat-chip *ngIf = "index.isDeleted==false">
             {{index.label}}
             <mat-icon matChipRemove (click) = "deleteChips(index.id)">cancel</mat-icon>
           </mat-chip>

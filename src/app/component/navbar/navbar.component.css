@@ -1,29 +1,22 @@
 .sidenav-container {
   height: 100%;
-  /* width: 500px; */
   background-color: rgb(221,221,230);
-  /* position: fixed; */
-  /* position: fixed; */
 }
 .sidenav {
-  width: 250px;
-  /* overflow-y: scroll; */
+  width: 230px;
   margin-top: 65px;
   background-color:rgb(221,221,230);
   position: fixed;
 }
 .mat-toolbar.mat-primary {
   position: fixed;
-  /* top: 0;   */
 }
 .mat-drawer.mat-drawer-side {
   top:0;
-  /* height:100%; */
 }
 .toolbar
 {
   background: #fb0;
-  /* position: relative; */
   position: fixed;
   z-index: 2;
   display: flex;

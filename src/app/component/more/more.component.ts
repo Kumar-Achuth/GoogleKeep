@@ -14,7 +14,7 @@ export class MoreComponent implements OnInit {
   // search : any;
   @Input() trash;
   @Output() deleteCard = new EventEmitter();
-
+@Output() addEvent = new EventEmitter();
   constructor(private myHttpService: HttpService) { }
 
   ngOnInit() {
@@ -35,12 +35,16 @@ export class MoreComponent implements OnInit {
     })
   }
   goAndGetLabel(label) {
-    this.myHttpService.goLabel('notes/' + this.trash.id + '/addLabelToNotes/' + label + '/add',
-      { "noteId": this.trash.id, "lableId": label },
+    console.log(label);
+    this.addEvent.emit(label);
+    this.myHttpService.goLabel('notes/' + this.trash.id + '/addLabelToNotes/' + label.id + '/add',
+      { "noteId": this.trash.id, "lableId": label.id },
       this.accessToken)
       .subscribe(data => {
+        // this.getAllLabels();
         this.deleteCard.emit({
         })
+      
         console.log('response', data);
       
       })

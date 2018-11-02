@@ -1,48 +1,5 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:20px">
-    <mat-card *ngIf="hide">
-        <span (click)="hide=!hide"> Take a Note ...</span>
-        <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
-            <div class="click">
-                <i class="material-icons" mat-raised-button matTooltip="New List">
-                    list
-                </i>
-            </div>
-            &nbsp;&nbsp;
-            <div class="click">
-                <i class="material-icons" matTooltip="New Note with Image">
-                    photo
-                </i>
-            </div>
-            &nbsp;&nbsp;
-            <div class="click">
-                <i class="material-icons" matTooltip="New Note with Drawing">
-                    create
-                </i>
-            </div>
-        </div>
-    </mat-card>
-    <mat-card *ngIf="!hide">
-        <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
-        <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
-        <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
-            <app-add-reminder>
-            </app-add-reminder>
-            <app-collaborator>
-            </app-collaborator>
-            <app-change-color>
-            </app-change-color>
-            <app-add-photo>
-            </app-add-photo>
-            <app-add-archive>
-            </app-add-archive>
-            <app-more>
-            </app-more>
-            <div class="close">
-                <div class="example-button-row">
-                    <button mat-button (click)="addNotes()">CLOSE</button>
-                </div>
-            </div>
-        </div>
-        <br>
-    </mat-card>
+<div style="margin-bottom : 3%;">
+<app-add-notes>
+
+</app-add-notes>
 </div>

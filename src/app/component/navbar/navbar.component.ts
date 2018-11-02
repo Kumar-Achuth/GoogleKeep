@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { LabelsComponent } from '../labels/labels.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { GlobalSearchService } from '../../services/global-search.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class NavbarComponent {
    token= localStorage.getItem('token');
    labelArray : any =[]
   model : any = {}
+  globalSearch : any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -26,7 +28,7 @@ export class NavbarComponent {
     );
     // token = localStorage.getItem('token');
 
-  constructor(private myHttpService: HttpService,private snackBar: MatSnackBar, public route:ActivatedRoute,private breakpointObserver: BreakpointObserver, private router : Router,public dialog: MatDialog) {}
+  constructor(private myHttpService: HttpService,private snackBar: MatSnackBar, public route:ActivatedRoute,private breakpointObserver: BreakpointObserver, private router : Router,public dialog: MatDialog,public data : GlobalSearchService) {}
   
   doLogout()
   {
@@ -94,8 +96,13 @@ export class NavbarComponent {
       }
       this.labelArray=newArray;
       console.log(data['data'].details)
-    })
+    }) 
+  }
 
-    
+  goSearch(){
+this.router.navigate(['home/globalSearch']);
+  }
+  lookFor(){
+this.data.changeMessage(this.globalSearch)
   }
   }
