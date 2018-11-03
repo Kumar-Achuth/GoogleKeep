@@ -22,7 +22,7 @@ const routes: Routes = [
                        { path : 'resetpassword/:forgotToken', component : ResetPasswordComponent},
                        { path : 'home' , component : HomeComponent, canActivate : [AuthGuard],  children : [
                        { path : 'notes', component : NotesComponent},
-                       { path : 'newlabel', component : NewlabelComponent},
+                       { path : 'newlabel/:label', component : NewlabelComponent},
                        { path : 'reminder' , component : ReminderComponent},
                        { path : 'archive' , component : ArchiveComponent},
                        { path : 'trash', component : TrashComponent},

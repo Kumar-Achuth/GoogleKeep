@@ -44,9 +44,7 @@ export class MoreComponent implements OnInit {
         // this.getAllLabels();
         this.deleteCard.emit({
         })
-      
         console.log('response', data);
-      
       })
   }
   getAllLabels(){

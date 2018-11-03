@@ -105,4 +105,9 @@ this.router.navigate(['home/globalSearch']);
   lookFor(){
 this.data.changeMessage(this.globalSearch)
   }
+  select(labels){
+    let label = labels.label;
+    this.router.navigate(['/newLabel/'+label])
+    console.log(label);
+  }
   }

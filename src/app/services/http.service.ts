@@ -228,10 +228,10 @@ postCheckList(url,input,token){
     url = this.url+url;
     const httpOptions = {
       headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
+        'Content-Type' : 'application/x-www-form-urlencoded',
         'Authorization' : token
       })
     }
-    return this.http.post(url,body,httpOptions)
+    return this.http.post(url,this.getFormUrlEncoded(body),httpOptions)
   }
 }

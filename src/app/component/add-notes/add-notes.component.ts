@@ -43,6 +43,7 @@ this.myHttpService.postNotes('notes/addNotes', {
  
   this.newEvent.emit({
   })
+  this.labelName=[];
   this.hide=!this.hide;
   this.color = "#fafafa";
   this.show = 0;
@@ -50,6 +51,7 @@ this.myHttpService.postNotes('notes/addNotes', {
   console.log("failed",error)
   this.color = "#fafafa";
   this.hide=!this.hide;
+  this.labelName=[];
   this.show = 0;
 })
 }

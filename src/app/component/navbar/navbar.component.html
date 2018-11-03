@@ -49,9 +49,9 @@
               </i>Reminders</a>
             <hr>
             <a mat-list-item> Labels </a>
-            <div *ngFor="let labels of labelArray trackBy : val?.id">
+            <div *ngFor="let labels of labelArray trackBy : val?.id" (click) = "select(labels)">
               <div *ngIf= "labels.isDeleted==false">
-              <a mat-list-item routerLink="/home/newlabel">
+              <a mat-list-item >
                 <mat-icon class="margin">label_outline</mat-icon>
                 <span class="margin2" [innerHTML]="labels.label"></span>
               </a>
