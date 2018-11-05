@@ -22,13 +22,12 @@ const routes: Routes = [
                        { path : 'resetpassword/:forgotToken', component : ResetPasswordComponent},
                        { path : 'home' , component : HomeComponent, canActivate : [AuthGuard],  children : [
                        { path : 'notes', component : NotesComponent},
-                       { path : 'newlabel/:label', component : NewlabelComponent},
-                       { path : 'reminder' , component : ReminderComponent},
-                       { path : 'archive' , component : ArchiveComponent},
+                       { path : 'newLabel/:label', component : NewlabelComponent},
+                       { path : 'reminder', component : ReminderComponent},
+                       { path : 'archive', component : ArchiveComponent},
                        { path : 'trash', component : TrashComponent},
                        { path : 'globalSearch', component : GlobalSearchComponent},
-                       { path : '', redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
-                       
+                       { path : '',redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
                        },
                        { path : 'labels', component : LabelsComponent},                    
                        {path : 'updateNotes', component : UpdateNotesComponent},
@@ -39,6 +38,5 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
-
 })
 export class AppRoutingModule { }

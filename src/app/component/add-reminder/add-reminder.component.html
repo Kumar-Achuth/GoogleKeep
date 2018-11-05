@@ -1,9 +1,18 @@
-<!-- <div class="click">
-  <button mat-icon-button>  <i class="material-icons" matTooltip="Add as a reminder">
-      touch_app
-    </i></button>
-  </div> -->
-
-  <mat-icon class = "space" style="cursor : pointer;"><i class="material-icons" matTooltip="Remind me">
+<mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu"><i class="material-icons" matTooltip="Remind me">
     touch_app
   </i></mat-icon>
+<mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+  <div>
+    <button mat-button (click)="addReminder()">Reminder : </button><br>
+    <button mat-button>Later Today Mon 8PM</button><br>
+    <button mat-button>Tomorrow 8AM</button><br>
+    <button mat-button>Next Week MON,8AM</button><br>
+    <a> <i class="material-icons">
+        access_time
+      </i><button mat-button>Pick Date & Time</button></a><br>
+    <a> <i class="material-icons">
+        place
+      </i> <button mat-button>Pick a Place</button>
+    </a><br>
+  </div>
+</mat-menu>

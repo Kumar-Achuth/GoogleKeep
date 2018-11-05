@@ -25,6 +25,7 @@ export class NewlabelComponent implements OnInit {
 }
       
 getNoteLabels(label){
+  // if(this.label.isDeleted==true){
   this.myHttpService.getindividualLabel('notes/getNotesListByLabel/'+label+'',null,this.accessToken).subscribe(
     (data) => {
     console.log("Post Request is successful ", data);
@@ -34,6 +35,7 @@ getNoteLabels(label){
     error => {
     console.log("Error", error);
     }
+  // }
 }
 
 }

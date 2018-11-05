@@ -1,21 +1,32 @@
-<div fxLayout = "row" fxLayoutAlign = "center center"  >
-  <div class="trash" >
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div class="trash">
     Notes in Trash are deleted after 7 days.
-    </div>&nbsp;&nbsp;&nbsp;
-    <div class="trash">
-        <button mat-button>Empty Trash</button> 
-    </div>
-    </div>
-    <div  fxLayout = "row wrap"  fxLayoutAlign = "center center" fxLayoutGap="10px" style="margin-top:280px;">
-  <div *ngFor = 'let notes of cards'>
-    <mat-card style="margin-top : 10px;" [style.backgroundColor] = "notes.color" >
-    <mat-card-title><div [innerHtml] = "notes.title"></div></mat-card-title>
-    <mat-card-content><div  [innerHtml]="notes.description"></div></mat-card-content>
-       <div class="space" fxLayout="row" fxLayoutAlign="space-between">
-      
-        <app-more>
-        </app-more>
-    </div>
-</mat-card>
+  </div>
+  <div class="trash">
+    <button mat-button>Empty Trash</button>
+  </div>
 </div>
+<div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" style="margin-top:50px;">
+  <div *ngFor='let notes of cards' fxFlex="0 1 calc(30% - 32px)">
+    <mat-card class="card" style="margin-top : 10px; border-radius: 10px" [style.backgroundColor]="notes.color">
+      <mat-card-title>
+        <div [innerHtml]="notes.title"></div>
+      </mat-card-title>
+      <mat-card-content>
+        <div [innerHtml]="notes.description"></div>
+      </mat-card-content>
+      <div class="space" fxLayout="row" fxLayoutAlign="space-between">
+        <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu"><i class="material-icons"
+            matTooltip="More">
+            more_vert
+          </i></mat-icon>
+        <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+          <div>
+            <button mat-button (click)="deleteForever(notes.id)">Delete Forever</button><br>
+            <button mat-button>Restore</button><br>
+          </div>
+        </mat-menu>
+      </div>
+    </mat-card>
+  </div>
 </div>

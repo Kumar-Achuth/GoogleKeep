@@ -1,34 +1,40 @@
-<div  fxLayout = "row wrap" fxLayoutAlign = "center"  fxLayoutGap="10px" style="margin-top:25px ">
-  <div *ngFor = 'let notes of cardsArray | searchBar :  globalSearch' fxFlex ="0 1 calc(30% - 32px)">
-    <mat-card  class="cards" style="margin-top : 10px; border-radius: 10px; " [style.backgroundColor] = "notes.color">
-    <mat-card-title   (click)="openDialog(notes)" ><div [innerHtml] = "notes.title"></div></mat-card-title>
-    <mat-card-content  (click)="openDialog(notes)"><div [innerHtml]="notes.description"></div></mat-card-content>
-    <div fxLayout="row" class="spacebetween" >
-    <div  *ngFor = "let index of notes.noteLabels trackBy : val?.id">
-      <div *ngIf = "index.isDeleted == false">
-    <mat-chip-list selected>
-    <mat-chip >
-    {{index.label}}
-    <mat-icon matChipRemove  (click) = "$event.stopPropagation(); deleteChips(notes.id,index.id)">cancel</mat-icon>
-  </mat-chip>
-</mat-chip-list>
-</div>
-</div>
-</div>
-       <div class="space" fxLayout="row" fxLayoutAlign="space-between" >
-        <app-add-reminder>
-        </app-add-reminder>
-        <app-collaborator >
-        </app-collaborator>
-        <app-change-color [color] = "notes" (changeColor) = "deleteEvent($event)">
-        </app-change-color>
-        <app-add-photo>
-        </app-add-photo>
-        <app-add-archive [archive]= "notes" >
-        </app-add-archive>
-        <app-more [trash] = "notes"  (deleteCard) = "deleteEvent($event)">
-        </app-more>
+<div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" style="margin-top:25px ">
+  <div *ngFor='let notes of cardsArray | searchBar :  globalSearch' fxFlex="0 1 calc(30% - 32px)">
+    <div [ngClass]="{'grid':toggle,'list':!toggle}">
+      <mat-card class="cards" style="margin-top : 10px; border-radius: 10px; " [style.backgroundColor]="notes.color">
+        <mat-card-title (click)="openDialog(notes)">
+          <div [innerHtml]="notes.title"></div>
+        </mat-card-title>
+        <mat-card-content (click)="openDialog(notes)">
+          <div [innerHtml]="notes.description"></div>
+        </mat-card-content>
+        <div fxLayout="row" class="spacebetween">
+          <div *ngFor="let index of notes.noteLabels trackBy : val?.id">
+            <div *ngIf="index.isDeleted == false">
+              <mat-chip-list selected>
+                <mat-chip>
+                  {{index.label}}
+                  <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteChips(notes.id,index.id)">cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </div>
+        <div class="space" fxLayout="row" fxLayoutAlign="space-between">
+          <app-add-reminder [reminder]="notes" (remindEmit)="deleteEvent($event)">
+          </app-add-reminder>
+          <app-collaborator>
+          </app-collaborator>
+          <app-change-color [color]="notes" (changeColor)="deleteEvent($event)">
+          </app-change-color>
+          <app-add-photo>
+          </app-add-photo>
+          <app-add-archive [archive]="notes">
+          </app-add-archive>
+          <app-more [trash]="notes" (deleteCard)="deleteEvent($event)">
+          </app-more>
+        </div>
+      </mat-card>
     </div>
-</mat-card>
-</div>
+  </div>
 </div>

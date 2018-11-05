@@ -7,14 +7,17 @@ import { Subject } from 'rxjs';
 export class GlobalSearchService {
   private messageSource = new Subject();
   currentMessage = this.messageSource.asObservable();
-  deletedLabel=this.messageSource.asObservable();
-
+  deletedLabel = this.messageSource.asObservable();
+  viewList = this.messageSource.asObservable();
   constructor() { }
 
   changeMessage(message: string) {
     this.messageSource.next(message)
   }
-  deleteMessage(message : boolean){
+  deleteMessage(message: boolean) {
+    this.messageSource.next(message)
+  }
+  sendMessage(message: boolean) {
     this.messageSource.next(message)
   }
 

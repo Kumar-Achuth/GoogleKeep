@@ -14,15 +14,13 @@ export class MoreComponent implements OnInit {
   // search : any;
   @Input() trash;
   @Output() deleteCard = new EventEmitter();
-@Output() addEvent = new EventEmitter();
-  constructor(private myHttpService: HttpService) { }
+  @Output() addEvent = new EventEmitter();
+  constructor(private myHttpService: HttpService) {}
 
   ngOnInit() {
-
    this.getAllLabels();
-
   }
-  postToTrash(trash) {
+  postToTrash(trash){
     console.log(this.trash);
     console.log(this.accessToken)
     this.myHttpService.postTrash('notes/trashNotes', {
@@ -34,6 +32,7 @@ export class MoreComponent implements OnInit {
       })
     })
   }
+  
   goAndGetLabel(label) {
     console.log(label);
     this.addEvent.emit(label);

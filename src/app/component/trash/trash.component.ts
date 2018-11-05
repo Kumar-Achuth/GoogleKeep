@@ -9,24 +9,32 @@ import { Router } from '@angular/router';
 })
 export class TrashComponent implements OnInit {
 
-  cards : any = [];
+  cards: any = [];
   accessToken = localStorage.getItem('token');
-  constructor(private myHttpService: HttpService, private router : Router) { }
-
+  constructor(private myHttpService: HttpService, private router: Router) { }
   ngOnInit() {
-
-    this.myHttpService.getTrashNotes('notes/getTrashNotesList',this.accessToken).subscribe(data => {
+    this.getTrash();
+  }
+  deleteForever(card) {
+    console.log(card);
+    this.myHttpService.foreverTrash('notes/deleteForeverNotes', {
+      "isDeleted": false,
+      "noteIdList": [card]
+    }, this.accessToken).subscribe(data => {
+      console.log('response', data);
+      this.getTrash()
+    })
+  }
+  getTrash() {
+    this.myHttpService.getTrashNotes('notes/getTrashNotesList', this.accessToken).subscribe(data => {
       console.log('response', data);
       for (var i = 0; i < data["data"]['data'].length; i++) {
-        
         this.cards = (data["data"]['data']);
       }
       console.log(this.cards);
-    }, error=>{
+    }, error => {
       console.log(error)
-  ;    })
+        ;
+    })
   }
-
-  
-
 }

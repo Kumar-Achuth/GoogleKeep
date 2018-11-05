@@ -1,94 +1,66 @@
 <div fxLayout='column' fxLayoutAlign="center center" style="margin-top:100px">
-        <mat-card *ngIf="hide" (click)="hide=!hide">
-            <span > Take a Note ...</span>
-            <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
-                <div class="click">
-                    <i class="material-icons" mat-raised-button matTooltip="New List" (click) = "toggle()">
-                        list
-                    </i>
-                </div>
-                &nbsp;&nbsp;
-                <div class="click">
-                    <i class="material-icons" matTooltip="New Note with Image">
-                        photo
-                    </i>
-                </div>
-                &nbsp;&nbsp;
-                <div class="click">
-                    <i class="material-icons" matTooltip="New Note with Drawing">
-                        create
-                    </i>
-                </div>
+    <mat-card *ngIf="hide" (click)="hide=!hide">
+        <span> Take a Note ...</span>
+        <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
+            <div class="click">
+                <i class="material-icons" mat-raised-button matTooltip="New List" (click)="toggle()">
+                    list
+                </i>
             </div>
-        </mat-card>
-   
-        <mat-card *ngIf="!hide" [style.backgroundColor] = "color">
-            <div contenteditable="true" id="titleId"  class="reset" data-text="Title"></div>
-            <div *ngIf = "show == 0">
+            &nbsp;&nbsp;
+            <div class="click">
+                <i class="material-icons" matTooltip="New Note with Image">
+                    photo
+                </i>
+            </div>
+            &nbsp;&nbsp;
+            <div class="click">
+                <i class="material-icons" matTooltip="New Note with Drawing">
+                    create
+                </i>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="!hide" [style.backgroundColor]="color">
+        <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
+        <div *ngIf="show == 0">
             <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
         </div>
-        <div *ngIf = "show == 1" fxLayout = "row" class = "topping">
+        <div *ngIf="show == 1" fxLayout="row" class="topping">
             <hr>
             <mat-icon>add</mat-icon>
             <!-- <div *ngFor = "let key of save"> -->
-        <input id="notesId" placeholder="List Item" class="edit1"  (keydown.enter)="onKeydown($event)">            
-    <!-- </div> -->
-    <hr>
-            </div>
-            <div *ngFor = "let index of labelName" >
-                    <mat-chip-list>
-                    <mat-chip >{{index.label}}
+            <input id="notesId" placeholder="List Item" class="edit1" (keydown.enter)="onKeydown($event)">
+            <!-- </div> -->
+            <hr>
+        </div>
+        <div *ngFor="let index of labelName">
+            <mat-chip-list>
+                <mat-chip>{{index.label}}
                     <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                </mat-chip-list>
-                </div>
-            <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
-                <app-add-reminder>
-                </app-add-reminder>
-                <app-collaborator>
-                </app-collaborator>
-                <app-change-color (colorEmit) = colorChanges($event) >
-                </app-change-color>
-                <app-add-photo>
-                </app-add-photo>
-                <app-add-archive>
-                </app-add-archive>
-                <app-more (addEvent)="instantLabel($event)">
-                </app-more>
-              
-              
-<!--               
-                <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu"><i class="material-icons" matTooltip="More">
-                        more_vert
-                      </i></mat-icon>
-                    <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-                      <div>
-                        <button mat-button (click)="postToTrash(trash)">Delete Note</button><br>
-                        <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)= "$event.stopPropagation()">AddLabel</button><br>
-                        <button mat-button>Add Drawing</button><br>
-                        <button mat-button>Make a Copy</button><br>
-                        <button mat-button>Show Checkboxes</button><br>
-                        <button mat-button>Copy to Google Docs</button><br>
-                      </div>
-                    </mat-menu>
-                    <div (click) ="$event.stopPropagation()">
-                    <mat-menu #labelMenu="matMenu" [overlapTrigger]="false">
-                      <mat-icon fxFlex = 15 >search</mat-icon>
-                      <input placeholder="Enter Label" fxFlex = 85 (click) ="$event.stopPropagation()" [(ngModel)]= "search" >
-                       <div *ngFor="let index of labelArray | searchBar : search"  >
-                        <mat-checkbox (click)=" $event.stopPropagation(); goAndGetLabel(index.id)">{{index.label}}</mat-checkbox>
-                      </div>
-                    </mat-menu>
-                    </div>
- -->
-
-
-                <div class="close">
-                    <div class="example-button-row">
-                        <button mat-button (click)="addNotes()">CLOSE</button>
-                    </div>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
+        <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
+            <app-add-reminder>
+            </app-add-reminder>
+            <app-collaborator>
+            </app-collaborator>
+            <app-change-color (colorEmit)=colorChanges($event)>
+            </app-change-color>
+            <app-add-photo>
+            </app-add-photo>
+            <app-add-archive>
+            </app-add-archive>
+            <app-more (addEvent)="instantLabel($event)">
+            </app-more>
+            <div class="close">
+                <div class="example-button-row">
+                    <button mat-button (click)="addNotes()">CLOSE</button>
                 </div>
             </div>
-            <br>
-        </mat-card>
+        </div>
+        <br>
+    </mat-card>
 </div>

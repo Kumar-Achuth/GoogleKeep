@@ -13,17 +13,19 @@ export class ArchiveComponent implements OnInit {
 
   ngOnInit() {
 
-    this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',this.accessToken).subscribe(data => {
-      console.log('response', data);
-      for (var i = 0; i < data["data"]['data'].length; i++) {
-      
-        this.cards = (data["data"]['data']);
-      }
-      console.log(this.cards);
-    }, error=>{
-      console.log(error)
-  ;    })
+   this.getArchiveNotes();
   }
-
+getArchiveNotes(){
+  this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',this.accessToken).subscribe(data => {
+    console.log('response', data);
+    for (var i = 0; i < data["data"]['data'].length; i++) {
+    
+      this.cards = (data["data"]['data']);
+    }
+    console.log(this.cards);
+  }, error=>{
+    console.log(error)
+;    })
+}
 
 }

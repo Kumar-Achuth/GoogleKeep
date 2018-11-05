@@ -234,4 +234,14 @@ postCheckList(url,input,token){
     }
     return this.http.post(url,this.getFormUrlEncoded(body),httpOptions)
   }
+  foreverTrash(url,body,token){
+    url = this.url+url;
+    const httpOptions = {
+      headers : new HttpHeaders({
+        'Content-Type' : 'application/json',
+        'Authorization' : token
+      })
+    }
+    return this.http.post(url,body,httpOptions)
+  }
 }

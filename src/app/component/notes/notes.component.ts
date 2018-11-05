@@ -22,12 +22,12 @@ export class NotesComponent implements OnInit {
     this.cards = [];
     console.log('response', data);
     for (var i = data["data"]['data'].length-1; i >= 0; i--) {
-      if(data["data"]['data'][i].isDeleted==false && data["data"]['data'][i].isArchived==false)
+      if(data["data"]['data'][i].isDeleted==false && data["data"]['data'][i].isArchived==false )
       {
         this.cards.push(data["data"]['data'][i])
       }
     }
-    console.log(this.cards);
+    // console.log(this.cards);
   }, error=>{
     console.log(error)
 ;    })

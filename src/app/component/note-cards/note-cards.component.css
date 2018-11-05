@@ -1,8 +1,7 @@
 .space
 {
     padding-top: 4%;
-    /* opacity: 0; */
-    
+    /* opacity: 0; */  
 }
 .space:hover{opacity: 1;}
 .close
@@ -16,9 +15,14 @@
 .spacebetween{
     margin-left: 5px;
 }
-/* .cards{
-    width:80%;
-} */
+.cards{
+    width:85%;
+}
 ::ng-deep.mat-card{
     width : 87%;
+}
+
+.grid{
+    align-content: center;
+width:900px;
 }

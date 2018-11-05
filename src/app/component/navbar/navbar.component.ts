@@ -21,7 +21,7 @@ export class NavbarComponent {
    labelArray : any =[]
   model : any = {}
   globalSearch : any;
-
+list=0;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -60,9 +60,7 @@ export class NavbarComponent {
       this.firstName = localStorage.getItem('firstName');
       this.lastName = localStorage.getItem('lastName');
       this.email = localStorage.getItem('email');
-  this.getLabels();
-  
-     
+  this.getLabels();  
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelsComponent, {
@@ -76,11 +74,8 @@ export class NavbarComponent {
       this.getLabels();
       console.log('The dialog was closed');
       // this.trashEvent.emit({})
-      // this.animal = result;
     });
   }
-
-// arr = [];
   getLabels(){
     let newArray=[];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList',this.token).subscribe(data=>{
@@ -95,7 +90,7 @@ export class NavbarComponent {
         }
       }
       this.labelArray=newArray;
-      console.log(data['data'].details)
+      // console.log(data['data'].details)
     }) 
   }
 
@@ -107,7 +102,15 @@ this.data.changeMessage(this.globalSearch)
   }
   select(labels){
     let label = labels.label;
-    this.router.navigate(['/newLabel/'+label])
+    this.router.navigate(['home/newLabel/'+label])
     console.log(label);
   }
+ listView(){
+   this.data.sendMessage(true);
+this.list=1;
+ }
+ gridView(){
+  this.data.sendMessage(false);
+this.list=0;
+ }
   }
