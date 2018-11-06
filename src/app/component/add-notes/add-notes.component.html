@@ -29,15 +29,21 @@
             <div contenteditable="true" id="notesId" class="edit"
                 data-text="Take a Note.... "></div>
         </div>
-        <div *ngIf="show == 1" fxLayout="row" class="topping">
-            <hr>
-            <mat-icon>add</mat-icon>
-            <!-- <div *ngFor = "let key of save"> -->
-            <input id="notesId" placeholder="List Item" class="edit1"
-                (keydown.enter)="onKeydown($event)">
-            <!-- </div> -->
-            <hr>
+        
+ <div *ngIf="show ==1" id="title" autofocus #description style = "margin-bottom: 20px;">
+        <div class="check" *ngFor="let data of dataarray" id="note" fxLayout="row" style = "margin-bottom: 5px;">
+        <mat-checkbox fxFlex="5%"></mat-checkbox>
+        <input fxFlex="90" *ngIf="show ==1" class="inputNote1" id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
+        <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" style = "cursor: pointer;">cancel</mat-icon>
         </div>
+        <mat-divider></mat-divider>
+        <div class="check" fxLayout="row" id="title" id="note" autofocus id = "notesId">
+        <mat-icon fxFlex="5%">add</mat-icon>
+        <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()">
+        </div>
+        <mat-divider></mat-divider>
+        </div>
+        
         <div *ngFor="let index of labelName">
             <mat-chip-list>
                 <mat-chip>{{index.label}}

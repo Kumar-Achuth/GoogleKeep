@@ -16,6 +16,7 @@ export class AddNotesComponent implements OnInit {
   data: any;
   show: any = 0;
   color: any = "#fafafa";
+  listing = true;
   accessToken = localStorage.getItem('token');
   @Output() newEvent = new EventEmitter();
   labelArray: any[];
@@ -25,7 +26,7 @@ export class AddNotesComponent implements OnInit {
     this.getAllLabels();
   }
   toggle() {
-    this.show = 1;
+this.show = 1;
   }
   addNotes() {
     this.myHttpService.postNotes('notes/addNotes', {
@@ -41,13 +42,13 @@ export class AddNotesComponent implements OnInit {
       this.labelName = [];
       this.hide = !this.hide;
       this.color = "#fafafa";
-      this.show = 0;
+      this.show = 0
     }, error => {
       console.log("failed", error)
       this.color = "#fafafa";
       this.hide = !this.hide;
       this.labelName = [];
-      this.show = 0;
+      this.show = 0
     })
   }
   colorChanges(event) {
@@ -79,4 +80,46 @@ export class AddNotesComponent implements OnInit {
         this.labelArray = newArray;
       })
   }
+  public i=0;
+  dataarray = [];
+  
+enter(){
+  this.i++;
+  if(this.data!=null){
+    console.log(event,"keydown");
+    var obj={
+      "index":this.i,
+      "data":this.data
+    }
+    this.dataarray.push(obj);
+    this.data=null
+    
+  }
+}
+ondelete(deletedObj){
+  console.log("ondelete function runnig");
+  for(var i=0;i<this.dataarray.length;i++){
+    if(deletedObj.index==this.dataarray[i].index){
+      this.dataarray.splice(i,1);
+      break;
+    }
+  }
+  console.log(this.dataarray);
+}
+
+editing(event,edited){
+
+  if(event.code=="Enter"){
+    console.log("enter pressed");
+    for(var i=0;i<this.dataarray.length;i++){
+      if(edited.index==this.dataarray[i].index){
+        this.dataarray[i].data==edited.data
+      }
+    }
+    console.log(this.dataarray);
+    
+  }
+}
+
+
 }
