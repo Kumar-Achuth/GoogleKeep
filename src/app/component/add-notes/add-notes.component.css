@@ -3,7 +3,6 @@ mat-card
     padding: 8px;
     width: 40%;
 }
-
 .click
 {
   cursor: pointer;
@@ -56,6 +55,9 @@ mat-card
 }
 .topping{
     padding-top: 4%;
+}.pin{
+    float: right;
+    cursor: pointer;
 }
 
 

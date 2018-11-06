@@ -2,74 +2,82 @@
   <div class="item item-1" fxFlex fxFlexOffset="10%"></div>
   <div class="item item-2" fxFlex fxFlexOffset="8%" fxFlexOrder="3"> </div>
   <form>
-  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-    <div class="item item-3" fxFlex="31%"></div>
-    <div class="item item-4" fxFlex="31%" fxFlexOrder="3"></div>
-    <div class="item item-5" fxFlex>
-      <mat-card>
-        <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
-          <div leftPane>
-            <div class="clas">
-              <mat-card-title id="center">
-                <div class="letters" fxLayout="row">
-                  <div class="letter1">F</div>
-                  <div class="letter2">U</div>
-                  <div class="letter3">N</div>
-                  <div class="letter4">D</div>
-                  <div class="letter5">O</div>
-                  <div class="letter6">O</div>
-                </div><br>
-                <div style="font-family :BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,'Open Sans'">
-                  Login to Your Account</div>
-              </mat-card-title>
-              <mat-card-content fxLayout="column">
-                <div>
-                  <mat-form-field class="width">
-                    <input matInput placeholder="Email" [(ngModel)] = "model.Email" [formControl]="Email" required>
-                    <mat-error *ngIf="Email.invalid"> {{getErrorMessage()}}</mat-error>
-                  </mat-form-field>
-                  <br>
-                </div>
-              </mat-card-content>
-              <div class="button" fxLayout="row" fxLayoutAlign="space-around">
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center"
+      fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <div class="item item-3" fxFlex="31%"></div>
+      <div class="item item-4" fxFlex="31%" fxFlexOrder="3"></div>
+      <div class="item item-5" fxFlex>
+        <mat-card>
+          <my-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+            <div leftPane>
+              <div class="clas">
+                <mat-card-title id="center">
+                  <div class="letters" fxLayout="row">
+                    <div class="letter1">F</div>
+                    <div class="letter2">U</div>
+                    <div class="letter3">N</div>
+                    <div class="letter4">D</div>
+                    <div class="letter5">O</div>
+                    <div class="letter6">O</div>
+                  </div><br>
+                  <div  class="login" >
+                    Login to Your Account</div>
+                </mat-card-title>
+                <mat-card-content fxLayout="column">
+                  <div>
+                    <mat-form-field class="width">
+                      <input matInput placeholder="Email" [(ngModel)]="model.Email"
+                       [formControl]="Email" required>
+                      <mat-error *ngIf="Email.invalid"> {{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <br>
+                  </div>
+                </mat-card-content>
+                <div class="button" fxLayout="row" fxLayoutAlign="space-around">
                   <a routerLink="/signup"> Create New Account </a>
-                <button mat-raised-button color="primary" type="submit" (click)="emailValidation()">Next</button>
-              </div>
-            </div>
-          </div>
-          <div rightPane>
-            <div>
-              <mat-card-title id="center">
-                <div class="letters" fxLayout="row">
-                  <div class="letter1">F</div>
-                  <div class="letter2">U</div>
-                  <div class="letter3">N</div>
-                  <div class="letter4">D</div>
-                  <div class="letter5">O</div>
-                  <div class="letter6">O</div>
-                </div><br>
-                <div style="font-family :BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,'Open Sans'">
-                  Login to Your Account</div>
-              </mat-card-title>
-              <mat-card-content fxLayout="column">
-                <div>
-                  <mat-form-field class="width">
-                    <input matInput placeholder="Enter your password" [(ngModel)] = "model.password" [formControl]="password" [type]="hide ? 'password' : 'text'">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                  </mat-form-field>
-                  <br>
+                  <button mat-raised-button color="primary" type="submit" 
+                  (click)="emailValidation()">Next</button>
                 </div>
-              </mat-card-content>
-              <div class=button fxLayout="row" fxLayoutAlign="space-between">
-                <a routerLink = "/forgotPassword"> Forgot Password ? </a>
-                <button mat-raised-button color="primary" (click)="isLeftVisible = !isLeftVisible">Back</button>
-             <button mat-raised-button color="primary"type = "submit" (click)="loginValidation()">Login</button>
               </div>
             </div>
-          </div>
-        </my-slide-panel>
-      </mat-card>
+            <div rightPane>
+              <div>
+                <mat-card-title id="center">
+                  <div class="letters" fxLayout="row">
+                    <div class="letter1">F</div>
+                    <div class="letter2">U</div>
+                    <div class="letter3">N</div>
+                    <div class="letter4">D</div>
+                    <div class="letter5">O</div>
+                    <div class="letter6">O</div>
+                  </div><br>
+                  <div class="login">
+                    Login to Your Account</div>
+                </mat-card-title>
+                <mat-card-content fxLayout="column">
+                  <div>
+                    <mat-form-field class="width">
+                      <input matInput placeholder="Enter your password" 
+                      [(ngModel)]="model.password" [formControl]="password"
+                        [type]="hide ? 'password' : 'text'">
+                      <mat-icon matSuffix (click)="hide = !hide">
+                        {{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </mat-form-field>
+                    <br>
+                  </div>
+                </mat-card-content>
+                <div class=button fxLayout="row" fxLayoutAlign="space-between">
+                  <a routerLink="/forgotPassword"> Forgot Password ? </a>
+                  <button mat-raised-button color="primary" 
+                  (click)="isLeftVisible = !isLeftVisible">Back</button>
+                  <button mat-raised-button color="primary" type="submit"
+                   (click)="loginValidation()">Login</button>
+                </div>
+              </div>
+            </div>
+          </my-slide-panel>
+        </mat-card>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>

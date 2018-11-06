@@ -10,33 +10,27 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
   styleUrls: ['./newlabel.component.css']
 })
 export class NewlabelComponent implements OnInit {
-  params : any;
+  params: any;
   label: any;
-  labelArray: any=[];
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar, private router: ActivatedRoute) { }
+  labelArray: any = [];
+  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+    private router: ActivatedRoute) { }
   accessToken = localStorage.getItem('token');
   ngOnInit() {
     this.router.params.subscribe(
-      (params:Params)=>{
-      this.label= params['label']
-      this.getNoteLabels(this.label)
-      console.log("I m here now");
+      (params: Params) => {
+        this.label = params['label']
+        this.getNoteLabels(this.label)
       })
-}
-      
-getNoteLabels(label){
-  // if(this.label.isDeleted==true){
-  this.myHttpService.getindividualLabel('notes/getNotesListByLabel/'+label+'',null,this.accessToken).subscribe(
-    (data) => {
-    console.log("Post Request is successful ", data);
-    this.labelArray=data['data'].data ;
-    console.log(this.labelArray)
-    }),
-    error => {
-    console.log("Error", error);
-    }
-  // }
-}
-
+  }
+  getNoteLabels(label) {
+    this.myHttpService.getindividualLabel('notes/getNotesListByLabel/' + label + '',
+      null, this.accessToken).subscribe(
+        (data) => {
+          this.labelArray = data['data'].data;
+        }),
+      error => {
+      }
+  }
 }
 

@@ -3,7 +3,8 @@
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
             <div class="click">
-                <i class="material-icons" mat-raised-button matTooltip="New List" (click)="toggle()">
+                <i class="material-icons" mat-raised-button matTooltip="New List"
+                 (click)="toggle()">
                     list
                 </i>
             </div>
@@ -21,17 +22,19 @@
             </div>
         </div>
     </mat-card>
-
     <mat-card *ngIf="!hide" [style.backgroundColor]="color">
+        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
         <div *ngIf="show == 0">
-            <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... "></div>
+            <div contenteditable="true" id="notesId" class="edit"
+                data-text="Take a Note.... "></div>
         </div>
         <div *ngIf="show == 1" fxLayout="row" class="topping">
             <hr>
             <mat-icon>add</mat-icon>
             <!-- <div *ngFor = "let key of save"> -->
-            <input id="notesId" placeholder="List Item" class="edit1" (keydown.enter)="onKeydown($event)">
+            <input id="notesId" placeholder="List Item" class="edit1"
+                (keydown.enter)="onKeydown($event)">
             <!-- </div> -->
             <hr>
         </div>

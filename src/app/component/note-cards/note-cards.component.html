@@ -1,7 +1,11 @@
-<div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" style="margin-top:25px ">
-  <div *ngFor='let notes of cardsArray | searchBar :  globalSearch' fxFlex="0 1 calc(30% - 32px)">
+<div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px"
+   style="margin-top:25px ">
+  <div *ngFor='let notes of cardsArray | searchBar :  globalSearch' 
+    fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card class="cards" style="margin-top : 10px; border-radius: 10px; " [style.backgroundColor]="notes.color">
+      <mat-card  style="margin-top : 10px; border-radius: 10px; " 
+       [style.backgroundColor]="notes.color">
+          <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">  
         <mat-card-title (click)="openDialog(notes)">
           <div [innerHtml]="notes.title"></div>
         </mat-card-title>
@@ -14,7 +18,8 @@
               <mat-chip-list selected>
                 <mat-chip>
                   {{index.label}}
-                  <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteChips(notes.id,index.id)">cancel</mat-icon>
+                  <mat-icon matChipRemove (click)="$event.stopPropagation();
+                   deleteChips(notes.id,index.id)">cancel</mat-icon>
                 </mat-chip>
               </mat-chip-list>
             </div>
@@ -29,7 +34,7 @@
           </app-change-color>
           <app-add-photo>
           </app-add-photo>
-          <app-add-archive [archive]="notes">
+          <app-add-archive [archive]="notes" (archiveEmit)="deleteEvent($event)">
           </app-add-archive>
           <app-more [trash]="notes" (deleteCard)="deleteEvent($event)">
           </app-more>

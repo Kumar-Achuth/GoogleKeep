@@ -8,36 +8,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-  cards : any = [];
+  cards: any = [];
   accessToken = localStorage.getItem('token');
-  constructor(private myHttpService: HttpService, private router : Router) { }
+  constructor(private myHttpService: HttpService, private router: Router) { }
 
   ngOnInit() {
     this.getNotes();
   }
- getNotes()
- {
-  //  this.cards = [];
-  this.myHttpService.getNotes('notes/getNotesList',this.accessToken).subscribe(data => {
-    this.cards = [];
-    console.log('response', data);
-    for (var i = data["data"]['data'].length-1; i >= 0; i--) {
-      if(data["data"]['data'][i].isDeleted==false && data["data"]['data'][i].isArchived==false )
-      {
-        this.cards.push(data["data"]['data'][i])
-      }
+  getNotes() {
+    this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
+      .subscribe(data => {
+        this.cards = [];
+        for (var i = data["data"]['data'].length - 1; i >= 0; i--) {
+          if (data["data"]['data'][i].isDeleted == false &&
+            data["data"]['data'][i].isArchived == false) {
+            this.cards.push(data["data"]['data'][i])
+          }
+        }
+      },
+        error => {
+            ;
+        })
+  }
+  eventEntry(event) {
+    if (event) {
+      this.getNotes();
     }
-    // console.log(this.cards);
-  }, error=>{
-    console.log(error)
-;    })
- }
- eventEntry(event)
- {
-   if(event)
-   {
-   this.getNotes();
-   }
 
- }
+  }
 }

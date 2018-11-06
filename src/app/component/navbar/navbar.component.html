@@ -2,32 +2,38 @@
   <div fxLayout='column wrap'>
     <div>
       <mat-toolbar class="toolbar">
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <button type="button" aria-label="Toggle sidenav"
+           mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header"><b>Fundoo</b> Notes</span>
         <div class="searchBar">
           <i class="material-icons">search </i>
-          <input class="search" type="input" placeholder="search" [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
+          <input class="search" type="input" placeholder="search" 
+           [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
         </div>
-        <div class="equal" fxlayout="row" fxLayoutAlign="space-around" fxFlex="1 1 auto">
+        <div  fxlayout="row" fxLayoutAlign="space-around" fxFlex="1 1 auto">
           <div class="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
           <div class="one">
-            <mat-icon matTooltip="Grid View" class="one" (click)="listView()" *ngIf="list == 0">
+            <mat-icon matTooltip="Grid View" class="one" (click)="listView()"
+             *ngIf="list == 0">
               view_agenda</mat-icon>
-            <mat-icon class="one" class="material-icons" matTooltip="List View" (click)="gridView()" *ngIf="list == 1">
+            <mat-icon class="one" class="material-icons" matTooltip="List View" 
+             (click)="gridView()" *ngIf="list == 1">
               view_module</mat-icon>
           </div>
           <div class="one" matTooltip="Google apps">
             <mat-icon>apps</mat-icon>
           </div>
           <div class="two" matTooltip="Google Account">
-            <button mat-mini-fab [matMenuTriggerFor]="appMenu">{{firstName | slice : 0:1}}</button>
+            <button mat-mini-fab [matMenuTriggerFor]="appMenu">
+              {{firstName | slice : 0:1}}</button>
             <mat-menu class="padding" #appMenu="matMenu" [overlapTrigger]="false">
-              <button mat-mini-fab [matMenuTriggerFor]="appMenu">{{firstName | slice: 0:1}} </button>
+              <button mat-mini-fab [matMenuTriggerFor]="appMenu">
+                {{firstName | slice: 0:1}} </button>
               <div style="float : right">
                 <div>{{firstName}}{{lastName}}</div>
                 <div>{{email}}</div>
@@ -42,18 +48,23 @@
         </div>
       </mat-toolbar>
       <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-          [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async)">
+        <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+          [mode]="(isHandset$ | async) ? 'over' : 'side'" 
+          [opened]="(isHandset$ | async)">
           <mat-nav-list>
-            <a mat-list-item routerLink='/home/notes'><i class="material-icons" matTooltip="Notes">
+            <a mat-list-item routerLink='/home/notes'><i class="material-icons"
+               matTooltip="Notes">
                 assignment
               </i>Notes</a>
-            <a mat-list-item routerLink='/home/reminder'><i class="material-icons" matTooltip="Reminders">
+            <a mat-list-item routerLink='/home/reminder'><i class="material-icons"
+               matTooltip="Reminders">
                 touch_app
               </i>Reminders</a>
             <hr>
             <a mat-list-item> Labels </a>
-            <div *ngFor="let labels of labelArray trackBy : val?.id" (click)="select(labels)">
+            <div *ngFor="let labels of labelArray trackBy : val?.id" 
+            (click)="select(labels)">
               <div *ngIf="labels.isDeleted==false">
                 <a mat-list-item>
                   <mat-icon class="margin">label_outline</mat-icon>
@@ -61,14 +72,17 @@
                 </a>
               </div>
             </div>
-            <a mat-list-item (click)="openDialog()"><i class="material-icons" matTooltip="Edit Label">
+            <a mat-list-item (click)="openDialog()">
+              <i class="material-icons" matTooltip="Edit Label">
                 create
               </i>Edit Labels</a>
             <hr>
-            <a mat-list-item routerLink="/home/archive"><i class="material-icons" matTooltip="Archive">
+            <a mat-list-item routerLink="/home/archive">
+              <i class="material-icons" matTooltip="Archive">
                 archive
               </i>Archive</a>
-            <a mat-list-item routerLink="/home/trash"><i class="material-icons" matTooltip="Trash">
+            <a mat-list-item routerLink="/home/trash">
+              <i class="material-icons" matTooltip="Trash">
                 delete
               </i>Trash</a>
             <a mat-list-item> <i class="material-icons" matTooltip="Settings">

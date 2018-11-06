@@ -14,16 +14,15 @@ export class AddReminderComponent implements OnInit {
   ngOnInit() {
   }
   addReminder() {
-    this.myHttpService.postArchive('notes/' + this.reminder.id + '/addUpdateReminderNotes', {
-      "title": this.reminder.title,
-      "description": this.reminder.description,
-      "reminder": [
-        "2018-11-05T11:35:08.678Z"
-      ],
-    }, this.accessToken).subscribe(data => {
-      console.log('Post is successfull ', data);
-      this.remindEmit.emit({
+    let currentDate = new Date();
+    this.myHttpService.postArchive('notes/addUpdateReminderNotes',
+      {
+        "noteIdList": [this.reminder.id],
+        "reminder": new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate(),8,0,0,0)
+      }, this.accessToken).subscribe(data => {
+        console.log('Post is successfull ', data);
+        this.remindEmit.emit({
+        })
       })
-    })
   }
 }

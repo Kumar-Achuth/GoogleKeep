@@ -55,7 +55,6 @@ import { MatChipsModule} from '@angular/material/chips';
 import { MatCheckboxModule} from '@angular/material/checkbox';
 import { LabelFilterPipe } from './pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
-import { TrashMoreComponent } from './component/trash-more/trash-more.component';
 
 
 
@@ -87,7 +86,6 @@ import { TrashMoreComponent } from './component/trash-more/trash-more.component'
     NewlabelComponent,
     LabelFilterPipe,
     GlobalSearchComponent,
-    TrashMoreComponent,
   ],
   imports: [
     BrowserModule,

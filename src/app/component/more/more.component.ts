@@ -11,54 +11,43 @@ export class MoreComponent implements OnInit {
   id = localStorage.getItem('userId');
   body: any = {}
   labelArray: any = [];
-  // search : any;
   @Input() trash;
   @Output() deleteCard = new EventEmitter();
   @Output() addEvent = new EventEmitter();
-  constructor(private myHttpService: HttpService) {}
+  constructor(private myHttpService: HttpService) { }
 
   ngOnInit() {
-   this.getAllLabels();
+    this.getAllLabels();
   }
-  postToTrash(trash){
-    console.log(this.trash);
-    console.log(this.accessToken)
+  postToTrash(trash) {
     this.myHttpService.postTrash('notes/trashNotes', {
       "isDeleted": true,
       "noteIdList": [this.trash.id]
     }, this.accessToken).subscribe(data => {
-      console.log('response', data);
       this.deleteCard.emit({
       })
     })
   }
-  
   goAndGetLabel(label) {
-    console.log(label);
     this.addEvent.emit(label);
-    this.myHttpService.goLabel('notes/' + this.trash.id + '/addLabelToNotes/' + label.id + '/add',
+    this.myHttpService.goLabel('notes/'+this.trash.id+'/addLabelToNotes/'+label.id+'/add',
       { "noteId": this.trash.id, "lableId": label.id },
       this.accessToken)
       .subscribe(data => {
-        // this.getAllLabels();
         this.deleteCard.emit({
         })
-        console.log('response', data);
       })
   }
-  getAllLabels(){
-    let newArray=[];
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken).subscribe(data => {
-      console.log("Successfull", data);
+  getAllLabels() {
+    let newArray = [];
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+    .subscribe(data => {
       for (var i = 0; i < data['data']['details'].length; i++) {
         if (data['data']['details'][i].isDeleted == false) {
           newArray.push(data['data']['details'][i])
         }
-        else {
-          console.log('Ok')
-        }
       }
-      this.labelArray=newArray;
+      this.labelArray = newArray;
     })
   }
 }

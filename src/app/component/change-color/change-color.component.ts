@@ -19,7 +19,6 @@ export class ChangeColorComponent implements OnInit {
   colors(id)
   {
     this.colorEmit.emit(id)
-    console.log(id);
     if(this.color!=undefined)
     {
   this.myHttpService.postColor('/notes/changesColorNotes',
@@ -28,15 +27,11 @@ export class ChangeColorComponent implements OnInit {
         "noteIdList": [this.color.id]
       }, this.accessToken).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
-          console.log(id);
-          console.log(this.color.id);
           localStorage.setItem('colorId',this.color.id);
           this.changeColor.emit({
  })
         },
         error => {
-          console.log("Error", error);
         })
     }
   }

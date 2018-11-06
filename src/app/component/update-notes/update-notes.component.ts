@@ -4,15 +4,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteCardsComponent } from '../note-cards/note-cards.component';
 import { HttpService } from '../../services/http.service';
 
-
 export interface DialogData {
   title: string;
   description: string;
   id: string;
   label: string;
 }
-
-
 @Component({
   selector: 'app-update-notes',
   templateUrl: './update-notes.component.html',
@@ -23,7 +20,8 @@ export class UpdateNotesComponent implements OnInit {
   @Output() updateEvent = new EventEmitter();
   accessToken = localStorage.getItem('token');
   constructor(public dialogRef: MatDialogRef<NoteCardsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private myHttpService: HttpService, ) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private myHttpService: HttpService, ) { }
   ngOnInit() {
   }
   onNoClick(id): void {
@@ -32,7 +30,6 @@ export class UpdateNotesComponent implements OnInit {
       "title": document.getElementById('titleId').innerHTML,
       "description": document.getElementById('notesId').innerHTML
     }, this.accessToken).subscribe(data => {
-      console.log('response', data);
       this.dialogRef.close();
       this.updateEvent.emit({
       })
@@ -40,14 +37,11 @@ export class UpdateNotesComponent implements OnInit {
     this.dialogRef.close();
   }
   deleteChips(label) {
-    this.myHttpService.deleteChip('notes/' + this.data.id + '/addLabelToNotes/' + label + '/remove',
+    this.myHttpService.deleteChip('notes/'+this.data.id+'/addLabelToNotes/'+label+'/remove',
       { "noteId": this.data.id, "lableId": label },
       this.accessToken).subscribe(data => {
-        console.log('response', data);
         this.updateEvent.emit({
         })
       })
   }
-
-
 }

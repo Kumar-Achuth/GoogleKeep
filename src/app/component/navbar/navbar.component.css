@@ -10,6 +10,7 @@
 }
 .mat-toolbar.mat-primary {
   position: fixed;
+  display: flex;
 }
 .mat-drawer.mat-drawer-side {
   top:0;
@@ -25,10 +26,12 @@
 padding-left: 30px;
 color:black;
 padding-right: 32px;
+display: flex;
 }
 .toggle{
   color: black;
   opacity: 0.54;
+  display: flex;
 }
 .searchBar{
   background-color: rgb(235, 174, 22);
@@ -45,6 +48,7 @@ padding-right: 32px;
   margin-right: 8px;
   color: black;
   opacity: 0.6;
+  display: flex;
 }
 .search
 {
@@ -72,6 +76,7 @@ padding-right: 32px;
 }
 .one
 {
+  display: flex;
   padding-top: 3%;
   cursor: pointer;
 }

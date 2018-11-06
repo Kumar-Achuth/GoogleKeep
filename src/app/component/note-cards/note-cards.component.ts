@@ -23,17 +23,15 @@ export class NoteCardsComponent implements OnInit {
   @Output() trashEvent = new EventEmitter();
   @Input() globalSearch;
 
-  constructor(private myHttpService: HttpService, private router: Router, public dialog: MatDialog, public data: GlobalSearchService) {
+  constructor(private myHttpService: HttpService, private router: Router,
+    public dialog: MatDialog, public data: GlobalSearchService) {
     this.data.deletedLabel.subscribe(message => {
-      console.log(message);
       if (message) {
         this.trashEvent.emit({
         })
       }
     })
   }
-
-
   @Output() dialogEvent = new EventEmitter();
   ngOnInit() {
     this.switchView()
@@ -52,7 +50,6 @@ export class NoteCardsComponent implements OnInit {
       data: notes
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.getAllLabels();
       this.trashEvent.emit({
       })
@@ -62,49 +59,41 @@ export class NoteCardsComponent implements OnInit {
     this.myHttpService.deleteChip('notes/' + id + '/addLabelToNotes/' + label + '/remove',
       { "noteId": id, "lableId": label },
       this.accessToken).subscribe(data => {
-        console.log('response', data);
         this.trashEvent.emit({
         })
       })
   }
   getAllLabels() {
     let newArray = [];
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken).subscribe(data => {
-      // let newArray=[];
-      console.log("Successfull", data);
-      for (var i = 0; i < data['data']['details'].length; i++) {
-        if (data['data']['details'][i].isDeleted == false) {
-          newArray.push(data['data']['details'][i])
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+      .subscribe(data => {
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            newArray.push(data['data']['details'][i])
+          }
         }
-        else {
-          console.log('Ok')
-        }
-      }
-      this.labelArray = newArray;
-    })
+        this.labelArray = newArray;
+      })
   }
   switchView() {
     {
       this.data.viewList.subscribe(message => {
-        console.log(message);
         this.toggle = message;
       })
     }
   }
   getReminders() {
     let newArray = [];
-    this.myHttpService.getArchiveNotes('notes/getReminderNotesList', this.accessToken).subscribe(data => {
-      console.log(" Get is totally Successfull", data);
-      for (var i = 0; i < data['data']['details'].length; i++) {
-        if (data['data']['details'][i].isDeleted == false) {
-          newArray.push(data['data']['details'][i])
+    this.myHttpService.getArchiveNotes('notes/getReminderNotesList', this.accessToken)
+      .subscribe(data => {
+        console.log('Get request is successful', data)
+        for (var i = 0; i < data['data'].length; i++) {
+          if (data['data'][i].isDeleted == false) {
+            newArray.push(data['data'][i])
+          }
         }
-        else {
-          console.log('Ok')
-        }
-      }
-      this.reminderArray = newArray;
-    })
+        this.reminderArray = newArray;
+      })
   }
 
 }

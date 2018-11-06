@@ -5,7 +5,7 @@ type PaneType = 'right' | 'left';
 
 @Component({
   selector: 'my-slide-panel',
-  styleUrls: [ './slide-panel.component.css' ],
+  styleUrls: ['./slide-panel.component.css'],
   templateUrl: './slide-panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -17,6 +17,6 @@ type PaneType = 'right' | 'left';
   ]
 })
 export class SlidePanelComponent {
-  
+
   @Input() activePane: PaneType = 'right';
 }

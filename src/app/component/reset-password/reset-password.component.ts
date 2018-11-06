@@ -11,11 +11,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-hide = true;
-model : any = {};
+  hide = true;
+  model: any = {};
 
-  password = new FormControl('',[Validators.required])
-  confirmPassword = new FormControl('',[Validators.required])
+  password = new FormControl('', [Validators.required])
+  confirmPassword = new FormControl('', [Validators.required])
   getErrorMessagepassword() {
     return this.password.hasError('required') ? 'You must enter a value' :
       this.password.hasError('pattern') ? 'Password required' :
@@ -27,46 +27,38 @@ model : any = {};
         '';
   }
 
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar, private router:Router,
-    public route:ActivatedRoute, ) { }
-    public accessToken=this.route.snapshot.params.forgotToken;
-
+  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+    private router: Router,
+    public route: ActivatedRoute, ) { }
+  public accessToken = this.route.snapshot.params.forgotToken;
   ngOnInit() {
   }
   public input = new FormData();
 
   match() {
-    let pass =  this.model.password;
+    let pass = this.model.password;
     let confirmPass = this.model.confirmPassword;
-   
-    if(pass != confirmPass)
-    {
-     this.snackBar.open("Password Mismatch" , "failed" , {
-       duration:3000
-     })
 
-     return false;
+    if (pass != confirmPass) {
+      this.snackBar.open("Password Mismatch", "failed", {
+        duration: 3000
+      })
+
+      return false;
     }
-    else
-    {
-     this.snackBar.open("Password" , "Generated" , {
-       duration:3000
-    })
-   
-    
-   var body={
-    "newPassword": this.model.password
-  }
-  this.input.append('newPassword', this.model.password);
-  console.log(this.input)
-  this.myHttpService.postReset("user/reset-password",body,this.accessToken).subscribe(response=>{
-    console.log("successfull",response);
-  },error=>{
-    console.log("failed",error)
-  })
-  console.log("accessToken",this.accessToken)
- 
-   }
+    else {
+      this.snackBar.open("Password", "Generated", {
+        duration: 3000
+      })
+      var body = {
+        "newPassword": this.model.password
+      }
+      this.input.append('newPassword', this.model.password);
+      this.myHttpService.postReset("user/reset-password", body, this.accessToken)
+        .subscribe(response => {
+        }, error => {
+        })
+    }
   }
 }
 

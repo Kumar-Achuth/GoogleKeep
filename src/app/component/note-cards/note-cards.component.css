@@ -9,20 +9,23 @@
     float : right;
 }
 .styles{
-    padding : 10px;
+    /* padding : 10px; */
      border-radius: 5%;
 }
 .spacebetween{
     margin-left: 5px;
 }
-.cards{
+/* .cards{
     width:85%;
-}
-::ng-deep.mat-card{
+} */
+/* ::ng-deep.mat-card{
     width : 87%;
-}
-
+} */
 .grid{
     align-content: center;
 width:900px;
+}
+.pin{
+    float: right;
+    cursor: pointer;
 }

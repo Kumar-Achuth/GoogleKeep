@@ -17,10 +17,10 @@ export class AddNotesComponent implements OnInit {
   show: any = 0;
   color: any = "#fafafa";
   accessToken = localStorage.getItem('token');
-  // id = localStorage.getItem('id');
   @Output() newEvent = new EventEmitter();
   labelArray: any[];
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+    private router: Router) { }
   ngOnInit() {
     this.getAllLabels();
   }
@@ -36,7 +36,6 @@ export class AddNotesComponent implements OnInit {
       'isPined': 'false',
       'color': this.color
     }, this.accessToken).subscribe(response => {
-      console.log("successfull", response);
       this.newEvent.emit({
       })
       this.labelName = [];
@@ -52,22 +51,17 @@ export class AddNotesComponent implements OnInit {
     })
   }
   colorChanges(event) {
-    console.log(event);
     this.color = event;
   }
   onKeydown(event, key) {
     if (event.key === "Enter") {
       console.log(event);
-      // this.letterArray.push({})
     }
   }
   instantLabel(event) {
-    console.log(event)
     if (this.labelName.indexOf(event) < 0) {
       this.labelId.push(event.id);
       this.labelName.push(event);
-      console.log(this.labelName)
-      console.log(event.id);
     } else {
       this.labelId.splice(this.labelId.indexOf(event), 1)
       this.labelName.splice(this.labelName.indexOf(event), 1)
@@ -75,17 +69,14 @@ export class AddNotesComponent implements OnInit {
   }
   getAllLabels() {
     let newArray = [];
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken).subscribe(data => {
-      console.log("Successfull", data);
-      for (var i = 0; i < data['data']['details'].length; i++) {
-        if (data['data']['details'][i].isDeleted == false) {
-          newArray.push(data['data']['details'][i])
+    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+      .subscribe(data => {
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            newArray.push(data['data']['details'][i])
+          }
         }
-        else {
-          console.log('Ok')
-        }
-      }
-      this.labelArray = newArray;
-    })
+        this.labelArray = newArray;
+      })
   }
 }
