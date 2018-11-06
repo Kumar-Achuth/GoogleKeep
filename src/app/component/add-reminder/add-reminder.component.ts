@@ -25,4 +25,28 @@ export class AddReminderComponent implements OnInit {
         })
       })
   }
+  addTomorrowReminder(){
+    let currentDate = new Date();
+    this.myHttpService.postArchive('notes/addUpdateReminderNotes',
+      {
+        "noteIdList": [this.reminder.id],
+        "reminder": new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()+1,8,0,0,0)
+      }, this.accessToken).subscribe(data => {
+        console.log('Post is successfull ', data);
+        this.remindEmit.emit({
+        })
+      })
+  }
+  addWeeklyReminder(){
+    let currentDate = new Date();
+    this.myHttpService.postArchive('notes/addUpdateReminderNotes',
+      {
+        "noteIdList": [this.reminder.id],
+        "reminder": new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()+7,8,0,0,0)
+      }, this.accessToken).subscribe(data => {
+        console.log('Post is successfull ', data);
+        this.remindEmit.emit({
+        })
+      })
+  }
 }

@@ -4,10 +4,10 @@
   </i></mat-icon>
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
   <div>
-    <button mat-button (click)="addReminder()">Reminder : </button><br>
-    <button mat-button>Later Today Mon 8PM</button><br>
-    <button mat-button>Tomorrow 8AM</button><br>
-    <button mat-button>Next Week MON,8AM</button><br>
+    <button mat-button>Reminder : </button><br>
+    <button mat-button (click)="addReminder()">Later Today Mon 8PM</button><br>
+    <button mat-button (click)="addTomorrowReminder()">Tomorrow 8AM</button><br>
+    <button mat-button (click)="addWeeklyReminder()">Next Week MON,8AM</button><br>
     <a> <i class="material-icons">
         access_time
       </i><button mat-button>Pick Date & Time</button></a><br>
@@ -16,4 +16,12 @@
       </i> <button mat-button>Pick a Place</button>
     </a><br>
   </div>
+</mat-menu>
+
+<mat-menu >
+<input matInput [matDatepicker]="picker" placeholder="Choose a date">
+<mat-datepicker-toggle matSuffix [for]="picker">
+  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+</mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>
 </mat-menu>
