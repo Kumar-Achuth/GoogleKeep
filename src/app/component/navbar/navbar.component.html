@@ -29,9 +29,12 @@
             <mat-icon>apps</mat-icon>
           </div>
           <div class="two" matTooltip="Google Account">
-            <button mat-mini-fab [matMenuTriggerFor]="appMenu">
-              {{firstName | slice : 0:1}}</button>
-            <mat-menu class="padding" #appMenu="matMenu" [overlapTrigger]="false">
+              <button class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
+                  <img src="{{img}}" style="float:left ;width:50px;height:50px;border-radius: 50%">
+                </button>
+            <!-- <button mat-mini-fab [matMenuTriggerFor]="appMenu">
+              {{firstName | slice : 0:1}}</button> -->
+            <!-- <mat-menu class="padding" #appMenu="matMenu" [overlapTrigger]="false">
               <button mat-mini-fab [matMenuTriggerFor]="appMenu">
                 {{firstName | slice: 0:1}} </button>
               <div style="float : right">
@@ -43,6 +46,31 @@
                 <button mat-menu-item routerLink="/signup">Add account</button>
                 <button mat-menu-item (click)="doLogout()">Log out </button>
               </div>
+            </mat-menu> -->
+            <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
+              <div class="signout">
+                <!--             profile-pic upload                   -->
+                <span fxLayout="row" fxLayoutGap="15px">
+  
+                  <button class="profilebutton">
+                    <img src="{{img}}" style="float:left ;width:100px;height:100px;border-radius: 50%">
+                  </button>
+                  <p class="name_onscreen">{{firstName }}&nbsp;{{lastName}} </p>
+                </span>
+                <p class="mail"> {{email}}</p>
+              </div>
+              <hr>
+  
+              <h4>upload pic</h4>
+              <input type="file" (change)=onFileSelected($event)>
+              <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button>
+  
+  
+  
+  
+              <button class="signup_button" mat-raised-button color="primary" style="float:right" 
+                      (click)="doLogout()">Logout</button>
+               <!--           profile-pic upload   ends                -->
             </mat-menu>
           </div>
         </div>

@@ -244,4 +244,16 @@ postCheckList(url,input,token){
     }
     return this.http.post(url,body,httpOptions)
   }
+  httpAddImage(url,body,token){
+    console.log(token);
+    url = this.url+url;
+
+    var httpOptions={
+      headers:new HttpHeaders({
+       
+       'Authorization':token
+      })
+    };
+    return this.http.post(url+"/"+url,body,httpOptions)
+  }
 }

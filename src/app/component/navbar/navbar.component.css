@@ -93,3 +93,20 @@ background-color: white;
   height: fit-content;
   width: 60%;
 }
+.profilebutton{
+  width:50px; 
+  height:25px; 
+  border: none;
+ border-radius: 50%;
+ background:white;
+ 
+}
+.profilebutton2{
+  width:50px; 
+  height:50px; 
+  border: none;
+ border-radius: 50%;
+ background: transparent;
+ outline:none;
+ 
+}
