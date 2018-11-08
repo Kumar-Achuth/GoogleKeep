@@ -25,6 +25,13 @@
             </div>
           </div>
         </div>
+        <br>
+        <mat-chip-list selected>
+          <mat-chip>
+            {{notes.reminder}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
           <app-add-reminder [reminder]="notes" (remindEmit)="deleteEvent($event)">
           </app-add-reminder>

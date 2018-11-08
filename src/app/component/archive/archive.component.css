@@ -2,9 +2,10 @@
     width: 280px;
     margin-top : 10px;
 }
-
-
 .trash{
     align-content: center;
     margin-top: 2%;
+}
+.space{
+    cursor: pointer;
 }
