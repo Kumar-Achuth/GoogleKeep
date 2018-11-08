@@ -5,38 +5,20 @@ import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpService } from './core/services/httpServices/http.service';
 import { SlidePanelComponent } from './component/slide-panel/slide-panel.component';
-import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { HomeComponent } from './component/home/home.component';
-import { MatSidenavModule} from '@angular/material/sidenav';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatListModule, MatTableModule, MatPaginatorModule, MatSortModule,
-  MatNativeDateModule, MatChipsModule,MatCheckboxModule } from '@angular/material';
 import { NotesComponent } from './component/notes/notes.component';
 import { ReminderComponent } from './component/reminder/reminder.component';
 import { ArchiveComponent } from './component/archive/archive.component';
 import { TrashComponent } from './component/trash/trash.component';
-import { MatMenuModule} from '@angular/material/menu';
-import { MatExpansionModule} from '@angular/material/expansion';
-import { MatTooltipModule} from '@angular/material/tooltip';
-import { MatDatepickerModule} from '@angular/material/datepicker';
 import { AddReminderComponent } from './component/add-reminder/add-reminder.component';
 import { CollaboratorComponent } from './component/collaborator/collaborator.component';
 import { ChangeColorComponent } from './component/change-color/change-color.component';
@@ -54,6 +36,16 @@ import { LabelFilterPipe } from '../app/core/pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
 import { LoggerService} from './core/services/loggerService/logger.service';
 
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+
+
+import {
+  MatListModule, MatTableModule, MatPaginatorModule, MatSortModule,
+  MatNativeDateModule, MatChipsModule, MatCheckboxModule, MatSelectModule, MatToolbarModule,
+  MatButtonModule, MatIconModule, MatCardModule, MatRadioModule, MatStepperModule,
+  MatSidenavModule, MatMenuModule, MatExpansionModule, MatTooltipModule, MatDatepickerModule,
+  MatInputModule, MatFormFieldModule,MatSnackBarModule
+} from '@angular/material';
 
 
 
