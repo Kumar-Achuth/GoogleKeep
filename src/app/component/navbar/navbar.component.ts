@@ -32,22 +32,8 @@ export class NavbarComponent {
     public route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
     private router: Router, public dialog: MatDialog, public data: GlobalSearchService) { }
 
-  doLogout() {
-    console.log(this.token);
-    this.myHttpService.postLogout('user/logout', this.token).subscribe(response => {
-      this.snackBar.open("Logout ", "Successful", {
-        duration: 1000
-      })
-      localStorage.removeItem('token');
-      localStorage.removeItem('firstName');
-      localStorage.removeItem('email');
-      localStorage.removeItem('lastName');
-      localStorage.removeItem('userId');
-
-      this.router.navigateByUrl('/login');
-    }, error => {
-    })
-  }
+    
+   
   firstName: any;
   lastName: any;
   email: any;
@@ -71,6 +57,26 @@ export class NavbarComponent {
       this.getLabels();
     });
   }
+   /**
+     * @description Api call for Logout 
+     */
+    doLogout() {
+      console.log(this.token);
+      this.myHttpService.postLogout('user/logout', this.token).subscribe(response => {
+        this.snackBar.open("Logout ", "Successful", {
+          duration: 1000
+        })
+        localStorage.removeItem('token');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('lastName');
+        localStorage.removeItem('userId');
+  
+        this.router.navigateByUrl('/login');
+      }, error => {
+      })
+    }
+    
   getLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.token)

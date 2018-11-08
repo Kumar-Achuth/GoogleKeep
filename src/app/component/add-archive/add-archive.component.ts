@@ -14,6 +14,10 @@ export class AddArchiveComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   ngOnInit() {
   }
+/**
+ * @description : Add Archive Api Call 
+ * @param : isArchived, noteIdList
+ */
   addArchive() {
     this.myHttpService.postArchive('notes/archiveNotes', {
       "isArchived": true,
@@ -23,4 +27,5 @@ export class AddArchiveComponent implements OnInit {
       })
     })
   }
+  
 }

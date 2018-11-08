@@ -14,6 +14,9 @@ export class AddReminderComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   ngOnInit() {
   }
+  /**
+   * @description Add to reminder api call 
+   */
   addReminder() {
     let currentDate = new Date();
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
@@ -28,6 +31,7 @@ export class AddReminderComponent implements OnInit {
         })
       })
   }
+
   addTomorrowReminder() {
     let currentDate = new Date();
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',

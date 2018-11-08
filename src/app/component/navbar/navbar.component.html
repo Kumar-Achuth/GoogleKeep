@@ -7,9 +7,9 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header"><b>Fundoo</b> Notes</span>
-        <div class="searchBar">
+        <div  class="searchBar">
           <i class="material-icons">search </i>
-          <input class="search" type="input" placeholder="search" 
+          <input  class="search" type="input" placeholder="search" 
            [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
         </div>
@@ -39,7 +39,7 @@
                     <img src="{{img}}" class = "image">
                   </button>
                   <div style="float : right">
-                    <div>{{firstName}}{{lastName}}</div>
+                    <div>{{firstName}}</div>
                     <div>{{email}}</div>
                   </div>
                 </span>

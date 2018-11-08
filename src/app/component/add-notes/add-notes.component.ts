@@ -30,6 +30,9 @@ export class AddNotesComponent implements OnInit {
   toggle() {
     this.show = 1;
   }
+  /**
+   * @description : Add Notes api Call starts
+   */
   addNotes() {
     this.myHttpService.postNotes('notes/addNotes', {
       'title': document.getElementById('titleId').innerHTML,
@@ -53,14 +56,26 @@ export class AddNotesComponent implements OnInit {
       this.show = 0
     })
   }
+  /**
+   * @description changecolor event
+   * @param event 
+   */
   colorChanges(event) {
     this.color = event;
   }
-  onKeydown(event, key) {
+  /**
+   * @description keydown event
+   * @param event 
+   */
+  onKeydown(event) {
     if (event.key === "Enter") {
       console.log(event);
     }
   }
+  /**
+   * @description Dislay label as chip in notecards
+   * @param event 
+   */
   instantLabel(event) {
     if (this.labelName.indexOf(event) < 0) {
       this.labelId.push(event.id);
@@ -70,7 +85,10 @@ export class AddNotesComponent implements OnInit {
       this.labelName.splice(this.labelName.indexOf(event), 1)
     }
   }
-  getAllLabels() {
+  /**
+   * @description get all Labels inside the notecards
+   */
+  getAllLabels(){
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
       .subscribe(data => {
@@ -82,17 +100,19 @@ export class AddNotesComponent implements OnInit {
         this.labelArray = newArray;
       })
   }
-  enter() {
+  /**
+   * @description Enter condition inside checklist
+   */
+  enter(){
     this.i++;
     if (this.data != null) {
-      console.log(event, "keydown");
+      console.log(event, "Keydown");
       var obj = {
         "index": this.i,
         "data": this.data
       }
       this.dataArray.push(obj);
       this.data = null
-
     }
   }
   ondelete(deletedObj) {

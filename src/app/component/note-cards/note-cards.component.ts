@@ -63,6 +63,14 @@ export class NoteCardsComponent implements OnInit {
         })
       })
   }
+  // deleteReminder(id, reminder) {
+  //   this.myHttpService.deleteChip('notes/' + id + '/addLabelToNotes/' + reminder + '/remove',
+  //     { "noteId": id, "reminderId": reminder },
+  //     this.accessToken).subscribe(data => {
+  //       this.trashEvent.emit({
+  //       })
+  //     })
+  // }
   getAllLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
