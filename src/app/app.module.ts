@@ -18,7 +18,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { HttpService } from './services/http.service';
+import { HttpService } from './core/services/httpServices/http.service';
 import { SlidePanelComponent } from './component/slide-panel/slide-panel.component';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
@@ -44,14 +44,15 @@ import { AddPhotoComponent } from './component/add-photo/add-photo.component';
 import { AddArchiveComponent } from './component/add-archive/add-archive.component';
 import { MoreComponent } from './component/more/more.component';
 import { AddNotesComponent } from './component/add-notes/add-notes.component';
-import { AuthService} from './component/auth.service';
-import { AuthGuard} from './component/auth.guard';
+import { AuthService} from './core/services/authGuard/auth.service';
+import { AuthGuard} from './core/services/authGuard/auth.guard';
 import { NoteCardsComponent } from './component/note-cards/note-cards.component';
 import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
 import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
-import { LabelFilterPipe } from './pipes/label-filter.pipe';
+import { LabelFilterPipe } from '../app/core/pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
+import { LoggerService} from './core/services/loggerService/logger.service';
 
 
 
@@ -121,7 +122,7 @@ import { GlobalSearchComponent } from './component/global-search/global-search.c
 
 
   ],
-  providers: [HttpService, AuthService, AuthGuard],
+  providers: [HttpService, AuthService, AuthGuard, LoggerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

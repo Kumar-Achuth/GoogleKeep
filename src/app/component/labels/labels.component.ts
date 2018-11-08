@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef }
   from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/httpServices/http.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef } from '@angular/material';
-import { GlobalSearchService } from '../../services/global-search.service';
+import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 
 @Component({
   selector: 'app-labels',

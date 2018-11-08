@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalSearchService } from '../../services/global-search.service';
-import { HttpService } from '../../services/http.service';
+import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
+import { HttpService } from '../../core/services/httpServices/http.service';
 
 @Component({
   selector: 'app-global-search',

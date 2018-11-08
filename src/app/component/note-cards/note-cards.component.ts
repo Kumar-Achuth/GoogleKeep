@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { GlobalSearchService } from '../../services/global-search.service';
-
+import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
+import { LoggerService} from '../../core/services/loggerService/logger.service';
 @Component({
   selector: 'app-note-cards',
   templateUrl: './note-cards.component.html',
@@ -85,7 +85,7 @@ export class NoteCardsComponent implements OnInit {
   getReminders() {
     this.myHttpService.getArchiveNotes('notes/getReminderNotesList', this.accessToken)
       .subscribe(data => {
-        console.log('Get request is successful', data)
+        LoggerService.log('Get request is successful', data)
       })
   }
 

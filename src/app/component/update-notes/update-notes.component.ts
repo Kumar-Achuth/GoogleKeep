@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteCardsComponent } from '../note-cards/note-cards.component';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/httpServices/http.service';
 
 export interface DialogData {
   title: string;
