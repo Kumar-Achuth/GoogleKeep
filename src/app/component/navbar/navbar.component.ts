@@ -14,7 +14,7 @@ import { GlobalSearchService } from '../../services/global-search.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
   token = localStorage.getItem('token');

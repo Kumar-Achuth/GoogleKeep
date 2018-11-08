@@ -8,7 +8,7 @@ import { GlobalSearchService } from '../../services/global-search.service';
 @Component({
   selector: 'app-labels',
   templateUrl: './labels.component.html',
-  styleUrls: ['./labels.component.css']
+  styleUrls: ['./labels.component.scss']
 })
 export class LabelsComponent implements OnInit {
   body: any = {}

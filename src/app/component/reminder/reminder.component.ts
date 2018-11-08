@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
-  styleUrls: ['./reminder.component.css']
+  styleUrls: ['./reminder.component.scss']
 })
 export class ReminderComponent implements OnInit {
   public hide: boolean = true;

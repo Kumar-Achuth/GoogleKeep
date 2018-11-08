@@ -4,7 +4,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-add-reminder',
   templateUrl: './add-reminder.component.html',
-  styleUrls: ['./add-reminder.component.css']
+  styleUrls: ['./add-reminder.component.scss']
 })
 export class AddReminderComponent implements OnInit {
   @Input() reminder;

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-trash',
   templateUrl: './trash.component.html',
-  styleUrls: ['./trash.component.css']
+  styleUrls: ['./trash.component.scss']
 })
 export class TrashComponent implements OnInit {
   cards: any = [];

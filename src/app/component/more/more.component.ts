@@ -4,7 +4,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-more',
   templateUrl: './more.component.html',
-  styleUrls: ['./more.component.css']
+  styleUrls: ['./more.component.scss']
 })
 export class MoreComponent implements OnInit {
   accessToken = localStorage.getItem('token');

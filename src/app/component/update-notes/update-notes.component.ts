@@ -13,7 +13,7 @@ export interface DialogData {
 @Component({
   selector: 'app-update-notes',
   templateUrl: './update-notes.component.html',
-  styleUrls: ['./update-notes.component.css']
+  styleUrls: ['./update-notes.component.scss']
 })
 export class UpdateNotesComponent implements OnInit {
   body: any = {}

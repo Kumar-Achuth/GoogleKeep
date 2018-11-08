@@ -7,7 +7,7 @@ import { Router, Params, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-newlabel',
   templateUrl: './newlabel.component.html',
-  styleUrls: ['./newlabel.component.css']
+  styleUrls: ['./newlabel.component.scss']
 })
 export class NewlabelComponent implements OnInit {
   params: any;

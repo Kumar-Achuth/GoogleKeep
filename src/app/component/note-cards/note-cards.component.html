@@ -28,7 +28,7 @@
         <br>
         <mat-chip-list selected>
           <mat-chip>
-            {{notes.reminder}}
+            {{notes.reminder | date:'fullDate'}}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>

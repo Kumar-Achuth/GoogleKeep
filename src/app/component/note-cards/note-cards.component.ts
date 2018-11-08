@@ -9,7 +9,7 @@ import { GlobalSearchService } from '../../services/global-search.service';
 @Component({
   selector: 'app-note-cards',
   templateUrl: './note-cards.component.html',
-  styleUrls: ['./note-cards.component.css']
+  styleUrls: ['./note-cards.component.scss']
 })
 export class NoteCardsComponent implements OnInit {
   array: any = []

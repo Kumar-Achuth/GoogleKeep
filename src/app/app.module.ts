@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpService } from './services/http.service';
@@ -28,7 +27,8 @@ import { HomeComponent } from './component/home/home.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatListModule, MatTableModule, MatPaginatorModule, MatSortModule,
+  MatNativeDateModule, MatChipsModule,MatCheckboxModule } from '@angular/material';
 import { NotesComponent } from './component/notes/notes.component';
 import { ReminderComponent } from './component/reminder/reminder.component';
 import { ArchiveComponent } from './component/archive/archive.component';
@@ -37,7 +37,6 @@ import { MatMenuModule} from '@angular/material/menu';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { MatTooltipModule} from '@angular/material/tooltip';
 import { MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule} from '@angular/material';
 import { AddReminderComponent } from './component/add-reminder/add-reminder.component';
 import { CollaboratorComponent } from './component/collaborator/collaborator.component';
 import { ChangeColorComponent } from './component/change-color/change-color.component';
@@ -51,8 +50,6 @@ import { NoteCardsComponent } from './component/note-cards/note-cards.component'
 import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
 import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
-import { MatChipsModule} from '@angular/material/chips';
-import { MatCheckboxModule} from '@angular/material/checkbox';
 import { LabelFilterPipe } from './pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
 
