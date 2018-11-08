@@ -20,7 +20,7 @@ export class NavbarComponent {
   token = localStorage.getItem('token');
   labelArray: any = []
   model: any = {}
-  ProfilePath : any;
+  ProfilePath: any;
   globalSearch: any;
   list = 0;
   isHandset$: Observable<boolean> = this.breakpointObserver.
@@ -30,7 +30,7 @@ export class NavbarComponent {
     );
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
     public route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
-    private router: Router, public dialog: MatDialog, public data: GlobalSearchService){}
+    private router: Router, public dialog: MatDialog, public data: GlobalSearchService) { }
 
   doLogout() {
     console.log(this.token);
@@ -106,30 +106,25 @@ export class NavbarComponent {
   }
 
   selectedFile = null;
- onFileSelected(event){
-this.selectedFile=event.path[0].files[0];
-console.log(event.target.value);
-this.ProfilePath=event.target.value;
-console.log(this.selectedFile.name);
- }
- image={};
- public image2=localStorage.getItem('imageUrl');
- img="http://34.213.106.173/"+this.image2;
- onUpload(){
-  var token=localStorage.getItem('token');
-  
-  const uploadData = new FormData();
-  uploadData.append('file', this.selectedFile, this.selectedFile.name);
-   this.myHttpService.httpAddImage('user/uploadProfileImage',uploadData,token).subscribe(res=>{
-     console.log("url: ", res['status'].imageUrl )
-     
-     
-    
-     console.log(this.ProfilePath);
-   },error=>{
-     console.log(error);
-     
-   })
+  selectFile(event) {
+    this.selectedFile = event.path[0].files[0];
+    console.log(event.target.value);
+    this.ProfilePath = event.target.value;
+    console.log(this.selectedFile.name);
+  }
+  image = {};
+  public image2 = localStorage.getItem('imageUrl');
+  img = "http://34.213.106.173/" + this.image2;
 
- }
+  Upload() {
+    var token = localStorage.getItem('token');
+    const uploadData = new FormData();
+    uploadData.append('file', this.selectedFile, this.selectedFile.name);
+    this.myHttpService.httpAddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {
+      console.log("url: ", res['status'].imageUrl)
+      console.log(this.ProfilePath);
+    }, error => {
+      console.log(error);
+    })
+  }
 }

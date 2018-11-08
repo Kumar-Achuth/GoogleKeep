@@ -77,7 +77,7 @@ display: flex;
 .one
 {
   display: flex;
-  padding-top: 3%;
+  padding-top: 7%;
   cursor: pointer;
 }
 .two
@@ -96,10 +96,19 @@ background-color: white;
 .profilebutton{
   /* padding-top: 1.5%; */
   width:50px; 
-  height:25px; 
+  height:50px; 
   border: none;
  border-radius: 50%;
- background:white;
+ background: rgb(235, 174, 22);
+ 
+}
+.profilebutton1{
+  /* padding-top: 1.5%; */
+  width:50px; 
+  height:50px; 
+  border: none;
+ border-radius: 50%;
+ background: white;
  
 }
 .profilebutton2{
@@ -110,4 +119,14 @@ background-color: white;
  background: transparent;
  outline:none;
  
+}
+.image{
+  float:left ;
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+}
+.signup_button{
+  float:right; 
+  padding-right:5px;
 }

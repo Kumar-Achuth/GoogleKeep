@@ -30,47 +30,27 @@
           </div>
           <div class="two" matTooltip="Google Account">
               <button class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
-                  <img src="{{img}}" style="float:left ;width:50px;height:50px;border-radius: 50%">
+                  <img src="{{img}}" class="image">
                 </button>
-            <!-- <button mat-mini-fab [matMenuTriggerFor]="appMenu">
-              {{firstName | slice : 0:1}}</button> -->
-            <!-- <mat-menu class="padding" #appMenu="matMenu" [overlapTrigger]="false">
-              <button mat-mini-fab [matMenuTriggerFor]="appMenu">
-                {{firstName | slice: 0:1}} </button>
-              <div style="float : right">
-                <div>{{firstName}}{{lastName}}</div>
-                <div>{{email}}</div>
-              </div>
-              <hr>
-              <div fxLayout="row" fxLayoutAlign="space-around">
-                <button mat-menu-item routerLink="/signup">Add account</button>
-                <button mat-menu-item (click)="doLogout()">Log out </button>
-              </div>
-            </mat-menu> -->
             <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
               <div class="signout">
-                <!--             profile-pic upload                   -->
                 <span fxLayout="row" fxLayoutGap="15px">
-  
-                  <button class="profilebutton">
-                    <img src="{{img}}" style="float:left ;width:100px;height:100px;border-radius: 50%">
+                  <button class="profilebutton1">
+                    <img src="{{img}}" class = "image">
                   </button>
-                  <p class="name_onscreen">{{firstName }}&nbsp;{{lastName}} </p>
+                  <div style="float : right">
+                    <div>{{firstName}}{{lastName}}</div>
+                    <div>{{email}}</div>
+                  </div>
                 </span>
-                <p class="mail"> {{email}}</p>
               </div>
               <hr>
-  
-              <h4>upload pic</h4>
-              <input type="file" (change)=onFileSelected($event)>
-              <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button>
-  
-  
-  
-  
-              <button class="signup_button" mat-raised-button color="primary" style="float:right" 
+              <h4>Upload pic</h4>
+              <input type="file" (change)=selectFile($event)>
+              <hr>
+              <button type="button" (click)="Upload()" mat-button > Upload</button>
+              <button class="signup_button" mat-button  
                       (click)="doLogout()">Logout</button>
-               <!--           profile-pic upload   ends                -->
             </mat-menu>
           </div>
         </div>

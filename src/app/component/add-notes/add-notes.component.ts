@@ -17,6 +17,8 @@ export class AddNotesComponent implements OnInit {
   show: any = 0;
   color: any = "#fafafa";
   listing = true;
+  public i = 0;
+  dataArray = [];
   accessToken = localStorage.getItem('token');
   @Output() newEvent = new EventEmitter();
   labelArray: any[];
@@ -26,7 +28,7 @@ export class AddNotesComponent implements OnInit {
     this.getAllLabels();
   }
   toggle() {
-this.show = 1;
+    this.show = 1;
   }
   addNotes() {
     this.myHttpService.postNotes('notes/addNotes', {
@@ -80,46 +82,43 @@ this.show = 1;
         this.labelArray = newArray;
       })
   }
-  public i=0;
-  dataarray = [];
-  
-enter(){
-  this.i++;
-  if(this.data!=null){
-    console.log(event,"keydown");
-    var obj={
-      "index":this.i,
-      "data":this.data
-    }
-    this.dataarray.push(obj);
-    this.data=null
-    
-  }
-}
-ondelete(deletedObj){
-  console.log("ondelete function runnig");
-  for(var i=0;i<this.dataarray.length;i++){
-    if(deletedObj.index==this.dataarray[i].index){
-      this.dataarray.splice(i,1);
-      break;
+  enter() {
+    this.i++;
+    if (this.data != null) {
+      console.log(event, "keydown");
+      var obj = {
+        "index": this.i,
+        "data": this.data
+      }
+      this.dataArray.push(obj);
+      this.data = null
+
     }
   }
-  console.log(this.dataarray);
-}
-
-editing(event,edited){
-
-  if(event.code=="Enter"){
-    console.log("enter pressed");
-    for(var i=0;i<this.dataarray.length;i++){
-      if(edited.index==this.dataarray[i].index){
-        this.dataarray[i].data==edited.data
+  ondelete(deletedObj) {
+    console.log("Ondelete function runnig");
+    for (var i = 0; i < this.dataArray.length; i++) {
+      if (deletedObj.index == this.dataArray[i].index) {
+        this.dataArray.splice(i, 1);
+        break;
       }
     }
-    console.log(this.dataarray);
-    
+    console.log(this.dataArray);
   }
-}
+
+  editing(event, edited) {
+
+    if (event.code == "Enter") {
+      console.log("enter pressed");
+      for (var i = 0; i < this.dataArray.length; i++) {
+        if (edited.index == this.dataArray[i].index) {
+          this.dataArray[i].data == edited.data
+        }
+      }
+      console.log(this.dataArray);
+
+    }
+  }
 
 
 }

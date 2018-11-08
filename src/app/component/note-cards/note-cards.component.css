@@ -22,8 +22,10 @@
     width : 87%;
 } */
 .grid{
-    align-content: center;
 width:900px;
+}
+.list{
+   width:300px;
 }
 .pin{
     float: right;

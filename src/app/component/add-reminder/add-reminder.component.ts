@@ -8,6 +8,7 @@ import { HttpService } from '../../services/http.service';
 })
 export class AddReminderComponent implements OnInit {
   @Input() reminder;
+  show = 0;
   @Output() remindEmit = new EventEmitter();
   accessToken = localStorage.getItem('token');
   constructor(private myHttpService: HttpService) { }
@@ -18,32 +19,38 @@ export class AddReminderComponent implements OnInit {
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate(),8,0,0,0)
+        "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(),
+          currentDate.getDate()+1, 8, 0, 0, 0)
       }, this.accessToken).subscribe(data => {
+        this.show=1;
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
       })
   }
-  addTomorrowReminder(){
+  addTomorrowReminder() {
     let currentDate = new Date();
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()+1,8,0,0,0)
+        "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(),
+          currentDate.getDate() + 1, 8, 0, 0, 0)
       }, this.accessToken).subscribe(data => {
+        // this.show=1;
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
       })
   }
-  addWeeklyReminder(){
+  addWeeklyReminder() {
     let currentDate = new Date();
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(currentDate.getFullYear(),currentDate.getMonth(),currentDate.getDate()+7,8,0,0,0)
+        "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(),
+          currentDate.getDate() + 7, 8, 0, 0, 0)
       }, this.accessToken).subscribe(data => {
+        this.show=1;
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })

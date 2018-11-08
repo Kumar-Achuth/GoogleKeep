@@ -2,22 +2,27 @@
   <i class="material-icons" matTooltip="Remind me">
     touch_app
   </i></mat-icon>
+  <!-- <div *ngIf = "show == 0"> -->
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
   <div>
     <button mat-button>Reminder : </button><br>
-    <button mat-button (click)="addReminder()">Later Today Mon 8PM</button><br>
-    <button mat-button (click)="addTomorrowReminder()">Tomorrow 8AM</button><br>
-    <button mat-button (click)="addWeeklyReminder()">Next Week MON,8AM</button><br>
-    <a> <i class="material-icons">
+    <div>
+    <button mat-menu-item (click)="addReminder()">Later Today<span class="time">8:00 PM </span></button></div><br>
+    <div>
+      <button mat-menu-item (click)="addTomorrowReminder()">Tomorrow<span class="time">8:00 AM </span></button></div><br>
+      <div>
+        <button mat-menu-item (click)=" addWeeklyReminder()">Next Week<span class="time">Mon 8:00 AM </span></button></div><br>  
+    <a><i class="material-icons">
         access_time
       </i><button mat-button>Pick Date & Time</button></a><br>
-    <a> <i class="material-icons">
+    <a><i class="material-icons">
         place
       </i> <button mat-button>Pick a Place</button>
     </a><br>
   </div>
 </mat-menu>
-
+  <!-- </div> -->
+  <!-- <div *ngIf =  "show ==1"> -->
 <mat-menu >
 <input matInput [matDatepicker]="picker" placeholder="Choose a date">
 <mat-datepicker-toggle matSuffix [for]="picker">
@@ -25,3 +30,4 @@
 </mat-datepicker-toggle>
 <mat-datepicker #picker></mat-datepicker>
 </mat-menu>
+<!-- </div> -->
