@@ -8,10 +8,6 @@
   background-color:rgb(221,221,230);
   position: fixed;
 }
-.mat-toolbar.mat-primary {
-  position: fixed;
-  display: flex;
-}
 .mat-drawer.mat-drawer-side {
   top:0;
 }
@@ -23,7 +19,6 @@
   display: flex;
 }
 .title-header{
-padding-left: 30px;
 color:black;
 padding-right: 32px;
 display: flex;
@@ -34,14 +29,8 @@ display: flex;
   display: flex;
 }
 .searchBar{
-  background-color: rgb(235, 174, 22);
-  display: flex;
-  align-items: center;
-  height:46px;
-  width:699px;
-  color: black;
-  border-radius: 5px;
-  padding-left: 1%;
+flex: 1 1 auto;
+width: stretch;
 }
 .material-icons{
   font-size: 30px;
@@ -52,64 +41,40 @@ display: flex;
 }
 .search
 {
-  height:41px;
-  width:693px;
+  flex: 1 1 auto;
   color: black;
   opacity: 1;
+  width: stretch;
+  height: 50px;
   background-color:  rgb(235, 174, 22);
   border:0px;
   border-radius: 5px;
   font-size: 20px;
   padding-left: 1%;
-  display: flex;
-}
-.refresh-icon{
-  padding-top: 19px;
-  padding-bottom: 11px;
-  padding-left: 50px;
-  padding-right: 30px;
-  display: flex;
-}
-.view-agenda{
- padding-top: 19px; 
- padding-bottom: 11px;
 }
 .one
 {
   display: flex;
-  padding-top: 7%;
   cursor: pointer;
-}
-.two
-{
-padding-top: 1.5%;
+  padding-top: 7%;
 }
 input:focus
 {
 background-color: white;
 }
-.padding
-{
-  height: fit-content;
-  width: 60%;
-}
 .profilebutton{
-  /* padding-top: 1.5%; */
   width:50px; 
   height:50px; 
   border: none;
  border-radius: 50%;
  background: rgb(235, 174, 22);
- 
 }
 .profilebutton1{
-  /* padding-top: 1.5%; */
   width:50px; 
   height:50px; 
   border: none;
  border-radius: 50%;
  background: white;
- 
 }
 .profilebutton2{
   width:50px; 
@@ -118,7 +83,6 @@ background-color: white;
  border-radius: 50%;
  background: transparent;
  outline:none;
- 
 }
 .image{
   float:left ;

@@ -17,6 +17,14 @@
       <mat-card-content>
         <div [innerHtml]="notes.description"></div>
       </mat-card-content>
+      <!-- <mat-chip >
+          <i class="material-icons">
+                  alarm
+                  </i>
+      {{notes.reminder | date:'fullDate'}}
+      <mat-icon matChipRemove >
+          cancel</mat-icon>
+  </mat-chip> -->
       <div class="space" fxLayout="row" fxLayoutAlign="space-between">
         <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu">
           <i class="material-icons"

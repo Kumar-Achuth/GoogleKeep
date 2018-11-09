@@ -1,7 +1,6 @@
 .space
 {
     padding-top: 4%;
-    /* opacity: 0; */  
 }
 .space:hover{opacity: 1;}
 .close
@@ -9,23 +8,17 @@
     float : right;
 }
 .styles{
-    /* padding : 10px; */
      border-radius: 5%;
 }
 .spacebetween{
     margin-left: 5px;
 }
-/* .cards{
-    width:85%;
-} */
-/* ::ng-deep.mat-card{
-    width : 87%;
-} */
 .grid{
 width:900px;
 }
 .list{
-   width:300px;
+    width:330px;
+    border-radius: 5px;
 }
 .pin{
     float: right;

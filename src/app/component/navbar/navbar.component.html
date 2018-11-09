@@ -1,34 +1,35 @@
-<div fxFlex>
-  <div fxLayout='column wrap'>
-    <div>
-      <mat-toolbar class="toolbar">
+<div fxFlex fxLayout="row" fxLayoutAlign="space-around">
+  <div>   
+  <mat-toolbar class="toolbar">
         <button type="button" aria-label="Toggle sidenav"
            mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header"><b>Fundoo</b> Notes</span>
-        <div  class="searchBar">
-          <i class="material-icons">search </i>
-          <input  class="search" type="input" placeholder="search" 
+      
+      
+        <div  class="searchBar" >
+          <mat-icon >search </mat-icon>
+          <input   class="search" type="input" placeholder="search" 
            [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
         </div>
-        <div  fxlayout="row" fxLayoutAlign="space-around" fxFlex="1 1 auto">
-          <div class="one" matTooltip="Cloud Sync">
+
+        <div  fxLayout="row" >
+          <div class ="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
-          <div class="one">
-            <mat-icon matTooltip="Grid View" class="one" (click)="listView()"
+         <div class ="one">
+            <mat-icon matTooltip="Grid View" (click)="listView()"
              *ngIf="list == 0">
               view_agenda</mat-icon>
-            <mat-icon class="one" class="material-icons" matTooltip="List View" 
+            </div>
+            <div class ="one">
+            <mat-icon  class="material-icons" matTooltip="List View" 
              (click)="gridView()" *ngIf="list == 1">
               view_module</mat-icon>
-          </div>
-          <div class="one" matTooltip="Google apps">
-            <mat-icon>apps</mat-icon>
-          </div>
-          <div class="two" matTooltip="Google Account">
+            </div>
+          <div  matTooltip="Google Account" >
               <button class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
@@ -53,8 +54,12 @@
                       (click)="doLogout()">Logout</button>
             </mat-menu>
           </div>
-        </div>
+          </div>
+        <!-- </div> -->
+
+
       </mat-toolbar>
+      </div>
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -75,8 +80,8 @@
             (click)="select(labels)">
               <div *ngIf="labels.isDeleted==false">
                 <a mat-list-item>
-                  <mat-icon class="margin">label_outline</mat-icon>
-                  <span class="margin2" [innerHTML]="labels.label"></span>
+                  <mat-icon >label_outline</mat-icon>
+                  <span  [innerHTML]="labels.label"></span>
                 </a>
               </div>
             </div>
@@ -100,12 +105,10 @@
             <hr>
           </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content style="display:flex">
           <router-outlet>
             <!--  content goes here -->
           </router-outlet>
         </mat-sidenav-content>
       </mat-sidenav-container>
-    </div>
-  </div>
 </div>

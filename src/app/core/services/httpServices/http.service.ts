@@ -253,4 +253,14 @@ export class HttpService {
     };
     return this.http.post(url, body, httpOptions)
   }
+  getRemind(url, token) {
+    url = this.url + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    }
+    return this.http.get(url, httpOptions)
+  }
 }

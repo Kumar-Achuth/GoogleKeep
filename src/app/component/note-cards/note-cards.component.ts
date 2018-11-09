@@ -6,6 +6,7 @@ import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { LoggerService} from '../../core/services/loggerService/logger.service';
+
 @Component({
   selector: 'app-note-cards',
   templateUrl: './note-cards.component.html',
@@ -36,7 +37,7 @@ export class NoteCardsComponent implements OnInit {
   ngOnInit() {
     this.switchView()
     this.getAllLabels();
-    this.getReminders();
+   
   }
   deleteEvent(event) {
     this.trashEvent.emit({
@@ -63,14 +64,6 @@ export class NoteCardsComponent implements OnInit {
         })
       })
   }
-  // deleteReminder(id, reminder) {
-  //   this.myHttpService.deleteChip('notes/' + id + '/addLabelToNotes/' + reminder + '/remove',
-  //     { "noteId": id, "reminderId": reminder },
-  //     this.accessToken).subscribe(data => {
-  //       this.trashEvent.emit({
-  //       })
-  //     })
-  // }
   getAllLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
@@ -90,11 +83,19 @@ export class NoteCardsComponent implements OnInit {
       })
     }
   }
-  getReminders() {
-    this.myHttpService.getArchiveNotes('notes/getReminderNotesList', this.accessToken)
-      .subscribe(data => {
-        LoggerService.log('Get request is successful', data)
+  deleteReminder(id) {
+    this.myHttpService.deleteChip('notes/removeReminderNotes',
+      { "noteIdList": [id]},
+      this.accessToken).subscribe(data => {
+        LoggerService.log('Success',data)
+        this.trashEvent.emit({
+        })
       })
+      error=>{
+        LoggerService.error(error);
+      };
+      
   }
+ 
 
 }

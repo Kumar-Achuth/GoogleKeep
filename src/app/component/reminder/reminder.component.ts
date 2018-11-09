@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router,Params, ActivatedRoute } from '@angular/router';
+import { LoggerService} from '../../core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-reminder',
@@ -9,12 +10,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./reminder.component.scss']
 })
 export class ReminderComponent implements OnInit {
-  public hide: boolean = true;
-  body: any = {}
-  @Output() newEvent = new EventEmitter();
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
-    private router: Router) { }
+  body: any = {};
   accessToken = localStorage.getItem('token');
+  reminderArray: any = [];
+  constructor(private myHttpService: HttpService) { }
   ngOnInit() {
+   this.getReminders();
+  }
+  getReminders() {
+    this.myHttpService.getRemind('notes/getReminderNotesList/',
+     this.accessToken).subscribe(
+        (data) => {
+          this.reminderArray = data['data'].data;
+        }),
+      error => {
+        LoggerService.error(error);
+      }
   }
 }

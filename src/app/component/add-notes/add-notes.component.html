@@ -8,18 +8,6 @@
                     list
                 </i>
             </div>
-            &nbsp;&nbsp;
-            <div class="click">
-                <i class="material-icons" matTooltip="New Note with Image">
-                    photo
-                </i>
-            </div>
-            &nbsp;&nbsp;
-            <div class="click">
-                <i class="material-icons" matTooltip="New Note with Drawing">
-                    create
-                </i>
-            </div>
         </div>
     </mat-card>
     <mat-card *ngIf="!hide" [style.backgroundColor]="color">
@@ -54,7 +42,7 @@
             </mat-chip-list>
         </div>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
-            <app-add-reminder>
+            <app-add-reminder >
             </app-add-reminder>
             <app-collaborator>
             </app-collaborator>
