@@ -2,8 +2,9 @@ import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef }
   from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
+import { DeleteLabelComponent } from '../delete-label/delete-label.component';
 
 @Component({
   selector: 'app-labels',
@@ -27,7 +28,7 @@ export class LabelsComponent implements OnInit {
   id = localStorage.getItem('userId');
 
   constructor(public data: GlobalSearchService, private myHttpService: HttpService,
-    public dialogRef: MatDialogRef<NavbarComponent>) { }
+    public dialogRef: MatDialogRef<NavbarComponent>,public dialog : MatDialog) { }
 
   ngOnInit() {
     this.getAllLabels();
@@ -53,11 +54,20 @@ export class LabelsComponent implements OnInit {
       })
   }
   deleteThisLabel(id) {
-    this.myHttpService.deleteLabel('/noteLabels/' + id + '/deleteNoteLabel',
+      const dialogRef = this.dialog.open(DeleteLabelComponent, {
+        width: '500px',
+        height: '100px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.myHttpService.deleteLabel('/noteLabels/' + id + '/deleteNoteLabel',
       this.accessToken).subscribe(response => {
         this.getAllLabels();
         this.data.deleteMessage(true)
       })
+    }
+      });
+    
   }
 
   updateTheLabel(id) {

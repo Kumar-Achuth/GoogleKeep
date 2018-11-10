@@ -15,14 +15,16 @@
                 </mat-chip-list>
             </div>
         </div>
+        <div class="chips" *ngFor="let index of data.reminder">
         <mat-chip>
                 <i class="material-icons">
                         alarm
                         </i>
-            {{data.reminder | date:'fullDate'}}
-            <mat-icon matChipRemove >
+            {{index | date:'fullDate'}}
+            <mat-icon matChipRemove (click)="deleteReminder(data.id)">
                 cancel</mat-icon>
         </mat-chip>
+        </div>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
             <app-add-reminder>
             </app-add-reminder>

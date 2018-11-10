@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
@@ -35,6 +35,8 @@ import { NewlabelComponent } from './component/newlabel/newlabel.component';
 import { LabelFilterPipe } from '../app/core/pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
 import { LoggerService} from './core/services/loggerService/logger.service';
+import { CropImageComponent } from './component/crop-image/crop-image.component';
+import { ImageCropperModule} from 'ngx-image-cropper';
 
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 
@@ -44,8 +46,13 @@ import {
   MatNativeDateModule, MatChipsModule, MatCheckboxModule, MatSelectModule, MatToolbarModule,
   MatButtonModule, MatIconModule, MatCardModule, MatRadioModule, MatStepperModule,
   MatSidenavModule, MatMenuModule, MatExpansionModule, MatTooltipModule, MatDatepickerModule,
-  MatInputModule, MatFormFieldModule,MatSnackBarModule
+  MatInputModule, MatFormFieldModule,MatSnackBarModule, MatDialogModule
 } from '@angular/material';
+
+import { DeleteLabelComponent } from './component/delete-label/delete-label.component';
+import { DeleteTrashComponent } from './component/delete-trash/delete-trash.component';
+
+
 
 
 
@@ -76,6 +83,9 @@ import {
     NewlabelComponent,
     LabelFilterPipe,
     GlobalSearchComponent,
+    CropImageComponent,
+    DeleteLabelComponent,
+    DeleteTrashComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,12 +119,17 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ImageCropperModule,
+    MatDialogModule
+  
 
 
 
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[DeleteLabelComponent,DeleteTrashComponent, CropImageComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-<span class="color" [matMenuTriggerFor]="menu" matTooltip="Change color" style="cursor: pointer;"><i class="material-icons">palette</i></span>
+<!-- <span class="color" [matMenuTriggerFor]="menu" matTooltip="Change color" style="cursor: pointer;"><i class="material-icons">palette</i></span>
 
 <mat-menu #menu="matMenu">
     <div style="overflow: hidden">
@@ -24,4 +24,22 @@
             <button style="background-color:#cfd8dc; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)="colors('#cfd8dc','')"></button>
         </div>
     </div>
+</mat-menu> -->
+
+
+<mat-icon style="cursor: pointer;" matTooltip="Change color" aria-label="change color" 
+    [matMenuTriggerFor]="appMenu">palette </mat-icon>
+<mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+    <ng-template matMenuContent >
+      <div class="buttons">
+          <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" 
+              *ngFor='let colors of colorArray'>
+                  <div *ngFor='let color of colors'>
+                      <button class="colors" [ngStyle]="{'background-color': color.color }" 
+                          (click)='colorsEdit(color.color)' matTooltip="{{color.name}}"
+                              mat-mini-fab></button>
+                  </div>
+          </div>
+      </div>
+      </ng-template>
 </mat-menu>

@@ -3,6 +3,7 @@ import { Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteCardsComponent } from '../note-cards/note-cards.component';
 import { HttpService } from '../../core/services/httpServices/http.service';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 export interface DialogData {
   title: string;
@@ -43,5 +44,17 @@ export class UpdateNotesComponent implements OnInit {
         this.updateEvent.emit({
         })
       })
+  }
+  deleteReminder(id) {
+    this.myHttpService.deleteChip('notes/removeReminderNotes',
+      { "noteIdList": [id]},
+      this.accessToken).subscribe(data => {
+        LoggerService.log('Success',data)
+        this.updateEvent.emit({
+        })
+      })
+      error=>{
+        LoggerService.error(error);
+      };
   }
 }

@@ -93,9 +93,6 @@ export class NoteCardsComponent implements OnInit {
       })
       error=>{
         LoggerService.error(error);
-      };
-      
+      };   
   }
- 
-
 }

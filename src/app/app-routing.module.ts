@@ -14,6 +14,7 @@ import { UpdateNotesComponent } from './component/update-notes/update-notes.comp
 import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
+import { DeleteLabelComponent } from './component/delete-label/delete-label.component';
 
 const routes: Routes = [
                        { path : 'signup', component: SignupComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
                        { path : 'globalSearch', component : GlobalSearchComponent},
                        { path : '',redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
                        },
+                       { path : 'deleteLabel', component : DeleteLabelComponent},
                        { path : 'labels', component : LabelsComponent},                    
                        {path : 'updateNotes', component : UpdateNotesComponent},
                        { path: '', redirectTo: 'login', pathMatch: 'full'}

@@ -23,9 +23,8 @@ export class AddReminderComponent implements OnInit {
       {
         "noteIdList": [this.reminder.id],
         "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(),
-          currentDate.getDate()+1, 8, 0, 0, 0)
+          currentDate.getDate(), 8, 0, 0, 0)
       }, this.accessToken).subscribe(data => {
-        // this.show=1;
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
@@ -40,7 +39,6 @@ export class AddReminderComponent implements OnInit {
         "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(),
           currentDate.getDate() + 1, 8, 0, 0, 0)
       }, this.accessToken).subscribe(data => {
-        // this.show=1;
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
@@ -54,7 +52,6 @@ export class AddReminderComponent implements OnInit {
         "reminder": new Date(currentDate.getFullYear(), currentDate.getMonth(),
           currentDate.getDate() + 7, 8, 0, 0, 0)
       }, this.accessToken).subscribe(data => {
-        // this.show=1;
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })

@@ -1,21 +1,17 @@
-<div fxFlex fxLayout="row" fxLayoutAlign="space-around">
-  <div>   
+<div fxLayout="row" >
   <mat-toolbar class="toolbar">
         <button type="button" aria-label="Toggle sidenav"
            mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header"><b>Fundoo</b> Notes</span>
-      
-      
-        <div  class="searchBar" >
-          <mat-icon >search </mat-icon>
-          <input   class="search" type="input" placeholder="search" 
+        <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
+        fxHide.md="false">
+          <input class="search" type="input" placeholder="search" 
            [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
         </div>
-
-        <div  fxLayout="row" >
+        <div  fxLayout="row"  fxLayoutAlign = "space-around">
           <div class ="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
@@ -33,33 +29,30 @@
               <button class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
-            <mat-menu class="mat-menu" #appMenu="matMenu" [overlapTrigger]="false">
-              <div class="signout">
-                <span fxLayout="row" fxLayoutGap="15px">
-                  <button class="profilebutton1">
-                    <img src="{{img}}" class = "image">
-                  </button>
-                  <div style="float : right">
-                    <div>{{firstName}}</div>
-                    <div>{{email}}</div>
-                  </div>
-                </span>
+            <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+              <div fxLayoutAlign="row wrap" fxLayoutGap="15px">
+              <div fxFlex=20>
+              <button (click) = "$event.stopPropagation()" 
+              [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+              (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
+              mat-mini-fab class="profile-pic">
+              </button>
+              <input style="display:none" (click) = "$event.stopPropagation()"
+               class="image"
+              type="file" (change)="onFileUpload($event)" #selectFile>
               </div>
-              <hr>
-              <h4>Upload pic</h4>
-              <input type="file" (change)=selectFile($event)>
-              <hr>
-              <button type="button" (click)="Upload()" mat-button > Upload</button>
+              <div>
+              {{firstName}}</div>
+              </div><br>
+              <div>{{email}}</div><hr>
+              <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
+              <button  mat-button  routerLink="/signup" matTooltip="Add Account">Add account</button>
               <button class="signup_button" mat-button  
-                      (click)="doLogout()">Logout</button>
-            </mat-menu>
+                      (click)="doLogout()" matTooltip="Logout">Logout</button></div>
+              </mat-menu> 
           </div>
-          </div>
-        <!-- </div> -->
-
-
+        </div>
       </mat-toolbar>
-      </div>
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"

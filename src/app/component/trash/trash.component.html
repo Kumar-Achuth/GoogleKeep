@@ -8,7 +8,7 @@
 </div>
 <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" 
   style="margin-top:50px;">
-  <div *ngFor='let notes of cards' fxFlex="0 1 calc(30% - 32px)">
+  <div *ngFor='let notes of cards' >
     <mat-card class="card" style="margin-top : 10px; border-radius: 10px"
        [style.backgroundColor]="notes.color">
       <mat-card-title>
@@ -17,14 +17,6 @@
       <mat-card-content>
         <div [innerHtml]="notes.description"></div>
       </mat-card-content>
-      <!-- <mat-chip >
-          <i class="material-icons">
-                  alarm
-                  </i>
-      {{notes.reminder | date:'fullDate'}}
-      <mat-icon matChipRemove >
-          cancel</mat-icon>
-  </mat-chip> -->
       <div class="space" fxLayout="row" fxLayoutAlign="space-between">
         <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu">
           <i class="material-icons"

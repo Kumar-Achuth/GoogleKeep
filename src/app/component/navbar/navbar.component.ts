@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material';
 import { LabelsComponent } from '../labels/labels.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
+import { environment } from '../../../environments/environment';
+import { CropImageComponent } from '../crop-image/crop-image.component';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class NavbarComponent {
   ProfilePath: any;
   globalSearch: any;
   list = 0;
+  public picture : any;
   isHandset$: Observable<boolean> = this.breakpointObserver.
     observe(Breakpoints.Handset)
     .pipe(
@@ -110,27 +113,55 @@ export class NavbarComponent {
     this.data.sendMessage(false);
     this.list = 0;
   }
-
   selectedFile = null;
-  selectFile(event) {
-    this.selectedFile = event.path[0].files[0];
-    console.log(event.target.value);
-    this.ProfilePath = event.target.value;
-    console.log(this.selectedFile.name);
-  }
-  image = {};
-  public image2 = localStorage.getItem('imageUrl');
-  img = "http://34.213.106.173/" + this.image2;
+  // selectFile(event) {
+  //   this.selectedFile = event.path[0].files[0];
+  //   console.log(event.target.value);
+  //   this.ProfilePath = event.target.value;
+  //   console.log(this.selectedFile.name);
+  // }
+  // image = {};
+  // public image2 = localStorage.getItem('imageUrl');
+  // img = "http://34.213.106.173/" + this.image2;
 
-  Upload() {
-    var token = localStorage.getItem('token');
-    const uploadData = new FormData();
-    uploadData.append('file', this.selectedFile, this.selectedFile.name);
-    this.myHttpService.httpAddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {
-      console.log("url: ", res['status'].imageUrl)
-      console.log(this.ProfilePath);
-    }, error => {
-      console.log(error);
-    })
-  }
+  // Upload() {
+  //   var token = localStorage.getItem('token');
+  //   const uploadData = new FormData();
+  //   uploadData.append('file', this.selectedFile, this.selectedFile.name);
+  //   this.myHttpService.httpAddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {
+  //     console.log("url: ", res['status'].imageUrl)
+  //     console.log(this.ProfilePath);
+  //   }, error => {
+  //     console.log(error);
+  //   })
+  // }
+  public image2 = localStorage.getItem('imageUrl');
+img = environment.apiUrl + this.image2;
+
+onFileUpload(event) {
+var token = localStorage.getItem('token');
+this.profileCropOpen(event);
+
+this.selectedFile = event.path[0].files[0];
+const uploadData = new FormData();
+uploadData.append('file', this.selectedFile, this.selectedFile.name);
+}
+image = {};
+profileCropOpen(data): void { //Function for the dialog box
+const dialogRefPic = this.dialog.open(CropImageComponent, {
+width: '450px',
+data: data
+});
+
+dialogRefPic.afterClosed().subscribe(result => {
+console.log('The dialog was closed');
+this.data.currentMsg.subscribe(message => this.picture = message)
+console.log("pic", this.picture);
+if (this.picture == true) {
+this.image2 = localStorage.getItem('imageUrl');
+this.img = environment.apiUrl + this.image2;
+}
+
+});
+}
 }
