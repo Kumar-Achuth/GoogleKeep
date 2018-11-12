@@ -4,7 +4,7 @@
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card style="margin-top : 10px; border-radius: 5px" 
       [style.backgroundColor]="notes.color">
-        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
+      <app-pin (click)="pinIt(notes.id)" class="pin"></app-pin>
         <mat-card-title (click)="openDialog(notes)">
           <div [innerHtml]="notes.title"></div>
         </mat-card-title>

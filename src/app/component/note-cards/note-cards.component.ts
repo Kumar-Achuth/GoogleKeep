@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
-import { LoggerService} from '../../core/services/loggerService/logger.service';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-note-cards',
@@ -17,7 +17,7 @@ export class NoteCardsComponent implements OnInit {
   cards: any = [];
   body: any = {};
   toggle: any = false;
-  checkListArray :any=[];
+  checkListArray: any = [];
   reminderArray: any = [];
   accessToken = localStorage.getItem('token');
   @Input() cardsArray;
@@ -35,7 +35,7 @@ export class NoteCardsComponent implements OnInit {
   @Output() dialogEvent = new EventEmitter();
   ngOnInit() {
     this.switchView()
-    this.getAllLabels(); 
+    this.getAllLabels();
   }
   deleteEvent(event) {
     this.trashEvent.emit({
@@ -83,36 +83,51 @@ export class NoteCardsComponent implements OnInit {
   }
   deleteReminder(id) {
     this.myHttpService.deleteChip('notes/removeReminderNotes',
-      { "noteIdList": [id]},
+      { "noteIdList": [id] },
       this.accessToken).subscribe(data => {
-        LoggerService.log('Success',data)
+        LoggerService.log('Success', data)
         this.trashEvent.emit({
         })
       })
-      error=>{
-        LoggerService.error(error);
-      };   
+    error => {
+      LoggerService.error(error);
+    };
   }
-  checkBox(checkList,note) {
+  checkBox(checkList, note) {
     if (checkList.status == "open") {
       checkList.status = "close"
     }
     else {
       checkList.status = "open"
-    } 
+    }
     console.log(checkList);
-    this.checkListArray=checkList;
-     this.checkListApi(note.id);
+    this.checkListArray = checkList;
+    this.checkListApi(note.id);
   }
 
-  checkListApi(id){
-      var apiData = {
-        "itemName": this.checkListArray.itemName,
-        "status": this.checkListArray.status
-      }
-      this.myHttpService.postColor("notes/" + id + "/checklist/" + this.checkListArray.id + "/update",
-       JSON.stringify(apiData), this.accessToken).subscribe(response => {
+  checkListApi(id) {
+    var apiData = {
+      "itemName": this.checkListArray.itemName,
+      "status": this.checkListArray.status
+    }
+    this.myHttpService.postColor("notes/" + id + "/checklist/" + this.checkListArray.id + "/update",
+      JSON.stringify(apiData), this.accessToken).subscribe(response => {
         console.log(response);
       })
+  }
+  pinIt(id) {
+    this.myHttpService.deleteChip('notes/pinUnpinNotes',
+      {
+        "noteIdList": [id],
+        "isPined": true
+      },
+      this.accessToken).subscribe(data => {
+        LoggerService.log('Success', data)
+        this.trashEvent.emit({
+        })
+      })
+    error => {
+      LoggerService.error(error);
+    };
   }
 }
