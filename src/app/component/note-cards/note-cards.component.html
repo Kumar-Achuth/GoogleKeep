@@ -1,10 +1,10 @@
 <div fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="center" fxLayoutGap="10px"
-   style="margin-top:25px ">
-  <div *ngFor='let notes of cardsArray | searchBar :  globalSearch' >
+ style="margin-top:25px ">
+  <div *ngFor='let notes of cardsArray | searchBar :  globalSearch'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card  style="margin-top : 10px; border-radius: 5px" 
-       [style.backgroundColor]="notes.color">
-          <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">  
+      <mat-card style="margin-top : 10px; border-radius: 5px" 
+      [style.backgroundColor]="notes.color">
+        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <mat-card-title (click)="openDialog(notes)">
           <div [innerHtml]="notes.title"></div>
         </mat-card-title>
@@ -12,24 +12,22 @@
           <div [innerHtml]="notes.description"></div>
         </mat-card-content>
 
-
-        <div class="note" *ngFor="let checklist of notes.noteCheckLists" fxLayout="row" > 
-          <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-          (click)=checkBox(checklist,notes)></mat-checkbox>
+        <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+            <mat-divider></mat-divider>
+          <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted"
+           (click)=checkBox(checklist,notes)></mat-checkbox>
           <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
-          [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
-            (click)="open(notes)" [style.backgroundColor]="notes.color">
-         </div>
-        
-          <div class="note" *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+          [(ngModel)]=checklist.itemName fxFlex="90%" class="check"
+           (click)="open(notes)" [style.backgroundColor]="notes.color">
+        </div>        
+        <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
            (click)=checkBox(checklist,notes)></mat-checkbox>
-          <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
-           (click)="open(notes)">{{checklist.itemName}}</del>
+           <mat-divider></mat-divider>
+          <del class = "check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
+          (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
-
-
-
+        <br>
         <div fxLayout="row wrap" class="spacebetween">
           <div *ngFor="let index of notes.noteLabels trackBy : val?.id">
             <div *ngIf="index.isDeleted == false">
@@ -45,15 +43,15 @@
         </div>
         <br>
         <div *ngFor="let index of notes.reminder trackBy : val?.id">
-        <mat-chip-list selected >
-          <mat-chip>
+          <mat-chip-list selected>
+            <mat-chip class="cursor">
               <i class="material-icons">
-                  query_builder
-                  </i>
-            {{index | date:'fullDate'}}
-            <mat-icon matChipRemove (click)="deleteReminder(notes.id)">cancel</mat-icon>
-          </mat-chip>
-        </mat-chip-list>
+                query_builder
+              </i>
+              {{index | date:'fullDate'}}
+              <mat-icon matChipRemove (click)="deleteReminder(notes.id)">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
         </div>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
           <app-add-reminder [reminder]="notes" (remindEmit)="deleteEvent($event)">

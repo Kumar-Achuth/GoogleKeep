@@ -6,21 +6,57 @@
     <button mat-button>Empty Trash</button>
   </div>
 </div>
-<div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" 
-  style="margin-top:50px;">
-  <div *ngFor='let notes of cards' >
-    <mat-card class="card" style="margin-top : 10px; border-radius: 10px"
-       [style.backgroundColor]="notes.color">
+<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px" 
+style="margin-top:50px;">
+  <div *ngFor='let notes of cards'>
+    <mat-card class="card" style="margin-top : 10px; border-radius: 10px" 
+    [style.backgroundColor]="notes.color">
       <mat-card-title>
         <div [innerHtml]="notes.title"></div>
       </mat-card-title>
       <mat-card-content>
         <div [innerHtml]="notes.description"></div>
       </mat-card-content>
+      <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+        <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted"
+         (click)=checkBox(checklist,notes)></mat-checkbox>
+        <input *ngIf="!checklist.isDeleted && checklist.status=='open' "
+         [(ngModel)]=checklist.itemName fxFlex="90%"
+          (click)="open(notes)" [style.backgroundColor]="notes.color">
+      </div>
+      <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+        <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+         (click)=checkBox(checklist,notes)></mat-checkbox>
+        <del *ngIf="!checklist.isDeleted && checklist.status=='close'" 
+        (click)="open(notes)">{{checklist.itemName}}</del>
+      </div>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="chips" *ngFor="let index of notes.noteLabels">
+          <mat-chip-list>
+            <mat-chip *ngIf="index.isDeleted==false">
+              {{index.label}}
+              <mat-icon matChipRemove (click)="deleteChips(index.id)">
+                cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+      <br>
+      <div *ngFor="let index of notes.reminder trackBy : val?.id">
+        <mat-chip-list selected>
+          <mat-chip>
+            <i class="material-icons">
+              query_builder
+            </i>
+            {{index | date:'fullDate'}}
+            <mat-icon matChipRemove (click)="deleteReminder(notes.id)">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
       <div class="space" fxLayout="row" fxLayoutAlign="space-between">
         <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu">
-          <i class="material-icons"
-            matTooltip="More">
+          <i class="material-icons" matTooltip="More">
             more_vert
           </i></mat-icon>
         <mat-menu #appMenu="matMenu" [overlapTrigger]="false">

@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/signup/signup.component';
@@ -32,6 +34,8 @@ import { NoteCardsComponent } from './component/note-cards/note-cards.component'
 import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
 import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
+import { DeleteLabelComponent } from './component/delete-label/delete-label.component';
+import { DeleteTrashComponent } from './component/delete-trash/delete-trash.component';
 import { LabelFilterPipe } from '../app/core/pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
 import { LoggerService} from './core/services/loggerService/logger.service';
@@ -48,9 +52,8 @@ import {
   MatSidenavModule, MatMenuModule, MatExpansionModule, MatTooltipModule, MatDatepickerModule,
   MatInputModule, MatFormFieldModule,MatSnackBarModule, MatDialogModule
 } from '@angular/material';
+import { PinComponent } from './component/pin/pin.component';
 
-import { DeleteLabelComponent } from './component/delete-label/delete-label.component';
-import { DeleteTrashComponent } from './component/delete-trash/delete-trash.component';
 
 
 
@@ -86,6 +89,7 @@ import { DeleteTrashComponent } from './component/delete-trash/delete-trash.comp
     CropImageComponent,
     DeleteLabelComponent,
     DeleteTrashComponent,
+    PinComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,19 +13,25 @@
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
         <div *ngIf="show == 0">
-            <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... " (click)="checked=false"></div>
+            <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... " 
+            (click)="checked=false"></div>
         </div>
-        <div *ngIf="show ==1" id="title" autofocus #description style="margin-bottom: 20px;">
-            <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row" style="margin-bottom: 5px;">
+         <div class = "items"></div>
+        <div  *ngIf="show ==1" id="title" autofocus #description style="margin-bottom: 20px;">
+            <div  *ngFor="let data of dataArray" id="note" fxLayout="row"
+             style="margin-bottom: 5px;">
                 <mat-checkbox fxFlex="5%"></mat-checkbox>
-                <input fxFlex="90" *ngIf="show ==1" class="inputNote1" id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
-                <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" style="cursor: pointer;">cancel</mat-icon>
+                <input fxFlex="90" *ngIf="show ==1" class="inputNote1" id="note"
+                 [(ngModel)]=data.data (keydown)="editing($event.data)">
+                <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" 
+                style="cursor: pointer;">cancel</mat-icon>
             </div>
             <mat-divider></mat-divider>
-            <div fxLayout="row" autofocus id="notesId">
+            <div  fxLayout="row" autofocus id="notesId">
                 <mat-icon fxFlex="5%">add</mat-icon>
-                <input id="note" [(ngModel)]=data (click)="checked=true" fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item"
-                    (keydown.enter)="enter()">
+                <input id="note" [(ngModel)]=data (click)="checked=true" fxFlex="95%" 
+                class="inputNote" [(ngModel)]=data.data
+                    placeholder="List item" (keydown.enter)="enter()">
             </div>
             <mat-divider></mat-divider>
         </div>

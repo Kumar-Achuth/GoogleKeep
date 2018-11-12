@@ -3,7 +3,6 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { LoggerService} from '../../core/services/loggerService/logger.service';
 
@@ -18,12 +17,12 @@ export class NoteCardsComponent implements OnInit {
   cards: any = [];
   body: any = {};
   toggle: any = false;
+  checkListArray :any=[];
   reminderArray: any = [];
   accessToken = localStorage.getItem('token');
   @Input() cardsArray;
   @Output() trashEvent = new EventEmitter();
   @Input() globalSearch;
-
   constructor(private myHttpService: HttpService, private router: Router,
     public dialog: MatDialog, public data: GlobalSearchService) {
     this.data.deletedLabel.subscribe(message => {
@@ -36,8 +35,7 @@ export class NoteCardsComponent implements OnInit {
   @Output() dialogEvent = new EventEmitter();
   ngOnInit() {
     this.switchView()
-    this.getAllLabels();
-   
+    this.getAllLabels(); 
   }
   deleteEvent(event) {
     this.trashEvent.emit({
@@ -96,15 +94,25 @@ export class NoteCardsComponent implements OnInit {
       };   
   }
   checkBox(checkList,note) {
-
     if (checkList.status == "open") {
       checkList.status = "close"
     }
     else {
       checkList.status = "open"
-    }
+    } 
     console.log(checkList);
-    // this.modifiedCheckList = checkList;
-    // this.updatelist(note.id);
+    this.checkListArray=checkList;
+     this.checkListApi(note.id);
+  }
+
+  checkListApi(id){
+      var apiData = {
+        "itemName": this.checkListArray.itemName,
+        "status": this.checkListArray.status
+      }
+      this.myHttpService.postColor("notes/" + id + "/checklist/" + this.checkListArray.id + "/update",
+       JSON.stringify(apiData), this.accessToken).subscribe(response => {
+        console.log(response);
+      })
   }
 }

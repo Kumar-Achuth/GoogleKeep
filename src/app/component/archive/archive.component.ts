@@ -31,5 +31,4 @@ export class ArchiveComponent implements OnInit {
       this.getArchiveNotes();
     })
   }
-
 }

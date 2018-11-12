@@ -33,6 +33,7 @@
     outline: none;
     width: 100%;
     word-wrap: break-word;
+    margin-bottom: 10px;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
@@ -54,6 +55,14 @@
 }.pin{
     float: right;
     cursor: pointer;
+}
+.check{
+    margin-bottom: 10px;
+
+}
+.items
+{
+    margin-bottom: 10px;
 }
 
 

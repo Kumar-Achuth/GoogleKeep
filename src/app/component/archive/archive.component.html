@@ -13,6 +13,50 @@
             <mat-card-content>
                 <div [innerHtml]="notes.description"></div>
             </mat-card-content>
+
+         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+            <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted"
+             (click)=checkBox(checklist,notes)></mat-checkbox>
+            <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+            [(ngModel)]=checklist.itemName fxFlex="90%"
+             (click)="open(notes)" [style.backgroundColor]="notes.color">
+          </div>
+  
+          <div  *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+            <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+             (click)=checkBox(checklist,notes)></mat-checkbox>
+            <del *ngIf="!checklist.isDeleted && checklist.status=='close'" 
+            (click)="open(notes)">{{checklist.itemName}}</del>
+          </div>
+          <br>
+
+          <div fxLayout="row wrap" class="spacebetween">
+            <div *ngFor="let index of notes.noteLabels trackBy : val?.id">
+              <div *ngIf="index.isDeleted == false">
+                <mat-chip-list selected>
+                  <mat-chip>
+                    {{index.label}}
+                    <mat-icon matChipRemove (click)="$event.stopPropagation();
+                     deleteChips(notes.id,index.id)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </div><br>
+
+          <div *ngFor="let index of notes.reminder trackBy : val?.id">
+            <mat-chip-list selected>
+              <mat-chip>
+                <i class="material-icons">
+                  query_builder
+                </i>
+                {{index | date:'fullDate'}}
+                <mat-icon matChipRemove (click)="deleteReminder(notes.id)">cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+
+
             <div class="space" fxLayout="row" fxLayoutAlign="space-between">
                 <app-add-reminder>
                 </app-add-reminder>
@@ -27,9 +71,23 @@
                       (click)="unArchive(notes.id)">
                         unarchive
                     </i></mat-icon>
-                <app-more>
+                <app-more  >
                 </app-more>
             </div>
         </mat-card>
     </div>
 </div>
+
+
+
+<!-- <div fxLayout="row" fxLayoutAlign="center center" style="margin-top:5%;">
+    <div class="trash">
+        Your Archived Notes Appear here
+    </div>
+</div>
+<div style="margin-top : 4%;">
+    <app-note-cards [cardsArray]="cards">
+    </app-note-cards>
+  </div> -->
+
+
