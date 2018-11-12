@@ -14,7 +14,7 @@
         <button mat-menu-item (click)=" addWeeklyReminder()">Next Week<span class="time">Mon 8:00 AM </span></button></div><br>  
     <a><i class="material-icons">
         access_time
-      </i><button mat-button>Pick Date & Time</button></a><br>
+      </i><button mat-menu-item [matMenuTriggerFor]="dateMenu">Pick Date & Time</button></a><br>
     <a><i class="material-icons">
         place
       </i> <button mat-button>Pick a Place</button>
@@ -23,7 +23,7 @@
 </mat-menu>
   <!-- </div> -->
   <!-- <div *ngIf =  "show ==1"> -->
-<mat-menu >
+<mat-menu  #dateMenu="matMenu" [overlapTrigger]="false" >
 <input matInput [matDatepicker]="picker" placeholder="Choose a date">
 <mat-datepicker-toggle matSuffix [for]="picker">
   <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>

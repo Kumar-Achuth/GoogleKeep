@@ -19,6 +19,9 @@ export class AddNotesComponent implements OnInit {
   listing = true;
   public i = 0;
   dataArray = [];
+  dataArrayCheck = [];
+  checked = false;
+  status = "open";
   accessToken = localStorage.getItem('token');
   @Output() newEvent = new EventEmitter();
   labelArray: any[];
@@ -34,6 +37,9 @@ export class AddNotesComponent implements OnInit {
    * @description : Add Notes api Call starts
    */
   addNotes() {
+    if(this.checked==false){
+
+    
     this.myHttpService.postNotes('notes/addNotes', {
       'title': document.getElementById('titleId').innerHTML,
       'description': document.getElementById('notesId').innerHTML,
@@ -55,6 +61,42 @@ export class AddNotesComponent implements OnInit {
       this.labelName = [];
       this.show = 0
     })
+  }
+  else{
+    this.dataArrayCheck = [];
+      for(var i=0;i<this.dataArray.length;i++){
+        if(this.dataArray[i].isChecked==true){
+         this.status="close"
+        }
+        var apiObj={
+          "itemName":this.dataArray[i].data,
+          "status":this.status
+        }
+        this.dataArrayCheck.push(apiObj)
+        this.status="open"
+      }
+      console.log(this.dataArrayCheck);
+    this.myHttpService.postNotes('notes/addNotes', {
+      'title': document.getElementById('titleId').innerHTML,
+      'labelIdList': JSON.stringify(this.labelId),
+      'checklist': JSON.stringify(this.dataArrayCheck),
+      'isPined': 'false',
+      'color': this.color
+    }, this.accessToken).subscribe(response => {
+      this.newEvent.emit({
+      })
+      this.labelName = [];
+      this.hide = !this.hide;
+      this.color = "#fafafa";
+      this.show = 0
+    }, error => {
+      console.log("failed", error)
+      this.color = "#fafafa";
+      this.hide = !this.hide;
+      this.labelName = [];
+      this.show = 0
+    })
+  }
   }
   /**
    * @description changecolor event

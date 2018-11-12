@@ -3,8 +3,7 @@
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
             <div class="click">
-                <i class="material-icons" mat-raised-button matTooltip="New List"
-                 (click)="toggle()">
+                <i class="material-icons" mat-raised-button matTooltip="New List" (click)="toggle()">
                     list
                 </i>
             </div>
@@ -14,26 +13,22 @@
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
         <div *ngIf="show == 0">
-            <div contenteditable="true" id="notesId" class="edit"
-                data-text="Take a Note.... "></div>
+            <div contenteditable="true" id="notesId" class="edit" data-text="Take a Note.... " (click)="checked=false"></div>
         </div>
- <div *ngIf="show ==1" id="title" autofocus #description style = "margin-bottom: 20px;">
-        <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row"
-         style = "margin-bottom: 5px;">
-        <mat-checkbox fxFlex="5%"></mat-checkbox>
-        <input fxFlex="90" *ngIf="show ==1" class="inputNote1" id="note"
-         [(ngModel)]=data.data (keydown)="editing($event.data)">
-        <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" 
-        style = "cursor: pointer;">cancel</mat-icon>
+        <div *ngIf="show ==1" id="title" autofocus #description style="margin-bottom: 20px;">
+            <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row" style="margin-bottom: 5px;">
+                <mat-checkbox fxFlex="5%"></mat-checkbox>
+                <input fxFlex="90" *ngIf="show ==1" class="inputNote1" id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
+                <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" style="cursor: pointer;">cancel</mat-icon>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="row" autofocus id="notesId">
+                <mat-icon fxFlex="5%">add</mat-icon>
+                <input id="note" [(ngModel)]=data (click)="checked=true" fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item"
+                    (keydown.enter)="enter()">
+            </div>
+            <mat-divider></mat-divider>
         </div>
-        <mat-divider></mat-divider>
-        <div  fxLayout="row"  autofocus id = "notesId">
-        <mat-icon fxFlex="5%">add</mat-icon>
-        <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote"
-         [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()">
-        </div>
-        <mat-divider></mat-divider>
-    </div>
         <div *ngFor="let index of labelName">
             <mat-chip-list>
                 <mat-chip>{{index.label}}
@@ -41,23 +36,33 @@
                 </mat-chip>
             </mat-chip-list>
         </div>
-        <div class="space" fxLayout="row" fxLayoutAlign="space-between ">
-            <app-add-reminder >
-            </app-add-reminder>
-            <app-collaborator>
-            </app-collaborator>
-            <app-change-color (colorEmit)=colorChanges($event)>
-            </app-change-color>
-            <app-add-photo>
-            </app-add-photo>
-            <app-add-archive>
-            </app-add-archive>
-            <app-more (addEvent)="instantLabel($event)">
-            </app-more>
-            <div class="close">
-                <div class="example-button-row">
-                    <button mat-button (click)="addNotes()">CLOSE</button>
-                </div>
+        <div class="space" fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex=10>
+                <app-add-reminder>
+                </app-add-reminder>
+            </div>
+            <div fxFlex=10>
+                <app-collaborator>
+                </app-collaborator>
+            </div>
+            <div fxFlex=10>
+                <app-change-color (colorEmit)=colorChanges($event)>
+                </app-change-color>
+            </div>
+            <div fxFlex=10>
+                <app-add-photo>
+                </app-add-photo>
+            </div>
+            <div fxFlex=10>
+                <app-add-archive>
+                </app-add-archive>
+            </div>
+            <div fxFlex=10>
+                <app-more (addEvent)="instantLabel($event)">
+                </app-more>
+            </div>
+            <div>
+                <button mat-button (click)="addNotes()">CLOSE</button>
             </div>
         </div>
         <br>

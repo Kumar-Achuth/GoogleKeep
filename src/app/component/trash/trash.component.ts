@@ -31,7 +31,6 @@ export class TrashComponent implements OnInit {
         })
       }
     });
-
   }
   getTrash() {
     this.myHttpService.getTrashNotes('notes/getTrashNotesList', this.accessToken)

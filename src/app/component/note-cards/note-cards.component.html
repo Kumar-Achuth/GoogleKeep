@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="center center" fxLayoutGap="10px"
+<div fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="center" fxLayoutGap="10px"
    style="margin-top:25px ">
   <div *ngFor='let notes of cardsArray | searchBar :  globalSearch' >
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
@@ -11,6 +11,25 @@
         <mat-card-content (click)="openDialog(notes)">
           <div [innerHtml]="notes.description"></div>
         </mat-card-content>
+
+
+        <div class="note" *ngFor="let checklist of notes.noteCheckLists" fxLayout="row" > 
+          <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
+          (click)=checkBox(checklist,notes)></mat-checkbox>
+          <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+          [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
+            (click)="open(notes)" [style.backgroundColor]="notes.color">
+         </div>
+        
+          <div class="note" *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
+          <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+           (click)=checkBox(checklist,notes)></mat-checkbox>
+          <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
+           (click)="open(notes)">{{checklist.itemName}}</del>
+        </div>
+
+
+
         <div fxLayout="row wrap" class="spacebetween">
           <div *ngFor="let index of notes.noteLabels trackBy : val?.id">
             <div *ngIf="index.isDeleted == false">

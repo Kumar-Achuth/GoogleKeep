@@ -24,7 +24,6 @@ export class ReminderComponent implements OnInit {
           this.reminderArray = data['data'].data;
         }),
       error => {
-        // LoggerService.error(error);
       }
   }
 }
