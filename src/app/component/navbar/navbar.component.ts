@@ -25,7 +25,8 @@ export class NavbarComponent {
   ProfilePath: any;
   globalSearch: any;
   list = 0;
-  public picture : any;
+  title;
+  public picture: any;
   isHandset$: Observable<boolean> = this.breakpointObserver.
     observe(Breakpoints.Handset)
     .pipe(
@@ -35,8 +36,8 @@ export class NavbarComponent {
     public route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
     private router: Router, public dialog: MatDialog, public data: GlobalSearchService) { }
 
-    
-   
+
+
   firstName: any;
   lastName: any;
   email: any;
@@ -47,6 +48,9 @@ export class NavbarComponent {
     this.lastName = localStorage.getItem('lastName');
     this.email = localStorage.getItem('email');
     this.getLabels();
+  }
+  aptTitle(title){
+    this.title=title;
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelsComponent, {
@@ -60,26 +64,26 @@ export class NavbarComponent {
       this.getLabels();
     });
   }
-   /**
-     * @description Api call for Logout 
-     */
-    doLogout() {
-      console.log(this.token);
-      this.myHttpService.postLogout('user/logout', this.token).subscribe(response => {
-        this.snackBar.open("Logout ", "Successful", {
-          duration: 1000
-        })
-        localStorage.removeItem('token');
-        localStorage.removeItem('firstName');
-        localStorage.removeItem('email');
-        localStorage.removeItem('lastName');
-        localStorage.removeItem('userId');
-  
-        this.router.navigateByUrl('/login');
-      }, error => {
+  /**
+    * @description Api call for Logout 
+    */
+  doLogout() {
+    console.log(this.token);
+    this.myHttpService.postLogout('user/logout', this.token).subscribe(response => {
+      this.snackBar.open("Logout ", "Successful", {
+        duration: 1000
       })
-    }
-    
+      localStorage.removeItem('token');
+      localStorage.removeItem('firstName');
+      localStorage.removeItem('email');
+      localStorage.removeItem('lastName');
+      localStorage.removeItem('userId');
+
+      this.router.navigateByUrl('/login');
+    }, error => {
+    })
+  }
+
   getLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.token)
@@ -114,54 +118,32 @@ export class NavbarComponent {
     this.list = 0;
   }
   selectedFile = null;
-  // selectFile(event) {
-  //   this.selectedFile = event.path[0].files[0];
-  //   console.log(event.target.value);
-  //   this.ProfilePath = event.target.value;
-  //   console.log(this.selectedFile.name);
-  // }
-  // image = {};
-  // public image2 = localStorage.getItem('imageUrl');
-  // img = "http://34.213.106.173/" + this.image2;
-
-  // Upload() {
-  //   var token = localStorage.getItem('token');
-  //   const uploadData = new FormData();
-  //   uploadData.append('file', this.selectedFile, this.selectedFile.name);
-  //   this.myHttpService.httpAddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {
-  //     console.log("url: ", res['status'].imageUrl)
-  //     console.log(this.ProfilePath);
-  //   }, error => {
-  //     console.log(error);
-  //   })
-  // }
   public image2 = localStorage.getItem('imageUrl');
-img = environment.apiUrl + this.image2;
+  img = environment.apiUrl + this.image2;
 
-onFileUpload(event) {
-var token = localStorage.getItem('token');
-this.profileCropOpen(event);
+  onFileUpload(event) {
+    var token = localStorage.getItem('token');
+    this.profileCropOpen(event);
 
-this.selectedFile = event.path[0].files[0];
-const uploadData = new FormData();
-uploadData.append('file', this.selectedFile, this.selectedFile.name);
-}
-image = {};
-profileCropOpen(data): void { //Function for the dialog box
-const dialogRefPic = this.dialog.open(CropImageComponent, {
-width: '450px',
-data: data
-});
+    this.selectedFile = event.path[0].files[0];
+    const uploadData = new FormData();
+    uploadData.append('file', this.selectedFile, this.selectedFile.name);
+  }
+  image = {};
+  profileCropOpen(data): void { //Function for the dialog box
+    const dialogRefPic = this.dialog.open(CropImageComponent, {
+      width: '450px',
+      data: data
+    });
 
-dialogRefPic.afterClosed().subscribe(result => {
-console.log('The dialog was closed');
-this.data.currentMsg.subscribe(message => this.picture = message)
-console.log("pic", this.picture);
-if (this.picture == true) {
-this.image2 = localStorage.getItem('imageUrl');
-this.img = environment.apiUrl + this.image2;
-}
-
-});
-}
+    dialogRefPic.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.data.currentMsg.subscribe(message => this.picture = message)
+      console.log("pic", this.picture);
+      if (this.picture == true) {
+        this.image2 = localStorage.getItem('imageUrl');
+        this.img = environment.apiUrl + this.image2;
+      }
+    });
+  }
 }

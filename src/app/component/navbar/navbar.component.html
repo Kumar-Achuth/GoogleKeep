@@ -4,7 +4,7 @@
            mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span class="title-header"><b>Fundoo</b> Notes</span>
+        <span class="title-header">{{title}}</span>
         <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
         fxHide.md="false">
           <input class="search" type="input" placeholder="search" 
@@ -59,11 +59,11 @@
           [mode]="(isHandset$ | async) ? 'over' : 'side'" 
           [opened]="(isHandset$ | async)">
           <mat-nav-list>
-            <a mat-list-item routerLink='/home/notes'><i class="material-icons"
+            <a (click)='aptTitle("Fundoo Notes")' mat-list-item routerLink='/home/notes'><i class="material-icons"
                matTooltip="Notes">
                 assignment
               </i>Notes</a>
-            <a mat-list-item routerLink='/home/reminder'><i class="material-icons"
+            <a (click)='aptTitle("Reminders")' mat-list-item routerLink='/home/reminder'><i class="material-icons"
                matTooltip="Reminders">
                 touch_app
               </i>Reminders</a>
@@ -72,7 +72,7 @@
             <div *ngFor="let labels of labelArray trackBy : val?.id" 
             (click)="select(labels)">
               <div *ngIf="labels.isDeleted==false">
-                <a mat-list-item>
+                <a (click)='aptTitle(labels.label)' mat-list-item>
                   <mat-icon >label_outline</mat-icon>
                   <span  [innerHTML]="labels.label"></span>
                 </a>
@@ -83,15 +83,15 @@
                 create
               </i>Edit Labels</a>
             <hr>
-            <a mat-list-item routerLink="/home/archive">
+            <a (click)='aptTitle("Archive")' mat-list-item routerLink="/home/archive">
               <i class="material-icons" matTooltip="Archive">
                 archive
               </i>Archive</a>
-            <a mat-list-item routerLink="/home/trash">
+            <a (click)='aptTitle("Trash")' mat-list-item routerLink="/home/trash">
               <i class="material-icons" matTooltip="Trash">
                 delete
               </i>Trash</a>
-            <a mat-list-item> <i class="material-icons" matTooltip="Settings">
+            <a (click)='aptTitle("Settings")' mat-list-item> <i class="material-icons" matTooltip="Settings">
                 settings
               </i>
               Settings</a>

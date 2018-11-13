@@ -1,4 +1,12 @@
 <app-add-notes (newEvent)="eventEntry($event)">
 </app-add-notes>
+<div  fxLayout="row" class="pinned">
+    <h4>Pinned</h4> 
+  </div>
+<app-note-cards [cardsArray]="pinnedNotes" (trashEvent)="eventEntry($event)">
+</app-note-cards>
+<div  fxLayout="row" class="pinned">
+    <h4>Others</h4> 
+  </div>
 <app-note-cards [cardsArray]="cards" (trashEvent)="eventEntry($event)">
 </app-note-cards>

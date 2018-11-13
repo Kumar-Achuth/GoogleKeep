@@ -2,9 +2,9 @@
  style="margin-top:25px ">
   <div *ngFor='let notes of cardsArray | searchBar :  globalSearch'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card style="margin-top : 10px; border-radius: 5px" 
+      <mat-card  style="margin-top : 10px; border-radius: 5px" 
       [style.backgroundColor]="notes.color">
-      <app-pin (click)="pinIt(notes.id)" class="pin"></app-pin>
+      <app-pin [pinNote]="notes" (pinEvent)="deleteEvent($event)" class="pin"></app-pin>
         <mat-card-title (click)="openDialog(notes)">
           <div [innerHtml]="notes.title"></div>
         </mat-card-title>
@@ -12,6 +12,7 @@
           <div [innerHtml]="notes.description"></div>
         </mat-card-content>
 
+        
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
             <mat-divider></mat-divider>
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted"
@@ -27,6 +28,9 @@
           <del class = "check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
           (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
+
+
+
         <br>
         <div fxLayout="row wrap" class="spacebetween">
           <div *ngFor="let index of notes.noteLabels trackBy : val?.id">

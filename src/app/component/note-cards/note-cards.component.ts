@@ -19,6 +19,7 @@ export class NoteCardsComponent implements OnInit {
   toggle: any = false;
   checkListArray: any = [];
   reminderArray: any = [];
+  pinnedNotes : any = [];
   accessToken = localStorage.getItem('token');
   @Input() cardsArray;
   @Output() trashEvent = new EventEmitter();
@@ -67,7 +68,7 @@ export class NoteCardsComponent implements OnInit {
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
       .subscribe(data => {
         for (var i = 0; i < data['data']['details'].length; i++) {
-          if (data['data']['details'][i].isDeleted == false) {
+          if (data['data']['details'][i].isDeleted == false ) {
             newArray.push(data['data']['details'][i])
           }
         }
@@ -104,7 +105,6 @@ export class NoteCardsComponent implements OnInit {
     this.checkListArray = checkList;
     this.checkListApi(note.id);
   }
-
   checkListApi(id) {
     var apiData = {
       "itemName": this.checkListArray.itemName,
@@ -115,19 +115,5 @@ export class NoteCardsComponent implements OnInit {
         console.log(response);
       })
   }
-  pinIt(id) {
-    this.myHttpService.deleteChip('notes/pinUnpinNotes',
-      {
-        "noteIdList": [id],
-        "isPined": true
-      },
-      this.accessToken).subscribe(data => {
-        LoggerService.log('Success', data)
-        this.trashEvent.emit({
-        })
-      })
-    error => {
-      LoggerService.error(error);
-    };
-  }
+
 }

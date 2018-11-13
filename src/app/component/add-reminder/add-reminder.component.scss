@@ -1,7 +1,21 @@
-.click
-{
-    cursor: pointer;
+// .click
+// {
+//     cursor: pointer;
+// }
+// .time{
+// float: right;
+// }
+
+
+::ng-deep.mat-menu-content:not(:empty) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 280px;
+    box-sizing: none;
+    outline: none;
 }
-.time{
-float: right;
+
+.icons{
+    opacity:0.75;
+
 }

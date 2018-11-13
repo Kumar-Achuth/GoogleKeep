@@ -263,4 +263,25 @@ export class HttpService {
     }
     return this.http.get(url, httpOptions)
   }
+  httpAddReminder(url,token,body){
+    console.log(token);
+    var httpOptions={
+      headers:new HttpHeaders({
+       
+       'Authorization':token
+      })
+    };
+    return this.http.post(url,body,httpOptions)
+  }
+  
+ public httpGetReminder(url,token){
+    console.log(token);
+    var httpOptions={
+      headers:new HttpHeaders({
+       
+       'Authorization':token
+      })
+    };
+    return this.http.get(url,httpOptions)
+  }
 }

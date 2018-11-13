@@ -151,11 +151,8 @@ export class UpdateNotesComponent implements OnInit {
           this.addCheck = false;
           this.adding = false;
           console.log(response['data'].details);
-
           this.tempArray.push(response['data'].details)
-
           console.log(this.tempArray)
-
         })
     }
   }

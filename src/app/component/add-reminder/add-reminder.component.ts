@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
+import { throwMatDuplicatedDrawerError } from '@angular/material';
 
 @Component({
   selector: 'app-add-reminder',
@@ -8,9 +9,16 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 })
 export class AddReminderComponent implements OnInit {
   @Input() reminder;
-  show = 0;
   @Output() remindEmit = new EventEmitter();
   accessToken = localStorage.getItem('token');
+  body = {};
+  show = true;
+  public currentDate = new Date();
+  reminders: any[] = [
+    { value: 'morning', viewPeriod: 'Morning', viewTime: '08:00 AM'},
+    { value: 'afternoon', viewPeriod: 'Afternoon', viewTime: '01:00 PM' },
+    { value: 'evening', viewPeriod: 'Evening', viewTime: '06:00 PM' },
+    { value: 'night', viewPeriod: 'Night', viewTime: '09:00 PM'}];
   constructor(private myHttpService: HttpService) { }
   ngOnInit() {
   }
@@ -56,5 +64,10 @@ export class AddReminderComponent implements OnInit {
         this.remindEmit.emit({
         })
       })
+  }
+
+
+  datePickReminder() {
+    this.show = !this.show;
   }
 }
