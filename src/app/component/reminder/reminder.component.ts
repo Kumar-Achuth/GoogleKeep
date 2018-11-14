@@ -17,6 +17,9 @@ export class ReminderComponent implements OnInit {
   ngOnInit() {
    this.getReminders();
   }
+  /**
+   * @description Get Api call for NotesList with reminders
+   */
   getReminders() {
     this.myHttpService.getRemind('notes/getReminderNotesList/',
      this.accessToken).subscribe(

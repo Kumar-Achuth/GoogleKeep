@@ -15,6 +15,9 @@ export class PinComponent implements OnInit {
 
   ngOnInit() {
   }
+  /**
+   * @description Post Api call for pinning the notse
+   */
   pinIt() {
     this.myHttpService.deleteChip('notes/pinUnpinNotes',
       {
@@ -30,6 +33,9 @@ export class PinComponent implements OnInit {
       LoggerService.error(error);
     };
   }
+   /**
+   * @description Post Api call for Unpinning the notse
+   */
   unPinIt() {
     this.myHttpService.deleteChip('notes/pinUnpinNotes',
       {

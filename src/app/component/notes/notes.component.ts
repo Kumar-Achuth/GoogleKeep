@@ -16,6 +16,9 @@ export class NotesComponent implements OnInit {
     this.getNotes();
     this.getPinedNotes();
   }
+  /**
+   * Get api call for getting notes 
+   */
   getNotes() {
     this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
       .subscribe(data => {
@@ -32,6 +35,9 @@ export class NotesComponent implements OnInit {
           ;
         })
   }
+  /**
+   * @description Get Api call for getting pinned Notes
+   */
   getPinedNotes() {
     this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
       .subscribe(data => {

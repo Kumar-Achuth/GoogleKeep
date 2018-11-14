@@ -22,15 +22,18 @@ export class CropImageComponent implements OnInit {
 
   ngOnInit() {
   }
+  /**
+   * @description Profile Pic Cropping 
+   * @param event 
+   */
   imageCropped(event: any) {
     this.croppedImage = event.file;
   }
-
-
   public image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
-
-
+  /**
+   * @description Api CAll fro Profile Picture Upload
+   */
   onUpload() {
     var token = localStorage.getItem('token');
     console.log(this.croppedImage);
@@ -42,11 +45,7 @@ export class CropImageComponent implements OnInit {
       this.dialogRefPic.close()
       this.dataService.changeMsg(true);
     }, error => {
-
-
     })
-
   }
-
 }
 

@@ -26,16 +26,24 @@
               view_module</mat-icon>
             </div>
           <div  matTooltip="Google Account" >
-              <button class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
+              <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
+                <button *ngIf="image2==''" class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
+                    {{firstName | slice:0:1}}
+                  </button>
             <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
               <div fxLayoutAlign="row wrap" fxLayoutGap="15px">
               <div fxFlex=20>
-              <button (click) = "$event.stopPropagation()" 
+              <button  *ngIf="image2!=''" (click) = "$event.stopPropagation()" 
               [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
               (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
               mat-mini-fab class="profile-pic">
+              </button>
+              <button *ngIf="image2==''" (click) = "$event.stopPropagation()" 
+              (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
+              mat-mini-fab class="profile-pic">
+              {{firstName | slice:0:1}}
               </button>
               <input style="display:none" (click) = "$event.stopPropagation()"
                class="image"

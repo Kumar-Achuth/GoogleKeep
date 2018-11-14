@@ -49,16 +49,15 @@
                 </mat-chip-list>
             </div>
         </div>
-        <div class="chips" *ngFor="let index of data.reminder">
-            <mat-chip>
-                <i class="material-icons">
-                    alarm
-                </i>
-                {{index | date:'fullDate'}}
-                <mat-icon matChipRemove (click)="deleteReminder(data.id)">
-                    cancel</mat-icon>
+        <div *ngIf="data.reminder.length!=0">
+            <mat-chip-list>
+            <mat-chip  class="cursor">
+            <mat-icon (click)="deleteReminder(data.id)">query_builder</mat-icon>{{data.reminder | date:'medium'}}
+            <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteReminder(data.id)">cancel</mat-icon>
             </mat-chip>
-        </div>
+            </mat-chip-list>
+            </div>
+
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
             <app-add-reminder>
             </app-add-reminder>

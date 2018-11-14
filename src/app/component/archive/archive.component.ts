@@ -14,6 +14,9 @@ export class ArchiveComponent implements OnInit {
   ngOnInit() {
     this.getArchiveNotes();
   }
+  /**
+   * @description Get api Call fro Getting All Archived NotesList
+   */
   getArchiveNotes() {
     this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',
       this.accessToken).subscribe(data => {
@@ -23,6 +26,10 @@ export class ArchiveComponent implements OnInit {
       }, error => {
       })
   }
+  /**
+   * @description UnArchive Function
+   * @param archive 
+   */
   unArchive(archive) {
     this.myHttpService.postArchive('notes/archiveNotes', {
       "isArchived": false,

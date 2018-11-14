@@ -23,6 +23,9 @@ export class NewlabelComponent implements OnInit {
         this.getNoteLabels(this.label)
       })
   }
+  /**
+   * @description Get Api to get all the notes according to labels
+   */
   getNoteLabels(label) {
     this.myHttpService.getindividualLabel('notes/getNotesListByLabel/' + label + '',
       null, this.accessToken).subscribe(

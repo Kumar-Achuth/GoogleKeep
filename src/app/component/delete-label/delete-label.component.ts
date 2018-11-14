@@ -10,15 +10,15 @@ import { DialogData } from '../update-notes/update-notes.component';
 })
 export class DeleteLabelComponent implements OnInit {
 
-  constructor(public dialogRef : MatDialogRef<LabelsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data : DialogData)  { }
+  constructor(public dialogRef: MatDialogRef<LabelsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
   }
-cancel(){
-  this.dialogRef.close();
-}
-delete(){
-
-}
+  /**
+   * @description Go BAck to Previous Html Screen
+   */
+  cancel() {
+    this.dialogRef.close();
+  }
 }

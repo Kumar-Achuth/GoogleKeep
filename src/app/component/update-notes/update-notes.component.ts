@@ -53,6 +53,7 @@ export class UpdateNotesComponent implements OnInit {
     }
     else {
       var apiData = {
+        "title": document.getElementById('titleId').innerHTML,
         "itemName": this.checkListArray.itemName,
         "status": this.checkListArray.status
       }

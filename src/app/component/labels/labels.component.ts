@@ -17,22 +17,23 @@ export class LabelsComponent implements OnInit {
   editShow: any;
   input: any = {};
   labelArray1: any = [];
-
   @ViewChild('labelsId') labelsId: ElementRef;
   @ViewChild('labelId') labelId: ElementRef;
-
-
   @Output() newEvent = new EventEmitter();
   @Input() trash;
   accessToken = localStorage.getItem('token');
   id = localStorage.getItem('userId');
 
   constructor(public data: GlobalSearchService, private myHttpService: HttpService,
-    public dialogRef: MatDialogRef<NavbarComponent>,public dialog : MatDialog) { }
+    public dialogRef: MatDialogRef<NavbarComponent>, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllLabels();
   }
+  /**
+   * @description Detecting Duplicate labels And Discarding them
+   * And Api call For adding Labels
+   */
   addLabels() {
     var duplicate = this.labelId.nativeElement.innerHTML;
     for (var i = 0; i < this.labelArray1.length; i++) {
@@ -53,23 +54,29 @@ export class LabelsComponent implements OnInit {
       }, error => {
       })
   }
+  /**
+   * @description Api CAll for Deleting Labels 
+   * @param id 
+   */
   deleteThisLabel(id) {
-      const dialogRef = this.dialog.open(DeleteLabelComponent, {
-        width: '500px',
-        height: '100px',
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if(result){
-          this.myHttpService.deleteLabel('/noteLabels/' + id + '/deleteNoteLabel',
-      this.accessToken).subscribe(response => {
-        this.getAllLabels();
-        this.data.deleteMessage(true)
-      })
-    }
-      });
-    
+    const dialogRef = this.dialog.open(DeleteLabelComponent, {
+      width: '500px',
+      height: '100px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.myHttpService.deleteLabel('/noteLabels/' + id + '/deleteNoteLabel',
+          this.accessToken).subscribe(response => {
+            this.getAllLabels();
+            this.data.deleteMessage(true)
+          })
+      }
+    });
   }
-
+  /**
+   * @description Api call for Updating Labels 
+   * @param id 
+   */
   updateTheLabel(id) {
     this.myHttpService.getUpdatedLabel('/noteLabels/' + id + '/updateNoteLabel', {
       "label": this.labelsId.nativeElement.innerHTML,
@@ -83,13 +90,15 @@ export class LabelsComponent implements OnInit {
   edit(id) {
     this.editShow = id;
   }
-
   clear() {
     this.labelId.nativeElement.innerHTML = '';
   }
   close() {
     this.dialogRef.close();
   }
+  /**
+   * @description Get Api Call for NoteLabels
+   */
   getAllLabels() {
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
       .subscribe(data => {
@@ -105,6 +114,4 @@ export class LabelsComponent implements OnInit {
         this.labelArray1 = newArray;
       })
   }
-
-
 }

@@ -19,6 +19,10 @@ export class MoreComponent implements OnInit {
   ngOnInit() {
     this.getAllLabels();
   }
+  /**
+   * @description Post To Trash Api 
+   * @param trash 
+   */
   postToTrash(trash) {
     this.myHttpService.postTrash('notes/trashNotes', {
       "isDeleted": true,
@@ -28,6 +32,10 @@ export class MoreComponent implements OnInit {
       })
     })
   }
+  /**
+   * @description Adding Labels to the Note Cards Api call
+   * @param label 
+   */
   goAndGetLabel(label) {
     this.addEvent.emit(label);
     this.myHttpService.goLabel('notes/'+this.trash.id+'/addLabelToNotes/'+label.id+'/add',
@@ -38,6 +46,9 @@ export class MoreComponent implements OnInit {
         })
       })
   }
+  /**
+   * @description Api call to get all the labels 
+   */
   getAllLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)

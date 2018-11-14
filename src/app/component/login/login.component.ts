@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
       })
     }
   }
+  /**
+   * @description Api call for verified login credentials
+   */
   loginValidation() {
     {
       if (this.password.valid) {

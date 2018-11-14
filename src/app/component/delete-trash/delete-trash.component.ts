@@ -10,12 +10,12 @@ import { DialogData } from '../update-notes/update-notes.component';
 })
 export class DeleteTrashComponent implements OnInit {
 
-  constructor(public dialogRef : MatDialogRef<DeleteTrashComponent>,
-    @Inject(MAT_DIALOG_DATA) public data : DialogData) { }
+  constructor(public dialogRef: MatDialogRef<DeleteTrashComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
   }
-  cancel(){
+  cancel() {
     this.dialogRef.close();
   }
 }

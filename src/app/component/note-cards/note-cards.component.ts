@@ -55,6 +55,11 @@ export class NoteCardsComponent implements OnInit {
       })
     });
   }
+  /**
+   * @description Delete Api call for deleting the labels from the notes
+   * @param id 
+   * @param label 
+   */
   deleteChips(id, label) {
     this.myHttpService.deleteChip('notes/' + id + '/addLabelToNotes/' + label + '/remove',
       { "noteId": id, "lableId": label },
@@ -75,6 +80,9 @@ export class NoteCardsComponent implements OnInit {
         this.labelArray = newArray;
       })
   }
+  /**
+   * @description Function to get the list view and grid view 
+   */
   switchView() {
     {
       this.data.viewList.subscribe(message => {
@@ -82,6 +90,10 @@ export class NoteCardsComponent implements OnInit {
       })
     }
   }
+  /**
+   * @description Api call for deleting the reminders from the note cards
+   * @param id 
+   */
   deleteReminder(id) {
     this.myHttpService.deleteChip('notes/removeReminderNotes',
       { "noteIdList": [id] },
@@ -105,6 +117,10 @@ export class NoteCardsComponent implements OnInit {
     this.checkListArray = checkList;
     this.checkListApi(note.id);
   }
+  /**
+   * @description Api call for Checklist info on the notecards
+   * @param id 
+   */
   checkListApi(id) {
     var apiData = {
       "itemName": this.checkListArray.itemName,

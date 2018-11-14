@@ -211,7 +211,6 @@ export class HttpService {
     };
     return this.http.post(url, body, httpOptions)
   }
-
   postCheckList(url, input, token) {
     url = this.url + url;
     console.log(token);
@@ -264,17 +263,17 @@ export class HttpService {
     return this.http.get(url, httpOptions)
   }
   httpAddReminder(url,token,body){
+    url = this.url + url;
     console.log(token);
     var httpOptions={
       headers:new HttpHeaders({
-       
        'Authorization':token
       })
     };
     return this.http.post(url,body,httpOptions)
-  }
-  
+  } 
  public httpGetReminder(url,token){
+  url = this.url + url;
     console.log(token);
     var httpOptions={
       headers:new HttpHeaders({

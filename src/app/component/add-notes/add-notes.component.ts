@@ -159,6 +159,10 @@ export class AddNotesComponent implements OnInit {
             this.data = null
         }
     }
+    /**
+     * @description : Click on delete function
+     * @param deletedObj 
+     */
     ondelete(deletedObj) {
         console.log("Ondelete function runnig");
         for (var i = 0; i < this.dataArray.length; i++) {
@@ -169,7 +173,11 @@ export class AddNotesComponent implements OnInit {
         }
         console.log(this.dataArray);
     }
-
+    /**
+     * @description On enter and keydown for edit function
+     * @param event 
+     * @param edited 
+     */
     editing(event, edited) {
         if (event.code == "Enter") {
             console.log("enter pressed");

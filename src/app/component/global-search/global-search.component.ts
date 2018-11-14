@@ -21,6 +21,9 @@ export class GlobalSearchComponent implements OnInit {
     })
     this.getNotes();
   }
+  /**
+   * @description Get Notes Api 
+   */
   getNotes() {
     this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
       .subscribe(data => {

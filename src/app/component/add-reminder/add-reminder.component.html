@@ -1,101 +1,61 @@
 <mat-icon class="space" style="cursor : pointer;" [matMenuTriggerFor]="appMenu">
-  <i class="material-icons" matTooltip="Remind me">
-    touch_app
-  </i></mat-icon>
-<mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-  <div>
-    <button mat-button>Reminder : </button><br>
-    <div>
-      <button mat-menu-item (click)="addReminder()">Later Today
-        <span class="time">8:00 PM </span></button></div><br>
-    <div>
-      <button mat-menu-item (click)="addTomorrowReminder()">Tomorrow
-        <span class="time">8:00 AM </span></button></div><br>
-    <div>
-      <button mat-menu-item (click)=" addWeeklyReminder()">Next Week
-        <span class="time">Mon 8:00 AM </span></button></div><br>
-        <button mat-menu-item (click)="$event.stopPropagation(); datePickReminder()">
-            <div>
-                <mat-icon>query_builder</mat-icon>Pick Date and Time
-            </div>
-        </button>
-  </div>
-  
-</mat-menu>
-
-
-
-<!-- 
-<button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon style="cursor:pointer" [matMenuTriggerFor]="menu" matTooltip="Remind Me " aria-label="Remind Me" 
-    class="icons">
-        notifications</mat-icon>
-</button>
-
-<mat-menu #menu="matMenu" yPosition="below" [overlapTrigger]="false"
- class="reminderMenu">
+    <i class="material-icons" matTooltip="Remind me">
+        touch_app
+    </i></mat-icon>
+<mat-menu #appMenu="matMenu" yPosition="below" [overlapTrigger]="false">
     <div *ngIf="show" class="reminderMenu">
+        <button mat-button>Reminder : </button><br>
         <div>
-            Reminder:
-        </div>
-        <button mat-menu-item (click)="addRemToday()">
-            <div fxFlex="20">Later today</div>
-            <div fxFlex="60"></div>
-            <div fxFlex="20"><span>08.00 PM</span></div>
-        </button>
-        <button mat-menu-item (click)="addRemTomorrow()">
-            <div fxFlex="20">Tomorrow</div>
-            <div fxFlex="60"></div>
-            <div fxFlex="20"><span>08.00 AM</span></div>
-        </button>
-        <button mat-menu-item (click)="addRemNextWeek()">
-            <div fxFlex="20">Next week</div>
-            <div fxFlex="60"></div>
-            <div fxFlex="20"><span>08.00 AM</span></div>
-        </button>
+            <button mat-menu-item (click)="addReminder()">Later Today
+                <span class="time">8:00 PM </span></button></div><br>
+        <div>
+            <button mat-menu-item (click)="addTomorrowReminder()">Tomorrow
+                <span class="time">8:00 AM </span></button></div><br>
+        <div>
+            <button mat-menu-item (click)=" addWeeklyReminder()">Next Week
+                <span class="time">Mon 8:00 AM </span></button></div><br>
         <button mat-menu-item (click)="$event.stopPropagation(); datePickReminder()">
             <div>
                 <mat-icon>query_builder</mat-icon>Pick Date and Time
             </div>
-
         </button>
     </div>
     <div *ngIf="!show" class="reminderMenu">
-        <button mat-icon-button (click)="$event.stopPropagation(); backPressDatepicker()">
+        <button mat-icon-button (click)="$event.stopPropagation();
+         backPressDatepicker()">
             <mat-icon>keyboard_backspace</mat-icon>Pick Date and Time
         </button>
         <hr>
         <mat-form-field>
-            <input  (click)="$event.stopPropagation()" matInput [matDatepicker]="picker"
-             [(ngModel)]="reminderBody.date.value"  placeholder="Choose a date">
-            <mat-datepicker-toggle matSuffix  [for]="picker">
+            <input (click)="$event.stopPropagation()" matInput [matDatepicker]="picker"
+             [(ngModel)]="reminderBody.date.value"
+                placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <div fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign="space-between">
             <mat-form-field (click)="$event.stopPropagation()">
                 <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()"
-                 [matMenuTriggerFor]="timeMenu" 
-                [(ngModel)]="reminderBody.time">
+                 [matMenuTriggerFor]="timeMenu"
+                    [(ngModel)]="reminderBody.time">
             </mat-form-field>
-                <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="timeMenu"
-                 class="timeSet">keyboard_arrow_down</mat-icon>
         </div>
         <mat-menu #timeMenu [overlapTrigger]=false>
-        <div fxLayout="column" *ngFor="let timing of reminders">
-                <button mat-button (click)="reminderBody.time = timing.viewTime" 
-                (click)="$event.stopPropagation()">
-                        
-                        <div fxFlex="35" >{{timing.viewPeriod}}</div>
-                        <div fxFlex="40"></div>
-                        <div fxFlex="35">{{timing.viewTime}}</div>
+            <div fxLayout="column" *ngFor="let timing of reminders">
+                <button mat-button (click)="reminderBody.time = timing.viewTime"
+                 (click)="$event.stopPropagation()">
+                    <div fxFlex="35">{{timing.viewPeriod}}</div>
+                    <div fxFlex="40"></div>
+                    <div fxFlex="35">{{timing.viewTime}}</div>
                 </button>
-        </div>
-        <div>
-            <button mat-button (click)="$event.stopPropagation()">Custom Time</button>
-        </div>
-    </mat-menu>
-        <div><button mat-button (click)="addRemCustom(reminderBody.date.value,reminderBody.time)">Save</button></div>
+            </div>
+            <div>
+                <button mat-button (click)="$event.stopPropagation()">Custom Time</button>
+            </div>
+        </mat-menu>
+        <div><button mat-button (click)="customReminder(reminderBody.date.value,reminderBody.time)">
+            Save</button></div>
     </div>
-</mat-menu> -->
+</mat-menu>

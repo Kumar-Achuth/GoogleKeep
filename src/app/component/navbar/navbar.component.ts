@@ -83,7 +83,9 @@ export class NavbarComponent {
     }, error => {
     })
   }
-
+/**
+ * @description Api call to get all the labels in the notes
+ */
   getLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.token)
@@ -120,22 +122,27 @@ export class NavbarComponent {
   selectedFile = null;
   public image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
-
+/**
+ * @description Function to select the required Path for image selection 
+ * @param event 
+ */
   onFileUpload(event) {
     var token = localStorage.getItem('token');
     this.profileCropOpen(event);
-
     this.selectedFile = event.path[0].files[0];
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile, this.selectedFile.name);
   }
   image = {};
-  profileCropOpen(data): void { //Function for the dialog box
+  /**
+   * @description Profice Picture Dialaog Box Open function 
+   * @param data 
+   */
+  profileCropOpen(data): void { 
     const dialogRefPic = this.dialog.open(CropImageComponent, {
       width: '450px',
       data: data
     });
-
     dialogRefPic.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.data.currentMsg.subscribe(message => this.picture = message)

@@ -21,6 +21,9 @@ export class ForgotPasswordComponent implements OnInit {
       this.Email.hasError('email') ? 'Not a valid email' :
         '';
   }
+  /**
+   * @description Api Call to reset Account Password
+   */
   goToPassword() {
     if (!this.Email.invalid) {
       this.myHttpService.postPassword('user/reset', {
