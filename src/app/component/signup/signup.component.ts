@@ -5,8 +5,6 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -52,7 +50,6 @@ export class SignupComponent implements OnInit {
   cards = [];
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
 
-
   ngOnInit() {
     this.records = this.myHttpService.getConfig('/user/service').subscribe(data => {
       for (var i = 0; i < data["data"].data.length; i++) {
@@ -62,6 +59,10 @@ export class SignupComponent implements OnInit {
       var value = data["data"].data.name;
     })
   }
+/** 
+ * @param card 
+ * @description Function to Select Basic and Advanced Services Cards
+ */
   selectCards(card) {
     this.service = card.name;
     card.select = true;
@@ -72,6 +73,7 @@ export class SignupComponent implements OnInit {
       this.cards[i].select = false;
     }
   }
+
   getErrorMessage() {
     return this.Email.hasError('required') ? 'You must enter a value' :
       this.Email.hasError('pattern') ? 'Not a valid email' :
@@ -92,6 +94,9 @@ export class SignupComponent implements OnInit {
       this.password.hasError('pattern') ? 'Password required' :
         '';
   }
+  /**
+   * @description Api Call for signup for a new user 
+   */
   send() {
     if (this.LastName.valid && this.FirstName.valid) {
       this.myHttpService.postConfig('user/userSignUp', {

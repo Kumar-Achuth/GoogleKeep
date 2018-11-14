@@ -1,5 +1,6 @@
 <app-add-notes (newEvent)="eventEntry($event)">
 </app-add-notes>
+<div *ngIf ="pinnedNotes.length!=0">
 <div  fxLayout="row" class="pinned">
     <h4>Pinned</h4> 
   </div>
@@ -10,3 +11,10 @@
   </div>
 <app-note-cards [cardsArray]="cards" (trashEvent)="eventEntry($event)">
 </app-note-cards>
+</div>
+<div *ngIf = "pinnedNotes.length==0">
+    <app-note-cards [cardsArray]="pinnedNotes" (trashEvent)="eventEntry($event)">
+    </app-note-cards>
+    <app-note-cards [cardsArray]="cards" (trashEvent)="eventEntry($event)">
+    </app-note-cards>
+</div>

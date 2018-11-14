@@ -25,7 +25,7 @@ export class NavbarComponent {
   ProfilePath: any;
   globalSearch: any;
   list = 0;
-  title;
+  title = "Fundoo Notes";
   public picture: any;
   isHandset$: Observable<boolean> = this.breakpointObserver.
     observe(Breakpoints.Handset)
@@ -34,14 +34,10 @@ export class NavbarComponent {
     );
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
     public route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
-    private router: Router, public dialog: MatDialog, public data: GlobalSearchService) { }
-
-
-
+    private router: Router, public dialog: MatDialog, public data: GlobalSearchService) {}
   firstName: any;
   lastName: any;
   email: any;
-
   ngOnInit() {
     this.labelArray = []
     this.firstName = localStorage.getItem('firstName');

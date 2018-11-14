@@ -34,11 +34,13 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit() {
   }
   public input = new FormData();
-
+  /**
+   * @description Function to check if both the passwords are matching
+   * And then generate New Password Using Api call
+   */
   match() {
     let pass = this.model.password;
     let confirmPass = this.model.confirmPassword;
-
     if (pass != confirmPass) {
       this.snackBar.open("Password Mismatch", "failed", {
         duration: 3000

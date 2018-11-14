@@ -140,7 +140,6 @@ export class AddReminderComponent implements OnInit {
         }
         this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
           this.accessToken, this.body).subscribe((result) => {
-
             this.remindEmit.emit()
           })
       } else if (ampm == 'PM' || ampm == 'pm') {
