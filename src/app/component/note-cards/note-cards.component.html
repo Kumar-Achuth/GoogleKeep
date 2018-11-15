@@ -41,13 +41,26 @@
           </div>
         </div>
         <br>
-        <div *ngIf="notes.reminder.length!=0">
+        <div *ngIf="reminderStrike(notes.reminder[0])">
+
+        <div *ngFor="let index of notes.reminder">
           <mat-chip-list>
           <mat-chip  class="cursor">
-          <mat-icon (click)="deleteReminder(notes.id)">query_builder</mat-icon>{{notes.reminder | date:'medium'}}
+          <mat-icon (click)="deleteReminder(notes.id)">query_builder</mat-icon>{{index | date:'medium'}}
           <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteReminder(notes.id)">cancel</mat-icon>
           </mat-chip>
           </mat-chip-list>
+          </div>
+        </div>
+<div *ngIf ="!reminderStrike(notes.reminder[0])">
+          <div *ngFor="let index of notes.reminder">
+            <mat-chip-list>
+            <mat-chip  class="cursor">
+            <mat-icon (click)="deleteReminder(notes.id)">query_builder</mat-icon><del>{{index | date:'medium'}}</del>
+            <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteReminder(notes.id)">cancel</mat-icon>
+            </mat-chip>
+            </mat-chip-list>
+            </div>
           </div>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
           <app-add-reminder [reminder]="notes" (remindEmit)="deleteEvent($event)">

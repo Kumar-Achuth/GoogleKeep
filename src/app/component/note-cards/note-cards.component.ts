@@ -131,5 +131,15 @@ export class NoteCardsComponent implements OnInit {
         console.log(response);
       })
   }
+  reminderStrike(cuttOff){
+    var currentReminderTime = new Date().getTime();
+    var timeValue = new Date(cuttOff).getTime();
+    if(timeValue > currentReminderTime){
+    return true;
+    } 
+    else{
+    return false;
+    }
+  }
 
 }
