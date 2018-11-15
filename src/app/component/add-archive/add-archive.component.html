@@ -1,4 +1,10 @@
-<mat-icon class="space" style="cursor : pointer;"><i class="material-icons"
+<!-- <mat-icon class="space" style="cursor : pointer;"><i class="material-icons"
    matTooltip="Archive" (click)="addArchive()">
     archive
-  </i></mat-icon>
+  </i></mat-icon> -->
+  <div *ngIf="archive.isArchived==false" >
+  <mat-icon class="space" style="cursor:pointer" matTooltip="Archive" (click)="addArchive()">archive</mat-icon> 
+</div>
+  <div *ngIf="archive.isArchived==true">
+  <mat-icon class="space" style="cursor:pointer" matTooltip="Unarchive" (click)="unArchive()">unarchive</mat-icon>
+</div>

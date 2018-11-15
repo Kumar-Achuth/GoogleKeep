@@ -26,20 +26,25 @@
               view_module</mat-icon>
             </div>
           <div  matTooltip="Google Account" >
-              <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
+              <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab
+               [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
-                <button *ngIf="image2==''" class="profilebutton" mat-mini-fab [matMenuTriggerFor]="appMenu">
+                <button *ngIf="image2==''" class="profilebutton" mat-mini-fab 
+                [matMenuTriggerFor]="appMenu">
                     {{firstName | slice:0:1}}
                   </button>
             <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-              <div fxLayoutAlign="row wrap" fxLayoutGap="15px">
-              <div fxFlex=20>
+              <div class="padding" fxLayoutAlign="row wrap" fxLayoutGap="15px" fxLayoutAlign="space-between">
+              <div fxFlex=15>
               <button  *ngIf="image2!=''" (click) = "$event.stopPropagation()" 
               [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
               (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
-              mat-mini-fab class="profile-pic">
-              </button>
+              mat-mini-fab class="profilebutton1">
+              <div class="changeButton">
+              Change
+            </div>  
+            </button>
               <button *ngIf="image2==''" (click) = "$event.stopPropagation()" 
               (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
               mat-mini-fab class="profile-pic">
@@ -49,11 +54,17 @@
                class="image"
               type="file" (change)="onFileUpload($event)" #selectFile>
               </div>
+              <div fxLayout="column" class="name">
               <div>
-              {{firstName}}</div>
+              {{firstName}}</div><br>
+              <div>{{email}}</div>
+            </div>
               </div><br>
-              <div>{{email}}</div><hr>
-              <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
+              <div class="google" fxLayoutAlign="center center">
+                <button mat-raised-button mat-Tooltip="Google Account" color="primary">Google Account</button>
+              </div>
+              <hr>
+              <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px fxLayoutAlign="sapce-around">
               <button  mat-button  routerLink="/signup" matTooltip="Add Account">Add account</button>
               <button class="signup_button" mat-button  
                       (click)="doLogout()" matTooltip="Logout">Logout</button></div>
@@ -67,11 +78,13 @@
           [mode]="(isHandset$ | async) ? 'over' : 'side'" 
           [opened]="(isHandset$ | async)">
           <mat-nav-list>
-            <a (click)='aptTitle("Fundoo Notes")' mat-list-item routerLink='/home/notes'><i class="material-icons"
+            <a (click)='aptTitle("Fundoo Notes")' mat-list-item routerLink='/home/notes'>
+              <i class="material-icons"
                matTooltip="Notes">
                 assignment
               </i>Notes</a>
-            <a (click)='aptTitle("Reminders")' mat-list-item routerLink='/home/reminder'><i class="material-icons"
+            <a (click)='aptTitle("Reminders")' mat-list-item routerLink='/home/reminder'>
+              <i class="material-icons"
                matTooltip="Reminders">
                 touch_app
               </i>Reminders</a>

@@ -26,16 +26,4 @@ export class ArchiveComponent implements OnInit {
       }, error => {
       })
   }
-  /**
-   * @description UnArchive Function
-   * @param archive 
-   */
-  unArchive(archive) {
-    this.myHttpService.postArchive('notes/archiveNotes', {
-      "isArchived": false,
-      "noteIdList": [archive]
-    }, this.accessToken).subscribe(data => {
-      this.getArchiveNotes();
-    })
-  }
 }

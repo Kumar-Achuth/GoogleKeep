@@ -1,6 +1,6 @@
 .sidenav-container {
-  height:100%;
-  width : stretch;
+  height:90%;
+  width : 100%;
   background-color: rgb(221,221,230);
 }
 .sidenav {
@@ -31,7 +31,7 @@ display: flex;
 }
 .searchBar{
 flex: 1 1 auto;
-width: stretch;
+// width: stretch;
 }
 .material-icons{
   font-size: 30px;
@@ -72,19 +72,12 @@ background-color: white;
  background: rgb(235, 174, 22);
 }
 .profilebutton1{
-  width:50px; 
-  height:50px; 
+  width:100px; 
+  height:100px; 
   border: none;
  border-radius: 50%;
  background: white;
-}
-.profilebutton2{
-  width:50px; 
-  height:50px; 
-  border: none;
- border-radius: 50%;
- background: transparent;
- outline:none;
+ padding: 3%;
 }
 .image{
   float:left ;
@@ -96,10 +89,10 @@ background-color: white;
   float:right; 
   padding-right:5px;
 }
-.profile-pic 
-{
-background-color: black;
-float: right;
-color: white;
-text-transform: uppercase;
+.padding{
+  padding: 3%;
 }
+.changeButton{
+  margin-top: 125%;
+}
+

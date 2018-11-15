@@ -28,5 +28,5 @@ export class ReminderComponent implements OnInit {
         }),
       error => {
       }
-  }
+  } 
 }

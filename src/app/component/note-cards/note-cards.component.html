@@ -11,8 +11,6 @@
         <mat-card-content (click)="openDialog(notes)">
           <div [innerHtml]="notes.description"></div>
         </mat-card-content>
-
-        
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
             <mat-divider></mat-divider>
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted"
@@ -28,9 +26,6 @@
           <del class = "check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
           (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
-
-
-
         <br>
         <div fxLayout="row wrap" class="spacebetween">
           <div *ngFor="let index of notes.noteLabels trackBy : val?.id">
@@ -54,17 +49,6 @@
           </mat-chip>
           </mat-chip-list>
           </div>
-        <!-- <div *ngFor="let index of notes.reminder trackBy : val?.id">
-          <mat-chip-list selected>
-            <mat-chip class="cursor">
-              <i class="material-icons">
-                query_builder
-              </i>
-              {{index | date:'fullDate'}}
-              <mat-icon matChipRemove (click)="deleteReminder(notes.id)">cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-        </div> -->
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
           <app-add-reminder [reminder]="notes" (remindEmit)="deleteEvent($event)">
           </app-add-reminder>
@@ -74,7 +58,7 @@
           </app-change-color>
           <app-add-photo>
           </app-add-photo>
-          <app-add-archive [archive]="notes" (archiveEmit)="deleteEvent($event)">
+          <app-add-archive [archive]="notes" (archiveEmit)="deleteEvent($event)" (unarchiveEmit)="deleteEvent($event)">
           </app-add-archive>
           <app-more [trash]="notes" (deleteCard)="deleteEvent($event)">
           </app-more>

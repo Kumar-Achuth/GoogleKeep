@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AddReminderComponent implements OnInit {
   @Input() reminder;
+  @Output() dateEmit= new EventEmitter();
   @Output() remindEmit = new EventEmitter();
   accessToken = localStorage.getItem('token');
   body = {};
@@ -28,12 +29,14 @@ export class AddReminderComponent implements OnInit {
    */
   addReminder() {
     let currentDate = new Date();
+    var dates =  new Date(currentDate.getFullYear(),currentDate.getMonth(),
+    currentDate.getDate(), 8, 0, 0, 0);
+    this.dateEmit.emit(dates)
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate(), 8, 0, 0, 0)
+        "reminder": dates,
+          
       }, this.accessToken).subscribe(data => {
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
@@ -42,12 +45,14 @@ export class AddReminderComponent implements OnInit {
   }
   addTomorrowReminder() {
     let currentDate = new Date();
+    var dates2= new Date(currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate() + 1, 8, 0, 0, 0)
+    this.dateEmit.emit(dates2);
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate() + 1, 8, 0, 0, 0)
+        "reminder": dates2
       }, this.accessToken).subscribe(data => {
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
@@ -56,12 +61,14 @@ export class AddReminderComponent implements OnInit {
   }
   addWeeklyReminder(reminder) {
     let currentDate = new Date();
+    var dates3=new Date(currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate() + 7, 8, 0, 0, 0);
+    this.dateEmit.emit(dates3);
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate() + 7, 8, 0, 0, 0)
+        "reminder": dates3
       }, this.accessToken).subscribe(data => {
         console.log('Post is successfull ', data);
         this.remindEmit.emit({
@@ -86,40 +93,48 @@ export class AddReminderComponent implements OnInit {
   customReminder(date, timing) {
     timing.match('^[0-2][0-3]:[0-5][0-9]$');
     if (timing == '8:00 AM') {
+      var dates4=  new Date(date.getFullYear(), date.getMonth(),
+      date.getDate(), 8, 0, 0, 0);
+      this.dateEmit.emit(dates4);
       this.body = {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(),
-          date.getDate(), 8, 0, 0, 0)
+        "reminder":dates4
       }
       this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
         this.accessToken, this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '1:00 PM') {
+      var dates5=new Date(date.getFullYear(), date.getMonth(),
+      date.getDate(), 13, 0, 0, 0);
+      this.dateEmit.emit(dates5);
       this.body = {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(),
-          date.getDate(), 13, 0, 0, 0)
+        "reminder": dates5
       }
       this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
         this.accessToken, this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '6:00 PM') {
+    var  dates6=new Date(date.getFullYear(), date.getMonth(),
+      date.getDate(), 18, 0, 0, 0)
+      this.dateEmit.emit(dates6)
       this.body = {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(),
-          date.getDate(), 18, 0, 0, 0)
+        "reminder":dates6
       }
       this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
         this.accessToken, this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '9:00 PM') {
+      var dates7=new Date(date.getFullYear(), date.getMonth(),
+      date.getDate(), 21, 0, 0, 0)
+      this.dateEmit.emit(dates7)
       this.body = {
         "noteIdList": [this.reminder.id],
-        "reminder": new Date(date.getFullYear(), date.getMonth(),
-          date.getDate(), 21, 0, 0, 0)
+        "reminder": dates7
       }
       this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
         this.accessToken, this.body).subscribe((result) => {
@@ -133,20 +148,24 @@ export class AddReminderComponent implements OnInit {
       var ampm = (splitTime[6] + splitTime[7]);
 
       if (ampm == 'AM' || ampm == 'am') {
+        var dates8=new Date(date.getFullYear(), date.getMonth(),
+        date.getDate(), hour, minute, 0, 0);
+        this.dateEmit.emit(dates8)
         this.body = {
           "noteIdList": [this.reminder.id],
-          "reminder": new Date(date.getFullYear(), date.getMonth(),
-            date.getDate(), hour, minute, 0, 0)
+          "reminder": dates8
         }
         this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
           this.accessToken, this.body).subscribe((result) => {
             this.remindEmit.emit()
           })
       } else if (ampm == 'PM' || ampm == 'pm') {
+        var date9=  new Date(date.getFullYear(), date.getMonth(),
+        date.getDate(), hour + 12, minute, 0, 0);
+        this.dateEmit.emit(date9)
         this.body = {
           "noteIdList": [this.reminder.id],
-          "reminder": new Date(date.getFullYear(), date.getMonth(),
-            date.getDate(), hour + 12, minute, 0, 0)
+          "reminder":date9
         }
         this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
           this.accessToken, this.body).subscribe((result) => {

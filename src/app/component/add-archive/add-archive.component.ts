@@ -9,7 +9,9 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 export class AddArchiveComponent implements OnInit {
   accessToken = localStorage.getItem('token');
   body: any = {}
+  cards:any=[];
   @Input() archive;
+  @Output() unarchiveEmit = new EventEmitter();
   @Output() archiveEmit = new EventEmitter();
   constructor(private myHttpService: HttpService) { }
   ngOnInit() {
@@ -27,5 +29,16 @@ export class AddArchiveComponent implements OnInit {
       })
     })
   }
-  
+  /**
+   * @description UnArchive Function Api
+   */
+  unArchive() {
+    this.myHttpService.postArchive('notes/archiveNotes', {
+      "isArchived": false,
+      "noteIdList": [this.archive.id]
+    }, this.accessToken).subscribe(data => {
+      this.unarchiveEmit.emit({
+      })
+    })
+  }  
 }

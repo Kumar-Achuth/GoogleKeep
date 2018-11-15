@@ -1,4 +1,4 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:100px">
+<div fxLayout='column' fxLayoutWrap fxLayoutAlign="center center" style="margin-top:100px">
     <mat-card *ngIf="hide" (click)="hide=!hide">
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
@@ -43,9 +43,16 @@
                 </mat-chip>
             </mat-chip-list>
         </div>
+        <div *ngFor="let index of dateArray">
+            <mat-chip-list>
+                <mat-chip>{{index|date:'medium'}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </div>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
             <div fxFlex=10>
-                <app-add-reminder>
+                <app-add-reminder [reminder]="notes" (dateEmit)="emitDate($event)">
                 </app-add-reminder>
             </div>
             <div fxFlex=10>
@@ -61,8 +68,7 @@
                 </app-add-photo>
             </div>
             <div fxFlex=10>
-                <app-add-archive>
-                </app-add-archive>
+                <mat-icon class="space" style="cursor:pointer" matTooltip="Archive">archive</mat-icon> 
             </div>
             <div fxFlex=10>
                 <app-more (addEvent)="instantLabel($event)">

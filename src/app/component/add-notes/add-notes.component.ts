@@ -25,6 +25,9 @@ export class AddNotesComponent implements OnInit {
     accessToken = localStorage.getItem('token');
     @Output() newEvent = new EventEmitter();
     labelArray: any[];
+    date;
+    dateArray = [];
+    notes={'id':''}
     constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
@@ -44,19 +47,22 @@ export class AddNotesComponent implements OnInit {
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': '',
                 'isPined': 'false',
-                'color': this.color
+                'color': this.color,
+                "reminder":this.date
             }, this.accessToken).subscribe(response => {
                 this.newEvent.emit({
                 })
                 this.labelName = [];
                 this.hide = !this.hide;
                 this.color = "#fafafa";
-                this.show = 0
+                this.show = 0;
+                this.dateArray=[];
             }, error => {
                 console.log("failed", error)
                 this.color = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
+                this.dateArray=[];
                 this.show = 0
             })
         }
@@ -89,14 +95,16 @@ export class AddNotesComponent implements OnInit {
                 this.labelName = [];
                 this.hide = !this.hide;
                 this.color = "#fafafa";
-                this.show = 0
+                this.show = 0;
+                this.dateArray=[];
             }, error => {
                 this.dataArrayCheck = [];
                 console.log("failed", error)
                 this.color = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
-                this.show = 0
+                this.show = 0;
+                this.dateArray=[];
             })
         }
     }
@@ -188,5 +196,10 @@ export class AddNotesComponent implements OnInit {
             }
             console.log(this.dataArray);
         }
+    }
+    emitDate(event){
+        this.dateArray=[];
+        this.date=event;
+        this.dateArray.push(this.date)
     }
 }
