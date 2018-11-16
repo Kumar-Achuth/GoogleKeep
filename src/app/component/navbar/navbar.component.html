@@ -5,13 +5,16 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header">{{title}}</span>
+        <mat-icon fxshow = "true" fxHide.lg = "true" fxHide.xs="false" fxHide.sm="true" 
+        fxHide.md="true" >search</mat-icon>
+
         <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
         fxHide.md="false">
           <input class="search" type="input" placeholder="search" 
            [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
         </div>
-        <div  fxLayout="row"  fxLayoutAlign = "space-around">
+        <div  fxLayout="row">
           <div class ="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
@@ -59,13 +62,9 @@
               {{firstName}}</div><br>
               <div>{{email}}</div>
             </div>
-              </div><br>
-              <div class="google" fxLayoutAlign="center center">
-                <button mat-raised-button mat-Tooltip="Google Account" color="primary">Google Account</button>
               </div>
               <hr>
-              <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px fxLayoutAlign="sapce-around">
-              <button  mat-button  routerLink="/signup" matTooltip="Add Account">Add account</button>
+              <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px fxLayoutAlign="center">
               <button class="signup_button" mat-button  
                       (click)="doLogout()" matTooltip="Logout">Logout</button></div>
               </mat-menu> 

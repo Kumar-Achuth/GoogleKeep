@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -56,7 +55,6 @@ export class SignupComponent implements OnInit {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);
       }
-      var value = data["data"].data.name;
     })
   }
 /** 
@@ -108,25 +106,25 @@ export class SignupComponent implements OnInit {
         "password": this.model.password,
       })
         .subscribe(
-          (data) => {
+          () => {
             this.snackBar.open("Registration", "Successful", {
               duration: 1000
-            })
-            this.message = "Successful Registration"
+            });
+            this.message = "Successful Registration";
           },
-          error => {
+          () => {
             this.snackBar.open("Registration", "Unsuccessful", {
               duration: 1000
-            })
-            this.message = "Registration UnSuccessful "
+            });
+            this.message = "Registration UnSuccessful ";
           }
         )
     }
     else {
-      error => {
+      () => {
         this.snackBar.open("Registration", "Unsuccessful", {
           duration: 1000
-        })
+        });
       }
     }
   }

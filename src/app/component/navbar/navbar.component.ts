@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpService } from '../../core/services/httpServices/http.service';
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { LabelsComponent } from '../labels/labels.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { environment } from '../../../environments/environment';
 import { CropImageComponent } from '../crop-image/crop-image.component';
@@ -56,7 +56,7 @@ export class NavbarComponent {
       data: ''
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.getLabels();
     });
   }
@@ -65,19 +65,18 @@ export class NavbarComponent {
     */
   doLogout() {
     console.log(this.token);
-    this.myHttpService.postLogout('user/logout', this.token).subscribe(response => {
+    this.myHttpService.postLogout('user/logout', this.token).subscribe(() => {
       this.snackBar.open("Logout ", "Successful", {
         duration: 1000
-      })
+      });
       localStorage.removeItem('token');
       localStorage.removeItem('firstName');
       localStorage.removeItem('email');
       localStorage.removeItem('lastName');
       localStorage.removeItem('userId');
-
       this.router.navigateByUrl('/login');
-    }, error => {
-    })
+    }, () => {
+      })
   }
 /**
  * @description Api call to get all the labels in the notes
@@ -123,7 +122,6 @@ export class NavbarComponent {
  * @param event 
  */
   onFileUpload(event) {
-    var token = localStorage.getItem('token');
     this.profileCropOpen(event);
     this.selectedFile = event.path[0].files[0];
     const uploadData = new FormData();
@@ -139,9 +137,9 @@ export class NavbarComponent {
       width: '450px',
       data: data
     });
-    dialogRefPic.afterClosed().subscribe(result => {
+    dialogRefPic.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
-      this.data.currentMsg.subscribe(message => this.picture = message)
+      this.data.currentMsg.subscribe(message => this.picture = message);
       console.log("pic", this.picture);
       if (this.picture == true) {
         this.image2 = localStorage.getItem('imageUrl');

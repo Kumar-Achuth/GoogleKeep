@@ -50,5 +50,5 @@ export class TrashComponent implements OnInit {
       this.getTrash()
     })
   }
-}
+ }
 

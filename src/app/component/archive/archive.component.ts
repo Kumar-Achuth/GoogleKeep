@@ -10,18 +10,33 @@ export class ArchiveComponent implements OnInit {
   cards: any = []
   accessToken = localStorage.getItem('token');
   constructor(private myHttpService: HttpService) { }
-
+  pin : any =[];
+  unPin : any=[];
   ngOnInit() {
     this.getArchiveNotes();
+    this.getunPinnedArchiveNotes();
   }
   /**
-   * @description Get api Call fro Getting All Archived NotesList
+   * @description Get api Call for Getting All Archived NotesList
    */
   getArchiveNotes() {
     this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',
       this.accessToken).subscribe(data => {
         for (var i = 0; i < data["data"]['data'].length; i++) {
-          this.cards = (data["data"]['data']);
+          if(data["data"]['data'][i].isPined == true){
+            this.pin = (data["data"]['data']);
+          }
+        }
+      }, error => {
+      })
+  }
+  getunPinnedArchiveNotes() {
+    this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',
+      this.accessToken).subscribe(data => {
+        for (var i = 0; i < data["data"]['data'].length; i++) {
+          if(data["data"]['data'][i].isPined == false){
+            this.unPin = (data["data"]['data']);
+          }
         }
       }, error => {
       })

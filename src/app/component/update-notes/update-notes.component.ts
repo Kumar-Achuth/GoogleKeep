@@ -25,6 +25,9 @@ export class UpdateNotesComponent implements OnInit {
   public tempArray = [];
   public array1 = [];
   public array2 = [];
+  public adding = false;
+  public addCheck = false;
+  public status = "open"
   @Output() updateEvent = new EventEmitter();
   accessToken = localStorage.getItem('token');
   constructor(public dialogRef: MatDialogRef<NoteCardsComponent>,
@@ -98,7 +101,6 @@ export class UpdateNotesComponent implements OnInit {
     this.checkListArray = checkList;
     this.onNoClick();
   }
-
   editing(editedList, event) {
     console.log(editedList);
     if (event.code == "Enter") {
@@ -106,13 +108,15 @@ export class UpdateNotesComponent implements OnInit {
       this.onNoClick();
     }
   }
-
   public removedList;
   removeList(checklist) {
     console.log(checklist)
     this.removedList = checklist;
     this.removeCheckList()
   }
+  /**
+   * @description : Remove checklists from updated notes
+   */
   removeCheckList() {
     this.myHttpService.addLabel("notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove", null, this.accessToken).subscribe((response) => {
       console.log(response);
@@ -123,10 +127,10 @@ export class UpdateNotesComponent implements OnInit {
       }
     })
   }
-  public adding = false;
-  public addCheck = false;
-  public status = "open"
-
+ /**
+  * @description Adding checklist inside the checklist
+  * @param event 
+  */
   addList(event) {
     if (this.newList != "") {
       this.adding = true;

@@ -36,18 +36,33 @@
             </div>
             <mat-divider></mat-divider>
         </div>
+        <div fxLayout="row wrap">
         <div *ngFor="let index of labelName">
             <mat-chip-list>
                 <mat-chip>{{index.label}}
-                    <mat-icon matChipRemove>cancel</mat-icon>
+                    <mat-icon (click)="cancelLabel()" matChipRemove>cancel</mat-icon>
                 </mat-chip>
             </mat-chip-list>
         </div>
+    </div>
         <div *ngFor="let index of dateArray">
             <mat-chip-list>
-                <mat-chip>{{index|date:'medium'}}
-                    <mat-icon matChipRemove>cancel</mat-icon>
+                <div *ngIf ="(today | date : shortDate)==(index|date:shortDate)">
+                <mat-chip>Today {{index|date:'shortTime'}}
+                    <mat-icon (click)="cancel()" matChipRemove>cancel</mat-icon>
                 </mat-chip>
+            </div>
+            <div *ngIf ="(tomorrow | date : shortDate)==(index|date:shortDate)">
+                    <mat-chip> Tomorrow {{index|date:'shortTime'}}
+                        <mat-icon (click)="cancel()" matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </div>
+                <div *ngIf ="(today | date : shortDate)!=(index|date:shortDate)&&
+                (tomorrow | date : shortDate)!=(index|date:shortDate)">
+                        <mat-chip>{{index|date:'medium'}}
+                            <mat-icon (click)="cancel()" matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </div>
             </mat-chip-list>
         </div>
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
@@ -68,7 +83,7 @@
                 </app-add-photo>
             </div>
             <div fxFlex=10>
-                <mat-icon class="space" style="cursor:pointer" matTooltip="Archive">archive</mat-icon> 
+                <mat-icon class="space" style="cursor:pointer" matTooltip="Archive" (click)="pinIt()">archive</mat-icon> 
             </div>
             <div fxFlex=10>
                 <app-more (addEvent)="instantLabel($event)">

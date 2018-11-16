@@ -4,7 +4,6 @@
          data-text=""></div><br>
         <div contenteditable="true" id="notesId" class="edit" *ngIf="!checkList" [innerHtml]="data.description" 
         data-text=""></div><br>
-
         <div class="note" *ngFor="let check of tempArray" fxLayout="row">
                 <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
                 (click)=checkBox(check)></mat-checkbox>
@@ -30,7 +29,6 @@
                   <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
                    *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
                   </div>
-
         <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="chips" *ngFor="let index of data.noteLabels">
                 <mat-chip-list>
@@ -50,17 +48,16 @@
             </mat-chip>
             </mat-chip-list>
             </div>
-
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
-            <app-add-reminder>
+            <app-add-reminder [reminder]="data" >
             </app-add-reminder>
             <app-collaborator>
             </app-collaborator>
-            <app-change-color>
+            <app-change-color [color]="data">
             </app-change-color>
             <app-add-photo>
             </app-add-photo>
-            <app-add-archive>
+            <app-add-archive [archive]="data">
             </app-add-archive>
             <app-more [trash]="data">
             </app-more>

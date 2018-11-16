@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { MatSnackBar } from '@angular/material';
-import { Router,Params, ActivatedRoute } from '@angular/router';
-import { LoggerService} from '../../core/services/loggerService/logger.service';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+import { LoggerService } from '../../core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-reminder',
@@ -15,18 +15,21 @@ export class ReminderComponent implements OnInit {
   reminderArray: any = [];
   constructor(private myHttpService: HttpService) { }
   ngOnInit() {
-   this.getReminders();
+    this.getReminders();
   }
   /**
    * @description Get Api call for NotesList with reminders
    */
   getReminders() {
     this.myHttpService.getRemind('notes/getReminderNotesList/',
-     this.accessToken).subscribe(
+      this.accessToken).subscribe(
         (data) => {
           this.reminderArray = data['data'].data;
+          this.reminderArray.sort((a: any, b: any) =>
+            new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
+          )
         }),
       error => {
       }
-  } 
+  }
 }

@@ -41,9 +41,7 @@ import { GlobalSearchComponent } from './component/global-search/global-search.c
 import { LoggerService} from './core/services/loggerService/logger.service';
 import { CropImageComponent } from './component/crop-image/crop-image.component';
 import { ImageCropperModule} from 'ngx-image-cropper';
-
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
-
 
 import {
   MatListModule, MatTableModule, MatPaginatorModule, MatSortModule,
@@ -52,6 +50,8 @@ import {
   MatSidenavModule, MatMenuModule, MatExpansionModule, MatTooltipModule, MatDatepickerModule,
   MatInputModule, MatFormFieldModule,MatSnackBarModule, MatDialogModule
 } from '@angular/material';
+
+
 import { PinComponent } from './component/pin/pin.component';
 
 
@@ -127,8 +127,6 @@ import { PinComponent } from './component/pin/pin.component';
     ImageCropperModule,
     MatDialogModule
   
-
-
 
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService],

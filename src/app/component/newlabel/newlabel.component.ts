@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
-import { MatSnackBar, MatChipInputEvent } from '@angular/material';
-import { Router, Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,8 +12,7 @@ export class NewlabelComponent implements OnInit {
   params: any;
   label: any;
   labelArray: any = [];
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
-    private router: ActivatedRoute) { }
+  constructor(private myHttpService: HttpService, private router: ActivatedRoute) { }
   accessToken = localStorage.getItem('token');
   ngOnInit() {
     this.router.params.subscribe(
@@ -32,7 +30,7 @@ export class NewlabelComponent implements OnInit {
         (data) => {
           this.labelArray = data['data'].data;
         }),
-      error => {
+      () => {
       }
   }
 }

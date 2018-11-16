@@ -1,4 +1,21 @@
   <div style="padding-top:10%;">
-    <app-note-cards  [cardsArray]="cards">
-    </app-note-cards>
+      <div *ngIf ="pin.length!=0">
+          <div  fxLayout="row" class="pinned">
+              <h4>Pinned</h4> 
+            </div>
+          <app-note-cards [cardsArray]="pinnedNotes" >
+          </app-note-cards>
+          <div  fxLayout="row" class="pin">
+              <h4>Others</h4> 
+            </div>
+          <app-note-cards [cardsArray]="unPin" >
+          </app-note-cards>
+          </div>
+          <div *ngIf = "pin.length==0">
+              <app-note-cards [cardsArray]="pin" >
+              </app-note-cards>
+              <app-note-cards [cardsArray]="unPin" >
+              </app-note-cards>
+          </div>
   </div>
+  

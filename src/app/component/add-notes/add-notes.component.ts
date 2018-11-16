@@ -22,10 +22,13 @@ export class AddNotesComponent implements OnInit {
     dataArrayCheck = [];
     checked = false;
     status = "open";
+    dating;
     accessToken = localStorage.getItem('token');
     @Output() newEvent = new EventEmitter();
     labelArray: any[];
     date;
+    today = new Date();
+    tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
     dateArray = [];
     notes={'id':''}
     constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
@@ -36,10 +39,23 @@ export class AddNotesComponent implements OnInit {
     toggle() {
         this.show = 1;
     }
+    cancelLabel(){
+        this.labelName=[];
+        this.labelId=[];
+    }
+    cancel(){
+        this.dateArray=[];
+        this.date='';
+       
+    }
     /**
      * @description : Add Notes api Call starts
      */
     addNotes() {
+        this.dating='';
+        if(this.date!=undefined){
+            this.dating=this.date
+        }
         if (this.checked == false) {
             this.myHttpService.postNotes('notes/addNotes', {
                 'title': document.getElementById('titleId').innerHTML,
@@ -48,7 +64,7 @@ export class AddNotesComponent implements OnInit {
                 'checklist': '',
                 'isPined': 'false',
                 'color': this.color,
-                "reminder":this.date
+                "reminder":this.dating
             }, this.accessToken).subscribe(response => {
                 this.newEvent.emit({
                 })
@@ -56,14 +72,20 @@ export class AddNotesComponent implements OnInit {
                 this.hide = !this.hide;
                 this.color = "#fafafa";
                 this.show = 0;
+                this.dating='';
+                this.labelId=[];
                 this.dateArray=[];
+                this.date='';
             }, error => {
                 console.log("failed", error)
                 this.color = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
+                this.dating='';
+                this.labelId=[];
                 this.dateArray=[];
-                this.show = 0
+                this.show = 0;
+                this.date='';
             })
         }
         /**
@@ -87,12 +109,15 @@ export class AddNotesComponent implements OnInit {
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
-                'color': this.color
+                'color': this.color,
+                "reminder":this.dating
             }, this.accessToken).subscribe(response => {
                 this.newEvent.emit({
                 })
                 this.dataArrayCheck = [];
                 this.labelName = [];
+                this.dataArray=[];
+                this.date='';
                 this.hide = !this.hide;
                 this.color = "#fafafa";
                 this.show = 0;
@@ -101,9 +126,11 @@ export class AddNotesComponent implements OnInit {
                 this.dataArrayCheck = [];
                 console.log("failed", error)
                 this.color = "#fafafa";
+                this.dataArray=[];
                 this.hide = !this.hide;
                 this.labelName = [];
                 this.show = 0;
+                this.date='';
                 this.dateArray=[];
             })
         }

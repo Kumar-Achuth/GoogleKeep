@@ -30,7 +30,7 @@ export class AddReminderComponent implements OnInit {
   addReminder() {
     let currentDate = new Date();
     var dates =  new Date(currentDate.getFullYear(),currentDate.getMonth(),
-    currentDate.getDate(), 8, 0, 0, 0);
+    currentDate.getDate(), 20, 0, 0, 0);
     this.dateEmit.emit(dates)
     this.myHttpService.postArchive('notes/addUpdateReminderNotes',
       {

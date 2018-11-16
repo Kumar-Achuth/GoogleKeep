@@ -5,8 +5,16 @@
 export const environment = {
   production: false,
   apiUrl : "http://34.213.106.173/",
- baseUrl : "http://34.213.106.173/api/"
+ baseUrl : "http://34.213.106.173/api/",
 
+ firebase: {
+  apiKey: "your apikey",
+  authDomain: "your authDomain",
+  databaseURL: "your databaseUrl",
+  projectId: "your projectId",
+  storageBucket: "your storageBucket",
+  messagingSenderId: "your messagingSenderId"
+}
 };
 
 /*

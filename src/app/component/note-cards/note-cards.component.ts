@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
@@ -19,7 +19,9 @@ export class NoteCardsComponent implements OnInit {
   toggle: any = false;
   checkListArray: any = [];
   reminderArray: any = [];
-  pinnedNotes : any = [];
+  pinnedNotes: any = [];
+  today = new Date();
+  tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
   accessToken = localStorage.getItem('token');
   @Input() cardsArray;
   @Output() trashEvent = new EventEmitter();
@@ -38,7 +40,7 @@ export class NoteCardsComponent implements OnInit {
     this.switchView()
     this.getAllLabels();
   }
-  deleteEvent(event) {
+  deleteEvent() {
     this.trashEvent.emit({
     })
   }
@@ -49,10 +51,9 @@ export class NoteCardsComponent implements OnInit {
       backdropClass: '',
       data: notes
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.getAllLabels();
-      this.trashEvent.emit({
-      })
+      this.trashEvent.emit({});
     });
   }
   /**
@@ -63,17 +64,16 @@ export class NoteCardsComponent implements OnInit {
   deleteChips(id, label) {
     this.myHttpService.deleteChip('notes/' + id + '/addLabelToNotes/' + label + '/remove',
       { "noteId": id, "lableId": label },
-      this.accessToken).subscribe(data => {
-        this.trashEvent.emit({
+      this.accessToken).subscribe(() => {
+          this.trashEvent.emit({});
         })
-      })
   }
   getAllLabels() {
     let newArray = [];
     this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
       .subscribe(data => {
         for (var i = 0; i < data['data']['details'].length; i++) {
-          if (data['data']['details'][i].isDeleted == false ) {
+          if (data['data']['details'][i].isDeleted == false) {
             newArray.push(data['data']['details'][i])
           }
         }
@@ -89,6 +89,10 @@ export class NoteCardsComponent implements OnInit {
         this.toggle = message;
       })
     }
+  }
+  select(labels) {
+    let label = labels.label;
+    this.router.navigate(['home/newLabel/' + label])
   }
   /**
    * @description Api call for deleting the reminders from the note cards
@@ -131,14 +135,14 @@ export class NoteCardsComponent implements OnInit {
         console.log(response);
       })
   }
-  reminderStrike(cuttOff){
+  reminderStrike(cuttOff) {
     var currentReminderTime = new Date().getTime();
     var timeValue = new Date(cuttOff).getTime();
-    if(timeValue > currentReminderTime){
-    return true;
-    } 
-    else{
-    return false;
+    if (timeValue > currentReminderTime) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
 
