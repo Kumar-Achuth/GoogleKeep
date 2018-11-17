@@ -5,8 +5,8 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header">{{title}}</span>
-        <mat-icon fxshow = "true" fxHide.lg = "true" fxHide.xs="false" fxHide.sm="true" 
-        fxHide.md="true" >search</mat-icon>
+        <!-- <mat-icon fxshow = "true" fxHide.lg = "true" fxHide.xs="false" fxHide.sm="true" 
+        fxHide.md="true" >search</mat-icon> -->
 
         <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
         fxHide.md="false">
@@ -29,7 +29,7 @@
               view_module</mat-icon>
             </div>
           <div  matTooltip="Google Account" >
-              <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab
+              <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab color="disabled"
                [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
@@ -39,11 +39,11 @@
                   </button>
             <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
               <div class="padding" fxLayoutAlign="row wrap" fxLayoutGap="15px" fxLayoutAlign="space-between">
-              <div fxFlex=15>
+              <div >
               <button  *ngIf="image2!=''" (click) = "$event.stopPropagation()" 
               [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
               (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
-              mat-mini-fab class="profilebutton1">
+              mat-mini-fab color="disabled" class="profilebutton1">
               <div class="changeButton">
               Change
             </div>  
@@ -118,9 +118,9 @@
             <hr>
           </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content style="display:flex">
+        <mat-sidenav-content>
           <router-outlet>
-            <!--  content goes here -->
+             <!-- content goes here -->
           </router-outlet>
         </mat-sidenav-content>
       </mat-sidenav-container>

@@ -42,6 +42,7 @@ import { LoggerService} from './core/services/loggerService/logger.service';
 import { CropImageComponent } from './component/crop-image/crop-image.component';
 import { ImageCropperModule} from 'ngx-image-cropper';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import{ MessagingService} from './core/services/messageService/messaging.service';
 
 import {
   MatListModule, MatTableModule, MatPaginatorModule, MatSortModule,
@@ -129,7 +130,7 @@ import { PinComponent } from './component/pin/pin.component';
   
 
   ],
-  providers: [HttpService, AuthService, AuthGuard, LoggerService],
+  providers: [HttpService, AuthService, AuthGuard,MessagingService, LoggerService],
   bootstrap: [AppComponent],
   entryComponents:[DeleteLabelComponent,DeleteTrashComponent, CropImageComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

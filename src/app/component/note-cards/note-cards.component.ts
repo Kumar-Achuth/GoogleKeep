@@ -145,5 +145,4 @@ export class NoteCardsComponent implements OnInit {
       return false;
     }
   }
-
 }

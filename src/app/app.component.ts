@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessagingService } from './core/services/messageService/messaging.service';
 // import { HttpService } from './services/http.service';
 
 
@@ -9,11 +10,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'googleKeep';
- 
-  constructor() { }
+  message;
+  constructor(private msgService: MessagingService) { }
 
 ngOnInit()
 {
-  
+  this.msgService.getPermission()
+  this.message = this.msgService.currentMessage
 }
 }

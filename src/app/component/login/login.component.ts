@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
 
 @Component({
   selector: 'app-login',
@@ -73,6 +74,21 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("lastName", data['lastName']);
               localStorage.setItem("userId", data['userId']);
               localStorage.setItem("imageUrl",data['imageUrl'])
+
+              
+              var token = localStorage.getItem("token");
+              var pushToken=localStorage.getItem('pushToken')
+              console.log('pushToken in Login',pushToken);
+              var body={
+                "pushToken":pushToken
+              }
+              this.myHttpService.postTrash('user/registerPushToken',body,token).subscribe(
+                data=>{
+                  LoggerService.log("Message Notification Available",data)
+                }),
+                error=>{
+                  console.log(error,"error in pushToken"); 
+                }
               this.router.navigateByUrl('/home')
             },
             error => {
@@ -88,4 +104,6 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+
+  
 }
