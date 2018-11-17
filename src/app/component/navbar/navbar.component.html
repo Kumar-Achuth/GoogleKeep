@@ -1,13 +1,21 @@
 <div fxLayout="row" >
   <mat-toolbar class="toolbar">
+
+    <!-- ********************ToolBar Display****************** --> 
+
         <button type="button" aria-label="Toggle sidenav"
            mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span class="title-header">{{title}}</span>
-        <!-- <mat-icon fxshow = "true" fxHide.lg = "true" fxHide.xs="false" fxHide.sm="true" 
-        fxHide.md="true" >search</mat-icon> -->
-
+        <span class="title-header">
+            <span> <img class="gb_Xa gb_Ne" alt="" aria-hidden="true"
+             src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" 
+             srcset="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x,
+              https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x " 
+              style="width:40px;height:40px"></span>
+            <span class="titledisplay">{{title}}</span></span>
+            <mat-icon fxShow="true" fxHide.xs="false" fxHide.sm="true" 
+        fxHide.md="true" fxHide.xl = "true" fxHide.lg = "true" (click)="goSearch()" class = "searchNew">search</mat-icon>
         <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
         fxHide.md="false">
           <input class="search" type="input" placeholder="search" 
@@ -18,19 +26,19 @@
           <div class ="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
-         <div class ="one">
+         <div class ="one" style = "padding-left: 10px;float: right">
             <mat-icon matTooltip="Grid View" (click)="listView()"
              *ngIf="list == 0">
               view_agenda</mat-icon>
             </div>
-            <div class ="one">
+            <div class ="one" style = "padding-left: 10px;float: right">
             <mat-icon  class="material-icons" matTooltip="List View" 
              (click)="gridView()" *ngIf="list == 1">
               view_module</mat-icon>
             </div>
           <div  matTooltip="Google Account" >
               <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab color="disabled"
-               [matMenuTriggerFor]="appMenu">
+               [matMenuTriggerFor]="appMenu" style = "padding-left: 10px;">
                   <img src="{{img}}" class="image">
                 </button>
                 <button *ngIf="image2==''" class="profilebutton" mat-mini-fab 
@@ -71,50 +79,40 @@
           </div>
         </div>
       </mat-toolbar>
+
+      <!-- *****************Side Menu Display********************** -->
+
       <mat-sidenav-container class="sidenav-container">
         <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
           [mode]="(isHandset$ | async) ? 'over' : 'side'" 
           [opened]="(isHandset$ | async)">
           <mat-nav-list>
+
             <a (click)='aptTitle("Fundoo Notes")' mat-list-item routerLink='/home/notes'>
-              <i class="material-icons"
-               matTooltip="Notes">
-                assignment
-              </i>Notes</a>
+              <img src="../../../assets/images/bulp.svg">
+              <div class="bulp" >Notes</div></a> 
             <a (click)='aptTitle("Reminders")' mat-list-item routerLink='/home/reminder'>
-              <i class="material-icons"
-               matTooltip="Reminders">
-                touch_app
-              </i>Reminders</a>
+              <img src="../../../assets/images/bell.svg">
+              <div class="bulp" >Reminders</div></a>
             <hr>
             <a mat-list-item> Labels </a>
-            <div *ngFor="let labels of labelArray trackBy : val?.id" 
+            <div *ngFor="let labels of labelArray" 
             (click)="select(labels)">
               <div *ngIf="labels.isDeleted==false">
                 <a (click)='aptTitle(labels.label)' mat-list-item>
-                  <mat-icon >label_outline</mat-icon>
-                  <span  [innerHTML]="labels.label"></span>
+                <img src="../../../assets/images/labels.svg">
+                  <span class="bulp" [innerHTML]="labels.label"></span>
                 </a>
               </div>
             </div>
             <a mat-list-item (click)="openDialog()">
-              <i class="material-icons" matTooltip="Edit Label">
-                create
-              </i>Edit Labels</a>
+              <img src="../../../assets/images/edit.svg"><div class="bulp" >Edit Labels</div></a>
             <hr>
             <a (click)='aptTitle("Archive")' mat-list-item routerLink="/home/archive">
-              <i class="material-icons" matTooltip="Archive">
-                archive
-              </i>Archive</a>
+              <img src="../../../assets/images/archive.svg"><div class="bulp" >Archive</div></a>
             <a (click)='aptTitle("Trash")' mat-list-item routerLink="/home/trash">
-              <i class="material-icons" matTooltip="Trash">
-                delete
-              </i>Trash</a>
-            <a (click)='aptTitle("Settings")' mat-list-item> <i class="material-icons" matTooltip="Settings">
-                settings
-              </i>
-              Settings</a>
+              <img src="../../../assets/images/trash.svg"><div class="bulp" >Trash</div></a>
             <hr>
           </mat-nav-list>
         </mat-sidenav>

@@ -5,22 +5,38 @@
 .ico{
   float:right;
 }
+.titledisplay{
+  padding-left: 10%;
+  padding-top: 7%;
+  opacity: 0.51;
+  display: inline-block;
+    font-family: 'Product Sans',Arial,sans-serif;
+    font-size: 22px;
+}
+.bulp{
+  padding-left: 4%;
+}
 .sidenav{
   width: 230px;
   margin-top: 65px;
-  position: fixed;
+  // z-index: 3;
 }
+.listing{
+  background-color: #feefc3;
+}   
 .mat-drawer.mat-drawer-side {
   top:0;
 }
 .toolbar
 {
+  box-shadow: 0 1px 1px rgba(0,0,0,0.20);
   background-color: white;
   position: fixed;
-  z-index: 2;
-  display: flex;
+  z-index: 3;
+  display: flex; 
 }
 .title-header{
+  padding-left: 1%;
 color:black;
 padding-right: 32px;
 display: flex;
@@ -32,6 +48,8 @@ display: flex;
 }
 .searchBar{
 flex: 1 1 auto;
+padding-left: 2%;
+// padding-right: 7%;
 }
 .material-icons{
   font-size: 30px;
@@ -42,6 +60,7 @@ flex: 1 1 auto;
 }
 .search
 {
+  font: normal 16px Roboto,sans-serif;
   flex: 1 1 auto;
   color: black;
   opacity: 1;
@@ -57,22 +76,14 @@ flex: 1 1 auto;
 }
 .one
 {
-  // display: flex;
   cursor: pointer;
-  padding-top: 7%;
+  // float: right;
+  padding-top: 10%;
 }
 input:focus
 {
 background-color: white;
 }
-// .profilebutton{
-//   width:50px; 
-//   height:50px; 
-//   border: none;
-//  border-radius: 50%;
-// //  background: rgb(235, 174, 22);
-// background-color: white;
-// }
 .profilebutton1{
   width:100px; 
   height:100px; 
@@ -87,15 +98,14 @@ background-color: white;
   height:50px;
   border-radius: 50%;
 }
-// .signup_button{
-//   float:right; 
-//   padding-right:5px;
-// }
 .padding{
   padding: 3%;
 }
 .changeButton{
   margin-top: 125%;
 }
-
+.searchNew
+{
+  // margin-right: 100px;
+}
 

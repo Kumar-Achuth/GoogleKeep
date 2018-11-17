@@ -25,7 +25,7 @@ export class NavbarComponent {
   ProfilePath: any;
   globalSearch: any;
   list = 0;
-  title = "Fundoo";
+  title = "Keep";
   public picture: any;
   isHandset$: Observable<boolean> = this.breakpointObserver.
     observe(Breakpoints.Handset)
