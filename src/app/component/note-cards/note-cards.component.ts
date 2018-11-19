@@ -12,22 +12,22 @@ import { LoggerService } from '../../core/services/loggerService/logger.service'
   styleUrls: ['./note-cards.component.scss']
 })
 export class NoteCardsComponent implements OnInit {
-  array: any = []
-  labelArray = [];
-  cards: any = [];
-  body: any = {};
-  toggle: any = false;
-  checkListArray: any = [];
-  reminderArray: any = [];
-  pinnedNotes: any = [];
-  today = new Date();
-  tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
-  accessToken = localStorage.getItem('token');
+  private array: any = []
+  private labelArray = [];
+  private cards: any = [];
+  private body: any = {};
+  private toggle: any = false;
+  private checkListArray: any = [];
+  private reminderArray: any = [];
+  private pinnedNotes: any = [];
+  private today = new Date();
+  private tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
+  private accessToken = localStorage.getItem('token');
   @Input() cardsArray;
   @Output() trashEvent = new EventEmitter();
   @Input() globalSearch;
   constructor(private myHttpService: HttpService, private router: Router,
-    public dialog: MatDialog, public data: GlobalSearchService) {
+    private dialog: MatDialog,  private data: GlobalSearchService) {
     this.data.deletedLabel.subscribe(message => {
       if (message) {
         this.trashEvent.emit({
@@ -117,7 +117,6 @@ export class NoteCardsComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    console.log(checkList);
     this.checkListArray = checkList;
     this.checkListApi(note.id);
   }
@@ -132,7 +131,6 @@ export class NoteCardsComponent implements OnInit {
     }
     this.myHttpService.postColor("notes/" + id + "/checklist/" + this.checkListArray.id + "/update",
       JSON.stringify(apiData), this.accessToken).subscribe(response => {
-        console.log(response);
       })
   }
   reminderStrike(cuttOff) {

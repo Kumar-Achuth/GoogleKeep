@@ -10,8 +10,4 @@ export class AuthService {
   isLoggednIn() {
     return localStorage.getItem('token') !== null;
   }
-  // logout() {
-  //   localStorage.removeItem("LoggedInUser");
-  //   this.myRoute.navigate(["Login"]);
-  // }
 }

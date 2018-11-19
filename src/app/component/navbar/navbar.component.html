@@ -1,7 +1,7 @@
 <div fxLayout="row" >
   <mat-toolbar class="toolbar">
 
-    <!-- ********************ToolBar Display****************** --> 
+    <!-- ********************ToolBar Display************************* --> 
 
         <button type="button" aria-label="Toggle sidenav"
            mat-icon-button (click)="drawer.toggle()">
@@ -15,14 +15,17 @@
               style="width:40px;height:40px"></span>
             <span class="titledisplay">{{title}}</span></span>
             <mat-icon fxShow="true" fxHide.xs="false" fxHide.sm="true" 
-        fxHide.md="true" fxHide.xl = "true" fxHide.lg = "true" (click)="goSearch()" class = "searchNew">search</mat-icon>
+        fxHide.md="true" fxHide.xl = "true" fxHide.lg = "true" (click)="goSearch()"
+         class = "searchNew">search</mat-icon>
         <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
         fxHide.md="false">
           <input class="search" type="input" placeholder="search" 
            [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
         </div>
-        <div  fxLayout="row">
+        <div  fxFlex fxLayoutAlign="end">
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-around evenly"
+           class="icons">
           <div class ="one" matTooltip="Cloud Sync">
             <mat-icon>refresh</mat-icon>
           </div>
@@ -36,9 +39,10 @@
              (click)="gridView()" *ngIf="list == 1">
               view_module</mat-icon>
             </div>
-          <div  matTooltip="Google Account" >
-              <button *ngIf="image2!=''" class="profilebutton" mat-mini-fab color="disabled"
-               [matMenuTriggerFor]="appMenu" style = "padding-left: 10px;">
+          </div>
+          <div  matTooltip="Google Account" class="img" >
+              <button *ngIf="image2!=''"  class="profilebutton" mat-mini-fab color="disabled"
+               [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
                 <button *ngIf="image2==''" class="profilebutton" mat-mini-fab 
@@ -46,7 +50,8 @@
                     {{firstName | slice:0:1}}
                   </button>
             <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
-              <div class="padding" fxLayoutAlign="row wrap" fxLayoutGap="15px" fxLayoutAlign="space-between">
+              <div class="padding" fxLayoutAlign="row wrap" fxLayoutGap="15px" 
+              fxLayoutAlign="space-between">
               <div >
               <button  *ngIf="image2!=''" (click) = "$event.stopPropagation()" 
               [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
@@ -116,6 +121,7 @@
             <hr>
           </mat-nav-list>
         </mat-sidenav>
+        <!-- *******************Side Nav Content Display************************* -->
         <mat-sidenav-content>
           <router-outlet>
              <!-- content goes here -->

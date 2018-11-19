@@ -9,11 +9,11 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 })
 export class GlobalSearchComponent implements OnInit {
 
-  cards: any[];
-  accessToken = localStorage.getItem('token');
-  globalSearch: any;
+  private cards: any[];
+  private accessToken = localStorage.getItem('token');
+  private globalSearch: any;
 
-  constructor(public myHttpService: HttpService, public data: GlobalSearchService) { }
+  constructor(private myHttpService: HttpService, private data: GlobalSearchService) { }
 
   ngOnInit() {
     this.data.currentMessage.subscribe(message => {
@@ -35,7 +35,6 @@ export class GlobalSearchComponent implements OnInit {
           }
         }
       }, error => {
-        console.log(error) ;
       })
   }
 }

@@ -9,28 +9,28 @@ import { Router } from '@angular/router';
     styleUrls: ['./add-notes.component.scss']
 })
 export class AddNotesComponent implements OnInit {
-    public hide: boolean = true;
-    public labelId = [];
-    public labelName = [];
-    body: any = {};
-    data: any;
-    show: any = 0;
-    color: any = "#fafafa";
-    listing = true;
-    public i = 0;
-    dataArray = [];
-    dataArrayCheck = [];
-    checked = false;
-    status = "open";
-    dating;
-    accessToken = localStorage.getItem('token');
+    private hide: boolean = true;
+    private labelId = [];
+    private labelName = [];
+    private body: any = {};
+    private data: any;
+    private show: any = 0;
+    private color: any = "#fafafa";
+    private listing = true;
+    private i = 0;
+    private dataArray = [];
+    private dataArrayCheck = [];
+    private checked = false;
+    private status = "open";
+    private dating;
+    private accessToken = localStorage.getItem('token');
+    private labelArray: any[];
+    private date;
+    private today = new Date();
+    private tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
+    private dateArray = [];
+    private notes={'id':''}
     @Output() newEvent = new EventEmitter();
-    labelArray: any[];
-    date;
-    today = new Date();
-    tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
-    dateArray = [];
-    notes={'id':''}
     constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
@@ -45,8 +45,7 @@ export class AddNotesComponent implements OnInit {
     }
     cancel(){
         this.dateArray=[];
-        this.date='';
-       
+        this.date='';  
     }
     /**
      * @description : Add Notes api Call starts
@@ -77,7 +76,6 @@ export class AddNotesComponent implements OnInit {
                 this.dateArray=[];
                 this.date='';
             }, error => {
-                console.log("failed", error)
                 this.color = "#fafafa";
                 this.hide = !this.hide;
                 this.labelName = [];
@@ -103,7 +101,6 @@ export class AddNotesComponent implements OnInit {
                 this.dataArrayCheck.push(apiObj)
                 this.status = "open"
             }
-            console.log(this.dataArrayCheck);
             this.myHttpService.postNotes('notes/addNotes', {
                 'title': document.getElementById('titleId').innerHTML,
                 'labelIdList': JSON.stringify(this.labelId),
@@ -124,7 +121,6 @@ export class AddNotesComponent implements OnInit {
                 this.dateArray=[];
             }, error => {
                 this.dataArrayCheck = [];
-                console.log("failed", error)
                 this.color = "#fafafa";
                 this.dataArray=[];
                 this.hide = !this.hide;
@@ -148,7 +144,6 @@ export class AddNotesComponent implements OnInit {
      */
     onKeydown(event) {
         if (event.key === "Enter") {
-            console.log(event);
         }
     }
     /**
@@ -185,7 +180,6 @@ export class AddNotesComponent implements OnInit {
     enter() {
         this.i++;
         if (this.data != null) {
-            console.log(event, "Keydown");
             var obj = {
                 "index": this.i,
                 "data": this.data
@@ -199,14 +193,12 @@ export class AddNotesComponent implements OnInit {
      * @param deletedObj 
      */
     ondelete(deletedObj) {
-        console.log("Ondelete function runnig");
         for (var i = 0; i < this.dataArray.length; i++) {
             if (deletedObj.index == this.dataArray[i].index) {
                 this.dataArray.splice(i, 1);
                 break;
             }
         }
-        console.log(this.dataArray);
     }
     /**
      * @description On enter and keydown for edit function
@@ -215,13 +207,11 @@ export class AddNotesComponent implements OnInit {
      */
     editing(event, edited) {
         if (event.code == "Enter") {
-            console.log("enter pressed");
             for (var i = 0; i < this.dataArray.length; i++) {
                 if (edited.index == this.dataArray[i].index) {
                     this.dataArray[i].data == edited.data
                 }
             }
-            console.log(this.dataArray);
         }
     }
     emitDate(event){

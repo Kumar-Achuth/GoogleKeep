@@ -9,9 +9,9 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  Email = new FormControl('', [Validators.required, Validators.email]);
-  isLeftVisible = false;
-  model: any = {}
+  private Email = new FormControl('', [Validators.required, Validators.email]);
+  private isLeftVisible = false;
+  private model: any = {}
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {

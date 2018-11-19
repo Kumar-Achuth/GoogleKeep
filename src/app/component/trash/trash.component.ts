@@ -10,12 +10,17 @@ import { DeleteTrashComponent } from '../delete-trash/delete-trash.component';
   styleUrls: ['./trash.component.scss']
 })
 export class TrashComponent implements OnInit {
-  cards: any = [];
-  accessToken = localStorage.getItem('token');
-  constructor(private myHttpService: HttpService, public dialog: MatDialog, private router: Router) { }
+  private cards: any = [];
+  private accessToken = localStorage.getItem('token');
+  constructor(private myHttpService: HttpService, private dialog: MatDialog, 
+    private router: Router) { }
   ngOnInit() {
     this.getTrash();
   }
+  /**
+   * @description : Delete Notes Forever APi call
+   * @param card 
+   */
   deleteForever(card) {
     const dialogRef = this.dialog.open(DeleteTrashComponent, {
       width: '500px',
@@ -32,6 +37,9 @@ export class TrashComponent implements OnInit {
       }
     });
   }
+  /**
+   * @description Get trash notes Api call
+   */
   getTrash() {
     this.myHttpService.getTrashNotes('notes/getTrashNotesList', this.accessToken)
       .subscribe(data => {
@@ -42,6 +50,10 @@ export class TrashComponent implements OnInit {
         ;
       })
   }
+  /**
+   * @description Restore Cards back to notes function
+   * @param card 
+   */
   postToTrash(card) {
     this.myHttpService.postTrash('notes/trashNotes', {
       "isDeleted": false,

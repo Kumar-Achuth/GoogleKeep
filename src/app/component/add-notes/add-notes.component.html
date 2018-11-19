@@ -1,4 +1,6 @@
-<div fxLayout='column wrap' fxLayoutAlign="center center" style="margin-top:100px">
+<div fxFlex=10></div>
+<div fxFlex=89 fxLayout='column wrap' fxLayoutAlign="center center" 
+style="margin-top:100px; border-radius: 8px">
     <mat-card *ngIf="hide" (click)="hide=!hide">
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
@@ -10,8 +12,10 @@
             </div>
         </div>
     </mat-card>
+
     <!-- ******************** Take A Note ************************ -->
-    <mat-card *ngIf="!hide" [style.backgroundColor]="color">
+
+    <mat-card class="opened" *ngIf="!hide" [style.backgroundColor]="color">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
         <div *ngIf="show == 0">
@@ -37,7 +41,9 @@
             </div>
             <mat-divider></mat-divider>
         </div>
+
         <!-- ******************* Label Adding To the Note ************************* -->
+
         <div fxLayout="row wrap">
         <div *ngFor="let index of labelName">
             <mat-chip-list>
@@ -47,7 +53,9 @@
             </mat-chip-list>
         </div>
     </div>
+
     <!-- *********************** Adding Reminders to The Notes **************************** -->
+
         <div *ngFor="let index of dateArray">
             <mat-chip-list>
                 <div *ngIf ="(today | date : shortDate)==(index|date:shortDate)">
@@ -68,7 +76,9 @@
                     </div>
             </mat-chip-list>
         </div>
-        
+
+        <!-- ************************Icons Display In Adding Notes ********************* -->
+
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
             <div fxFlex=10>
                 <app-add-reminder [reminder]="notes" (dateEmit)="emitDate($event)">
@@ -87,7 +97,8 @@
                 </app-add-photo>
             </div>
             <div fxFlex=10>
-                <mat-icon class="space" style="cursor:pointer" matTooltip="Archive" (click)="pinIt()">archive</mat-icon> 
+                <mat-icon class="space" style="cursor:pointer" matTooltip="Archive"
+                 (click)="pinIt()">archive</mat-icon> 
             </div>
             <div fxFlex=10>
                 <app-more (addEvent)="instantLabel($event)">
@@ -100,3 +111,4 @@
         <br>
     </mat-card>
 </div>
+<div fxFlex=1></div>

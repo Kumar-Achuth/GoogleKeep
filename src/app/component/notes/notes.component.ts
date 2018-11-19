@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  cards: any = [];
-  pinnedNotes: any = [];
-  accessToken = localStorage.getItem('token');
+  private cards: any = [];
+  private pinnedNotes: any = [];
+  private accessToken = localStorage.getItem('token');
   constructor(private myHttpService: HttpService, private router: Router) { }
   ngOnInit() {
     this.getNotes();

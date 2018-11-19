@@ -1,7 +1,12 @@
-<div fxLayout="row wrap"  fxLayoutAlign="center"  fxLayoutGap="10px" style="margin-top:25px ; ">
+<div fxFlex=10></div>
+
+<!-- ************************Note Cards Display ********************* -->
+
+<div fxFlex=89 fxLayout="row wrap"  fxLayoutAlign="start"  fxLayoutGap="10px"
+ style="margin-top:25px ; ">
   <div *ngFor='let notes of cardsArray | searchBar :  globalSearch'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card style="margin-top : 10px; border-radius: 5px" [style.backgroundColor]="notes.color">
+      <mat-card style="margin-top : 10px; border-radius: 8px" [style.backgroundColor]="notes.color">
         <app-pin [pinNote]="notes" (pinEvent)="deleteEvent($event)" class="pin"></app-pin>
         <mat-card-title (click)="openDialog(notes)">
           <div [innerHtml]="notes.title"></div>
@@ -9,6 +14,9 @@
         <mat-card-content (click)="openDialog(notes)">
           <div [innerHtml]="notes.description"></div>
         </mat-card-content>
+
+        <!-- ************************CheckList Display In Notes********************* -->
+
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
           <mat-divider></mat-divider>
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
@@ -25,11 +33,14 @@
           (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
         <br>
+
+        <!-- ************************Labels Display In Notes ********************* -->
+
         <div fxLayout="row wrap" class="spacebetween">
           <div *ngFor="let index of notes.noteLabels trackBy : val?.id">
             <div *ngIf="index.isDeleted == false">
               <mat-chip-list selected>
-                <mat-chip (click)="select(index)">
+                <mat-chip  (click)="select(index)">
                   {{index.label}}
                   <mat-icon matChipRemove (click)="$event.stopPropagation();
                    deleteChips(notes.id,index.id)">cancel</mat-icon>
@@ -39,19 +50,24 @@
           </div>
         </div>
         <br>
+
+        <!-- ************************Reminder Display In Notes  ********************* -->
+
         <div *ngIf="reminderStrike(notes.reminder[0])">
           <div *ngFor="let index of notes.reminder">
               <mat-chip-list>
                   <div *ngIf ="(today | date : shortDate)==(index|date:shortDate)">
-                  <mat-chip>Today {{index|date:'shortTime'}}
-                    <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" (remindEmit)="deleteEvent($event)">
+                  <mat-chip >Today {{index|date:'shortTime'}}
+                    <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" 
+                    (remindEmit)="deleteEvent($event)">
                     </app-add-reminder>
                       <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>
                   </mat-chip>
               </div>
               <div *ngIf ="(tomorrow | date : shortDate)==(index|date:shortDate)">
                       <mat-chip> Tomorrow {{index|date:'shortTime'}}
-                          <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" (remindEmit)="deleteEvent($event)">
+                          <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes"
+                           (remindEmit)="deleteEvent($event)">
                             </app-add-reminder>
                           <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>
                       </mat-chip>
@@ -59,7 +75,8 @@
                   <div *ngIf ="(today | date : shortDate)!=(index|date:shortDate)&&
                   (tomorrow | date : shortDate)!=(index|date:shortDate)">
                           <mat-chip>{{index|date:'medium'}}
-                              <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" (remindEmit)="deleteEvent($event)">
+                              <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" 
+                              (remindEmit)="deleteEvent($event)">
                                 </app-add-reminder>
                               <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>
                           </mat-chip>
@@ -67,12 +84,16 @@
               </mat-chip-list>
           </div>
         </div>
+
+        <!-- **********************Fired Reminder Notes Display******************** -->
+
         <div *ngIf="!reminderStrike(notes.reminder[0])">
           <div *ngFor="let index of notes.reminder">
               <mat-chip-list>
                   <div *ngIf ="(today | date : shortDate)==(index|date:shortDate)">
                   <mat-chip><del>Today {{index|date:'shortTime'}}
-                      <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" (remindEmit)="deleteEvent($event)">
+                      <app-add-reminder style="color:rgb(223,223,223)" 
+                      [reminder]="notes" (remindEmit)="deleteEvent($event)">
                         </app-add-reminder>
                   </del>
                       <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>
@@ -80,18 +101,22 @@
               </div>
               <div *ngIf ="(tomorrow | date : shortDate)==(index|date:shortDate)">
                       <mat-chip><del> Tomorrow {{index|date:'shortTime'}}
-                          <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" (remindEmit)="deleteEvent($event)">
+                          <app-add-reminder style="color:rgb(223,223,223)" 
+                          [reminder]="notes" (remindEmit)="deleteEvent($event)">
                             </app-add-reminder> </del>
-                          <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>
+                          <mat-icon (click)="deleteReminder(notes.id)" 
+                          matChipRemove>cancel</mat-icon>
                       </mat-chip>
                   </div>
                   <div *ngIf ="(today | date : shortDate)!=(index|date:shortDate)&&
                   (tomorrow | date : shortDate)!=(index|date:shortDate)">
                           <mat-chip><del>{{index|date:'medium'}}
-                             <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes" (remindEmit)="deleteEvent($event)">
+                             <app-add-reminder style="color:rgb(223,223,223)" 
+                             [reminder]="notes" (remindEmit)="deleteEvent($event)">
                     </app-add-reminder>
                           </del>
-                              <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>
+                              <mat-icon (click)="deleteReminder(notes.id)" 
+                              matChipRemove>cancel</mat-icon>
                           </mat-chip>
                       </div>
               </mat-chip-list>
@@ -115,3 +140,4 @@
     </div>
   </div>
 </div>
+<div fxFlex=1></div>

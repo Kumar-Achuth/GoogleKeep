@@ -10,8 +10,8 @@
   padding-top: 7%;
   opacity: 0.51;
   display: inline-block;
-    font-family: 'Product Sans',Arial,sans-serif;
-    font-size: 22px;
+  font-family: 'Product Sans',Arial,sans-serif;
+  font-size: 22px;
 }
 .bulp{
   padding-left: 4%;
@@ -38,7 +38,6 @@
 .title-header{
   padding-left: 1%;
 color:black;
-padding-right: 32px;
 display: flex;
 }
 .toggle{
@@ -48,8 +47,8 @@ display: flex;
 }
 .searchBar{
 flex: 1 1 auto;
-padding-left: 2%;
-// padding-right: 7%;
+width: stretch;
+padding-left: 5%;
 }
 .material-icons{
   font-size: 30px;
@@ -60,25 +59,28 @@ padding-left: 2%;
 }
 .search
 {
-  font: normal 16px Roboto,sans-serif;
+  font: normal 16px,sans-serif;
   flex: 1 1 auto;
+  padding: 11px 16px 11px 16px;
   color: black;
   opacity: 1;
   width: stretch;
-  height: 50px;
-  // background-color:  rgb(235, 174, 22);
+  height: 46px;
   background-color: whitesmoke;
   border:0px;
+  box-sizing: border-box;
   border-radius: 5px;
   font-size: 20px;
   padding-left: 1%;
   padding-right: 3%;
 }
-.one
+.searchNew{
+  padding-left: 2%;
+}
+.icons
 {
-  cursor: pointer;
-  // float: right;
-  padding-top: 10%;
+ padding-top: 11%;
+ padding-left: 2%;
 }
 input:focus
 {
@@ -91,6 +93,7 @@ background-color: white;
  border-radius: 50%;
  background-color: white;
  padding: 3%;
+//  padding-right: 1%;
 }
 .image{
   float:left ;
@@ -103,5 +106,8 @@ background-color: white;
 }
 .changeButton{
   margin-top: 125%;
+}
+.img{
+  padding-right: 1%;
 }
 

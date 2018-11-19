@@ -9,11 +9,11 @@ import { Params, ActivatedRoute } from '@angular/router';
   styleUrls: ['./newlabel.component.scss']
 })
 export class NewlabelComponent implements OnInit {
-  params: any;
-  label: any;
-  labelArray: any = [];
+  private params: any;
+  private label: any;
+  private labelArray: any = [];  private accessToken = localStorage.getItem('token');
+
   constructor(private myHttpService: HttpService, private router: ActivatedRoute) { }
-  accessToken = localStorage.getItem('token');
   ngOnInit() {
     this.router.params.subscribe(
       (params: Params) => {

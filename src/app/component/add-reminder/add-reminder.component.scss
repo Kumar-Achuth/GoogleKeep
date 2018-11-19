@@ -1,4 +1,4 @@
-::ng-deep.mat-menu-content:not(:empty) {
+:host::ng-deep.mat-menu-content:not(:empty) {
     padding-top: 8px;
     padding-bottom: 8px;
     width: 280px;

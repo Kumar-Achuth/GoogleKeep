@@ -9,19 +9,20 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./add-reminder.component.scss']
 })
 export class AddReminderComponent implements OnInit {
-  @Input() reminder;
-  @Output() dateEmit= new EventEmitter();
-  @Output() remindEmit = new EventEmitter();
-  accessToken = localStorage.getItem('token');
-  body = {};
-  show = true;
-  public currentDate = new Date();
-  reminders: any[] = [
+ 
+  private accessToken = localStorage.getItem('token');
+  private body = {};
+  private show = true;
+  private currentDate = new Date();
+  private reminders: any[] = [
     { value: 'morning', viewPeriod: 'Morning', viewTime: '08:00 AM' },
     { value: 'afternoon', viewPeriod: 'Afternoon', viewTime: '01:00 PM' },
     { value: 'evening', viewPeriod: 'Evening', viewTime: '06:00 PM' },
     { value: 'night', viewPeriod: 'Night', viewTime: '09:00 PM' }];
   constructor(private myHttpService: HttpService) { }
+  @Input() reminder;
+  @Output() dateEmit= new EventEmitter();
+  @Output() remindEmit = new EventEmitter();
   ngOnInit() {
   }
   /**
@@ -38,7 +39,6 @@ export class AddReminderComponent implements OnInit {
         "reminder": dates,
           
       }, this.accessToken).subscribe(data => {
-        console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
       })
@@ -54,7 +54,6 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates2
       }, this.accessToken).subscribe(data => {
-        console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
       })
@@ -70,7 +69,6 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates3
       }, this.accessToken).subscribe(data => {
-        console.log('Post is successfull ', data);
         this.remindEmit.emit({
         })
       })
@@ -81,7 +79,7 @@ export class AddReminderComponent implements OnInit {
   backPressDatepicker() {
     this.show = true;
   }
-  reminderBody = {
+  private reminderBody = {
     "date": new FormControl(new Date()),
     "time": ""
   }

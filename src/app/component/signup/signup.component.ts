@@ -29,26 +29,25 @@ import { FormControl, Validators } from '@angular/forms';
   ]
 })
 export class SignupComponent implements OnInit {
-  hide = true;
-  records = {};
-  basic: any;
-  message: any;
-  advance: any;
-  value = true;
-  value1 = true;
-  form: any = {};
-  Email = new FormControl('', [Validators.required,
+  private hide = true;
+  private records = {};
+  private basic: any;
+  private message: any;
+  private advance: any;
+  private value = true;
+  private value1 = true;
+  private form: any = {};
+  private Email = new FormControl('', [Validators.required,
   Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
-  FirstName = new FormControl('', [Validators.required,
+  private FirstName = new FormControl('', [Validators.required,
   Validators.pattern('[a-zA-Z]*')]);
-  LastName = new FormControl('', [Validators.required,
+  private LastName = new FormControl('', [Validators.required,
   Validators.pattern('[a-zA-Z]*')]);
-  password = new FormControl('', [Validators.required])
-  model: any = {};
-  service: any;
-  cards = [];
+  private password = new FormControl('', [Validators.required])
+  private model: any = {};
+  private service: any;
+  private cards = [];
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
-
   ngOnInit() {
     this.records = this.myHttpService.getConfig('/user/service').subscribe(data => {
       for (var i = 0; i < data["data"].data.length; i++) {

@@ -4,7 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'searchBar'
 })
 export class LabelFilterPipe implements PipeTransform {
-
+/**
+ * @description Label Filter Function 
+ */
     transform(value: any, args?: any): any {
 
       if(!value)return null;

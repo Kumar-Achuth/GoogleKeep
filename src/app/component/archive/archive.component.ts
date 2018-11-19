@@ -7,11 +7,11 @@ import { HttpService } from '../../core/services/httpServices/http.service';
   styleUrls: ['./archive.component.scss']
 })
 export class ArchiveComponent implements OnInit {
-  cards: any = []
-  accessToken = localStorage.getItem('token');
+  private cards: any = []
+  private accessToken = localStorage.getItem('token');
+  private pin : any =[];
+  private  unPin : any=[];
   constructor(private myHttpService: HttpService) { }
-  pin : any =[];
-  unPin : any=[];
   ngOnInit() {
     this.getArchiveNotes();
     this.getunPinnedArchiveNotes();

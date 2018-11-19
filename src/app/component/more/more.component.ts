@@ -7,10 +7,10 @@ import { HttpService } from '../../core/services/httpServices/http.service';
   styleUrls: ['./more.component.scss']
 })
 export class MoreComponent implements OnInit {
-  accessToken = localStorage.getItem('token');
-  id = localStorage.getItem('userId');
-  body: any = {}
-  labelArray: any = [];
+  private accessToken = localStorage.getItem('token');
+  private id = localStorage.getItem('userId');
+  private body: any = {}
+  private labelArray: any = [];
   @Input() trash;
   @Output() deleteCard = new EventEmitter();
   @Output() addEvent = new EventEmitter();

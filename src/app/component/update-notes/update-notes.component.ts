@@ -17,19 +17,19 @@ export interface DialogData {
   styleUrls: ['./update-notes.component.scss']
 })
 export class UpdateNotesComponent implements OnInit {
-  body: any = {}
-  public newList;
-  public newData;
-  checklist: any = false;
-  checkListArray: any = [];
-  public tempArray = [];
-  public array1 = [];
-  public array2 = [];
-  public adding = false;
-  public addCheck = false;
-  public status = "open"
+  private body: any = {}
+  private newList;
+  private newData;
+  private checklist: any = false;
+  private checkListArray: any = [];
+  private tempArray = [];
+  private array1 = [];
+  private array2 = [];
+  private adding = false;
+  private addCheck = false;
+  private status = "open"
+  private accessToken = localStorage.getItem('token');
   @Output() updateEvent = new EventEmitter();
-  accessToken = localStorage.getItem('token');
   constructor(public dialogRef: MatDialogRef<NoteCardsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private myHttpService: HttpService, ) { }
@@ -41,6 +41,9 @@ export class UpdateNotesComponent implements OnInit {
     }
     this.tempArray = this.data['noteCheckLists']
   }
+  /**
+   * @description Update Notes Api call Without CheckList
+   */
   onNoClick(): void {
     if (this.checklist == false) {
       this.myHttpService.noteUpdate('notes/updateNotes', {
@@ -54,6 +57,9 @@ export class UpdateNotesComponent implements OnInit {
       })
       this.dialogRef.close();
     }
+    /**
+   * @description Update Notes Api call With CheckList
+   */
     else {
       var apiData = {
         "title": document.getElementById('titleId').innerHTML,
@@ -61,15 +67,17 @@ export class UpdateNotesComponent implements OnInit {
         "status": this.checkListArray.status
       }
       this.myHttpService.postColor("notes/" + this.data['id'] + "/checklist/" + this.checkListArray.id + "/update", JSON.stringify(apiData), this.accessToken).subscribe(response => {
-        console.log(response);
         this.updateEvent.emit()
       })
       this.dialogRef.close();
     }
     error => {
-      console.log(error);
     }
   }
+  /**
+   * @description Upadte Label Api 
+   * @param label 
+   */
   deleteChips(label) {
     this.myHttpService.deleteChip('notes/' + this.data.id + '/addLabelToNotes/' + label + '/remove',
       { "noteId": this.data.id, "lableId": label },
@@ -78,6 +86,10 @@ export class UpdateNotesComponent implements OnInit {
         })
       })
   }
+  /**
+   * @description Update Reminder
+   * @param id
+   */
   deleteReminder(id) {
     this.myHttpService.deleteChip('notes/removeReminderNotes',
       { "noteIdList": [id] },
@@ -90,6 +102,10 @@ export class UpdateNotesComponent implements OnInit {
       LoggerService.error(error);
     };
   }
+  /**
+   * @description CheckBox Array Display Function
+   * @param checkList 
+   */
   checkBox(checkList) {
     if (checkList.status == "open") {
       checkList.status = "close"
@@ -97,20 +113,26 @@ export class UpdateNotesComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    console.log(checkList);
     this.checkListArray = checkList;
     this.onNoClick();
   }
+  /**
+   * @description Edited CheckList Updation function
+   * @param editedList 
+   * @param event 
+   */
   editing(editedList, event) {
-    console.log(editedList);
     if (event.code == "Enter") {
       this.checkListArray = editedList;
       this.onNoClick();
     }
   }
   public removedList;
+  /**
+   * @description CheckList remove Update 
+   * @param checklist 
+   */
   removeList(checklist) {
-    console.log(checklist)
     this.removedList = checklist;
     this.removeCheckList()
   }
@@ -119,7 +141,6 @@ export class UpdateNotesComponent implements OnInit {
    */
   removeCheckList() {
     this.myHttpService.addLabel("notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove", null, this.accessToken).subscribe((response) => {
-      console.log(response);
       for (var i = 0; i < this.tempArray.length; i++) {
         if (this.tempArray[i].id == this.removedList.id) {
           this.tempArray.splice(i, 1)
@@ -151,13 +172,10 @@ export class UpdateNotesComponent implements OnInit {
       }
       this.myHttpService.addLabel("notes/" + this.data['id'] + "/checklist/add", this.newData, this.accessToken)
         .subscribe(response => {
-          console.log(response);
           this.newList = null;
           this.addCheck = false;
           this.adding = false;
-          console.log(response['data'].details);
           this.tempArray.push(response['data'].details)
-          console.log(this.tempArray)
         })
     }
   }

@@ -11,11 +11,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  hide = true;
-  model: any = {};
-
-  password = new FormControl('', [Validators.required])
-  confirmPassword = new FormControl('', [Validators.required])
+  private hide = true;
+  private model: any = {};
+  private password = new FormControl('', [Validators.required])
+  private confirmPassword = new FormControl('', [Validators.required])
+  private accessToken = this.route.snapshot.params.forgotToken;
   getErrorMessagepassword() {
     return this.password.hasError('required') ? 'You must enter a value' :
       this.password.hasError('pattern') ? 'Password required' :
@@ -26,11 +26,10 @@ export class ResetPasswordComponent implements OnInit {
       this.confirmPassword.hasError('pattern') ? 'Password required' :
         '';
   }
-
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
     private router: Router,
     public route: ActivatedRoute, ) { }
-  public accessToken = this.route.snapshot.params.forgotToken;
+ 
   ngOnInit() {
   }
   public input = new FormData();

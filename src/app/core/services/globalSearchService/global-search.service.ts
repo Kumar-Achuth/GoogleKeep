@@ -12,7 +12,6 @@ export class GlobalSearchService {
   deletedLabel = this.messageSource.asObservable();
   viewList = this.messageSource.asObservable();
   constructor() { }
-
   changeMessage(message: string) {
     this.messageSource.next(message)
   }
@@ -25,5 +24,4 @@ export class GlobalSearchService {
   changeMsg(message: boolean) {
     this.msgSource.next(message);
   }
-
 }

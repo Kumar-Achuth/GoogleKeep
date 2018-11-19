@@ -7,12 +7,8 @@ import { HttpService } from '../../core/services/httpServices/http.service';
   styleUrls: ['./change-color.component.scss']
 })
 export class ChangeColorComponent implements OnInit {
-  accessToken = localStorage.getItem('token');
-  @Input() color;
-  @Output() colorEmit = new EventEmitter();
-  @Output() changeColor = new EventEmitter();
-  constructor(private myHttpService: HttpService) { }
-  colorArray = [[{ 'color': '#ffffff', 'name': 'White' },
+  private accessToken = localStorage.getItem('token');
+  private colorArray = [[{ 'color': '#ffffff', 'name': 'White' },
   { 'color': '#f28b82', 'name': 'Red' },
   { 'color': '#fbbc04', 'name': 'Orange' },
   { 'color': '#fff475', 'name': 'Yellow' }],
@@ -27,6 +23,10 @@ export class ChangeColorComponent implements OnInit {
   { 'color': '#e6c9a8', 'name': 'Brown' },
   { 'color': '#e8eaed', 'name': 'Gray' }]]
 
+  @Input() color;
+  @Output() colorEmit = new EventEmitter();
+  @Output() changeColor = new EventEmitter();
+  constructor(private myHttpService: HttpService) { }
   ngOnInit() {
   }
   /**

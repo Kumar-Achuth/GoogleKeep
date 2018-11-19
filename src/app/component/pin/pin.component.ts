@@ -8,7 +8,7 @@ import { LoggerService } from '../../core/services/loggerService/logger.service'
   styleUrls: ['./pin.component.scss']
 })
 export class PinComponent implements OnInit {
-  accessToken = localStorage.getItem('token');
+  private accessToken = localStorage.getItem('token');
   @Input() pinNote;
   @Output() pinEvent = new EventEmitter();
   constructor(private myHttpService: HttpService, ) { }

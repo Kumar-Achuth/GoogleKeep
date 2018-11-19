@@ -7,9 +7,9 @@ import { HttpService } from '../../core/services/httpServices/http.service';
   styleUrls: ['./add-archive.component.scss']
 })
 export class AddArchiveComponent implements OnInit {
-  accessToken = localStorage.getItem('token');
-  body: any = {}
-  cards:any=[];
+  private accessToken = localStorage.getItem('token');
+  private body: any = {}
+  private cards:any=[];
   @Input() archive;
   @Output() archiveEmit = new EventEmitter();
   constructor(private myHttpService: HttpService) { }

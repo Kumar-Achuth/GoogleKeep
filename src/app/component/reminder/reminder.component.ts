@@ -10,9 +10,9 @@ import { LoggerService } from '../../core/services/loggerService/logger.service'
   styleUrls: ['./reminder.component.scss']
 })
 export class ReminderComponent implements OnInit {
-  body: any = {};
-  accessToken = localStorage.getItem('token');
-  reminderArray: any = [];
+  private body: any = {};
+  private accessToken = localStorage.getItem('token');
+  private reminderArray: any = [];
   constructor(private myHttpService: HttpService) { }
   ngOnInit() {
     this.getReminders();

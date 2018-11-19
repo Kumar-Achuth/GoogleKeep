@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA
+} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -28,8 +31,8 @@ import { AddPhotoComponent } from './component/add-photo/add-photo.component';
 import { AddArchiveComponent } from './component/add-archive/add-archive.component';
 import { MoreComponent } from './component/more/more.component';
 import { AddNotesComponent } from './component/add-notes/add-notes.component';
-import { AuthService} from './core/services/authGuard/auth.service';
-import { AuthGuard} from './core/services/authGuard/auth.guard';
+import { AuthService } from './core/services/authGuard/auth.service';
+import { AuthGuard } from './core/services/authGuard/auth.guard';
 import { NoteCardsComponent } from './component/note-cards/note-cards.component';
 import { UpdateNotesComponent } from './component/update-notes/update-notes.component';
 import { LabelsComponent } from './component/labels/labels.component';
@@ -38,27 +41,44 @@ import { DeleteLabelComponent } from './component/delete-label/delete-label.comp
 import { DeleteTrashComponent } from './component/delete-trash/delete-trash.component';
 import { LabelFilterPipe } from '../app/core/pipes/label-filter.pipe';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
-import { LoggerService} from './core/services/loggerService/logger.service';
+import { LoggerService } from './core/services/loggerService/logger.service';
 import { CropImageComponent } from './component/crop-image/crop-image.component';
-import { ImageCropperModule} from 'ngx-image-cropper';
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
-import{ MessagingService} from './core/services/messageService/messaging.service';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import {
-  MatListModule, MatTableModule, MatPaginatorModule, MatSortModule,
-  MatNativeDateModule, MatChipsModule, MatCheckboxModule, MatSelectModule, MatToolbarModule,
-  MatButtonModule, MatIconModule, MatCardModule, MatRadioModule, MatStepperModule,
-  MatSidenavModule, MatMenuModule, MatExpansionModule, MatTooltipModule, MatDatepickerModule,
-  MatInputModule, MatFormFieldModule,MatSnackBarModule, MatDialogModule
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+
+import { MessagingService } from './core/services/messageService/messaging.service';
+
+import {
+  MatListModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatNativeDateModule,
+  MatChipsModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatIconModule,
+  MatCardModule,
+  MatRadioModule,
+  MatStepperModule,
+  MatSidenavModule,
+  MatMenuModule,
+  MatExpansionModule,
+  MatTooltipModule,
+  MatDatepickerModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatSnackBarModule,
+  MatDialogModule
 } from '@angular/material';
 
-
 import { PinComponent } from './component/pin/pin.component';
-
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -108,11 +128,11 @@ import { PinComponent } from './component/pin/pin.component';
     MatRadioModule,
     MatStepperModule,
     ReactiveFormsModule,
-    HttpClientModule ,
+    HttpClientModule,
     HttpClientInMemoryWebApiModule,
     MatSnackBarModule,
     MatSidenavModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     LayoutModule,
     MatListModule,
     MatTableModule,
@@ -127,12 +147,12 @@ import { PinComponent } from './component/pin/pin.component';
     MatCheckboxModule,
     ImageCropperModule,
     MatDialogModule
-  
+
 
   ],
-  providers: [HttpService, AuthService, AuthGuard,MessagingService, LoggerService],
+  providers: [HttpService, AuthService, AuthGuard, MessagingService, LoggerService],
   bootstrap: [AppComponent],
-  entryComponents:[DeleteLabelComponent,DeleteTrashComponent, CropImageComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

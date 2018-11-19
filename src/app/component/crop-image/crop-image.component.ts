@@ -12,10 +12,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class CropImageComponent implements OnInit {
 
-  public croppedImage: any = '';
-  imageChangedEvent: any = '';
+  private croppedImage: any = '';
+  private imageChangedEvent: any = '';
   constructor(
-    public dialogRefPic: MatDialogRef<NavbarComponent>,
+    private dialogRefPic: MatDialogRef<NavbarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private myHttpService: HttpService,
     private dataService: GlobalSearchService) { }
@@ -29,14 +29,13 @@ export class CropImageComponent implements OnInit {
   imageCropped(event: any) {
     this.croppedImage = event.file;
   }
-  public image2 = localStorage.getItem('imageUrl');
+  private  image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
   /**
    * @description Api CAll fro Profile Picture Upload
    */
   onUpload() {
     var token = localStorage.getItem('token');
-    console.log(this.croppedImage);
     const uploadData = new FormData();
     uploadData.append('file', this.croppedImage);
     this.myHttpService.httpAddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {

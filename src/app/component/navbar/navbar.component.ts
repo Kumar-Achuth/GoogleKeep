@@ -12,32 +12,31 @@ import { GlobalSearchService } from '../../core/services/globalSearchService/glo
 import { environment } from '../../../environments/environment';
 import { CropImageComponent } from '../crop-image/crop-image.component';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  token = localStorage.getItem('token');
-  labelArray: any = []
-  model: any = {}
-  ProfilePath: any;
-  globalSearch: any;
-  list = 0;
-  title = "Keep";
-  public picture: any;
+  private token = localStorage.getItem('token');
+  private labelArray: any = []
+  private model: any = {}
+  private ProfilePath: any;
+  private globalSearch: any;
+  private list = 0;
+  private title = "Keep";
+  private picture: any;
+  private firstName: any;
+  private lastName: any;
+  private email: any;
   isHandset$: Observable<boolean> = this.breakpointObserver.
     observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
-    public route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
-    private router: Router, public dialog: MatDialog, public data: GlobalSearchService) {}
-  firstName: any;
-  lastName: any;
-  email: any;
+    private route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
+    private router: Router, private dialog: MatDialog, private data: GlobalSearchService) {}  
   ngOnInit() {
     this.labelArray = []
     this.firstName = localStorage.getItem('firstName');
@@ -55,7 +54,6 @@ export class NavbarComponent {
       backdropClass: '',
       data: ''
     });
-
     dialogRef.afterClosed().subscribe(() => {
       this.getLabels();
     });
@@ -90,7 +88,6 @@ export class NavbarComponent {
             newArray.push(data['data']['details'][i])
           }
           else {
-            console.log('Ok')
           }
         }
         this.labelArray = newArray;
@@ -115,7 +112,7 @@ export class NavbarComponent {
     this.list = 0;
   }
   selectedFile = null;
-  public image2 = localStorage.getItem('imageUrl');
+  private image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
 /**
  * @description Function to select the required Path for image selection 
@@ -138,9 +135,7 @@ export class NavbarComponent {
       data: data
     });
     dialogRefPic.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
       this.data.currentMsg.subscribe(message => this.picture = message);
-      console.log("pic", this.picture);
       if (this.picture == true) {
         this.image2 = localStorage.getItem('imageUrl');
         this.img = environment.apiUrl + this.image2;

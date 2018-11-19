@@ -12,20 +12,19 @@ import { DeleteLabelComponent } from '../delete-label/delete-label.component';
   styleUrls: ['./labels.component.scss']
 })
 export class LabelsComponent implements OnInit {
-  body: any = {}
-  hide = true;
-  editShow: any;
-  input: any = {};
-  labelArray1: any = [];
+  private body: any = {}
+  private hide = true;
+  private editShow: any;
+  private input: any = {};
+  private labelArray1: any = [];
+  private accessToken = localStorage.getItem('token');
+  private id = localStorage.getItem('userId');
   @ViewChild('labelsId') labelsId: ElementRef;
   @ViewChild('labelId') labelId: ElementRef;
   @Output() newEvent = new EventEmitter();
   @Input() trash;
-  accessToken = localStorage.getItem('token');
-  id = localStorage.getItem('userId');
-
-  constructor(public data: GlobalSearchService, private myHttpService: HttpService,
-    public dialogRef: MatDialogRef<NavbarComponent>, public dialog: MatDialog) { }
+  constructor(private data: GlobalSearchService, private myHttpService: HttpService,
+    private dialogRef: MatDialogRef<NavbarComponent>, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllLabels();
@@ -106,9 +105,6 @@ export class LabelsComponent implements OnInit {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             newArray.push(data['data']['details'][i])
-          }
-          else {
-            console.log('Ok')
           }
         }
         this.labelArray1 = newArray;
