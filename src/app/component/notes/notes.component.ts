@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
+import { NotesInformation } from 'src/app/core/models/notes-information';
 
 @Component({
   selector: 'app-notes',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
-  private cards: any = [];
+  private cards: NotesInformation[] = [];
   private pinnedNotes: any = [];
   private accessToken = localStorage.getItem('token');
   constructor(private myHttpService: HttpService, private router: Router) { }
@@ -23,13 +24,15 @@ export class NotesComponent implements OnInit {
     this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
       .subscribe(data => {
         this.cards = [];
-        for (var i = data["data"]['data'].length - 1; i >= 0; i--) {
-          if (data["data"]['data'][i].isDeleted == false &&
-            data["data"]['data'][i].isArchived == false &&
-            data["data"]['data'][i].isPined == false) {
-            this.cards.push(data["data"]['data'][i])
+        var noteList:NotesInformation[]=data["data"]['data'];
+        for (var i = noteList.length - 1; i >= 0; i--) {
+          if (noteList[i].isDeleted == false &&
+            noteList[i].isArchived == false &&
+            noteList[i].isPined == false) {
+            this.cards.push(noteList[i])
           }
         }
+        console.log(this.cards)
       },
         error => {
           ;
@@ -49,6 +52,7 @@ export class NotesComponent implements OnInit {
             this.pinnedNotes.push(data["data"]['data'][i])
           }
         }
+        console.log(this.pinnedNotes)
       },
         error => {
           ;
@@ -59,5 +63,8 @@ export class NotesComponent implements OnInit {
       this.getNotes();
       this.getPinedNotes();
     }
+  }
+  new(event:NotesInformation){
+    this.cards.splice(0,0,event)
   }
 }

@@ -5,9 +5,6 @@ mat-card{
     background-color: rgb(255, 255, 255);
     box-shadow: 0 5px 5px rgba(0,0,0,0.20);
 }
-.opened{
-    background-color: rgb(255, 255, 255);
-}
 .click
 {
   cursor: pointer;
@@ -29,7 +26,12 @@ mat-card{
     width: 100%;
     word-wrap: break-word;
     font-style: bold;
-    background-color: rgb(255, 255, 255);
+    letter-spacing: .00625em;
+    font-family: 'Google Sans','Roboto',Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding-top: 12px;
 }
 .edit
 {
@@ -40,7 +42,11 @@ mat-card{
     width: 100%;
     word-wrap: break-word;
     margin-bottom: 10px;
-    background-color: rgb(255, 255, 255);
+    letter-spacing: .01428571em;
+    font-family: 'Roboto',Arial,sans-serif;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
@@ -56,7 +62,6 @@ mat-card{
     outline: none;
     width: 100%;
     word-wrap: break-word;
-    background-color: rgb(255, 255, 255);
 }
 .topping{
     padding-top: 4%;

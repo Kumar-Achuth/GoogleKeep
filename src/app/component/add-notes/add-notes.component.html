@@ -5,10 +5,8 @@ style="margin-top:100px; border-radius: 8px">
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
             <div class="click">
-                <i class="material-icons" mat-raised-button matTooltip="New List"
-                 (click)="toggle()">
-                    list
-                </i>
+               <mat-icon  matTooltip="New List"
+               (click)="toggle()">list</mat-icon>
             </div>
         </div>
     </mat-card>
@@ -35,6 +33,7 @@ style="margin-top:100px; border-radius: 8px">
             <mat-divider></mat-divider>
             <div  fxLayout="row" autofocus id="notesId">
                 <mat-icon fxFlex="5%">add</mat-icon>
+            
                 <input id="note" [(ngModel)]=data (click)="checked=true" fxFlex="95%" 
                 class="inputNote" [(ngModel)]=data.data
                     placeholder="List item" (keydown.enter)="enter()">

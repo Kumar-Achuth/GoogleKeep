@@ -40,12 +40,15 @@
               view_module</mat-icon>
             </div>
           </div>
+
+          <!-- *************************Profile Picture Display************************* -->
+         
           <div  matTooltip="Google Account" class="img" >
               <button *ngIf="image2!=''"  class="profilebutton" mat-mini-fab color="disabled"
                [matMenuTriggerFor]="appMenu">
                   <img src="{{img}}" class="image">
                 </button>
-                <button *ngIf="image2==''" class="profilebutton" mat-mini-fab 
+                <button *ngIf="image2==''" class="profilebutton" mat-mini-fab color="disabled"
                 [matMenuTriggerFor]="appMenu">
                     {{firstName | slice:0:1}}
                   </button>
@@ -63,7 +66,7 @@
             </button>
               <button *ngIf="image2==''" (click) = "$event.stopPropagation()" 
               (click)="selectFile.click()" matTooltip="{{firstName | titlecase}}"
-              mat-mini-fab class="profile-pic">
+              mat-mini-fab color="disabled" class="profile-pic">
               {{firstName | slice:0:1}}
               </button>
               <input style="display:none" (click) = "$event.stopPropagation()"
@@ -92,36 +95,39 @@
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
           [mode]="(isHandset$ | async) ? 'over' : 'side'" 
           [opened]="(isHandset$ | async)">
-          <mat-nav-list>
-
-            <a (click)='aptTitle("Fundoo Notes")' mat-list-item routerLink='/home/notes'>
+          <mat-nav-list class="list">
+            <a (click)='aptTitle("Notes")' mat-list-item routerLinkActive="active" routerLink='/home/notes'>
               <img src="../../../assets/images/bulp.svg">
               <div class="bulp" >Notes</div></a> 
-            <a (click)='aptTitle("Reminders")' mat-list-item routerLink='/home/reminder'>
+            <a (click)='aptTitle("Reminders")' mat-list-item routerLinkActive="active" routerLink='/home/reminder'>
               <img src="../../../assets/images/bell.svg">
-              <div class="bulp" >Reminders</div></a>
-            <hr>
-            <a mat-list-item> Labels </a>
-            <div *ngFor="let labels of labelArray" 
+              <div class="bulp" >Reminders</div></a><hr>
+
+            <!-- ***********************Labels Display************************* -->
+
+            <a mat-list-item routerLinkActive="active" > <p class="lab">Labels</p>  </a>
+            <div routerLinkActive="active" *ngFor="let labels of labelArray" 
             (click)="select(labels)">
               <div *ngIf="labels.isDeleted==false">
-                <a (click)='aptTitle(labels.label)' mat-list-item>
+                <a (click)='aptTitle(labels.label)' routerLinkActive="active" mat-list-item>
                 <img src="../../../assets/images/labels.svg">
-                  <span class="bulp" [innerHTML]="labels.label"></span>
+                  <span class="bulp" routerLinkActive="active" [innerHTML]="labels.label"></span>
                 </a>
               </div>
             </div>
-            <a mat-list-item (click)="openDialog()">
+            <a mat-list-item (click)="openDialog()" >
               <img src="../../../assets/images/edit.svg"><div class="bulp" >Edit Labels</div></a>
             <hr>
-            <a (click)='aptTitle("Archive")' mat-list-item routerLink="/home/archive">
+            <a (click)='aptTitle("Archive")' mat-list-item routerLinkActive="active" routerLink="/home/archive">
               <img src="../../../assets/images/archive.svg"><div class="bulp" >Archive</div></a>
-            <a (click)='aptTitle("Trash")' mat-list-item routerLink="/home/trash">
+            <a (click)='aptTitle("Trash")' mat-list-item routerLinkActive="active" routerLink="/home/trash">
               <img src="../../../assets/images/trash.svg"><div class="bulp" >Trash</div></a>
             <hr>
           </mat-nav-list>
         </mat-sidenav>
+
         <!-- *******************Side Nav Content Display************************* -->
+
         <mat-sidenav-content>
           <router-outlet>
              <!-- content goes here -->

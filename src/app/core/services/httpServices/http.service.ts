@@ -5,17 +5,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-  private url = 'http://34.213.106.173/api/';
-
+  url = 'http://34.213.106.173/api/';
   constructor(private http: HttpClient) { }
   getConfig(url) {
-    url = this.url + url;
     return this.http.get(url);
   }
-  postConfig(url, body) {
-    url = this.url + url;
-    return this.http.post(url, body);
-  }
+  // postConfig(url, body) {
+  //   url = this.url + url;
+  //   return this.http.post(url, body);
+  // }
   postPassword(url, body) {
     url = this.url + url;
     return this.http.post(url, body);
@@ -59,7 +57,6 @@ export class HttpService {
     };
     return this.http.post(url, {}, httpOptions)
   }
-
   postNotes(url, input, token) {
     url = this.url + url;
     console.log(token);
@@ -74,7 +71,6 @@ export class HttpService {
 
   getNotes(url, token) {
     url = this.url + url;
-    // console.log(token);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -261,25 +257,25 @@ export class HttpService {
     }
     return this.http.get(url, httpOptions)
   }
-  httpAddReminder(url,token,body){
+  httpAddReminder(url, token, body) {
     url = this.url + url;
     console.log(token);
-    var httpOptions={
-      headers:new HttpHeaders({
-       'Authorization':token
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': token
       })
     };
-    return this.http.post(url,body,httpOptions)
-  } 
- public httpGetReminder(url,token){
-  url = this.url + url;
+    return this.http.post(url, body, httpOptions)
+  }
+  public httpGetReminder(url, token) {
+    url = this.url + url;
     console.log(token);
-    var httpOptions={
-      headers:new HttpHeaders({
-       
-       'Authorization':token
+    var httpOptions = {
+      headers: new HttpHeaders({
+
+        'Authorization': token
       })
     };
-    return this.http.get(url,httpOptions)
+    return this.http.get(url, httpOptions)
   }
 }

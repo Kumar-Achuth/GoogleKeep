@@ -12,10 +12,10 @@ import { LoggerService } from 'src/app/core/services/loggerService/logger.servic
 })
 export class LoginComponent implements OnInit {
   private hide = true;
-  private Email = new FormControl('', [Validators.required,
+   Email = new FormControl('', [Validators.required,
   Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
-  private password = new FormControl('', [Validators.required])
-  private model: any = {}
+  password = new FormControl('', [Validators.required])
+  model: any = {}
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
     private router: Router) { }
   ngOnInit() {

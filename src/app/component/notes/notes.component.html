@@ -1,7 +1,11 @@
 <!-- *************************Add Notes Display In Home Page******************* -->
 
-<app-add-notes (newEvent)="eventEntry($event)">
-</app-add-notes>
+<!-- <app-add-notes (newEvent)="eventEntry($event)">
+</app-add-notes> -->
+
+
+<app-add-notes (addNote)="new($event)" (newEvent)="eventEntry($event)">
+  </app-add-notes>
 <!-- ************************Pinned Notes Display In Notes Cards********************* -->
 
 <div *ngIf ="pinnedNotes.length!=0">

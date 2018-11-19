@@ -4,8 +4,12 @@
     <div class="styles" [style.backgroundColor]="data.color">
         <div contenteditable="true" id="titleId" class="reset" [innerHtml]="data.title"
          data-text=""></div><br>
-        <div contenteditable="true" id="notesId" class="edit" *ngIf="!checkList" [innerHtml]="data.description" 
-        data-text=""></div><br>
+        <div contenteditable="true" id="notesId" class="edit" *ngIf="!checkList" 
+        [innerHtml]="data.description" 
+        data-text=""></div>
+
+        <!-- ********************CheckList Display And Update ************************** -->
+
         <div class="note" *ngFor="let check of tempArray" fxLayout="row">
                 <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
                 (click)=checkBox(check)></mat-checkbox>
@@ -21,7 +25,7 @@
                   <input   fxFlex="95%" class="note" placeholder="List Item" 
                   [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
                 </div>
-                <mat-divider *ngIf="checklist"></mat-divider>
+                <div *ngIf="checklist"></div>
                 <div class="note" *ngFor="let check of tempArray" fxLayout="row">
                   <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted"
                    (click)=checkBox(check)></mat-checkbox>
@@ -31,7 +35,10 @@
                   <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
                    *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
                   </div>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
+                  
+                  <!-- *************************Label Display And Update*******************  -->
+
+        <div fxLayout="row wrap" class="spacebetween">
             <div class="chips" *ngFor="let index of data.noteLabels">
                 <mat-chip-list>
                     <mat-chip *ngIf="index.isDeleted==false">
@@ -42,6 +49,9 @@
                 </mat-chip-list>
             </div>
         </div>
+
+        <!-- *********************Reminder Display and Update *********************** -->
+
         <div *ngIf="data.reminder.length!=0">
             <mat-chip-list>
             <mat-chip  class="cursor">
@@ -50,6 +60,7 @@
             </mat-chip>
             </mat-chip-list>
             </div>
+            <!-- *******************************Icons Display************************* -->
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
             <app-add-reminder [reminder]="data" >
             </app-add-reminder>

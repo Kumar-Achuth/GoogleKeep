@@ -31,6 +31,7 @@ export class AddNotesComponent implements OnInit {
     private dateArray = [];
     private notes={'id':''}
     @Output() newEvent = new EventEmitter();
+    @Output() addNote = new EventEmitter();
     constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
@@ -65,8 +66,7 @@ export class AddNotesComponent implements OnInit {
                 'color': this.color,
                 "reminder":this.dating
             }, this.accessToken).subscribe(response => {
-                this.newEvent.emit({
-                })
+                this.addNote.emit(response['status'].details)
                 this.labelName = [];
                 this.hide = !this.hide;
                 this.color = "#fafafa";

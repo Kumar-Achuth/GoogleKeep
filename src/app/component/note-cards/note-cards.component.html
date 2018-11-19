@@ -8,27 +8,25 @@
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card style="margin-top : 10px; border-radius: 8px" [style.backgroundColor]="notes.color">
         <app-pin [pinNote]="notes" (pinEvent)="deleteEvent($event)" class="pin"></app-pin>
-        <mat-card-title (click)="openDialog(notes)">
+        <mat-card-title class="title" (click)="openDialog(notes)">
           <div [innerHtml]="notes.title"></div>
         </mat-card-title>
-        <mat-card-content (click)="openDialog(notes)">
+        <mat-card-content class="description" (click)="openDialog(notes)">
           <div [innerHtml]="notes.description"></div>
         </mat-card-content>
 
         <!-- ************************CheckList Display In Notes********************* -->
 
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
-          <mat-divider></mat-divider>
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-          (click)=checkBox(checklist,notes)></mat-checkbox>
+          (click)=checkBox(checklist,notes)></mat-checkbox><br>
           <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
           [(ngModel)]=checklist.itemName fxFlex="90%"
-            class="check" (click)="open(notes)" [style.backgroundColor]="notes.color">
-        </div>
+            class="check" (click)="open(notes)" [style.backgroundColor]="notes.color"><br>
+        </div><br>
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
            (click)=checkBox(checklist,notes)></mat-checkbox>
-          <mat-divider></mat-divider>
           <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
           (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
@@ -41,7 +39,7 @@
             <div *ngIf="index.isDeleted == false">
               <mat-chip-list selected>
                 <mat-chip  (click)="select(index)">
-                  {{index.label}}
+                  <span class="displayLabels">{{index.label}}</span>
                   <mat-icon matChipRemove (click)="$event.stopPropagation();
                    deleteChips(notes.id,index.id)">cancel</mat-icon>
                 </mat-chip>

@@ -3,6 +3,7 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSnackBar } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/core/services/userServices/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -47,14 +48,15 @@ export class SignupComponent implements OnInit {
   private model: any = {};
   private service: any;
   private cards = [];
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
+  constructor(public myHttpService: UserService, private snackBar: MatSnackBar) { }
   ngOnInit() {
-    this.records = this.myHttpService.getConfig('/user/service').subscribe(data => {
-      for (var i = 0; i < data["data"].data.length; i++) {
-        data["data"].data[i].select = false;
-        this.cards.push(data["data"].data[i]);
-      }
-    })
+    this.users();
+    // this.records = this.myHttpService.getConfig().subscribe(data => {
+    //   for (var i = 0; i < data["data"].data.length; i++) {
+    //     data["data"].data[i].select = false;
+    //     this.cards.push(data["data"].data[i]);
+    //   }
+    // })
   }
 /** 
  * @param card 
@@ -96,7 +98,7 @@ export class SignupComponent implements OnInit {
    */
   send() {
     if (this.LastName.valid && this.FirstName.valid) {
-      this.myHttpService.postConfig('user/userSignUp', {
+      this.myHttpService.postConfig( {
         "firstName": this.model.FirstName,
         "lastName": this.model.LastName,
         "service": this.service,
@@ -129,6 +131,14 @@ export class SignupComponent implements OnInit {
   }
   onSubmit() {
     alert('Success' + JSON.stringify(this.model))
+  }
+  users(){
+    this.records = this.myHttpService.getConfig().subscribe(data => {
+      for (var i = 0; i < data["data"].data.length; i++) {
+        data["data"].data[i].select = false;
+        this.cards.push(data["data"].data[i]);
+      }
+    })
   }
 }
 
