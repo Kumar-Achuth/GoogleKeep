@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { environment } from '../../../environments/environment';
 import { CropImageComponent } from '../crop-image/crop-image.component';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-navbar',
@@ -34,7 +35,7 @@ export class NavbarComponent {
     .pipe(
       map(result => result.matches)
     );
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+  constructor(private myHttpService: HttpService,private notesService:NotesService, private snackBar: MatSnackBar,
     private route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
     private router: Router, private dialog: MatDialog, private data: GlobalSearchService) {}  
   ngOnInit() {
@@ -81,7 +82,7 @@ export class NavbarComponent {
  */
   getLabels() {
     let newArray = [];
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.token)
+    this.notesService.getLabels()
       .subscribe(data => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {

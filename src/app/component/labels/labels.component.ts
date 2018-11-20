@@ -5,6 +5,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { DeleteLabelComponent } from '../delete-label/delete-label.component';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-labels',
@@ -24,6 +25,7 @@ export class LabelsComponent implements OnInit {
   @Output() newEvent = new EventEmitter();
   @Input() trash;
   constructor(private data: GlobalSearchService, private myHttpService: HttpService,
+    private newService: NotesService,
     private dialogRef: MatDialogRef<NavbarComponent>, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -64,8 +66,7 @@ export class LabelsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.myHttpService.deleteLabel('/noteLabels/' + id + '/deleteNoteLabel',
-          this.accessToken).subscribe(response => {
+        this.newService.deleteLabel(id).subscribe(response => {
             this.getAllLabels();
             this.data.deleteMessage(true)
           })
@@ -77,12 +78,12 @@ export class LabelsComponent implements OnInit {
    * @param id 
    */
   updateTheLabel(id) {
-    this.myHttpService.getUpdatedLabel('/noteLabels/' + id + '/updateNoteLabel', {
+    this.newService.getUpdatedLabel(id,{
       "label": this.labelsId.nativeElement.innerHTML,
       "isDeleted": false,
       "id": id,
       "userId": this.id
-    }, this.accessToken).subscribe(response => {
+    }).subscribe(response => {
       this.getAllLabels();
     })
   }
@@ -99,7 +100,7 @@ export class LabelsComponent implements OnInit {
    * @description Get Api Call for NoteLabels
    */
   getAllLabels() {
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+    this.newService.getLabels()
       .subscribe(data => {
         let newArray = [];
         for (var i = 0; i < data['data']['details'].length; i++) {

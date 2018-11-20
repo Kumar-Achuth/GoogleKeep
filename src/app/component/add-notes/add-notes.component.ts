@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
     selector: 'app-add-notes',
@@ -32,7 +33,7 @@ export class AddNotesComponent implements OnInit {
     private notes={'id':''}
     @Output() newEvent = new EventEmitter();
     @Output() addNote = new EventEmitter();
-    constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+    constructor(private myHttpService: HttpService,private noteService:NotesService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
         this.getAllLabels();
@@ -57,7 +58,7 @@ export class AddNotesComponent implements OnInit {
             this.dating=this.date
         }
         if (this.checked == false) {
-            this.myHttpService.postNotes('notes/addNotes', {
+            this.noteService.postNotes({
                 'title': document.getElementById('titleId').innerHTML,
                 'description': document.getElementById('notesId').innerHTML,
                 'labelIdList': JSON.stringify(this.labelId),
@@ -65,7 +66,7 @@ export class AddNotesComponent implements OnInit {
                 'isPined': 'false',
                 'color': this.color,
                 "reminder":this.dating
-            }, this.accessToken).subscribe(response => {
+            }).subscribe(response => {
                 this.addNote.emit(response['status'].details)
                 this.labelName = [];
                 this.hide = !this.hide;
@@ -101,14 +102,14 @@ export class AddNotesComponent implements OnInit {
                 this.dataArrayCheck.push(apiObj)
                 this.status = "open"
             }
-            this.myHttpService.postNotes('notes/addNotes', {
+            this.noteService.postNotes({
                 'title': document.getElementById('titleId').innerHTML,
                 'labelIdList': JSON.stringify(this.labelId),
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
                 'color': this.color,
                 "reminder":this.dating
-            }, this.accessToken).subscribe(response => {
+            }).subscribe(response => {
                 this.newEvent.emit({
                 })
                 this.dataArrayCheck = [];
@@ -164,7 +165,7 @@ export class AddNotesComponent implements OnInit {
      */
     getAllLabels() {
         let newArray = [];
-        this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+        this.noteService.getLabels()
             .subscribe(data => {
                 for (var i = 0; i < data['data']['details'].length; i++) {
                     if (data['data']['details'][i].isDeleted == false) {

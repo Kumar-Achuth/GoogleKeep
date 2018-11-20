@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-note-cards',
@@ -27,7 +28,7 @@ export class NoteCardsComponent implements OnInit {
   @Output() trashEvent = new EventEmitter();
   @Input() globalSearch;
   constructor(private myHttpService: HttpService, private router: Router,
-    private dialog: MatDialog,  private data: GlobalSearchService) {
+    private dialog: MatDialog,   private newService: NotesService,  private data: GlobalSearchService) {
     this.data.deletedLabel.subscribe(message => {
       if (message) {
         this.trashEvent.emit({
@@ -70,7 +71,7 @@ export class NoteCardsComponent implements OnInit {
   }
   getAllLabels() {
     let newArray = [];
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+    this.newService.getLabels()
       .subscribe(data => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {

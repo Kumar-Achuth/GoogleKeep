@@ -6,14 +6,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HttpService {
   url = 'http://34.213.106.173/api/';
-  constructor(private http: HttpClient) { }
+  accessToken = localStorage.getItem('token');
+  constructor(public http: HttpClient) { }
   getConfig(url) {
     return this.http.get(url);
   }
-  // postConfig(url, body) {
-  //   url = this.url + url;
-  //   return this.http.post(url, body);
-  // }
+  postConfig(url, body) {
+    url = this.url + url;
+    return this.http.post(url, body);
+  }
   postPassword(url, body) {
     url = this.url + url;
     return this.http.post(url, body);
@@ -57,13 +58,12 @@ export class HttpService {
     };
     return this.http.post(url, {}, httpOptions)
   }
-  postNotes(url, input, token) {
+  addNotes(url, input) {
     url = this.url + url;
-    console.log(token);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
+        'Authorization': this.accessToken
       })
     }
     return this.http.post(url, this.getFormUrlEncoded(input), httpOptions)
@@ -151,27 +151,26 @@ export class HttpService {
     };
     return this.http.post(url, body, httpOptions);
   }
-  getLabels(url, token) {
+  getTheLabels(url) {
     url = this.url + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
+        'Authorization': this.accessToken
       })
     };
-    return this.http.get(url, httpOptions)
-
+    return this.http.get(url,httpOptions)
   }
-  deleteLabel(url, body) {
+  deleteTheLabel(url) {
     url = this.url + url;
-    return this.http.delete(url, body);
+    return this.http.delete(url);
   }
-  getUpdatedLabel(url, body, token) {
+  postUpdatedLabel(url, body) {
     url = this.url + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': token
+        'Authorization': this.accessToken
       })
     };
     return this.http.post(url, body, httpOptions)

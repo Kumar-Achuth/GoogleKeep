@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
   private model: any = {};
   private service: any;
   private cards = [];
-  constructor(public myHttpService: UserService, private snackBar: MatSnackBar) { }
+  constructor(public myHttpService: HttpService, private snackBar: MatSnackBar) { }
   ngOnInit() {
     this.users();
     // this.records = this.myHttpService.getConfig().subscribe(data => {
@@ -98,7 +98,7 @@ export class SignupComponent implements OnInit {
    */
   send() {
     if (this.LastName.valid && this.FirstName.valid) {
-      this.myHttpService.postConfig( {
+      this.myHttpService.postConfig('user/userSignup', {
         "firstName": this.model.FirstName,
         "lastName": this.model.LastName,
         "service": this.service,
@@ -133,7 +133,7 @@ export class SignupComponent implements OnInit {
     alert('Success' + JSON.stringify(this.model))
   }
   users(){
-    this.records = this.myHttpService.getConfig().subscribe(data => {
+    this.records = this.myHttpService.getConfig('user/service').subscribe(data => {
       for (var i = 0; i < data["data"].data.length; i++) {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);

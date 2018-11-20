@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-more',
@@ -14,7 +15,7 @@ export class MoreComponent implements OnInit {
   @Input() trash;
   @Output() deleteCard = new EventEmitter();
   @Output() addEvent = new EventEmitter();
-  constructor(private myHttpService: HttpService) { }
+  constructor(private myHttpService: HttpService,private notesService:NotesService) { }
 
   ngOnInit() {
     this.getAllLabels();
@@ -51,7 +52,7 @@ export class MoreComponent implements OnInit {
    */
   getAllLabels() {
     let newArray = [];
-    this.myHttpService.getLabels('noteLabels/getNoteLabelList', this.accessToken)
+    this.notesService.getLabels()
     .subscribe(data => {
       for (var i = 0; i < data['data']['details'].length; i++) {
         if (data['data']['details'][i].isDeleted == false) {

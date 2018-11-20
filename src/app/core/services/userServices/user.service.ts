@@ -6,14 +6,14 @@ import { HttpService } from '../httpServices/http.service';
   providedIn: 'root'
 })
 export class UserService {
-baseUrl= environment.baseUrl;
-  constructor(private http : HttpService) { }
-  getConfig() {
-    let url = this.baseUrl + '/user/service';
-    return this.http.getConfig(url);
-  }
-  postConfig(body) {
-    let url = this.baseUrl + 'user/userSignUp';
-    return this.http.postLogin(url, body);
-  }
+// baseUrl= environment.baseUrl;
+//   constructor(private http : HttpService) { }
+//   getConfig() {
+//     let url = this.baseUrl + '/user/service';
+//     return this.http.getConfig(url);
+//   }
+//   postConfig(body) {
+//     let url = this.baseUrl + 'user/userSignUp';
+//     return this.http.postLogin(url, body);
+//   }
 }
