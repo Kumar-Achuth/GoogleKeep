@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
+import { UserService } from 'src/app/core/services/userServices/user.service';
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private hide = true;
    Email = new FormControl('', [Validators.required,
   Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   password = new FormControl('', [Validators.required])
   model: any = {}
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+  constructor(private userService:UserService, private snackBar: MatSnackBar,
     private router: Router) { }
   ngOnInit() {
   }
@@ -59,10 +62,11 @@ export class LoginComponent implements OnInit {
   loginValidation() {
     {
       if (this.password.valid) {
-        this.myHttpService.postLogin('user/login', {
+        this.userService.postLogin({
           "email": this.model.Email,
           "password": this.model.password
         })
+        .pipe(takeUntil(this.destroy$))
           .subscribe(
             (data) => {
               this.snackBar.open("Login ", "Successful", {
@@ -74,14 +78,11 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("lastName", data['lastName']);
               localStorage.setItem("userId", data['userId']);
               localStorage.setItem("imageUrl",data['imageUrl'])
-
-              
-              var token = localStorage.getItem("token");
               var pushToken=localStorage.getItem('pushToken')
               var body={
                 "pushToken":pushToken
               }
-              this.myHttpService.postTrash('user/registerPushToken',body,token).subscribe(
+              this.userService.pushToken(body).subscribe(
                 data=>{
                   LoggerService.log("Message Notification Available",data)
                 }),
@@ -102,6 +103,10 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
   
 }

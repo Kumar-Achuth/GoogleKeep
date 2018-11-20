@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { throwMatDuplicatedDrawerError } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-add-reminder',
@@ -10,7 +10,6 @@ import { FormControl } from '@angular/forms';
 })
 export class AddReminderComponent implements OnInit {
  
-  private accessToken = localStorage.getItem('token');
   private body = {};
   private show = true;
   private currentDate = new Date();
@@ -19,7 +18,7 @@ export class AddReminderComponent implements OnInit {
     { value: 'afternoon', viewPeriod: 'Afternoon', viewTime: '01:00 PM' },
     { value: 'evening', viewPeriod: 'Evening', viewTime: '06:00 PM' },
     { value: 'night', viewPeriod: 'Night', viewTime: '09:00 PM' }];
-  constructor(private myHttpService: HttpService) { }
+  constructor(private notesService: NotesService) { }
   @Input() reminder;
   @Output() dateEmit= new EventEmitter();
   @Output() remindEmit = new EventEmitter();
@@ -33,12 +32,12 @@ export class AddReminderComponent implements OnInit {
     var dates =  new Date(currentDate.getFullYear(),currentDate.getMonth(),
     currentDate.getDate(), 20, 0, 0, 0);
     this.dateEmit.emit(dates)
-    this.myHttpService.postArchive('notes/addUpdateReminderNotes',
+    this.notesService.reminder(
       {
         "noteIdList": [this.reminder.id],
         "reminder": dates,
           
-      }, this.accessToken).subscribe(data => {
+      }).subscribe(data => {
         this.remindEmit.emit({
         })
       })
@@ -49,11 +48,11 @@ export class AddReminderComponent implements OnInit {
     currentDate.getMonth(),
     currentDate.getDate() + 1, 8, 0, 0, 0)
     this.dateEmit.emit(dates2);
-    this.myHttpService.postArchive('notes/addUpdateReminderNotes',
+    this.notesService.reminder(
       {
         "noteIdList": [this.reminder.id],
         "reminder": dates2
-      }, this.accessToken).subscribe(data => {
+      }).subscribe(data => {
         this.remindEmit.emit({
         })
       })
@@ -64,11 +63,11 @@ export class AddReminderComponent implements OnInit {
     currentDate.getMonth(),
     currentDate.getDate() + 7, 8, 0, 0, 0);
     this.dateEmit.emit(dates3);
-    this.myHttpService.postArchive('notes/addUpdateReminderNotes',
+    this.notesService.reminder(
       {
         "noteIdList": [this.reminder.id],
         "reminder": dates3
-      }, this.accessToken).subscribe(data => {
+      }).subscribe(data => {
         this.remindEmit.emit({
         })
       })
@@ -98,8 +97,7 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder":dates4
       }
-      this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
-        this.accessToken, this.body).subscribe((result) => {
+      this.notesService.reminder(this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '1:00 PM') {
@@ -110,8 +108,7 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates5
       }
-      this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
-        this.accessToken, this.body).subscribe((result) => {
+      this.notesService.reminder(this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '6:00 PM') {
@@ -122,8 +119,7 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder":dates6
       }
-      this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
-        this.accessToken, this.body).subscribe((result) => {
+      this.notesService.reminder(this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '9:00 PM') {
@@ -134,8 +130,7 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates7
       }
-      this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
-        this.accessToken, this.body).subscribe((result) => {
+      this.notesService.reminder( this.body).subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == this.reminderBody.time) {
@@ -153,8 +148,7 @@ export class AddReminderComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder": dates8
         }
-        this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
-          this.accessToken, this.body).subscribe((result) => {
+        this.notesService.reminder(this.body).subscribe((result) => {
             this.remindEmit.emit()
           })
       } else if (ampm == 'PM' || ampm == 'pm') {
@@ -165,8 +159,7 @@ export class AddReminderComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder":date9
         }
-        this.myHttpService.httpAddReminder('notes/addUpdateReminderNotes',
-          this.accessToken, this.body).subscribe((result) => {
+        this.notesService.reminder(this.body).subscribe((result) => {
             this.remindEmit.emit()
           })
       }

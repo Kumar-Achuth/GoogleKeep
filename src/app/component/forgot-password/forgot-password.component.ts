@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { MatSnackBar } from '@angular/material';
+import { UserService } from 'src/app/core/services/userServices/user.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,7 +12,7 @@ export class ForgotPasswordComponent implements OnInit {
   private Email = new FormControl('', [Validators.required, Validators.email]);
   private isLeftVisible = false;
   private model: any = {}
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -26,7 +26,7 @@ export class ForgotPasswordComponent implements OnInit {
    */
   goToPassword() {
     if (!this.Email.invalid) {
-      this.myHttpService.postPassword('user/reset', {
+      this.userService.postPassword( {
         "email": this.model.Email,
       })
         .subscribe(

@@ -31,12 +31,13 @@
           </div>
          <div class ="one" style = "padding-left: 10px;float: right">
             <mat-icon matTooltip="Grid View" (click)="listView()"
-             *ngIf="list == 0">
+             *ngIf="list == 0" fxShow = "true" fxHide.sm = "true" fxHide.xs = "true">
               view_agenda</mat-icon>
             </div>
             <div class ="one" style = "padding-left: 10px;float: right">
             <mat-icon  class="material-icons" matTooltip="List View" 
-             (click)="gridView()" *ngIf="list == 1">
+             (click)="gridView()" *ngIf="list == 1" 
+              fxShow = "true" fxHide.sm = "true" fxHide.xs = "true">
               view_module</mat-icon>
             </div>
           </div>

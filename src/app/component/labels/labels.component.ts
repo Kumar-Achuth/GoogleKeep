@@ -25,7 +25,7 @@ export class LabelsComponent implements OnInit {
   @Output() newEvent = new EventEmitter();
   @Input() trash;
   constructor(private data: GlobalSearchService, private myHttpService: HttpService,
-    private newService: NotesService,
+    private notesService: NotesService,
     private dialogRef: MatDialogRef<NavbarComponent>, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class LabelsComponent implements OnInit {
         "isDeleted": false,
         "userId": this.id
       }
-    this.myHttpService.addLabel('/noteLabels', this.body, this.accessToken)
+    this.notesService.addLabel(this.body)
       .subscribe(response => {
         this.getAllLabels();
       }, error => {
@@ -66,7 +66,7 @@ export class LabelsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.newService.deleteLabel(id).subscribe(response => {
+        this.notesService.deleteLabel(id).subscribe(response => {
             this.getAllLabels();
             this.data.deleteMessage(true)
           })
@@ -78,7 +78,7 @@ export class LabelsComponent implements OnInit {
    * @param id 
    */
   updateTheLabel(id) {
-    this.newService.getUpdatedLabel(id,{
+    this.notesService.getUpdatedLabel(id,{
       "label": this.labelsId.nativeElement.innerHTML,
       "isDeleted": false,
       "id": id,
@@ -100,7 +100,7 @@ export class LabelsComponent implements OnInit {
    * @description Get Api Call for NoteLabels
    */
   getAllLabels() {
-    this.newService.getLabels()
+    this.notesService.getLabels()
       .subscribe(data => {
         let newArray = [];
         for (var i = 0; i < data['data']['details'].length; i++) {

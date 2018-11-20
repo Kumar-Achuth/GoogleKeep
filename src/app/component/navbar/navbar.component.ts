@@ -12,6 +12,7 @@ import { GlobalSearchService } from '../../core/services/globalSearchService/glo
 import { environment } from '../../../environments/environment';
 import { CropImageComponent } from '../crop-image/crop-image.component';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
+import { UserService } from 'src/app/core/services/userServices/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -35,9 +36,10 @@ export class NavbarComponent {
     .pipe(
       map(result => result.matches)
     );
-  constructor(private myHttpService: HttpService,private notesService:NotesService, private snackBar: MatSnackBar,
-    private route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
-    private router: Router, private dialog: MatDialog, private data: GlobalSearchService) {}  
+  constructor(private userService: UserService,private notesService:NotesService, 
+    private snackBar: MatSnackBar,private route: ActivatedRoute,
+     private breakpointObserver: BreakpointObserver,private router: Router,
+      private dialog: MatDialog, private data: GlobalSearchService) {}  
   ngOnInit() {
     this.labelArray = []
     this.firstName = localStorage.getItem('firstName');
@@ -64,7 +66,7 @@ export class NavbarComponent {
     */
   doLogout() {
     console.log(this.token);
-    this.myHttpService.postLogout('user/logout', this.token).subscribe(() => {
+    this.userService.logout().subscribe(() => {
       this.snackBar.open("Logout ", "Successful", {
         duration: 1000
       });

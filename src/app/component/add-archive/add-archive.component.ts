@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-add-archive',
@@ -7,12 +7,10 @@ import { HttpService } from '../../core/services/httpServices/http.service';
   styleUrls: ['./add-archive.component.scss']
 })
 export class AddArchiveComponent implements OnInit {
-  private accessToken = localStorage.getItem('token');
-  private body: any = {}
   private cards:any=[];
   @Input() archive;
   @Output() archiveEmit = new EventEmitter();
-  constructor(private myHttpService: HttpService) { }
+  constructor(private notesService: NotesService) { }
   ngOnInit() {
   }
 /**
@@ -20,10 +18,10 @@ export class AddArchiveComponent implements OnInit {
  * @param : isArchived, noteIdList
  */
   addArchive() {
-    this.myHttpService.postArchive('notes/archiveNotes', {
+    this.notesService.postArchive({
       "isArchived": true,
       "noteIdList": [this.archive.id]
-    }, this.accessToken).subscribe(data => {
+    }).subscribe(data => {
       this.archiveEmit.emit({
       })
     })
@@ -32,10 +30,10 @@ export class AddArchiveComponent implements OnInit {
    * @description UnArchive Function Api
    */
   unArchive() {
-    this.myHttpService.postArchive('notes/archiveNotes', {
+    this.notesService.postArchive({
       "isArchived": false,
       "noteIdList": [this.archive.id]
-    }, this.accessToken).subscribe(data => {
+    }).subscribe(data => {
       this.archiveEmit.emit({
       })
     })

@@ -29,7 +29,7 @@ export class CropImageComponent implements OnInit {
   imageCropped(event: any) {
     this.croppedImage = event.file;
   }
-  private  image2 = localStorage.getItem('imageUrl');
+  private image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
   /**
    * @description Api CAll fro Profile Picture Upload
@@ -38,7 +38,8 @@ export class CropImageComponent implements OnInit {
     var token = localStorage.getItem('token');
     const uploadData = new FormData();
     uploadData.append('file', this.croppedImage);
-    this.myHttpService.httpAddImage('user/uploadProfileImage', uploadData, token).subscribe(res => {
+    this.myHttpService.httpAddImage('user/uploadProfileImage',
+     uploadData, token).subscribe(res => {
       this.img = environment.apiUrl + res['status'].imageUrl;
       localStorage.setItem("imageUrl", res['status'].imageUrl);
       this.dialogRefPic.close()

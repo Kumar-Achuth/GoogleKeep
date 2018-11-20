@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
 import { NotesInformation } from 'src/app/core/models/notes-information';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-notes',
@@ -11,8 +11,7 @@ import { NotesInformation } from 'src/app/core/models/notes-information';
 export class NotesComponent implements OnInit {
   private cards: NotesInformation[] = [];
   private pinnedNotes: any = [];
-  private accessToken = localStorage.getItem('token');
-  constructor(private myHttpService: HttpService, private router: Router) { }
+  constructor(private notesService: NotesService, private router: Router) { }
   ngOnInit() {
     this.getNotes();
     this.getPinedNotes();
@@ -21,7 +20,7 @@ export class NotesComponent implements OnInit {
    * Get api call for getting notes 
    */
   getNotes() {
-    this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
+    this.notesService.getNotes()
       .subscribe(data => {
         this.cards = [];
         var noteList:NotesInformation[]=data["data"]['data'];
@@ -42,7 +41,7 @@ export class NotesComponent implements OnInit {
    * @description Get Api call for getting pinned Notes
    */
   getPinedNotes() {
-    this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
+    this.notesService.getNotes()
       .subscribe(data => {
         this.pinnedNotes = [];
         for (var i = data["data"]['data'].length - 1; i >= 0; i--) {

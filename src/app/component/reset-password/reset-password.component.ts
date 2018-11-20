@@ -3,6 +3,7 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/core/services/userServices/user.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ResetPasswordComponent implements OnInit {
       this.confirmPassword.hasError('pattern') ? 'Password required' :
         '';
   }
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar,
+  constructor(private userService: UserService, private snackBar: MatSnackBar,
     private router: Router,
     public route: ActivatedRoute, ) { }
  
@@ -55,7 +56,7 @@ export class ResetPasswordComponent implements OnInit {
         "newPassword": this.model.password
       }
       this.input.append('newPassword', this.model.password);
-      this.myHttpService.postReset("user/reset-password", body, this.accessToken)
+      this.userService.postReset(body)
         .subscribe(response => {
         }, error => {
         })

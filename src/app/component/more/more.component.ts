@@ -25,10 +25,10 @@ export class MoreComponent implements OnInit {
    * @param trash 
    */
   postToTrash(trash) {
-    this.myHttpService.postTrash('notes/trashNotes', {
+    this.notesService.postTrash({
       "isDeleted": true,
       "noteIdList": [this.trash.id]
-    }, this.accessToken).subscribe(data => {
+    }).subscribe(data => {
       this.deleteCard.emit({
       })
     })
@@ -39,9 +39,8 @@ export class MoreComponent implements OnInit {
    */
   goAndGetLabel(label) {
     this.addEvent.emit(label);
-    this.myHttpService.goLabel('notes/'+this.trash.id+'/addLabelToNotes/'+label.id+'/add',
-      { "noteId": this.trash.id, "lableId": label.id },
-      this.accessToken)
+    this.notesService.goLabel(this.trash.id,label.id,
+      { "noteId": this.trash.id,"lableId": label.id })
       .subscribe(data => {
         this.deleteCard.emit({
         })

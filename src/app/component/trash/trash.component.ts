@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DeleteTrashComponent } from '../delete-trash/delete-trash.component';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-trash',
@@ -11,8 +11,7 @@ import { DeleteTrashComponent } from '../delete-trash/delete-trash.component';
 })
 export class TrashComponent implements OnInit {
   private cards: any = [];
-  private accessToken = localStorage.getItem('token');
-  constructor(private myHttpService: HttpService, private dialog: MatDialog, 
+  constructor(private notesService:NotesService, private dialog: MatDialog, 
     private router: Router) { }
   ngOnInit() {
     this.getTrash();
@@ -28,10 +27,10 @@ export class TrashComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.myHttpService.foreverTrash('notes/deleteForeverNotes', {
+        this.notesService.foreverTrash({
           "isDeleted": false,
           "noteIdList": [card]
-        }, this.accessToken).subscribe(data => {
+        }).subscribe(data => {
           this.getTrash()
         })
       }
@@ -41,7 +40,7 @@ export class TrashComponent implements OnInit {
    * @description Get trash notes Api call
    */
   getTrash() {
-    this.myHttpService.getTrashNotes('notes/getTrashNotesList', this.accessToken)
+    this.notesService.getTrashNotes()
       .subscribe(data => {
         for (var i = 0; i < data["data"]['data'].length; i++) {
           this.cards = (data["data"]['data']);
@@ -55,10 +54,10 @@ export class TrashComponent implements OnInit {
    * @param card 
    */
   postToTrash(card) {
-    this.myHttpService.postTrash('notes/trashNotes', {
+    this.notesService.postTrash( {
       "isDeleted": false,
       "noteIdList": [card]
-    }, this.accessToken).subscribe(data => {
+    }).subscribe(data => {
       this.getTrash()
     })
   }

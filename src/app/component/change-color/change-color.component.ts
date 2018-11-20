@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-change-color',
@@ -26,7 +27,7 @@ export class ChangeColorComponent implements OnInit {
   @Input() color;
   @Output() colorEmit = new EventEmitter();
   @Output() changeColor = new EventEmitter();
-  constructor(private myHttpService: HttpService) { }
+  constructor(private notesService: NotesService) { }
   ngOnInit() {
   }
   /**
@@ -36,11 +37,10 @@ export class ChangeColorComponent implements OnInit {
   colorsEdit(id) {
     this.colorEmit.emit(id)
     if (this.color != undefined) {
-      this.myHttpService.postColor('/notes/changesColorNotes',
-        {
+      this.notesService.postColor({
           "color": id,
           "noteIdList": [this.color.id]
-        }, this.accessToken).subscribe(
+        }).subscribe(
           (data) => {
             localStorage.setItem('colorId', this.color.id);
             this.changeColor.emit({

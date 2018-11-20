@@ -12,14 +12,16 @@
      border-radius: 5%;
 }
 .spacebetween{
-    margin-left: 5px;
+    margin-left: 5px;   
 }
 .grid{
 width:900px;
 box-shadow: 0 1px 1px rgba(0,0,0,0.20);
 }
 .list{
-    width:290px;
+    width:300px;
+    margin-left: 10px;    
+    transition-property: opacity,transform;
     box-shadow: 0 1px 1px rgba(0,0,0,0.20);
 }
 .pin{

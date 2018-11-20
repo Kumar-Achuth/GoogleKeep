@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { Params, ActivatedRoute } from '@angular/router';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class NewlabelComponent implements OnInit {
   private label: any;
   private labelArray: any = [];  private accessToken = localStorage.getItem('token');
 
-  constructor(private myHttpService: HttpService, private router: ActivatedRoute) { }
+  constructor(private notesService: NotesService, private router: ActivatedRoute) { }
   ngOnInit() {
     this.router.params.subscribe(
       (params: Params) => {
@@ -25,8 +26,7 @@ export class NewlabelComponent implements OnInit {
    * @description Get Api to get all the notes according to labels
    */
   getNoteLabels(label) {
-    this.myHttpService.getindividualLabel('notes/getNotesListByLabel/' + label + '',
-      null, this.accessToken).subscribe(
+    this.notesService.getindividualLabel(label).subscribe(
         (data) => {
           this.labelArray = data['data'].data;
         }),

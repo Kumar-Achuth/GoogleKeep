@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { HttpService } from '../../core/services/httpServices/http.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-global-search',
@@ -13,7 +14,7 @@ export class GlobalSearchComponent implements OnInit {
   private accessToken = localStorage.getItem('token');
   private globalSearch: any;
 
-  constructor(private myHttpService: HttpService, private data: GlobalSearchService) { }
+  constructor(private notesService: NotesService, private data: GlobalSearchService) { }
 
   ngOnInit() {
     this.data.currentMessage.subscribe(message => {
@@ -25,7 +26,7 @@ export class GlobalSearchComponent implements OnInit {
    * @description Get Notes Api 
    */
   getNotes() {
-    this.myHttpService.getNotes('notes/getNotesList', this.accessToken)
+    this.notesService.getNotes()
       .subscribe(data => {
         this.cards = [];
         for (var i = data["data"]['data'].length - 1; i >= 0; i--) {

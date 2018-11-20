@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({
   selector: 'app-archive',
@@ -7,34 +8,19 @@ import { HttpService } from '../../core/services/httpServices/http.service';
   styleUrls: ['./archive.component.scss']
 })
 export class ArchiveComponent implements OnInit {
-  private cards: any = []
-  private accessToken = localStorage.getItem('token');
-  private pin : any =[];
   private  unPin : any=[];
-  constructor(private myHttpService: HttpService) { }
+  constructor(private notesService: NotesService) { }
   ngOnInit() {
-    this.getArchiveNotes();
     this.getunPinnedArchiveNotes();
   }
   /**
-   * @description Get api Call for Getting All Archived NotesList
+   * @description Get Archived Notes Api
    */
-  getArchiveNotes() {
-    this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',
-      this.accessToken).subscribe(data => {
-        for (var i = 0; i < data["data"]['data'].length; i++) {
-          if(data["data"]['data'][i].isPined == true){
-            this.pin = (data["data"]['data']);
-          }
-        }
-      }, error => {
-      })
-  }
   getunPinnedArchiveNotes() {
-    this.myHttpService.getArchiveNotes('notes/getArchiveNotesList',
-      this.accessToken).subscribe(data => {
+    this.notesService.getArchiveNotes().subscribe(data => {
         for (var i = 0; i < data["data"]['data'].length; i++) {
-          if(data["data"]['data'][i].isPined == false){
+          if(data["data"]['data'][i].isPined == false &&
+          data["data"]['data'][i].isDeleted == false ){
             this.unPin = (data["data"]['data']);
           }
         }

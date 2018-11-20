@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteCardsComponent } from '../note-cards/note-cards.component';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
+import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 export interface DialogData {
   title: string;
@@ -28,11 +29,9 @@ export class UpdateNotesComponent implements OnInit {
   private adding = false;
   private addCheck = false;
   private status = "open"
-  private accessToken = localStorage.getItem('token');
   @Output() updateEvent = new EventEmitter();
   constructor(public dialogRef: MatDialogRef<NoteCardsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private myHttpService: HttpService, ) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,private notesService:NotesService ) { }
   ngOnInit() {
     this.array1 = this.data['noteLabels'];
     this.array2 = this.data['reminder'];
@@ -46,11 +45,11 @@ export class UpdateNotesComponent implements OnInit {
    */
   onNoClick(): void {
     if (this.checklist == false) {
-      this.myHttpService.noteUpdate('notes/updateNotes', {
+      this.notesService.noteUpdate({
         "noteId": [this.data.id],
         "title": document.getElementById('titleId').innerHTML,
         "description": document.getElementById('notesId').innerHTML
-      }, this.accessToken).subscribe(data => {
+      }).subscribe(data => {
         this.dialogRef.close();
         this.updateEvent.emit({
         })
@@ -66,7 +65,8 @@ export class UpdateNotesComponent implements OnInit {
         "itemName": this.checkListArray.itemName,
         "status": this.checkListArray.status
       }
-      this.myHttpService.postColor("notes/" + this.data['id'] + "/checklist/" + this.checkListArray.id + "/update", JSON.stringify(apiData), this.accessToken).subscribe(response => {
+      this.notesService.updateCheckList(this.data['id'], this.checkListArray.id ,
+       JSON.stringify(apiData)).subscribe(response => {
         this.updateEvent.emit()
       })
       this.dialogRef.close();
@@ -79,9 +79,8 @@ export class UpdateNotesComponent implements OnInit {
    * @param label 
    */
   deleteChips(label) {
-    this.myHttpService.deleteChip('notes/' + this.data.id + '/addLabelToNotes/' + label + '/remove',
-      { "noteId": this.data.id, "lableId": label },
-      this.accessToken).subscribe(data => {
+    this.notesService.deleteChip( this.data.id ,label,
+      { "noteId": this.data.id, "lableId": label }).subscribe(data => {
         this.updateEvent.emit({
         })
       })
@@ -91,9 +90,7 @@ export class UpdateNotesComponent implements OnInit {
    * @param id
    */
   deleteReminder(id) {
-    this.myHttpService.deleteChip('notes/removeReminderNotes',
-      { "noteIdList": [id] },
-      this.accessToken).subscribe(data => {
+    this.notesService.deleteReminder({ "noteIdList": [id] }).subscribe(data => {
         LoggerService.log('Success', data)
         this.updateEvent.emit({
         })
@@ -140,7 +137,7 @@ export class UpdateNotesComponent implements OnInit {
    * @description : Remove checklists from updated notes
    */
   removeCheckList() {
-    this.myHttpService.addLabel("notes/" + this.data.id + "/checklist/" + this.removedList.id + "/remove", null, this.accessToken).subscribe((response) => {
+    this.notesService.removeCheckList( this.data.id,this.removedList.id,null).subscribe((response) => {
       for (var i = 0; i < this.tempArray.length; i++) {
         if (this.tempArray[i].id == this.removedList.id) {
           this.tempArray.splice(i, 1)
@@ -170,7 +167,7 @@ export class UpdateNotesComponent implements OnInit {
         "itemName": this.newList,
         "status": this.status
       }
-      this.myHttpService.addLabel("notes/" + this.data['id'] + "/checklist/add", this.newData, this.accessToken)
+      this.notesService.addCheckList( this.data['id'],this.newData)
         .subscribe(response => {
           this.newList = null;
           this.addCheck = false;

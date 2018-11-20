@@ -6,37 +6,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HttpService {
   url = 'http://34.213.106.173/api/';
-  accessToken = localStorage.getItem('token');
   constructor(public http: HttpClient) { }
-  getConfig(url) {
-    return this.http.get(url);
-  }
-  postConfig(url, body) {
-    url = this.url + url;
-    return this.http.post(url, body);
-  }
+
+  /**********************************User Services*******************************/
+
   postPassword(url, body) {
-    url = this.url + url;
-    return this.http.post(url, body);
-  }
-  postLogin(url, body) {
     url = this.url + url;
     return this.http.post(url, body);
   }
   postEmail(url, body) {
     url = this.url + url;
     return this.http.post(url, body);
-  }
-  postReset(name, input, accessToken) {
-    console.log(input);
-    console.log(accessToken)
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': accessToken
-      })
-    };
-    return this.http.post(this.url + "/" + name, this.getFormUrlEncoded(input), httpOptions)
   }
   getFormUrlEncoded(toConvert) {
     const formBody = [];
@@ -47,218 +27,78 @@ export class HttpService {
     }
     return formBody.join('&');
   }
-  postLogout(url, token) {
+  loginPost(url, body) {
     url = this.url + url;
-    console.log(token)
+    return this.http.post(url, body);
+  }
+  getConfig(url) {
+    return this.http.get(url);
+  }
+  postLogout(url) {
+    url = this.url + url;
+    // console.log(token)
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': token
+        // 'Authorization': token
       })
     };
     return this.http.post(url, {}, httpOptions)
   }
-  addNotes(url, input) {
+
+  // *********************************NOTES SERVICE**********************************/
+
+  postJSON(url, body) {
+    let accessToken = localStorage.getItem('token');
+    url = this.url + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // 'Authorization': accessToken
+      })
+    };
+    return this.http.post(url, body, httpOptions)
+  }
+  encodedPostForm(url, body) {
+    // let accessToken = localStorage.getItem('token');
     url = this.url + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': this.accessToken
+        // 'Authorization': accessToken
       })
     }
-    return this.http.post(url, this.getFormUrlEncoded(input), httpOptions)
-  }
-
-  getNotes(url, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-    };
-    return this.http.get(url, httpOptions)
-  }
-
-  postTrash(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-
-  getTrashNotes(url, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-    };
-    return this.http.get(url, httpOptions)
-  }
-  postArchive(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-  getArchiveNotes(url, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-    };
-    return this.http.get(url, httpOptions)
-  }
-  postColor(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions);
-  }
-  noteUpdate(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-    };
     return this.http.post(url, this.getFormUrlEncoded(body), httpOptions)
   }
-  addLabel(url, body, token) {
+  getJSON(url) {
+    // let accessToken = localStorage.getItem('token')
     url = this.url + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': token
+        // 'Authorization': accessToken
       })
-    };
-    return this.http.post(url, body, httpOptions);
+    }
+    return this.http.get(url, httpOptions)
   }
-  getTheLabels(url) {
+  encodedGetForm(url) {
+    let accessToken = localStorage.getItem('token');
     url = this.url + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': this.accessToken
+        // 'Authorization': accessToken
       })
     };
-    return this.http.get(url,httpOptions)
+    return this.http.get(url, httpOptions)
   }
   deleteTheLabel(url) {
     url = this.url + url;
     return this.http.delete(url);
   }
-  postUpdatedLabel(url, body) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': this.accessToken
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-  goLabel(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-  deleteChip(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-  checkAdd(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-  postCheckList(url, input, token) {
-    url = this.url + url;
-    console.log(token);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-    }
-    return this.http.post(url, this.getFormUrlEncoded(input), httpOptions)
-  }
-  getindividualLabel(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': token
-      })
-    }
-    return this.http.post(url, this.getFormUrlEncoded(body), httpOptions)
-  }
-  foreverTrash(url, body, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    }
-    return this.http.post(url, body, httpOptions)
-  }
   httpAddImage(url, body, token) {
     console.log(token);
     url = this.url + url;
-    var httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': token
-      })
-    };
-    return this.http.post(url, body, httpOptions)
-  }
-  getRemind(url, token) {
-    url = this.url + url;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    }
-    return this.http.get(url, httpOptions)
-  }
-  httpAddReminder(url, token, body) {
-    url = this.url + url;
-    console.log(token);
     var httpOptions = {
       headers: new HttpHeaders({
         'Authorization': token
@@ -277,4 +117,5 @@ export class HttpService {
     };
     return this.http.get(url, httpOptions)
   }
+/**************************Notes Services End************************** */
 }

@@ -28,7 +28,7 @@ export class NoteCardsComponent implements OnInit {
   @Output() trashEvent = new EventEmitter();
   @Input() globalSearch;
   constructor(private myHttpService: HttpService, private router: Router,
-    private dialog: MatDialog,   private newService: NotesService,  private data: GlobalSearchService) {
+    private dialog: MatDialog,   private notesService: NotesService,  private data: GlobalSearchService) {
     this.data.deletedLabel.subscribe(message => {
       if (message) {
         this.trashEvent.emit({
@@ -63,15 +63,14 @@ export class NoteCardsComponent implements OnInit {
    * @param label 
    */
   deleteChips(id, label) {
-    this.myHttpService.deleteChip('notes/' + id + '/addLabelToNotes/' + label + '/remove',
-      { "noteId": id, "lableId": label },
-      this.accessToken).subscribe(() => {
+    this.notesService.deleteChip(id,label,
+      { "noteId": id, "lableId": label }).subscribe(() => {
           this.trashEvent.emit({});
         })
   }
   getAllLabels() {
     let newArray = [];
-    this.newService.getLabels()
+    this.notesService.getLabels()
       .subscribe(data => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
@@ -100,9 +99,7 @@ export class NoteCardsComponent implements OnInit {
    * @param id 
    */
   deleteReminder(id) {
-    this.myHttpService.deleteChip('notes/removeReminderNotes',
-      { "noteIdList": [id] },
-      this.accessToken).subscribe(data => {
+    this.notesService.deleteReminder({ "noteIdList": [id] }).subscribe(data => {
         LoggerService.log('Success', data)
         this.trashEvent.emit({
         })
@@ -130,8 +127,8 @@ export class NoteCardsComponent implements OnInit {
       "itemName": this.checkListArray.itemName,
       "status": this.checkListArray.status
     }
-    this.myHttpService.postColor("notes/" + id + "/checklist/" + this.checkListArray.id + "/update",
-      JSON.stringify(apiData), this.accessToken).subscribe(response => {
+    this.notesService.updateCheckList( id ,this.checkListArray.id ,
+      JSON.stringify(apiData)).subscribe(response => {
       })
   }
   reminderStrike(cuttOff) {

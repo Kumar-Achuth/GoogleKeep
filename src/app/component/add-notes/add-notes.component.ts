@@ -24,7 +24,6 @@ export class AddNotesComponent implements OnInit {
     private checked = false;
     private status = "open";
     private dating;
-    private accessToken = localStorage.getItem('token');
     private labelArray: any[];
     private date;
     private today = new Date();
@@ -33,7 +32,7 @@ export class AddNotesComponent implements OnInit {
     private notes={'id':''}
     @Output() newEvent = new EventEmitter();
     @Output() addNote = new EventEmitter();
-    constructor(private myHttpService: HttpService,private noteService:NotesService, private snackBar: MatSnackBar,
+    constructor(private noteService:NotesService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
         this.getAllLabels();

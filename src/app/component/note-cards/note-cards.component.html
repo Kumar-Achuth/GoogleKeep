@@ -1,9 +1,11 @@
-<div fxFlex=10></div>
+<!-- <div fxFlex=10></div> -->
 
 <!-- ************************Note Cards Display ********************* -->
 
-<div fxFlex=89 fxLayout="row wrap"  fxLayoutAlign="start"  fxLayoutGap="10px"
- style="margin-top:25px ; ">
+<div  fxLayout="row wrap" fxFlex = 100 fxLayoutAlign="center"  fxLayoutGap="10px"
+ style="margin-top:25px ;">
+ <div  fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 ></div>
+ <div fxLayout = "row wrap" fxFlex.xs = 100 fxFlex.sm = 100 fxFlex.md = 90 fxFlex.lg = 90 fxFlex.xl = 80 >
   <div *ngFor='let notes of cardsArray | searchBar :  globalSearch'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card style="margin-top : 10px; border-radius: 8px" [style.backgroundColor]="notes.color">
@@ -19,18 +21,17 @@
 
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-          (click)=checkBox(checklist,notes)></mat-checkbox><br>
+          (click)=checkBox(checklist,notes)></mat-checkbox>
           <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
           [(ngModel)]=checklist.itemName fxFlex="90%"
-            class="check" (click)="open(notes)" [style.backgroundColor]="notes.color"><br>
-        </div><br>
+            class="check" (click)="open(notes)" [style.backgroundColor]="notes.color">
+        </div>
         <div *ngFor="let checklist of notes.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
            (click)=checkBox(checklist,notes)></mat-checkbox>
           <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
           (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
-        <br>
 
         <!-- ************************Labels Display In Notes ********************* -->
 
@@ -48,7 +49,6 @@
           </div>
         </div>
         <br>
-
         <!-- ************************Reminder Display In Notes  ********************* -->
 
         <div *ngIf="reminderStrike(notes.reminder[0])">
@@ -82,7 +82,7 @@
               </mat-chip-list>
           </div>
         </div>
-
+        
         <!-- **********************Fired Reminder Notes Display******************** -->
 
         <div *ngIf="!reminderStrike(notes.reminder[0])">
@@ -138,4 +138,6 @@
     </div>
   </div>
 </div>
-<div fxFlex=1></div>
+<div fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 ></div>
+</div>
+<!-- <div fxFlex=1></div> -->

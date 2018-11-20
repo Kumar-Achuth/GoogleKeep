@@ -11,7 +11,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpService } from './core/services/httpServices/http.service';
 import { SlidePanelComponent } from './component/slide-panel/slide-panel.component';
@@ -79,6 +79,9 @@ import {
 } from '@angular/material';
 
 import { PinComponent } from './component/pin/pin.component';
+
+import { InterceptService} from './core/services/interceptor/interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -150,7 +153,11 @@ import { PinComponent } from './component/pin/pin.component';
 
 
   ],
-  providers: [HttpService, AuthService, AuthGuard, MessagingService, LoggerService],
+  providers: [HttpService, AuthService, AuthGuard, MessagingService, LoggerService,InterceptService,{
+    provide: HTTP_INTERCEPTORS,
+        useClass: InterceptService,
+        multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
