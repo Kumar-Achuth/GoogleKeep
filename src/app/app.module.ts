@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import {
   NgModule,
-  CUSTOM_ELEMENTS_SCHEMA
+  CUSTOM_ELEMENTS_SCHEMA,
+  ErrorHandler
 } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -82,6 +83,7 @@ import { PinComponent } from './component/pin/pin.component';
 
 import { InterceptService} from './core/services/interceptor/interceptor.service';
 import { CollaboratorPageComponent } from './component/collaborator-page/collaborator-page.component';
+import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 
 
 @NgModule({
@@ -159,6 +161,10 @@ import { CollaboratorPageComponent } from './component/collaborator-page/collabo
     provide: HTTP_INTERCEPTORS,
         useClass: InterceptService,
         multi: true
+  },
+  {
+    provide: ErrorHandler,
+    useClass: ErrorsHandler,
   }],
   bootstrap: [AppComponent],
   entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent,CollaboratorPageComponent],
