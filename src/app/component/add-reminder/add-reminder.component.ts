@@ -1,14 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output,OnDestroy, EventEmitter } from '@angular/core';
 import { throwMatDuplicatedDrawerError } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-add-reminder',
   templateUrl: './add-reminder.component.html',
   styleUrls: ['./add-reminder.component.scss']
 })
-export class AddReminderComponent implements OnInit {
+export class AddReminderComponent implements OnInit ,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
  
   private body = {};
   private show = true;
@@ -37,7 +39,9 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates,
           
-      }).subscribe(data => {
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
         this.remindEmit.emit({
         })
       })
@@ -52,7 +56,8 @@ export class AddReminderComponent implements OnInit {
       {
         "noteIdList": [this.reminder.id],
         "reminder": dates2
-      }).subscribe(data => {
+      }).pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
         this.remindEmit.emit({
         })
       })
@@ -67,7 +72,8 @@ export class AddReminderComponent implements OnInit {
       {
         "noteIdList": [this.reminder.id],
         "reminder": dates3
-      }).subscribe(data => {
+      }).pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
         this.remindEmit.emit({
         })
       })
@@ -97,7 +103,9 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder":dates4
       }
-      this.notesService.reminder(this.body).subscribe((result) => {
+      this.notesService.reminder(this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '1:00 PM') {
@@ -108,7 +116,9 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates5
       }
-      this.notesService.reminder(this.body).subscribe((result) => {
+      this.notesService.reminder(this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '6:00 PM') {
@@ -119,7 +129,9 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder":dates6
       }
-      this.notesService.reminder(this.body).subscribe((result) => {
+      this.notesService.reminder(this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == '9:00 PM') {
@@ -130,7 +142,9 @@ export class AddReminderComponent implements OnInit {
         "noteIdList": [this.reminder.id],
         "reminder": dates7
       }
-      this.notesService.reminder( this.body).subscribe((result) => {
+      this.notesService.reminder( this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
           this.remindEmit.emit()
         })
     } else if (timing == this.reminderBody.time) {
@@ -148,7 +162,9 @@ export class AddReminderComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder": dates8
         }
-        this.notesService.reminder(this.body).subscribe((result) => {
+        this.notesService.reminder(this.body)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((result) => {
             this.remindEmit.emit()
           })
       } else if (ampm == 'PM' || ampm == 'pm') {
@@ -159,10 +175,17 @@ export class AddReminderComponent implements OnInit {
           "noteIdList": [this.reminder.id],
           "reminder":date9
         }
-        this.notesService.reminder(this.body).subscribe((result) => {
+        this.notesService.reminder(this.body)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((result) => {
             this.remindEmit.emit()
           })
       }
     }
   }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+}
 }

@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  url = 'http://34.213.106.173/api/';
+  baseUrl = environment.baseUrl
   constructor(public http: HttpClient) { }
 
   /**********************************User Services*******************************/
 
   postPassword(url, body) {
-    url = this.url + url;
+    url = this.baseUrl + url;
     return this.http.post(url, body);
   }
   postEmail(url, body) {
-    url = this.url + url;
+    url = this.baseUrl + url;
     return this.http.post(url, body);
   }
   getFormUrlEncoded(toConvert) {
@@ -28,19 +29,18 @@ export class HttpService {
     return formBody.join('&');
   }
   loginPost(url, body) {
-    url = this.url + url;
+    url = this.baseUrl + url;
     return this.http.post(url, body);
   }
   getConfig(url) {
+    url = this.baseUrl + url;
     return this.http.get(url);
   }
   postLogout(url) {
-    url = this.url + url;
-    // console.log(token)
+    url = this.baseUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': token
       })
     };
     return this.http.post(url, {}, httpOptions)
@@ -49,56 +49,47 @@ export class HttpService {
   // *********************************NOTES SERVICE**********************************/
 
   postJSON(url, body) {
-    let accessToken = localStorage.getItem('token');
-    url = this.url + url;
+    url = this.baseUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': accessToken
       })
     };
     return this.http.post(url, body, httpOptions)
   }
   encodedPostForm(url, body) {
-    // let accessToken = localStorage.getItem('token');
-    url = this.url + url;
+    url = this.baseUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        // 'Authorization': accessToken
       })
     }
     return this.http.post(url, this.getFormUrlEncoded(body), httpOptions)
   }
   getJSON(url) {
-    // let accessToken = localStorage.getItem('token')
-    url = this.url + url;
+    url = this.baseUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': accessToken
       })
     }
     return this.http.get(url, httpOptions)
   }
   encodedGetForm(url) {
-    let accessToken = localStorage.getItem('token');
-    url = this.url + url;
+    url = this.baseUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        // 'Authorization': accessToken
       })
     };
     return this.http.get(url, httpOptions)
   }
   deleteTheLabel(url) {
-    url = this.url + url;
+    url = this.baseUrl + url;
     return this.http.delete(url);
   }
   httpAddImage(url, body, token) {
-    console.log(token);
-    url = this.url + url;
+    url = this.baseUrl + url;
     var httpOptions = {
       headers: new HttpHeaders({
         'Authorization': token
@@ -107,11 +98,9 @@ export class HttpService {
     return this.http.post(url, body, httpOptions)
   }
   public httpGetReminder(url, token) {
-    url = this.url + url;
-    console.log(token);
+    url = this.baseUrl + url;
     var httpOptions = {
       headers: new HttpHeaders({
-
         'Authorization': token
       })
     };

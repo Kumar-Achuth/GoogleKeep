@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-global-search',
   templateUrl: './global-search.component.html',
   styleUrls: ['./global-search.component.scss']
 })
-export class GlobalSearchComponent implements OnInit {
+export class GlobalSearchComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
 
   private cards: any[];
   private accessToken = localStorage.getItem('token');
@@ -27,7 +28,8 @@ export class GlobalSearchComponent implements OnInit {
    */
   getNotes() {
     this.notesService.getNotes()
-      .subscribe(data => {
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
         this.cards = [];
         for (var i = data["data"]['data'].length - 1; i >= 0; i--) {
           if (data["data"]['data'][i].isDeleted == false &&
@@ -38,4 +40,9 @@ export class GlobalSearchComponent implements OnInit {
       }, error => {
       })
   }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+}
 }

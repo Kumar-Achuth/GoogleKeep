@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output,OnDestroy, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -6,13 +6,15 @@ import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators'
 @Component({
   selector: 'app-note-cards',
   templateUrl: './note-cards.component.html',
   styleUrls: ['./note-cards.component.scss']
 })
-export class NoteCardsComponent implements OnInit {
+export class NoteCardsComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   private array: any = []
   private labelArray = [];
   private cards: any = [];
@@ -45,11 +47,11 @@ export class NoteCardsComponent implements OnInit {
     this.trashEvent.emit({
     })
   }
+  
   openDialog(notes): void {
+    debugger
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',
-      height: 'fit-content',
-      backdropClass: '',
       data: notes
     });
     dialogRef.afterClosed().subscribe(() => {
@@ -64,7 +66,9 @@ export class NoteCardsComponent implements OnInit {
    */
   deleteChips(id, label) {
     this.notesService.deleteChip(id,label,
-      { "noteId": id, "lableId": label }).subscribe(() => {
+      { "noteId": id, "lableId": label })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(() => {
           this.trashEvent.emit({});
         })
   }
@@ -99,7 +103,9 @@ export class NoteCardsComponent implements OnInit {
    * @param id 
    */
   deleteReminder(id) {
-    this.notesService.deleteReminder({ "noteIdList": [id] }).subscribe(data => {
+    this.notesService.deleteReminder({ "noteIdList": [id] })
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
         LoggerService.log('Success', data)
         this.trashEvent.emit({
         })
@@ -128,7 +134,9 @@ export class NoteCardsComponent implements OnInit {
       "status": this.checkListArray.status
     }
     this.notesService.updateCheckList( id ,this.checkListArray.id ,
-      JSON.stringify(apiData)).subscribe(response => {
+      JSON.stringify(apiData))
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(response => {
       })
   }
   reminderStrike(cuttOff) {
@@ -140,5 +148,10 @@ export class NoteCardsComponent implements OnInit {
     else {
       return false;
     }
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

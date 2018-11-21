@@ -47,16 +47,16 @@ export class SignupComponent implements OnInit {
   private password = new FormControl('', [Validators.required])
   private model: any = {};
   private service: any;
-  private cards = [];
+  cards = [];
   constructor(private userService:UserService, private snackBar: MatSnackBar) { }
   ngOnInit() {
-    this.users();
-    // this.records = this.myHttpService.getConfig().subscribe(data => {
-    //   for (var i = 0; i < data["data"].data.length; i++) {
-    //     data["data"].data[i].select = false;
-    //     this.cards.push(data["data"].data[i]);
-    //   }
-    // })
+    // this.users();
+    this.records = this.userService.getService().subscribe(data => {
+      for (var i = 0; i < data["data"].data.length; i++) {
+        data["data"].data[i].select = false;
+        this.cards.push(data["data"].data[i]);
+      }
+    })
   }
 /** 
  * @param card 
@@ -131,14 +131,6 @@ export class SignupComponent implements OnInit {
   }
   onSubmit() {
     alert('Success' + JSON.stringify(this.model))
-  }
-  users(){
-    this.records = this.userService.getService().subscribe(data => {
-      for (var i = 0; i < data["data"].data.length; i++) {
-        data["data"].data[i].select = false;
-        this.cards.push(data["data"].data[i]);
-      }
-    })
   }
 }
 

@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -13,13 +12,15 @@ import { environment } from '../../../environments/environment';
 import { CropImageComponent } from '../crop-image/crop-image.component';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { UserService } from 'src/app/core/services/userServices/user.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private token = localStorage.getItem('token');
   private labelArray: any = []
   private model: any = {}
@@ -36,19 +37,26 @@ export class NavbarComponent {
     .pipe(
       map(result => result.matches)
     );
-  constructor(private userService: UserService,private notesService:NotesService, 
-    private snackBar: MatSnackBar,private route: ActivatedRoute,
-     private breakpointObserver: BreakpointObserver,private router: Router,
-      private dialog: MatDialog, private data: GlobalSearchService) {}  
+  constructor(private userService: UserService, private notesService: NotesService,
+    private snackBar: MatSnackBar, private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver, private router: Router,
+    private dialog: MatDialog, private data: GlobalSearchService) { }
   ngOnInit() {
     this.labelArray = []
     this.firstName = localStorage.getItem('firstName');
     this.lastName = localStorage.getItem('lastName');
     this.email = localStorage.getItem('email');
     this.getLabels();
+    this.title=localStorage.getItem('title')
+
   }
-  aptTitle(title){
-    this.title=title;
+  /**
+   * @description Title Display Function
+   * @param title 
+   */
+  aptTitle(title) {
+    this.title = title;
+    localStorage.setItem('title',title)
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelsComponent, {
@@ -66,25 +74,28 @@ export class NavbarComponent {
     */
   doLogout() {
     console.log(this.token);
-    this.userService.logout().subscribe(() => {
-      this.snackBar.open("Logout ", "Successful", {
-        duration: 1000
-      });
-      localStorage.removeItem('token');
-      localStorage.removeItem('firstName');
-      localStorage.removeItem('email');
-      localStorage.removeItem('lastName');
-      localStorage.removeItem('userId');
-      this.router.navigateByUrl('/login');
-    }, () => {
+    this.userService.logout()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.snackBar.open("Logout ", "Successful", {
+          duration: 1000
+        });
+        localStorage.removeItem('token');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('lastName');
+        localStorage.removeItem('userId');
+        this.router.navigateByUrl('/login');
+      }, () => {
       })
   }
-/**
- * @description Api call to get all the labels in the notes
- */
+  /**
+   * @description Api call to get all the labels in the notes
+   */
   getLabels() {
     let newArray = [];
     this.notesService.getLabels()
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
@@ -93,6 +104,12 @@ export class NavbarComponent {
           else {
           }
         }
+        newArray.sort(function (a, b) {
+          var A = a.label.toLowerCase(), B = b.label.toLowerCase()
+          if (A < B) return -1;
+          if (A > B) return 1;
+          return 0;
+        })
         this.labelArray = newArray;
       })
   }
@@ -117,10 +134,10 @@ export class NavbarComponent {
   selectedFile = null;
   private image2 = localStorage.getItem('imageUrl');
   img = environment.apiUrl + this.image2;
-/**
- * @description Function to select the required Path for image selection 
- * @param event 
- */
+  /**
+   * @description Function to select the required Path for image selection 
+   * @param event 
+   */
   onFileUpload(event) {
     this.profileCropOpen(event);
     this.selectedFile = event.path[0].files[0];
@@ -132,7 +149,7 @@ export class NavbarComponent {
    * @description Profice Picture Dialaog Box Open function 
    * @param data 
    */
-  profileCropOpen(data): void { 
+  profileCropOpen(data): void {
     const dialogRefPic = this.dialog.open(CropImageComponent, {
       width: '450px',
       data: data
@@ -144,5 +161,10 @@ export class NavbarComponent {
         this.img = environment.apiUrl + this.image2;
       }
     });
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

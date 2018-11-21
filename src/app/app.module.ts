@@ -81,6 +81,7 @@ import {
 import { PinComponent } from './component/pin/pin.component';
 
 import { InterceptService} from './core/services/interceptor/interceptor.service';
+import { CollaboratorPageComponent } from './component/collaborator-page/collaborator-page.component';
 
 
 @NgModule({
@@ -114,6 +115,7 @@ import { InterceptService} from './core/services/interceptor/interceptor.service
     DeleteLabelComponent,
     DeleteTrashComponent,
     PinComponent,
+    CollaboratorPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -159,7 +161,7 @@ import { InterceptService} from './core/services/interceptor/interceptor.service
         multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent],
+  entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent,CollaboratorPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,12 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators';
 @Component({
   selector: 'app-add-archive',
   templateUrl: './add-archive.component.html',
   styleUrls: ['./add-archive.component.scss']
 })
-export class AddArchiveComponent implements OnInit {
+export class AddArchiveComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   private cards:any=[];
   @Input() archive;
   @Output() archiveEmit = new EventEmitter();
@@ -21,7 +23,9 @@ export class AddArchiveComponent implements OnInit {
     this.notesService.postArchive({
       "isArchived": true,
       "noteIdList": [this.archive.id]
-    }).subscribe(data => {
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.archiveEmit.emit({
       })
     })
@@ -33,9 +37,16 @@ export class AddArchiveComponent implements OnInit {
     this.notesService.postArchive({
       "isArchived": false,
       "noteIdList": [this.archive.id]
-    }).subscribe(data => {
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(data => {
       this.archiveEmit.emit({
       })
     })
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }  
 }

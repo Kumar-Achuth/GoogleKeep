@@ -1,5 +1,6 @@
 $color:rgb(255,255,255);
 $searchColor:whiteSmoke;
+$blackColor:black;
 
 .sidenav-container {
   height:90%;
@@ -20,7 +21,12 @@ $searchColor:whiteSmoke;
   vertical-align: middle;
   display: inline-block;
   font-family: 'Product Sans',Arial,sans-serif;
-  font-size: 22px;
+  // font-size: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important; 
+  width: 100px;
+  cursor: pointer;
 }
 .lab{
   color: #5f6368;
@@ -32,14 +38,18 @@ $searchColor:whiteSmoke;
   text-transform: uppercase;
 }
 .bulp{
-  padding-left: 4%;
-font-family: 'Google Sans','Roboto',Arial,sans-serif;
-font-weight: 500;
-font-size: .875rem;
+  padding-left: 12%;
+  font-family: 'Google Sans','Roboto',Arial,sans-serif;
+  font-weight: 500;
+  font-size: .875rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important; 
+  width: 100px;
 }
 .sidenav{
   width: 230px;
-  margin-top:65px;
+  margin-top:55px;
 }  
 .mat-drawer.mat-drawer-side {
   top:0;
@@ -54,11 +64,11 @@ font-size: .875rem;
 }
 .title-header{
   padding-left: 1%;
-color:black;
+color:$blackColor;
 display: flex;
 }
 .toggle{
-  color: black;
+  color: $blackColor;
   opacity: 0.54;
   display: flex;
 }
@@ -70,7 +80,7 @@ padding-left: 2%;
 .material-icons{
   font-size: 30px;
   margin-right: 8px;
-  color: black;
+  color: $blackColor;
   opacity: 0.6;
   display: flex;
 }
@@ -79,7 +89,7 @@ padding-left: 2%;
   font: normal 16px,sans-serif;
   flex: 1 1 auto;
   padding: 11px 16px 11px 16px;
-  color: black;
+  color: $blackColor;
   opacity: 1;
   width: stretch;
   height: 46px;
@@ -124,5 +134,8 @@ background-color: $color;
 }
 .img{
   padding-right: 1%;
+}
+.list{
+  margin-top: 3%;
 }
 

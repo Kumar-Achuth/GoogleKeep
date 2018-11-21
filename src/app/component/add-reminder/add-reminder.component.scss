@@ -1,9 +1,12 @@
 :host::ng-deep.mat-menu-content:not(:empty) {
     padding-top: 8px;
     padding-bottom: 8px;
-    width: 280px;
+    width: 100%;
+    border-radius: 4px;
     box-sizing: none;
     outline: none;
+    z-index: 5003;
+    font-size: 13px;
 }
 .icons{
     opacity:0.75;

@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { UserService } from 'src/app/core/services/userServices/user.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   private Email = new FormControl('', [Validators.required, Validators.email]);
   private isLeftVisible = false;
   private model: any = {}
@@ -29,7 +32,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.userService.postPassword( {
         "email": this.model.Email,
       })
-        .subscribe(
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
           (data) => {
             this.snackBar.open("Message", "Please Check Your Email", {
               duration: 2000
@@ -48,4 +52,9 @@ export class ForgotPasswordComponent implements OnInit {
       })
     }
   }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+}
 }

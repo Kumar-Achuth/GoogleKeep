@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotesInformation } from 'src/app/core/models/notes-information';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators'
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   private cards: NotesInformation[] = [];
   private pinnedNotes: any = [];
   constructor(private notesService: NotesService, private router: Router) { }
@@ -21,7 +23,8 @@ export class NotesComponent implements OnInit {
    */
   getNotes() {
     this.notesService.getNotes()
-      .subscribe(data => {
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
         this.cards = [];
         var noteList:NotesInformation[]=data["data"]['data'];
         for (var i = noteList.length - 1; i >= 0; i--) {
@@ -31,7 +34,6 @@ export class NotesComponent implements OnInit {
             this.cards.push(noteList[i])
           }
         }
-        console.log(this.cards)
       },
         error => {
           ;
@@ -42,7 +44,8 @@ export class NotesComponent implements OnInit {
    */
   getPinedNotes() {
     this.notesService.getNotes()
-      .subscribe(data => {
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
         this.pinnedNotes = [];
         for (var i = data["data"]['data'].length - 1; i >= 0; i--) {
           if (data["data"]['data'][i].isDeleted == false &&
@@ -51,7 +54,6 @@ export class NotesComponent implements OnInit {
             this.pinnedNotes.push(data["data"]['data'][i])
           }
         }
-        console.log(this.pinnedNotes)
       },
         error => {
           ;
@@ -65,5 +67,10 @@ export class NotesComponent implements OnInit {
   }
   new(event:NotesInformation){
     this.cards.splice(0,0,event)
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

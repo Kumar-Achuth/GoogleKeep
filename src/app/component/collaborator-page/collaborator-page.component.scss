@@ -1,0 +1,21 @@
+.collaborator{
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    font-size: 18px;
+    font-weight: 500;
+    height: 25px;
+    padding: 0 0 10px 0;
+}
+.padding{
+    padding: 10px;
+}
+.names{
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 1px 1px 1px 6px;
+    min-height: 28px;
+    padding: 100px 0 0;
+}
+.buttons{
+    float: right;
+    padding:2%;
+}

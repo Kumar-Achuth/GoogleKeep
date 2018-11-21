@@ -13,7 +13,7 @@ style="margin-top:100px; border-radius: 8px">
 
     <!-- ******************** Take A Note ************************ -->
 
-    <mat-card class="opened" *ngIf="!hide" [style.backgroundColor]="color">
+    <mat-card *ngIf="!hide" [style.backgroundColor]="color">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
         <div contenteditable="true" id="titleId" class="reset" data-text="Title"></div>
         <div *ngIf="show == 0">

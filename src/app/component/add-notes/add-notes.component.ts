@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'app-add-notes',
     templateUrl: './add-notes.component.html',
     styleUrls: ['./add-notes.component.scss']
 })
-export class AddNotesComponent implements OnInit {
+export class AddNotesComponent implements OnInit, OnDestroy {
+    destroy$: Subject<boolean> = new Subject<boolean>();
     private hide: boolean = true;
     private labelId = [];
     private labelName = [];
@@ -27,12 +28,13 @@ export class AddNotesComponent implements OnInit {
     private labelArray: any[];
     private date;
     private today = new Date();
-    private tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
+    private tomorrow = new Date(this.today.getFullYear(), this.today.getMonth()
+        , this.today.getDate() + 1)
     private dateArray = [];
-    private notes={'id':''}
+    private notes = { 'id': '' }
     @Output() newEvent = new EventEmitter();
     @Output() addNote = new EventEmitter();
-    constructor(private noteService:NotesService, private snackBar: MatSnackBar,
+    constructor(private noteService: NotesService, private snackBar: MatSnackBar,
         private router: Router) { }
     ngOnInit() {
         this.getAllLabels();
@@ -40,21 +42,21 @@ export class AddNotesComponent implements OnInit {
     toggle() {
         this.show = 1;
     }
-    cancelLabel(){
-        this.labelName=[];
-        this.labelId=[];
+    cancelLabel() {
+        this.labelName = [];
+        this.labelId = [];
     }
-    cancel(){
-        this.dateArray=[];
-        this.date='';  
+    cancel() {
+        this.dateArray = [];
+        this.date = '';
     }
     /**
      * @description : Add Notes api Call starts
      */
     addNotes() {
-        this.dating='';
-        if(this.date!=undefined){
-            this.dating=this.date
+        this.dating = '';
+        if (this.date != undefined) {
+            this.dating = this.date
         }
         if (this.checked == false) {
             this.noteService.postNotes({
@@ -64,27 +66,28 @@ export class AddNotesComponent implements OnInit {
                 'checklist': '',
                 'isPined': 'false',
                 'color': this.color,
-                "reminder":this.dating
-            }).subscribe(response => {
-                this.addNote.emit(response['status'].details)
-                this.labelName = [];
-                this.hide = !this.hide;
-                this.color = "#fafafa";
-                this.show = 0;
-                this.dating='';
-                this.labelId=[];
-                this.dateArray=[];
-                this.date='';
-            }, error => {
-                this.color = "#fafafa";
-                this.hide = !this.hide;
-                this.labelName = [];
-                this.dating='';
-                this.labelId=[];
-                this.dateArray=[];
-                this.show = 0;
-                this.date='';
-            })
+                "reminder": this.dating
+            }).pipe(takeUntil(this.destroy$))
+                .subscribe(response => {
+                    this.addNote.emit(response['status'].details)
+                    this.labelName = [];
+                    this.hide = !this.hide;
+                    this.color = "#fafafa";
+                    this.show = 0;
+                    this.dating = '';
+                    this.labelId = [];
+                    this.dateArray = [];
+                    this.date = '';
+                }, error => {
+                    this.color = "#fafafa";
+                    this.hide = !this.hide;
+                    this.labelName = [];
+                    this.dating = '';
+                    this.labelId = [];
+                    this.dateArray = [];
+                    this.show = 0;
+                    this.date = '';
+                })
         }
         /**
          * @description : Api call for Adding checklist 
@@ -107,28 +110,29 @@ export class AddNotesComponent implements OnInit {
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
                 'color': this.color,
-                "reminder":this.dating
-            }).subscribe(response => {
-                this.newEvent.emit({
+                "reminder": this.dating
+            }).pipe(takeUntil(this.destroy$))
+                .subscribe(response => {
+                    this.newEvent.emit({
+                    })
+                    this.dataArrayCheck = [];
+                    this.labelName = [];
+                    this.dataArray = [];
+                    this.date = '';
+                    this.hide = !this.hide;
+                    this.color = "#fafafa";
+                    this.show = 0;
+                    this.dateArray = [];
+                }, error => {
+                    this.dataArrayCheck = [];
+                    this.color = "#fafafa";
+                    this.dataArray = [];
+                    this.hide = !this.hide;
+                    this.labelName = [];
+                    this.show = 0;
+                    this.date = '';
+                    this.dateArray = [];
                 })
-                this.dataArrayCheck = [];
-                this.labelName = [];
-                this.dataArray=[];
-                this.date='';
-                this.hide = !this.hide;
-                this.color = "#fafafa";
-                this.show = 0;
-                this.dateArray=[];
-            }, error => {
-                this.dataArrayCheck = [];
-                this.color = "#fafafa";
-                this.dataArray=[];
-                this.hide = !this.hide;
-                this.labelName = [];
-                this.show = 0;
-                this.date='';
-                this.dateArray=[];
-            })
         }
     }
     /**
@@ -165,6 +169,7 @@ export class AddNotesComponent implements OnInit {
     getAllLabels() {
         let newArray = [];
         this.noteService.getLabels()
+            .pipe(takeUntil(this.destroy$))
             .subscribe(data => {
                 for (var i = 0; i < data['data']['details'].length; i++) {
                     if (data['data']['details'][i].isDeleted == false) {
@@ -214,9 +219,14 @@ export class AddNotesComponent implements OnInit {
             }
         }
     }
-    emitDate(event){
-        this.dateArray=[];
-        this.date=event;
+    emitDate(event) {
+        this.dateArray = [];
+        this.date = event;
         this.dateArray.push(this.date)
+    }
+    ngOnDestroy() {
+        this.destroy$.next(true);
+        // Now let's also unsubscribe from the subject itself:
+        this.destroy$.unsubscribe();
     }
 }

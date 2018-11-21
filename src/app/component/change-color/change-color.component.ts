@@ -1,13 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-change-color',
   templateUrl: './change-color.component.html',
   styleUrls: ['./change-color.component.scss']
 })
-export class ChangeColorComponent implements OnInit {
+export class ChangeColorComponent implements OnInit ,OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   private accessToken = localStorage.getItem('token');
   private colorArray = [[{ 'color': '#ffffff', 'name': 'White' },
   { 'color': '#f28b82', 'name': 'Red' },
@@ -40,7 +42,8 @@ export class ChangeColorComponent implements OnInit {
       this.notesService.postColor({
           "color": id,
           "noteIdList": [this.color.id]
-        }).subscribe(
+        }).pipe(takeUntil(this.destroy$))
+        .subscribe(
           (data) => {
             localStorage.setItem('colorId', this.color.id);
             this.changeColor.emit({
@@ -50,4 +53,9 @@ export class ChangeColorComponent implements OnInit {
           })
     }
   }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+}
 }

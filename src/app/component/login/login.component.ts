@@ -15,7 +15,7 @@ import { takeUntil} from 'rxjs/operators';
 export class LoginComponent implements OnInit , OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   private hide = true;
-   Email = new FormControl('', [Validators.required,
+  Email = new FormControl('', [Validators.required,
   Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   password = new FormControl('', [Validators.required])
   model: any = {}
