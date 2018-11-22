@@ -1,0 +1,19 @@
+@import "./mixins.scss";
+@import "./mainStyle.scss";
+
+$color:rgb(255,255,255);
+$searchColor:rgb(245, 245, 245);
+$blackColor:rgb(0, 0, 0);
+$blueColor:rgb(0, 0, 255);
+$redColor:rgb(255, 0, 0);
+$greenColor:rgb(0, 128, 0);
+$yellowColor:rgb(255, 255, 0);
+
+
+$width : 100%;
+$cursor:pointer;
+$float:right;
+$display:flex;
+$font-family: 'Google Sans','Roboto',Arial,sans-serif;
+$font-size: 40px;
+$box-shadow: 0 1px 1px rgba(0,0,0,0.20);

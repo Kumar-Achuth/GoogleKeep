@@ -1,3 +1,6 @@
+import { Label } from "./label-list";
+import { checkList } from "./check-list";
+
 export interface NotesInformation {
     collaborators: Array<object>,
     color: string,
@@ -19,18 +22,4 @@ export interface NotesInformation {
     title: string,
     userId: string,
 }
-export interface checkList {
-    createdDate: Date,
-    id: string,
-    isDeleted: boolean,
-    itemName: string,
-    modifiedDate: Date,
-    notesId: string,
-    status: string,
-}
-export interface Label {
-    id: string,
-    isDeleted: boolean,
-    label: string,
-    userId: string,
-}
+

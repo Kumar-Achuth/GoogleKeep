@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { CollaboratorPageComponent } from '../collaborator-page/collaborator-page.component';
 import { MatDialog } from '@angular/material';
 
@@ -8,17 +8,20 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./collaborator.component.scss']
 })
 export class CollaboratorComponent implements OnInit {
-
-  constructor(public dialog: MatDialog) {}
+@Input() collaborator;
+@Output() collabEvent=new EventEmitter();
+constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(CollaboratorPageComponent,{
       width: '600px',
-      data: ''
+      data: this.collaborator
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.collabEvent.emit({
+      })
       console.log('The dialog was closed');
     });
   }

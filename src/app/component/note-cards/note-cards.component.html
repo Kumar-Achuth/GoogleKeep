@@ -123,7 +123,7 @@
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
           <app-add-reminder [reminder]="notes" (remindEmit)="deleteEvent($event)">
           </app-add-reminder>
-          <app-collaborator>
+          <app-collaborator [collaborator]="notes" (collabEvent)="deleteEvent($event)">
           </app-collaborator>
           <app-change-color [color]="notes" (changeColor)="deleteEvent($event)">
           </app-change-color>

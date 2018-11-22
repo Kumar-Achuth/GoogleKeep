@@ -2,9 +2,45 @@
   <div class="collaborator">
     Collaborators
   </div>
-  <div class="names">
 
+  <!-- ************************User Info Display *************************** -->
+
+  <div fxLayout="row">
+<div class="nameDivision">
+      <div *ngIf="image!=''">
+         <img src="{{img}}" class="image">
+      </div>
+       <button *ngIf="image==''" mat-mini-fab color="primary" class="image">
+           {{firstName | slice:0:1}}
+       </button>
+    </div>
+  <div fxLayout="column" class="top">
+    <div>
+    <span class="nameDivision1">{{firstName}}{{lastName}}(Owner)</span>
   </div>
+  <div class="nameDivision2">
+    {{email}}
+  </div>
+</div>
+</div>
+
+<!-- ****************************Sender Info Display**************************** -->
+
+  <div fxLayout="row" class="nameDivision">
+      <div><button class="names" mat-mini-fab disabled><i class="material-icons">
+          person_add
+          </i></button></div>
+          <input contenteditable="true" (keyup)="search()" class="reset" [(ngModel)]="searchNames"
+           placeholder="Person or Email To Share With" [matMenuTriggerFor]="menu">
+  </div>
+  <mat-menu #menu="matMenu" >
+    <div *ngFor="let item of userList">
+      {{item.firstName}} {{item.lastName}} {{item.email}}
+    </div>
+  </mat-menu>
+
+  <!-- *******************************Functional Buttons************************* -->
+
   <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
 <div>
 <button mat-button (click)="cancel()">Cancel</button>

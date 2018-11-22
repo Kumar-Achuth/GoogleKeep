@@ -1,15 +1,17 @@
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+
 mat-card{
     padding: 8px;
     width: 40%;
 }
-
 .click
 {
-  cursor: pointer;
+  cursor:$cursor;
 }
 .noteButton
 {
-    float: right;
+    float:$float;
     padding-right: 2%;
 }
 .example-button-row button,
@@ -18,33 +20,24 @@ mat-card{
 }
 .close
 {
-    float: right;
+    float:$float;
     padding-bottom: 2%;
 }
 .reset
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
-    width: 100%;
-    word-wrap: break-word;
-    border-bottom-color: black;
+    @include boxes;
+    width:$width;
+    border-bottom-color:$blackColor
 }
 .edit
 {
-    border-color: transparent;
-    outline: none;
-    width: 100%;
-    word-wrap: break-word;
+  @include boxes;
 }
 .edit1
 {
+    @include boxes;
     padding-top: 12%;
-    border: none;
-    border-color: transparent;
-    outline: none;
     width: fit-content;
-    word-wrap: break-word;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
@@ -68,20 +61,17 @@ mat-card{
 }
 .spacing
 {
-    float: right;
+    float: $float;
     padding-right: 1%;
-    cursor: pointer;
+    cursor: $cursor;
 }
 .delete{
-cursor: pointer;
+cursor: $cursor;
 }
 .names{
-    border: none;
-    border-color: transparent;
-    outline: none;
-    width: 100%;
-    word-wrap: break-word;
-    border-bottom-color: black;
+   @include boxes;
+    width: $width;
+    border-bottom-color:$blackColor
 }
 
 

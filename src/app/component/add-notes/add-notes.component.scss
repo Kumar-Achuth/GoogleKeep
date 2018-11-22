@@ -1,80 +1,66 @@
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+$margin-bottom:10px;
+$padding-top:4%;
+
+
 mat-card{
     padding: 6px;
     width: 45%;
     border-radius: 8px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 5px 5px rgba(0,0,0,0.20);
+    background-color: $color;
+    box-shadow: $box-shadow;
 }
 .click
 {
-  cursor: pointer;
+  cursor: $cursor;
 }
 .noteButton
 {
-    float: right;
+    float: $float;
     padding-right: 2%;
 }
 .close
 {
-    float: right;
+    float: $float;
 }
 .reset
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
-    width: 100%;
-    word-wrap: break-word;
-    font-style: bold;
-    letter-spacing: .00625em;
-    font-family: 'Google Sans','Roboto',Arial,sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5rem;
+    @include edit();
     padding-top: 12px;
+    font-style: bold;
 }
 .edit
 {
+    @include edit();
+    margin-bottom: $margin-bottom;
     padding-top: 6%;
-    border: none;
-    border-color: transparent;
-    outline: none;
-    width: 100%;
-    word-wrap: break-word;
-    margin-bottom: 10px;
-    letter-spacing: .01428571em;
-    font-family: 'Google Sans','Roboto',Arial,sans-serif;
-    font-size: .875rem;
-    font-weight: 400;
-    line-height: 1.25rem;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
 .space
 {
-    padding-top: 4%;
+    padding-top:$padding-top;
 }
 .edit1
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
-    width: 100%;
-    word-wrap: break-word;
+ @include boxes;
+    width:$width;
 }
 .topping{
-    padding-top: 4%;
-}.pin{
-    float: right;
-    cursor: pointer;
+    padding-top:$padding-top;
+}
+.pin{
+    float: $float;
+    cursor: $cursor;
 }
 .check{
-    margin-bottom: 10px;
+    margin-bottom: $margin-bottom;
 }
 .items
 {
-    margin-bottom: 10px;
+    margin-bottom:$margin-bottom;
 }
 
 

@@ -1,13 +1,16 @@
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+
 :host {
     display: block;
     overflow: hidden;
   }
   
   .panes {
-    height: 100%;
+    height:$width;
     width: 200%;
   
-    display: flex;
+    display:$display;
   }
     div {
       flex: 1;

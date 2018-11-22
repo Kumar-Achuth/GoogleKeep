@@ -27,4 +27,10 @@ export class UserService {
   logout(){
     return this.http.postLogout('user/logout');
   }
+  getUsers(){
+    return this.http.getJSON('user');
+  }
+  searchUserList(body){
+    return this.http.postJSON('user/searchUserList',body)
+  }
 } 

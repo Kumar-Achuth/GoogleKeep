@@ -10,7 +10,6 @@ export class HttpService {
   constructor(public http: HttpClient) { }
 
   /**********************************User Services*******************************/
-
   postPassword(url, body) {
     url = this.baseUrl + url;
     return this.http.post(url, body);
@@ -88,7 +87,7 @@ export class HttpService {
     url = this.baseUrl + url;
     return this.http.delete(url);
   }
-  httpAddImage(url, body, token) {
+  httpAddImage(url, body, token){
     url = this.baseUrl + url;
     var httpOptions = {
       headers: new HttpHeaders({
@@ -96,15 +95,6 @@ export class HttpService {
       })
     };
     return this.http.post(url, body, httpOptions)
-  }
-  public httpGetReminder(url, token) {
-    url = this.baseUrl + url;
-    var httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': token
-      })
-    };
-    return this.http.get(url, httpOptions)
   }
 /**************************Notes Services End************************** */
 }

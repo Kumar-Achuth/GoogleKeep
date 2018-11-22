@@ -85,4 +85,9 @@ export class NotesService {
   pin(body){
     return this.http.postJSON('notes/pinUnpinNotes',body)
   }
+  // *************************Collaborator Services**************************/
+  postCollaborator(id,body){
+    return this.http.postJSON('notes/'+ id+'/AddcollaboratorsNotes',body)
+  }
+ 
 }

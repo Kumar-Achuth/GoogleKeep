@@ -1,13 +1,12 @@
-$color:rgb(255,255,255);
-$searchColor:whiteSmoke;
-$blackColor:black;
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
 
 .sidenav-container {
   height:90%;
   background-color:$color;
 }
 .ico{
-  float:right;
+  float:$float;
 }
 .mat-nav-list a.active {
   background:#feefc3;
@@ -15,36 +14,23 @@ $blackColor:black;
   border-bottom-right-radius: 20px;
 }
 .titledisplay{
-  padding-left: 10%;
-  padding-top: 7%;
-  opacity: 0.51;
-  vertical-align: middle;
-  display: inline-block;
-  font-family: 'Product Sans',Arial,sans-serif;
-  // font-size: 22px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden !important; 
-  width: 100px;
-  cursor: pointer;
+@include titleDisplay
 }
 .lab{
-  color: #5f6368;
+  color: rgb(95, 99, 104);
   letter-spacing: .07272727em;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: $font-family;
   font-size: .6875rem;
   font-weight: 500;
   line-height: 1rem;
   text-transform: uppercase;
 }
 .bulp{
+  @include labelDisplay;
   padding-left: 12%;
-  font-family: 'Google Sans','Roboto',Arial,sans-serif;
+  font-family: $font-family;
   font-weight: 500;
   font-size: .875rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden !important; 
   width: 100px;
 }
 .sidenav{
@@ -56,50 +42,36 @@ $blackColor:black;
 }
 .toolbar
 {
-  box-shadow: 0 1px 1px rgba(0,0,0,0.20);
+  box-shadow: $box-shadow;
   background-color:$color;
   position: fixed;
   z-index: 3;
-  display: flex; 
+  display: $display;
 }
 .title-header{
   padding-left: 1%;
 color:$blackColor;
-display: flex;
+display:$display;
 }
 .toggle{
   color: $blackColor;
   opacity: 0.54;
-  display: flex;
+  display: $display;
 }
 .searchBar{
-flex: 1 1 auto;
-width: stretch;
-padding-left: 2%;
+ flex: 1 1 auto;
+ width: stretch;
+ padding-left: 2%;
 }
 .material-icons{
   font-size: 30px;
   margin-right: 8px;
   color: $blackColor;
   opacity: 0.6;
-  display: flex;
+  display: $display;
 }
-.search
-{
-  font: normal 16px,sans-serif;
-  flex: 1 1 auto;
-  padding: 11px 16px 11px 16px;
-  color: $blackColor;
-  opacity: 1;
-  width: stretch;
-  height: 46px;
-  background-color: $searchColor;
-  border:0px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  font-size: 20px;
-  padding-left: 1%;
-  padding-right: 3%;
+.search{
+@include search;
 }
 .searchNew{
   padding-left: 2%;
@@ -117,14 +89,12 @@ background-color: $color;
   width:100px; 
   height:100px; 
   border: none;
- border-radius: 50%;
- background-color: $color;
- padding: 3%;
+  border-radius: 50%;
+  background-color: $color;
+  padding: 3%;
 }
 .image{
-  width:50px;
-  height:50px;
-  border-radius: 50%;
+ @include image;
 }
 .padding{
   padding: 3%;

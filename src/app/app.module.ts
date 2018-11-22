@@ -167,7 +167,8 @@ import { ErrorsHandler } from './core/services/errorHandler/error-handler';
     useClass: ErrorsHandler,
   }],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent,CollaboratorPageComponent],
+  entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent,
+    CollaboratorPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
