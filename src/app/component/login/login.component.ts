@@ -86,8 +86,6 @@ export class LoginComponent implements OnInit , OnDestroy {
                 data=>{
                   LoggerService.log("Message Notification Available",data)
                 }),
-                error=>{
-                }
               this.router.navigateByUrl('/home')
             },
             error => {
@@ -96,10 +94,6 @@ export class LoginComponent implements OnInit , OnDestroy {
               })
             }
           )
-      }
-      else {
-        error => {
-        }
       }
     }
   }

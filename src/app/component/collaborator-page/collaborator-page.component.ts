@@ -33,6 +33,9 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
+    for(let i=0 ;i<this.data['collaborators'].length;i++){
+      this.collaborator.push(this.data['collaborators'][i]);
+      }
   }
   /**
    * @description Dialog box close Function And Open Update Notes Dialog Box open 

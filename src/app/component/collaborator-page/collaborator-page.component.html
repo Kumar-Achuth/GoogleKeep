@@ -24,6 +24,15 @@
     </div>
   </div>
 
+  <div fxLayout="row" *ngFor="let data of collaborator">
+      <button mat-mini-fab color="basic" class="profilebutton2 person_button" > 
+        {{data.firstName | slice:0:1}}</button>
+      <div class="name_email " fxLayout="column">
+      <span> {{data.firstName | titlecase}}{{data.lastName | titlecase}}</span>
+      <span> {{data.email}}</span>
+      </div>
+      </div>
+
   <!-- ****************************Sender Info Display**************************** -->
 
   <div fxLayout="row" class="nameDivision">

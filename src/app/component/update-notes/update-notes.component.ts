@@ -70,8 +70,6 @@ export class UpdateNotesComponent implements OnInit {
       })
       this.dialogRef.close();
     }
-    error => {
-    }
   }
   /**
    * @description Upadte Label Api 

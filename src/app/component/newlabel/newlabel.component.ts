@@ -34,9 +34,7 @@ export class NewlabelComponent implements OnInit, OnDestroy {
     .subscribe(
         (data) => {
           this.labelArray = data['data'].data;
-        }),
-      () => {
-      }
+        })
   }
   ngOnDestroy() {
     this.destroy$.next(true);

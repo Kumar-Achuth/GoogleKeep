@@ -22,8 +22,6 @@ export class ReminderComponent implements OnInit {
           this.reminderArray.sort((a: any, b: any) =>
             new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
           )
-        }),
-      error => {
-      }
+        })
   }
 }

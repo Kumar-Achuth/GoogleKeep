@@ -122,7 +122,7 @@ export class SignupComponent implements OnInit {
         )
     }
     else {
-      () => {
+      (error) => {
         this.snackBar.open("Registration", "Unsuccessful", {
           duration: 1000
         });

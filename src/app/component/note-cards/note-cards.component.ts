@@ -49,7 +49,6 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
   }
   
   openDialog(notes): void {
-    debugger
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',
       data: notes
