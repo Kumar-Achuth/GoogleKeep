@@ -49,13 +49,13 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
   /**
    * @description Add Collaborator Api Call 
    */
-  save(index){
+  save(item){
     // LoggerService.log('res',this.userList)
     this.notesService.postCollaborator(this.data.id,{
-      "email": index.email ,
-      "firstName":index.firstName,
-      "lastName": index.lastName,
-       "userId":index.userId
+      "email": item.email ,
+      "firstName":item.firstName,
+      "lastName": item.lastName,
+       "userId":item.userId
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe(response =>{
