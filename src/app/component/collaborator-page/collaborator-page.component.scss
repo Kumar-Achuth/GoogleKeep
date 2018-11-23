@@ -1,22 +1,21 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
+$font-size: 13px;
+$padding: 3%;
+$padding-left: 11%;
+$padding-top: 2px;
+$overflow:hidden;
 
+.nameDivision3{
+overflow-x: $overflow;
+overflow-y: $overflow;
+}
 .collaborator{
     border-bottom: 1px solid rgba(0,0,0,0.15);
     font-size: 18px;
     font-weight: 500;
     height: 25px;
     padding: 0 0 10px 0;
-}
-:host::ng-deep.mat-menu-content:not(:empty) {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    width: $width; 
-    border-radius: 4px;
-    box-sizing: none;
-    outline: none;
-    z-index: 5003;
-    font-size: 13px;
 }
 .nameDivision{
     padding: 1%;
@@ -28,19 +27,19 @@
     padding-left: 2%;
 }
 .nameDivision1{
-    padding: 3%;
-    padding-left: 11%;
-    padding-top: 2px;
-    font-size: 13px;
+    padding: $padding;
+    padding-left:$padding-left;
+    padding-top: $padding-top;
+    font-size: $font-size;
     font-family: $font-family;
     font-weight: 700;
     color: rgb(32, 33, 36);
 }
 .nameDivision2{
-    padding: 3%;
-    padding-left: 11%;
-    padding-top: 2px;
-    font-size: 13px;
+    padding:$padding;
+    padding-left:$padding-left;
+    padding-top:$padding-top;
+    font-size: $font-size;
     font-family: $font-family;
     color: rgba(0,0,0,.54);
 }
@@ -63,7 +62,7 @@
     @include edit();
     padding-top: 8px;
     padding-left: 24px;
-    font-size: 13px;
+    font-size: $font-size;
     font-family: $font-family;
     font-style: bold;
 }

@@ -1,12 +1,11 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
+$height: 70%;
+$width :70%;
+
 
 .heading{
-   display:$display;
-   justify-content: center;
-   align-items: center;
-   height: 97vh;
-   width: $width;;
+  @include heading;
     }
 .clas{
       width: 450px; 
@@ -17,14 +16,14 @@
 .select{
       cursor:$cursor;
       background-color: lightgreen;
-      height: 70%;
-      width :70%;
+      height:$height;
+      width :$width ;
 }
 .notSelect{
       cursor: $cursor;
       background-color:lightskyblue ;
-      height: 70%;
-      width : 70%;
+      height: $height;
+      width : $width ;
 }
 .letter1{
       color : $blueColor;

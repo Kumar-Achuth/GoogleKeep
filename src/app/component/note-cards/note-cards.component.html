@@ -32,7 +32,12 @@
           <del class="check" *ngIf="!checklist.isDeleted && checklist.status=='close'" 
           (click)="open(notes)">{{checklist.itemName}}</del>
         </div>
-
+        <!-- *****************************Collaborator Display*********************** -->
+        <!-- <div fxLayout="row wrap" class="spacebetween">
+        <div *ngFor="let index of notes.collaborators">
+          <button mat-mini-fab disabled>{{index}}</button>
+        </div>
+      </div><br> -->
         <!-- ************************Labels Display In Notes ********************* -->
 
         <div fxLayout="row wrap" class="spacebetween">
@@ -64,7 +69,8 @@
               </div>
               <div *ngIf ="(tomorrow | date : shortDate)==(index|date:shortDate)">
                       <mat-chip> Tomorrow {{index|date:'shortTime'}}
-                          <app-add-reminder style="color:rgb(223,223,223)" [reminder]="notes"
+                          <app-add-reminder style="color:rgb(223,223,223)" 
+                          [reminder]="notes"
                            (remindEmit)="deleteEvent($event)">
                             </app-add-reminder>
                           <mat-icon (click)="deleteReminder(notes.id)" matChipRemove>cancel</mat-icon>

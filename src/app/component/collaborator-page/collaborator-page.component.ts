@@ -20,6 +20,8 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
   image =localStorage.getItem('imageUrl')
   img = environment.apiUrl + this.image;
   private searchNames:any=[];
+  private userList=[];
+  private collaborator:any=[];
   email= localStorage.getItem('email');
   firstName=localStorage.getItem('firstName');
   lastName=localStorage.getItem('lastName')
@@ -31,8 +33,10 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
-    this.getAllUsers();
   }
+  /**
+   * @description Dialog box close Function And Open Update Notes Dialog Box open 
+   */
   cancel(): void {
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',
@@ -40,22 +44,18 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
     });
     dialogRef.afterClosed().subscribe(() => {
     });
-    this.dialogRef.close();
-    
+    this.dialogRef.close();  
   }
-  getAllUsers(){
-    this.userService.getUsers()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(response => {
-      LoggerService.log('Done',response)
-    })
-  }
-  save(){
+  /**
+   * @description Add Collaborator Api Call 
+   */
+  save(index){
+    // LoggerService.log('res',this.userList)
     this.notesService.postCollaborator(this.data.id,{
-      "email": this.email ,
-      "firstName":this.firstName ,
-      "lastName": this.lastName,
-       "userId":this.userId 
+      "email": index.email ,
+      "firstName":index.firstName,
+      "lastName": index.lastName,
+       "userId":index.userId
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe(response =>{
@@ -63,7 +63,9 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
       LoggerService.log('Success',response)
     })
   }
-  private userList=[];
+/**
+ * @description Search User List Api Call
+ */
   search(){
     this.userService.searchUserList({
       'searchWord': this.searchNames,
@@ -73,6 +75,11 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
       LoggerService.log('Success',response);
       this.userList=response['data']['details'];
     })
+  }
+
+  select(email)
+  {
+    this.searchNames = email;
   }
   ngOnDestroy() {
     this.destroy$.next(true);

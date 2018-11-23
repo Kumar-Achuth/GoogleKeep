@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="center center">
+<div fxLayout="row" fxLayoutAlign="center center" >
   <div class="trash">
     Notes in Trash are deleted after 7 days.
   </div>
@@ -9,7 +9,7 @@
 <!-- ************************Trash Notes Display ******************************-->
 
 <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px" 
-style="margin-top:50px;">
+style="margin-top:30px;">
   <div *ngFor='let notes of cards'>
     <mat-card class="card" style="margin-top : 10px; border-radius: 8px" 
     [style.backgroundColor]="notes.color">

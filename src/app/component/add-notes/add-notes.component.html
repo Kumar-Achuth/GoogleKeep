@@ -1,12 +1,13 @@
-<div fxFlex=10></div>
-<div fxFlex=89 fxLayout='column wrap' fxLayoutAlign="center center" 
+<div fxFlex = 100 fxLayout='column wrap' fxLayoutAlign="center center" 
 style="margin-top:100px; border-radius: 8px">
+<div  fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 ></div>
     <mat-card *ngIf="hide" (click)="hide=!hide">
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
             <div class="click">
-               <mat-icon  matTooltip="New List"
-               (click)="toggle()">list</mat-icon>
+              <i class="material-icons" matTooltip="New List"
+                (click)="toggle()">
+                check_box</i>
             </div>
         </div>
     </mat-card>
@@ -53,7 +54,7 @@ style="margin-top:100px; border-radius: 8px">
         </div>
     </div>
 
-    <!-- *********************** Adding Reminders to The Notes **************************** -->
+    <!-- *********************** Adding Reminders to The Notes ************************* -->
 
         <div *ngFor="let index of dateArray">
             <mat-chip-list>
@@ -84,7 +85,7 @@ style="margin-top:100px; border-radius: 8px">
                 </app-add-reminder>
             </div>
             <div fxFlex=10>
-                <app-collaborator [collaborator]="notes">
+                <app-collaborator>
                 </app-collaborator>
             </div>
             <div fxFlex=10>
@@ -109,5 +110,5 @@ style="margin-top:100px; border-radius: 8px">
         </div>
         <br>
     </mat-card>
+    <div fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 ></div>
 </div>
-<div fxFlex=1></div>

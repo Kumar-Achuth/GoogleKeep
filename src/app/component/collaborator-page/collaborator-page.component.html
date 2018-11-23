@@ -6,49 +6,51 @@
   <!-- ************************User Info Display *************************** -->
 
   <div fxLayout="row">
-<div class="nameDivision">
+    <div class="nameDivision">
       <div *ngIf="image!=''">
-         <img src="{{img}}" class="image">
+        <img src="{{img}}" class="image">
       </div>
-       <button *ngIf="image==''" mat-mini-fab color="primary" class="image">
-           {{firstName | slice:0:1}}
-       </button>
+      <button *ngIf="image==''" mat-mini-fab color="primary" class="image">
+        {{firstName | slice:0:1}}
+      </button>
     </div>
-  <div fxLayout="column" class="top">
-    <div>
-    <span class="nameDivision1">{{firstName}}{{lastName}}(Owner)</span>
+    <div fxLayout="column" class="top">
+      <div>
+        <span class="nameDivision1">{{firstName}}{{lastName}}(Owner)</span>
+      </div>
+      <div class="nameDivision2">
+        {{email}}
+      </div>
+    </div>
   </div>
-  <div class="nameDivision2">
-    {{email}}
-  </div>
-</div>
-</div>
 
-<!-- ****************************Sender Info Display**************************** -->
+  <!-- ****************************Sender Info Display**************************** -->
 
   <div fxLayout="row" class="nameDivision">
-      <div><button class="names" mat-mini-fab disabled><i class="material-icons">
+    <div><button class="names" mat-mini-fab disabled><i class="material-icons">
           person_add
-          </i></button></div>
-          <input contenteditable="true" (keyup)="search()" class="reset" [(ngModel)]="searchNames"
-           placeholder="Person or Email To Share With" [matMenuTriggerFor]="menu">
+        </i></button></div>
+    <input contenteditable="true" (keyup)="search()" class="reset" [(ngModel)]="searchNames"
+     placeholder="Person or Email To Share With"
+      [matMenuTriggerFor]="menu">
   </div>
-  <mat-menu #menu="matMenu" >
-    <div *ngFor="let item of userList">
-      {{item.firstName}} {{item.lastName}} {{item.email}}
-    </div>
+  <mat-menu #menu="matMenu" [overlapTrigger]="false">
+    <!-- <div *ngFor="let item of userList | slice:0:5" class="nameDivision3"> -->
+      <button mat-menu-item  *ngFor="let item of userList | slice:0:5"
+      (click)="save(item)"
+      >{{item.firstName}}
+         <{{item.email}}> </button>
+    <!-- </div> -->
   </mat-menu>
 
   <!-- *******************************Functional Buttons************************* -->
 
   <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
-<div>
-<button mat-button (click)="cancel()">Cancel</button>
-</div>
-<div>
-  <button mat-button (click)="save()">Save</button>
-</div>
+    <div>
+      <button mat-button (click)="cancel()">Cancel</button>
+    </div>
+    <div>
+      <button mat-button (click)="cancel()">Save</button>
+    </div>
   </div>
 </div>
-
-
