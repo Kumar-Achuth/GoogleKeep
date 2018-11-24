@@ -15,8 +15,8 @@
       </button>
     </div>
     <div fxLayout="column" class="top">
-      <div>
-        <span class="nameDivision1">{{firstName}}{{lastName}}(Owner)</span>
+      <div class="nameDivision1">
+      <span>{{firstName}}{{lastName}}(Owner)</span>
       </div>
       <div class="nameDivision2">
         {{email}}
@@ -24,39 +24,50 @@
     </div>
   </div>
 
-  <!-- **************************Existing Collaborators Display*********************** -->
+  <!-- *************************Existing Collaborators Display*********************** -->
 
-<div *ngIf="collaborator.length!=0">
   <div fxLayout="row"  *ngFor="let data of collaborator"  class="nameDivision">
-      <button class="names" mat-mini-fab color="basic" class="profilebutton2 person_button" > 
+    <div fxFlex=2.5>
+      <button class="names" mat-mini-fab color="primary"> 
         {{data.firstName | slice:0:1}}</button>
-      <div fxLayout="column">
-      <span class="nameDivision1"> {{data.firstName | titlecase}}</span>
-      <span class="nameDivision2"> {{data.email}}</span>
       </div>
-      </div>
+      <div fxFlex=95 fxLayout="column">
+        <div class="nameDivision1">
+      <span> {{data.firstName | titlecase}}</span>
     </div>
+      <div class="nameDivision2"> 
+        {{data.email}}
+      </div>
+      </div>
+      <div fxFlex=2.5 class="close">
+          <mat-icon (click)="deleteCollaborator(data)">close</mat-icon>
+        </div>
+      </div>
 
   <!-- ****************************Sender Info Display**************************** -->
 
   <div fxLayout="row" class="nameDivision">
-    <div><button class="names" mat-mini-fab disabled><i class="material-icons">
+    <div fxflex=2.5><button class="names" mat-mini-fab disabled><i class="material-icons">
           person_add
         </i></button></div>
+        <div fxFlex=95>
     <input contenteditable="true" (keyup)="search()" class="reset" [(ngModel)]="searchNames"
      placeholder="Person or Email To Share With"
-      [matMenuTriggerFor]="menu">
+      [matMenuTriggerFor]="menu"></div>
+      <div fxFlex=2.5 class="close">
+          <mat-icon>done</mat-icon>
+        </div>
   </div>
   <mat-menu #menu="matMenu" [overlapTrigger]="false">
       <button mat-menu-item  *ngFor="let item of userList | slice:0:5"
-      (click)="save(item)"
+      (click)="save(item);select(item.email)"
       >{{item.firstName}}
          <{{item.email}}> </button>
   </mat-menu>
 
   <!-- *******************************Functional Buttons************************* -->
-
-  <div class="buttons" fxLayout="row" fxLayoutAlign="space-between">
+<div class="buttonscolor">
+  <div class="buttons" fxLayout="row" fxLayoutAlign="end" fxLayoutAlign="space-between">
     <div>
       <button mat-button (click)="cancel()">Cancel</button>
     </div>
@@ -64,4 +75,5 @@
       <button mat-button (click)="cancel()">Save</button>
     </div>
   </div>
+</div>
 </div>

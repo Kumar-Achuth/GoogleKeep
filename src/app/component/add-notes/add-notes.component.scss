@@ -64,6 +64,83 @@ mat-card{
 }
 
 
+// ***********Collaborator Css
+
+$font-size: 13px;
+$padding: 3%;
+$padding-left: 11%;
+$padding-top: 2px;
+$overflow:hidden;
+
+.nameDivision3{
+overflow-x: $overflow;
+overflow-y: $overflow;
+}
+.collaborator{
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    font-size: 18px;
+    font-weight: 500;
+    height: 25px;
+    padding: 0 0 10px 0;
+}
+.nameDivision{
+    padding: 1%;
+    padding-left: 2%;
+    font-family:$font-family 
+}
+.top{
+    padding-top: 10px;
+    padding-left: 2%;
+}
+.nameDivision1{
+    padding: $padding;
+    padding-left:$padding-left;
+    padding-top: $padding-top;
+    font-size: $font-size;
+    font-family: $font-family;
+    font-weight: 700;
+    color: rgb(32, 33, 36);
+}
+.nameDivision2{
+    padding:$padding;
+    padding-left:$padding-left;
+    padding-top:$padding-top;
+    font-size: $font-size;
+    font-family: $font-family;
+    color: rgba(0,0,0,.54);
+}
+.padding{
+    padding: 10px;
+}
+.image{
+    @include image;
+}
+.buttons{
+    float:$float;
+    padding:2%;
+}
+.owner{
+    font-style: italic;
+    margin-left: 5px;
+}
+.reset
+{
+    @include edit();
+    padding-top: 8px;
+    padding-left: 24px;
+    font-size: $font-size;
+    font-family: $font-family;
+    font-style: bold;
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+.names{
+    @include image;
+}
+
+
+
 
 
 

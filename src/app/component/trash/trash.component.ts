@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DeleteTrashComponent } from '../delete-trash/delete-trash.component';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators'
 @Component({
   selector: 'app-trash',
   templateUrl: './trash.component.html',
   styleUrls: ['./trash.component.scss']
 })
-export class TrashComponent implements OnInit {
+export class TrashComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private cards: any = [];
   constructor(private notesService:NotesService, private dialog: MatDialog, 
     private router: Router) { }
@@ -30,7 +32,8 @@ export class TrashComponent implements OnInit {
         this.notesService.foreverTrash({
           "isDeleted": false,
           "noteIdList": [card]
-        }).subscribe(data => {
+        }).pipe(takeUntil(this.destroy$))  
+        .subscribe(data => {
           this.getTrash()
         })
       }
@@ -41,7 +44,8 @@ export class TrashComponent implements OnInit {
    */
   getTrash() {
     this.notesService.getTrashNotes()
-      .subscribe(data => {
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
         for (var i = 0; i < data["data"]['data'].length; i++) {
           this.cards = (data["data"]['data']);
         }
@@ -57,9 +61,15 @@ export class TrashComponent implements OnInit {
     this.notesService.postTrash( {
       "isDeleted": false,
       "noteIdList": [card]
-    }).subscribe(data => {
+    }).pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
       this.getTrash()
     })
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
  }
 

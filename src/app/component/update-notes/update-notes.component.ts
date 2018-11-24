@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteCardsComponent } from '../note-cards/note-cards.component';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { CollaboratorPageComponent } from '../collaborator-page/collaborator-page.component';
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators'
 export interface DialogData {
   title: string;
   description: string;
@@ -16,7 +18,8 @@ export interface DialogData {
   templateUrl: './update-notes.component.html',
   styleUrls: ['./update-notes.component.scss']
 })
-export class UpdateNotesComponent implements OnInit {
+export class UpdateNotesComponent implements OnInit , OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private body: any = {}
   private newList;
   private newData;
@@ -30,7 +33,8 @@ export class UpdateNotesComponent implements OnInit {
   private status = "open"
   @Output() updateEvent = new EventEmitter();
   constructor(public dialogRef: MatDialogRef<NoteCardsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,private notesService:NotesService ) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private dialog: MatDialog,private notesService:NotesService ) { }
   ngOnInit() {
     this.array1 = this.data['noteLabels'];
     this.array2 = this.data['reminder'];
@@ -48,7 +52,8 @@ export class UpdateNotesComponent implements OnInit {
         "noteId": [this.data.id],
         "title": document.getElementById('titleId').innerHTML,
         "description": document.getElementById('notesId').innerHTML
-      }).subscribe(data => {
+      }).pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
         this.dialogRef.close();
         this.updateEvent.emit({
         })
@@ -65,7 +70,8 @@ export class UpdateNotesComponent implements OnInit {
         "status": this.checkListArray.status
       }
       this.notesService.updateCheckList(this.data['id'], this.checkListArray.id ,
-       JSON.stringify(apiData)).subscribe(response => {
+       JSON.stringify(apiData)).pipe(takeUntil(this.destroy$))  
+       .subscribe(response => {
         this.updateEvent.emit()
       })
       this.dialogRef.close();
@@ -77,7 +83,9 @@ export class UpdateNotesComponent implements OnInit {
    */
   deleteChips(label) {
     this.notesService.deleteChip( this.data.id ,label,
-      { "noteId": this.data.id, "lableId": label }).subscribe(data => {
+      { "noteId": this.data.id, "lableId": label })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
         this.updateEvent.emit({
         })
       })
@@ -87,7 +95,9 @@ export class UpdateNotesComponent implements OnInit {
    * @param id
    */
   deleteReminder(id) {
-    this.notesService.deleteReminder({ "noteIdList": [id] }).subscribe(data => {
+    this.notesService.deleteReminder({ "noteIdList": [id] })
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
         LoggerService.log('Success', data)
         this.updateEvent.emit({
         })
@@ -134,7 +144,9 @@ export class UpdateNotesComponent implements OnInit {
    * @description : Remove checklists from updated notes
    */
   removeCheckList() {
-    this.notesService.removeCheckList( this.data.id,this.removedList.id,null).subscribe((response) => {
+    this.notesService.removeCheckList( this.data.id,this.removedList.id,null)
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe((response) => {
       for (var i = 0; i < this.tempArray.length; i++) {
         if (this.tempArray[i].id == this.removedList.id) {
           this.tempArray.splice(i, 1)
@@ -165,7 +177,8 @@ export class UpdateNotesComponent implements OnInit {
         "status": this.status
       }
       this.notesService.addCheckList( this.data['id'],this.newData)
-        .subscribe(response => {
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(response => {
           this.newList = null;
           this.addCheck = false;
           this.adding = false;
@@ -173,5 +186,18 @@ export class UpdateNotesComponent implements OnInit {
         })
     }
   }
-
+  openCollaboratorPage(data){
+    const dialogRef = this.dialog.open(CollaboratorPageComponent,{
+      width: '600px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

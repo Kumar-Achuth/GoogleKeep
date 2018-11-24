@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-add-notes',
     templateUrl: './add-notes.component.html',
@@ -25,6 +26,12 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class AddNotesComponent implements OnInit, OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
+    image =localStorage.getItem('imageUrl')
+    img = environment.apiUrl + this.image;
+    email= localStorage.getItem('email');
+    firstName=localStorage.getItem('firstName');
+    lastName=localStorage.getItem('lastName')
+    userId=localStorage.getItem('userId');
     private hide: boolean = true;
     private labelId = [];
     private labelName = [];
@@ -41,6 +48,7 @@ export class AddNotesComponent implements OnInit, OnDestroy {
     private dating;
     private labelArray: any[];
     private date;
+    private addCollaborator :any=0;
     private today = new Date();
     private tomorrow = new Date(this.today.getFullYear(), this.today.getMonth()
         , this.today.getDate() + 1)
@@ -55,6 +63,12 @@ export class AddNotesComponent implements OnInit, OnDestroy {
     }
     toggle() {
         this.show = 1;
+    }
+    toggleCollaborator() {
+        this.addCollaborator = 1;
+    }
+    closecards(){
+        this.addCollaborator=0;
     }
     cancelLabel() {
         this.labelName = [];
@@ -237,6 +251,9 @@ export class AddNotesComponent implements OnInit, OnDestroy {
         this.dateArray = [];
         this.date = event;
         this.dateArray.push(this.date)
+    }
+    collaborator(){
+
     }
     ngOnDestroy() {
         this.destroy$.next(true);

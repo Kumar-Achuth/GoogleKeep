@@ -1,4 +1,4 @@
-<div fxLayout="row" >
+<div fxLayout="row">
   <mat-toolbar class="toolbar">
 
     <!-- ********************ToolBar Display************************* --> 
@@ -8,17 +8,17 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="title-header">
-            <span> <img  alt="" aria-hidden="true"
+            <span fxShow="true" fxHide.xs="true" fxHide.sm="true"
+            fxHide.md="false"> <img  alt=""  class="googleKeep" aria-hidden="true"
              src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" 
              srcset="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x,
-              https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x " 
-              style="width:40px;height:40px"></span>
+              https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x "></span>
             <span class="titledisplay">{{title}}</span></span>
-            <mat-icon fxShow="true" fxHide.xs="false" fxHide.sm="true" 
+            <!-- <mat-icon fxShow="true" fxHide.xs="false" fxHide.sm="true" 
         fxHide.md="true" fxHide.xl = "true" fxHide.lg = "true" (click)="goSearch()"
-         class = "searchNew">search</mat-icon>
-        <div  class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="false" 
-        fxHide.md="false">
+         class = "searchNew">search</mat-icon> -->
+        <div  class="searchBar" fxShow="true" fxHide.xs="false" fxHide.sm="false" 
+        fxHide.md="false" ngStyle.sm = "width: 50px;" ngStyle.xs = "width: 30px;">
           <input class="search" type="input" placeholder="search" 
            [(ngModel)]="globalSearch" name="search" (click)="goSearch()"
             (keydown)="lookFor()">
@@ -26,18 +26,15 @@
         <div fxFlex fxLayoutAlign="end">
           <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-around evenly"
            class="icons">
-          <div class ="one" matTooltip="Cloud Sync">
-            <mat-icon>refresh</mat-icon>
-          </div>
          <div class ="one" style = "padding-left: 10px;float: right">
             <mat-icon matTooltip="Grid View" (click)="listView()"
-             *ngIf="list == 0" fxShow = "true" fxHide.sm = "true" fxHide.xs = "true">
-              view_agenda</mat-icon>
+             *ngIf="list == 0" fxShow = "true" fxHide.md = "false" fxHide.sm = "true" 
+             fxHide.xs = "true"> view_agenda</mat-icon>
             </div>
             <div class ="one" style = "padding-left: 10px;float: right">
             <mat-icon  class="material-icons" matTooltip="List View" 
              (click)="gridView()" *ngIf="list == 1" 
-              fxShow = "true" fxHide.sm = "true" fxHide.xs = "true">
+              fxShow = "true" fxHide.md = "false" fxHide.sm = "true" fxHide.xs = "true">
               view_module</mat-icon>
             </div>
           </div>

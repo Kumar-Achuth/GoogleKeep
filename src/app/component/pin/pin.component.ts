@@ -10,16 +10,18 @@
 *  @since          : 20-10-2018
 *
 *************************************************************************************************/
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators'
 @Component({
   selector: 'app-pin',
   templateUrl: './pin.component.html',
   styleUrls: ['./pin.component.scss']
 })
-export class PinComponent implements OnInit {
+export class PinComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   @Input() pinNote;
   @Output() pinEvent = new EventEmitter();
   constructor(private notesService: NotesService, ) { }
@@ -34,7 +36,8 @@ export class PinComponent implements OnInit {
         "noteIdList": [this.pinNote.id],
         "isPined": true
       },
-      ).subscribe(data => {
+      ).pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
         LoggerService.log('Success', data)
         this.pinEvent.emit({
         })
@@ -50,7 +53,8 @@ export class PinComponent implements OnInit {
     this.notesService.pin({
         "noteIdList": [this.pinNote.id],
         "isPined": false
-      }).subscribe(data => {
+      }).pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
         LoggerService.log('Success', data)
         this.pinEvent.emit({
         })
@@ -58,5 +62,10 @@ export class PinComponent implements OnInit {
     error => {
       LoggerService.error(error);
     };
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

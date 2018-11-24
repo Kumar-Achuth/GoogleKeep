@@ -10,6 +10,9 @@ $overflow:hidden;
 overflow-x: $overflow;
 overflow-y: $overflow;
 }
+.close{
+    cursor: $cursor;
+}
 .collaborator{
     border-bottom: 1px solid rgba(0,0,0,0.15);
     font-size: 18px;
@@ -27,7 +30,6 @@ overflow-y: $overflow;
     padding-left: 2%;
 }
 .nameDivision1{
-    padding: $padding;
     padding-left:$padding-left;
     padding-top: $padding-top;
     font-size: $font-size;
@@ -36,7 +38,6 @@ overflow-y: $overflow;
     color: rgb(32, 33, 36);
 }
 .nameDivision2{
-    padding:$padding;
     padding-left:$padding-left;
     padding-top:$padding-top;
     font-size: $font-size;
@@ -50,8 +51,11 @@ overflow-y: $overflow;
     @include image;
 }
 .buttons{
-    float:$float;
     padding:2%;
+}
+.buttonscolor{
+    padding-top:$padding-top ;
+    background:rgb(211, 211, 211);
 }
 .owner{
     font-style: italic;
@@ -72,3 +76,4 @@ overflow-y: $overflow;
 .names{
     @include image;
 }
+

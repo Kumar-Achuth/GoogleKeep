@@ -2,42 +2,43 @@
 
 <div class="style1" fxLayout="row wrap" fxLayoutAlign="center center">
     <div class="styles" [style.backgroundColor]="data.color">
-        <div contenteditable="true" id="titleId" class="reset" [innerHtml]="data.title"
-         data-text=""></div><br>
-        <div contenteditable="true" id="notesId" class="edit" *ngIf="!checkList" 
-        [innerHtml]="data.description" 
-        data-text=""></div><br>
+        <div contenteditable="true" id="titleId" class="reset" [innerHtml]="data.title" data-text=""></div><br>
+        <div contenteditable="true" id="notesId" class="edit" *ngIf="!checkList" [innerHtml]="data.description"
+            data-text=""></div><br>
 
         <!-- ********************CheckList Display And Update ************************** -->
 
         <div class="note" *ngFor="let check of tempArray" fxLayout="row">
-                <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
-                (click)=checkBox(check)></mat-checkbox>
-                <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
-                [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open'">
-                <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
-                *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
-              </div>            
-                <mat-divider *ngIf="checklist"></mat-divider>
-                <div fxLayout="row" *ngIf="checklist">
-                  <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
-                  <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
-                  <input   fxFlex="95%" class="note" placeholder="List Item" 
-                  [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
-                </div>
-                <div *ngIf="checklist"></div>
-                <div class="note" *ngFor="let check of tempArray" fxLayout="row">
-                  <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted"
-                   (click)=checkBox(check)></mat-checkbox>
-                  <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;"
-                   fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
-                  [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
-                  <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
-                   *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
-                  </div>
-                  
-                  <!-- *************************Label Display And Update*******************  -->
+            <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+            <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event) [ngStyle]="{'background-color':data.color}"
+                *ngIf="!check.isDeleted && check.status=='open'">
+            <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+        </div>
+        <mat-divider *ngIf="checklist"></mat-divider>
+        <div fxLayout="row" *ngIf="checklist">
+            <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+            <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck color="primary"></mat-checkbox>
+            <input fxFlex="95%" class="note" placeholder="List Item" [ngStyle]="{'background-color':data.color}"
+                [(ngModel)]=newList (keydown)=addList($event) />
+        </div>
+        <div *ngIf="checklist"></div>
+        <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+            <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted" (click)=checkBox(check)></mat-checkbox>
+            <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;" fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
+                [ngStyle]="{'background-color':data.color}" (keydown)=editing(check,$event)>
+            <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+        </div>
+        <!-- *****************************Collaborator Display*********************** -->
 
+        <div fxLayout="row wrap" class="spacebetween">
+            <div *ngFor="let index of data.collaborators" (click)="openCollaboratorPage(data)">
+                <button mat-mini-fab color="primary" matTooltip={{index.email}}>
+                    {{index.firstName|slice:0:1 }}
+                </button>
+            </div>
+        </div><br>
+
+        <!-- *************************Label Display And Update*******************  -->
         <div fxLayout="row wrap" class="spacebetween">
             <div class="chips" *ngFor="let index of data.noteLabels">
                 <mat-chip-list>
@@ -50,19 +51,22 @@
             </div>
         </div>
 
+
+
         <!-- *********************Reminder Display and Update *********************** -->
 
         <div *ngIf="data.reminder.length!=0">
             <mat-chip-list>
-            <mat-chip  class="cursor">
-            <mat-icon (click)="deleteReminder(data.id)">query_builder</mat-icon>{{data.reminder | date:'medium'}}
-            <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteReminder(data.id)">cancel</mat-icon>
-            </mat-chip>
+                <mat-chip class="cursor">
+                    <mat-icon (click)="deleteReminder(data.id)">query_builder</mat-icon>{{data.reminder |
+                    date:'medium'}}
+                    <mat-icon matChipRemove (click)="$event.stopPropagation(); deleteReminder(data.id)">cancel</mat-icon>
+                </mat-chip>
             </mat-chip-list>
-            </div>
-            <!-- *******************************Icons Display************************* -->
+        </div>
+        <!-- *******************************Icons Display************************* -->
         <div class="space" fxLayout="row" fxLayoutAlign="space-between">
-            <app-add-reminder [reminder]="data" >
+            <app-add-reminder [reminder]="data">
             </app-add-reminder>
             <app-collaborator>
             </app-collaborator>

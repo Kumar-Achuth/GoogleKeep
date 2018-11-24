@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSnackBar } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/userServices/user.service';
-
+import { Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators'
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -29,7 +30,8 @@ import { UserService } from 'src/app/core/services/userServices/user.service';
     ]),
   ]
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>(); 
   private hide = true;
   private records = {};
   private basic: any;
@@ -131,6 +133,11 @@ export class SignupComponent implements OnInit {
   }
   onSubmit() {
     alert('Success' + JSON.stringify(this.model))
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

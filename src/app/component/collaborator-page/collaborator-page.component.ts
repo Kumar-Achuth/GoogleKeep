@@ -10,7 +10,7 @@
 *  @since          : 20-10-2018
 *
 *************************************************************************************************/
-import { Component, OnInit, Inject,OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject,OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogData, UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { UserService } from 'src/app/core/services/userServices/user.service';
@@ -45,9 +45,7 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
 
 
   ngOnInit() {
-    for(let i=0 ;i<this.data['collaborators'].length;i++){
-      this.collaborator.push(this.data['collaborators'][i]);
-      }
+    this.users();
   }
   /**
    * @description Dialog box close Function And Open Update Notes Dialog Box open 
@@ -65,7 +63,6 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
    * @description Add Collaborator Api Call 
    */
   save(item){
-    // LoggerService.log('res',this.userList)
     this.notesService.postCollaborator(this.data.id,{
       "email": item.email ,
       "firstName":item.firstName,
@@ -74,8 +71,22 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe(response =>{
-      this.dialogRef.close();
       LoggerService.log('Success',response)
+      this.users();
+    })
+  }
+  deleteCollaborator(item){
+    this.notesService.collaboratorDelete(this.data.id,item.userId)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(response=>{
+      for(let i=0; i<this.collaborator.length;i++){
+        if(item.userId==this.collaborator[i].userId){
+        this.collaborator.splice(i,1);
+        }
+        }
+      LoggerService.log('Success',response)
+      LoggerService.log(item);
+      this.users();
     })
   }
 /**
@@ -100,5 +111,11 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
+}
+users(){
+  this.collaborator=[];
+  for (let i = 0; i < this.data['collaborators'].length; i++) {
+    this.collaborator.push(this.data['collaborators'][i]);
+  }
 }
 }

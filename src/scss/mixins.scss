@@ -19,13 +19,14 @@
     padding-left: 10%;
     padding-top: 7%;
     opacity: 0.51;
+    font-size: 17px;
     vertical-align: middle;
     display: inline-block;
     font-family: 'Product Sans',Arial,sans-serif;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden !important; 
-    width: 100px;
+    width: 83px;
     cursor: pointer;
 }
 @mixin edit() {
