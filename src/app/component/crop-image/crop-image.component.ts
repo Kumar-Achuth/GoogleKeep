@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> cropImage.ts 
+*        
+*  Purpose         : To Crop the Profile Image  
+* 
+*  @file           : cropImage.ts
+*  @description    : Crop Profile Image 
+*  @module         : cropImage.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Inject,OnDestroy } from '@angular/core';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';

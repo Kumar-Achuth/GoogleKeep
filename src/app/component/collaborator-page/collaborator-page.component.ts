@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> collaboratorPage.ts 
+*        
+*  Purpose         : To Share Notes with other users 
+* 
+*  @file           : collaboratorPage.ts
+*  @description    : Add Collaborator Api
+*  @module         : collaboratorPage.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Inject,OnDestroy, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { DialogData, UpdateNotesComponent } from '../update-notes/update-notes.component';

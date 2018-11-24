@@ -1,3 +1,17 @@
+/************************************************************************************************
+*  Execution       :   1. default node         cmd> notecards.ts 
+*        
+*  Purpose         : To display small card & hiddencards & change color when clicked 
+* 
+*  Description     : Get all the Labels,Checklist,Collaborators prsesent in the note cards
+* 
+*  @file           : notecards.ts
+*  @overview       : To display small card & hiddencards & change color when clicked
+*  @module         : notecards.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Input, Output,OnDestroy, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { Router } from '@angular/router';
@@ -24,13 +38,15 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
   private reminderArray: any = [];
   private pinnedNotes: any = [];
   private today = new Date();
-  private tomorrow = new Date(this.today.getFullYear(),this.today.getMonth(),this.today.getDate()+1)
+  private tomorrow = new Date(this.today.getFullYear(),this.today.getMonth()
+  ,this.today.getDate()+1)
   private accessToken = localStorage.getItem('token');
   @Input() cardsArray;
   @Output() trashEvent = new EventEmitter();
   @Input() globalSearch;
   constructor(private myHttpService: HttpService, private router: Router,
-    private dialog: MatDialog,   private notesService: NotesService,  private data: GlobalSearchService) {
+    private dialog: MatDialog,   private notesService: NotesService, 
+     private data: GlobalSearchService) {
     this.data.deletedLabel.subscribe(message => {
       if (message) {
         this.trashEvent.emit({

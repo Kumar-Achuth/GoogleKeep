@@ -24,14 +24,18 @@
     </div>
   </div>
 
-  <div fxLayout="row" *ngFor="let data of collaborator">
-      <button mat-mini-fab color="basic" class="profilebutton2 person_button" > 
+  <!-- **************************Existing Collaborators Display*********************** -->
+
+<div *ngIf="collaborator.length!=0">
+  <div fxLayout="row"  *ngFor="let data of collaborator"  class="nameDivision">
+      <button class="names" mat-mini-fab color="basic" class="profilebutton2 person_button" > 
         {{data.firstName | slice:0:1}}</button>
-      <div class="name_email " fxLayout="column">
-      <span> {{data.firstName | titlecase}}{{data.lastName | titlecase}}</span>
-      <span> {{data.email}}</span>
+      <div fxLayout="column">
+      <span class="nameDivision1"> {{data.firstName | titlecase}}</span>
+      <span class="nameDivision2"> {{data.email}}</span>
       </div>
       </div>
+    </div>
 
   <!-- ****************************Sender Info Display**************************** -->
 
@@ -44,12 +48,10 @@
       [matMenuTriggerFor]="menu">
   </div>
   <mat-menu #menu="matMenu" [overlapTrigger]="false">
-    <!-- <div *ngFor="let item of userList | slice:0:5" class="nameDivision3"> -->
       <button mat-menu-item  *ngFor="let item of userList | slice:0:5"
       (click)="save(item)"
       >{{item.firstName}}
          <{{item.email}}> </button>
-    <!-- </div> -->
   </mat-menu>
 
   <!-- *******************************Functional Buttons************************* -->

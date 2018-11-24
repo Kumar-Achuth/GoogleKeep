@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> addReminder.ts 
+*        
+*  Purpose         : To Add Reminders to notes
+* 
+*  @file           : addReminder.ts
+*  @description    : To Add Reminders to notes
+*  @module         : addReminder.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Input, Output,OnDestroy, EventEmitter } from '@angular/core';
 import { throwMatDuplicatedDrawerError } from '@angular/material';
 import { FormControl } from '@angular/forms';

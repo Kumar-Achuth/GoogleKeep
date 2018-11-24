@@ -1,5 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> archive.ts 
+*        
+*  Purpose         : To Get Archive Notes
+* 
+*  @file           : archive.ts
+*  @description    : Get Archive Notes Api
+*  @module         : archive.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
+import { Component, OnInit } from '@angular/core';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 
 @Component({

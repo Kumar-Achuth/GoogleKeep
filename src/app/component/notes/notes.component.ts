@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> notes.ts 
+*        
+*  Purpose         : Get the Added Notes Instantly and Display them 
+* 
+*  @file           : notes.ts
+*  @description    : Get all the pinned and un-pinned Notes and display them
+*  @module         : notes.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotesInformation } from 'src/app/core/models/notes-information';

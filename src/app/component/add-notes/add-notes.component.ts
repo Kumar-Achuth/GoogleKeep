@@ -1,3 +1,17 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> addNotes.ts 
+*        
+*  Purpose         : To Add Notes
+* 
+*  Description     : Add Notes Api and CheckList Apis
+* 
+*  @file           : addNotes.ts
+*  @overview       : To Add Notes With reminders,colors,labels,checklist
+*  @module         : addNotes.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';

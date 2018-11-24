@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> more.ts 
+*        
+*  Purpose         : Menu For More Options Display 
+* 
+*  @file           : more.ts
+*  @description    : Label List Display and Delete Note options inside More Icons
+*  @module         : more.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';

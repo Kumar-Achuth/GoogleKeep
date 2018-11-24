@@ -1,5 +1,16 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> newLabel.ts 
+*        
+*  Purpose         : Note Cards With Particular Labels
+* 
+*  @file           : newLabel.ts
+*  @description    : Notes According to the Labels present in them Display 
+*  @module         : newLabel.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';

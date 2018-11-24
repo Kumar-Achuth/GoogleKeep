@@ -1,3 +1,18 @@
+/************************************************************************************************
+*  Execution       :   1. default node         cmd> addArchive.ts 
+*        
+*  Purpose         : To display small card & hiddencards & change color when clicked 
+* 
+*  Description    
+* 
+*  @file           : addArchive.ts
+*  @overview       : To display small card & hiddencards & change color when clicked
+*  @module         : addArchive.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
+
 import { Component, OnInit, Input, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';

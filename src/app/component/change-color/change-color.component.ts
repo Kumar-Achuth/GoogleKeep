@@ -1,5 +1,16 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> changeColor.ts 
+*        
+*  Purpose         : To Change Color of Added Notes
+* 
+*  @file           : changeColor.ts
+*  @description    : ChangeColor Api 
+*  @module         : changeColor.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -48,8 +59,6 @@ export class ChangeColorComponent implements OnInit ,OnDestroy {
             localStorage.setItem('colorId', this.color.id);
             this.changeColor.emit({
             })
-          },
-          error => {
           })
     }
   }

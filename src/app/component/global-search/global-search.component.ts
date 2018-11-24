@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> globalSearch.ts 
+*        
+*  Purpose         : Global Search Engine Activate  
+* 
+*  @file           : globalSearch.ts
+*  @description    : Search individual Notes According to Title And Description 
+*  @module         : globalSearch.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { GlobalSearchService } from '../../core/services/globalSearchService/global-search.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';

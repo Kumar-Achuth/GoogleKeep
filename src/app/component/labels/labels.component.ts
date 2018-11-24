@@ -1,5 +1,16 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef, OnDestroy }
-  from '@angular/core';
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> labels.ts 
+*        
+*  Purpose         : Label Creation and Updation 
+* 
+*  @file           : labels.ts
+*  @description    : Label Creation, Editing and Deletion Apis
+*  @module         : labels.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef, OnDestroy }from '@angular/core';
 import { HttpService } from '../../core/services/httpServices/http.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatDialogRef, MatDialog } from '@angular/material';

@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> pin.ts 
+*        
+*  Purpose         : To Pin Notes 
+* 
+*  @file           : pin.ts
+*  @description    : Pin Notes Api Call
+*  @module         : pin.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LoggerService } from '../../core/services/loggerService/logger.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';

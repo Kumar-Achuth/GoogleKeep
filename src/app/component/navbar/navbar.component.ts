@@ -1,3 +1,15 @@
+/************************************************************************************************
+*  Execution       : 1. default node         cmd> navBar.ts 
+*        
+*  Purpose         : Navigation Display With The Options Available such as Archive,Trash Reminders
+* 
+*  @file           : navBar.ts
+*  @description    : Title With Header and Menu Dsiplay with all the avilable options.
+*  @module         : navBar.ts - This is optional if expeclictly its an npm or local package
+*  @author         : KumarAchuth <achuthkumar146@gmail.com>
+*  @since          : 20-10-2018
+*
+*************************************************************************************************/
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
