@@ -108,7 +108,8 @@ export class SignupComponent implements OnInit, OnDestroy {
         "emailVerified": true,
         "password": this.model.password,
       })
-        .subscribe(
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(
           () => {
             this.snackBar.open("Registration", "Successful", {
               duration: 1000
@@ -124,11 +125,9 @@ export class SignupComponent implements OnInit, OnDestroy {
         )
     }
     else {
-      (error) => {
         this.snackBar.open("Registration", "Unsuccessful", {
           duration: 1000
         });
-      }
     }
   }
   onSubmit() {

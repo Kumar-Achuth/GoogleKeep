@@ -90,6 +90,6 @@ export class NotesService {
     return this.http.postJSON('notes/'+ id+'/AddcollaboratorsNotes',body)
   }
   collaboratorDelete(id,userId){
-    return this.http.deleteTheLabel('notes/'+id+'/removeCollaboratorsNotes/'+userId+'')
+    return this.http.deleteTheLabel('notes/'+id+'/removeCollaboratorsNotes/'+userId)
   }
 }

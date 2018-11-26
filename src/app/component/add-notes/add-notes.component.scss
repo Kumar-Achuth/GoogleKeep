@@ -3,13 +3,21 @@
 $margin-bottom:10px;
 $padding-top:4%;
 
-
 mat-card{
     padding: 6px;
-    width: 45%;
+    width: 600px;
     border-radius: 8px;
     background-color: $color;
     box-shadow: $box-shadow;
+}
+@media only screen and (min-width:320px) and (max-width:1200px){
+    mat-card{
+        padding: 6px;
+        width: 90%;
+        border-radius: 8px;
+        background-color: $color;
+        box-shadow: $box-shadow;
+    }
 }
 .click
 {
@@ -24,7 +32,7 @@ mat-card{
 {
     float: $float;
 }
-.reset
+.resetTitle
 {
     @include edit();
     padding-top: 12px;
@@ -63,8 +71,7 @@ mat-card{
     margin-bottom:$margin-bottom;
 }
 
-
-// ***********Collaborator Css
+// *******************************Collaborator Css*******************************
 
 $font-size: 13px;
 $padding: 3%;
@@ -75,6 +82,9 @@ $overflow:hidden;
 .nameDivision3{
 overflow-x: $overflow;
 overflow-y: $overflow;
+}
+.close{
+    cursor: $cursor;
 }
 .collaborator{
     border-bottom: 1px solid rgba(0,0,0,0.15);
@@ -93,7 +103,6 @@ overflow-y: $overflow;
     padding-left: 2%;
 }
 .nameDivision1{
-    padding: $padding;
     padding-left:$padding-left;
     padding-top: $padding-top;
     font-size: $font-size;
@@ -102,7 +111,6 @@ overflow-y: $overflow;
     color: rgb(32, 33, 36);
 }
 .nameDivision2{
-    padding:$padding;
     padding-left:$padding-left;
     padding-top:$padding-top;
     font-size: $font-size;
@@ -116,8 +124,7 @@ overflow-y: $overflow;
     @include image;
 }
 .buttons{
-    float:$float;
-    padding:2%;
+  float:$float
 }
 .owner{
     font-style: italic;

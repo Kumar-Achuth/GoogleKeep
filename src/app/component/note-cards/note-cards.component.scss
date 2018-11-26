@@ -1,6 +1,6 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
-
+$margin-top:20px;
 .space
 {
     padding-top: 4%;
@@ -50,13 +50,12 @@
     @include titleDescription;
 }
 
+//***************************Flex Responses *********************************
 
-//***************************************************************************************
 @media only screen and (min-width: 861px) and (max-width: 980px)
 {
     .grid
 {
-    // margin-top: 20px;
     width:850px;
 }
 }
@@ -64,7 +63,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:800px;
 }
 }
@@ -72,7 +70,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:750px;
 }
 }
@@ -80,7 +77,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:700px;
 }
 }
@@ -88,7 +84,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:650px;
 }
 }
@@ -96,7 +91,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:600px;
 }
 }
@@ -104,7 +98,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:520px;
 }
 }
@@ -112,7 +105,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:400px;
 }
 }
@@ -120,7 +112,6 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:350px;
 }
 }
@@ -128,17 +119,17 @@
 {
     .grid
 {
-    // margin-top: 20px;
     width:300px;
 }
 }
 
-//********************************************************************************8
+//*************************************List View****************************************
+
 @media only screen and (min-width: 506px) and (max-width: 649px)
 {
     .list
 {
-    margin-top: 20px;
+    margin-top: $margin-top;
     width:460px;
 }
 }
@@ -146,7 +137,7 @@
 {
     .list
 {
-    margin-top: 20px;
+    margin-top: $margin-top;
     width:420px;
 }
 }
@@ -154,7 +145,7 @@
 {
     .list
 {
-    margin-top: 20px;
+    margin-top: $margin-top;
     width:380px;
 }
 }
@@ -162,7 +153,7 @@
 {
     .list
 {
-    margin-top: 20px;
+    margin-top: $margin-top;
     width:380px;
 }
 }
@@ -170,7 +161,7 @@
 {
     .list
 {
-    margin-top: 20px;
+    margin-top: $margin-top;
     width:330px;
 }
 }
@@ -178,7 +169,7 @@
 {
     .list
 {
-    margin-top: 20px;
+    margin-top: $margin-top;
     width:300px;
 }
 }

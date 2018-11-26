@@ -38,6 +38,8 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
   firstName=localStorage.getItem('firstName');
   lastName=localStorage.getItem('lastName')
   userId=localStorage.getItem('userId');
+  private owner=this.data["user"];
+  private photo=environment.apiUrl+this.owner.imageUrl
   constructor(private userService:UserService,private notesService : NotesService,
      private dialog: MatDialog, 
     public dialogRef: MatDialogRef<CollaboratorPageComponent>,
@@ -102,6 +104,15 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
       this.userList=response['data']['details'];
     })
   }
+  enterNewLine(user) {
+    for (let i = 0; i < this.userList.length; i++) {
+        if (this.userList[i].email == user) {
+            this.collaborator.push(this.userList[i]);
+            LoggerService.log(this.collaborator);
+        }
+    }
+    this.searchNames=[];
+}
 
   select(email)
   {

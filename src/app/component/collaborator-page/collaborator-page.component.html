@@ -8,18 +8,18 @@
   <div fxLayout="row">
     <div class="nameDivision">
       <div *ngIf="image!=''">
-        <img src="{{img}}" class="image">
+        <img src="{{photo}}" class="image">
       </div>
       <button *ngIf="image==''" mat-mini-fab color="primary" class="image">
-        {{firstName | slice:0:1}}
+        {{owner.firstName | slice:0:1}}
       </button>
     </div>
     <div fxLayout="column" class="top">
       <div class="nameDivision1">
-      <span>{{firstName}}{{lastName}}(Owner)</span>
+      <span>{{owner.firstName}}{{owner.lastName}}(Owner)</span>
       </div>
       <div class="nameDivision2">
-        {{email}}
+        {{owner.email}}
       </div>
     </div>
   </div>
@@ -44,6 +44,7 @@
         </div>
       </div>
 
+
   <!-- ****************************Sender Info Display**************************** -->
 
   <div fxLayout="row" class="nameDivision">
@@ -55,7 +56,7 @@
      placeholder="Person or Email To Share With"
       [matMenuTriggerFor]="menu"></div>
       <div fxFlex=2.5 class="close">
-          <mat-icon>done</mat-icon>
+          <mat-icon (click)="enterNewLine(searchNames)">done</mat-icon>
         </div>
   </div>
   <mat-menu #menu="matMenu" [overlapTrigger]="false">

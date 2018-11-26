@@ -19,6 +19,9 @@ import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
+import { UserService } from 'src/app/core/services/userServices/user.service';
+
 @Component({
     selector: 'app-add-notes',
     templateUrl: './add-notes.component.html',
@@ -26,12 +29,12 @@ import { environment } from 'src/environments/environment';
 })
 export class AddNotesComponent implements OnInit, OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
-    image =localStorage.getItem('imageUrl')
-    img = environment.apiUrl + this.image;
-    email= localStorage.getItem('email');
-    firstName=localStorage.getItem('firstName');
-    lastName=localStorage.getItem('lastName')
-    userId=localStorage.getItem('userId');
+    private image = localStorage.getItem('imageUrl')
+    private img = environment.apiUrl + this.image;
+    private email = localStorage.getItem('email');
+    private firstName = localStorage.getItem('firstName');
+    private lastName = localStorage.getItem('lastName')
+    private userId = localStorage.getItem('userId');
     private hide: boolean = true;
     private labelId = [];
     private labelName = [];
@@ -48,16 +51,21 @@ export class AddNotesComponent implements OnInit, OnDestroy {
     private dating;
     private labelArray: any[];
     private date;
-    private addCollaborator :any=0;
+    private collaboratorBody:any=[];
+    private addCollaborator: any = 0;
     private today = new Date();
     private tomorrow = new Date(this.today.getFullYear(), this.today.getMonth()
         , this.today.getDate() + 1)
     private dateArray = [];
-    private notes = { 'id': '' }
+    private notes = { 'id': '' };
+    private searchNames: any = [];
+    private userList = [];
+    private newList = [];
+    private collaborator: any = [];
     @Output() newEvent = new EventEmitter();
     @Output() addNote = new EventEmitter();
-    constructor(private noteService: NotesService, private snackBar: MatSnackBar,
-        private router: Router) { }
+    constructor(private noteService: NotesService, private userService: UserService,
+        private snackBar: MatSnackBar, private router: Router) { }
     ngOnInit() {
         this.getAllLabels();
     }
@@ -67,8 +75,12 @@ export class AddNotesComponent implements OnInit, OnDestroy {
     toggleCollaborator() {
         this.addCollaborator = 1;
     }
-    closecards(){
-        this.addCollaborator=0;
+    closecards() {
+        this.addCollaborator = 0;
+    }
+    cancelCards(){
+        this.addCollaborator = 0;
+        this.collaborator=[];
     }
     cancelLabel() {
         this.labelName = [];
@@ -94,7 +106,8 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                 'checklist': '',
                 'isPined': 'false',
                 'color': this.color,
-                "reminder": this.dating
+                "reminder": this.dating,
+                "collaberators":JSON.stringify(this.collaborator)
             }).pipe(takeUntil(this.destroy$))
                 .subscribe(response => {
                     this.addNote.emit(response['status'].details)
@@ -106,6 +119,8 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                     this.labelId = [];
                     this.dateArray = [];
                     this.date = '';
+                    this.collaborator=[];
+                    this.searchNames=[];
                 }, error => {
                     this.color = "#fafafa";
                     this.hide = !this.hide;
@@ -115,6 +130,8 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                     this.dateArray = [];
                     this.show = 0;
                     this.date = '';
+                    this.collaborator=[];
+                    this.searchNames=[];
                 })
         }
         /**
@@ -138,7 +155,8 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                 'checklist': JSON.stringify(this.dataArrayCheck),
                 'isPined': 'false',
                 'color': this.color,
-                "reminder": this.dating
+                "reminder": this.dating,
+                "collaberators":JSON.stringify(this.collaborator)
             }).pipe(takeUntil(this.destroy$))
                 .subscribe(response => {
                     this.newEvent.emit({
@@ -151,6 +169,8 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                     this.color = "#fafafa";
                     this.show = 0;
                     this.dateArray = [];
+                    this.collaborator=[];
+                    this.searchNames=[];
                 }, error => {
                     this.dataArrayCheck = [];
                     this.color = "#fafafa";
@@ -160,6 +180,8 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                     this.show = 0;
                     this.date = '';
                     this.dateArray = [];
+                    this.collaborator=[];
+                    this.searchNames=[];
                 })
         }
     }
@@ -252,8 +274,47 @@ export class AddNotesComponent implements OnInit, OnDestroy {
         this.date = event;
         this.dateArray.push(this.date)
     }
-    collaborator(){
-
+    /**
+     * @description : To Delete The Added Collaborator 
+     * @param item 
+     */
+    deleteCollaborator(item) {
+        this.noteService.collaboratorDelete(this.data.id, item.userId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(response => {
+                for (let i = 0; i < this.collaborator.length; i++) {
+                    if (item.userId == this.collaborator[i].userId) {
+                        this.collaborator.splice(i, 1);
+                    }
+                }
+                LoggerService.log('Success', response)
+                LoggerService.log(item);
+                //   this.users();
+            })
+    }
+    /**
+     * @description Search User List Api Call
+     */
+    search() {
+        this.userService.searchUserList({
+            'searchWord': this.searchNames,
+        })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(response => {
+                LoggerService.log('Success', response);
+                this.userList = response['data']['details'];
+            })
+    }
+    select(email) {
+        this.searchNames = email;
+    }
+    enterNewLine(user) {
+        for (let i = 0; i < this.userList.length; i++) {
+            if (this.userList[i].email == user) {
+                this.collaborator.push(this.userList[i]);
+            }
+        }
+        this.searchNames=[];
     }
     ngOnDestroy() {
         this.destroy$.next(true);
