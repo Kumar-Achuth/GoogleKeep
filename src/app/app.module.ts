@@ -85,7 +85,6 @@ import { InterceptService} from './core/services/interceptor/interceptor.service
 import { CollaboratorPageComponent } from './component/collaborator-page/collaborator-page.component';
 import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 
-
 @NgModule({
   declarations: [
     AppComponent,

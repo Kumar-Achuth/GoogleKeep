@@ -2,11 +2,12 @@
 @import "../../../scss/variables.scss";
 $margin-bottom:10px;
 $padding-top:4%;
+$border-radius: 8px;
 
 mat-card{
     padding: 6px;
     width: 600px;
-    border-radius: 8px;
+    border-radius:$border-radius;
     background-color: $color;
     box-shadow: $box-shadow;
 }
@@ -14,7 +15,7 @@ mat-card{
     mat-card{
         padding: 6px;
         width: 90%;
-        border-radius: 8px;
+        border-radius:$border-radius;
         background-color: $color;
         box-shadow: $box-shadow;
     }

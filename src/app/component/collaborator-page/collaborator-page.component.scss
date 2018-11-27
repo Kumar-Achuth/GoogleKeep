@@ -2,7 +2,7 @@
 @import "../../../scss/variables.scss";
 $font-size: 13px;
 $padding: 3%;
-$padding-left: 11%;
+$padding-left: 13%;
 $padding-top: 2px;
 $overflow:hidden;
 
@@ -14,7 +14,7 @@ overflow-y: $overflow;
     cursor: $cursor;
 }
 .collaborator{
-    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-bottom: 1px solid #00000026;
     font-size: 18px;
     font-weight: 500;
     height: 25px;
@@ -35,14 +35,14 @@ overflow-y: $overflow;
     font-size: $font-size;
     font-family: $font-family;
     font-weight: 700;
-    color: rgb(32, 33, 36);
+    color: #202124;
 }
 .nameDivision2{
     padding-left:$padding-left;
     padding-top:$padding-top;
     font-size: $font-size;
     font-family: $font-family;
-    color: rgba(0,0,0,.54);
+    color: #0000008a;
 }
 .padding{
     padding: 10px;
@@ -55,7 +55,7 @@ overflow-y: $overflow;
 }
 .buttonscolor{
     padding-top:$padding-top ;
-    background:rgb(211, 211, 211);
+    background:#d3d3d3;
 }
 .owner{
     font-style: italic;

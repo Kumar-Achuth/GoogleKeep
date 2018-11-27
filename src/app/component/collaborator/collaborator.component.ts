@@ -14,15 +14,18 @@ constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
   }
+  /**
+   * @description Open The Collaborator Page component
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(CollaboratorPageComponent,{
-      width: '600px',
+      width: '500px',
+      maxWidth:'auto',
       data: this.collaborator
     });
     dialogRef.afterClosed().subscribe(result => {
       this.collabEvent.emit({
       })
-      console.log('The dialog was closed');
     });
   }
 

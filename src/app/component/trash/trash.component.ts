@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { DeleteTrashComponent } from '../delete-trash/delete-trash.component';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
-import { takeUntil} from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
 @Component({
   selector: 'app-trash',
   templateUrl: './trash.component.html',
@@ -42,15 +42,13 @@ export class TrashComponent implements OnInit, OnDestroy {
   /**
    * @description Get trash notes Api call
    */
-  getTrash() {
+  getTrash(){
     this.notesService.getTrashNotes()
     .pipe(takeUntil(this.destroy$))  
     .subscribe(data => {
         for (var i = 0; i < data["data"]['data'].length; i++) {
           this.cards = (data["data"]['data']);
         }
-      }, error => {
-        ;
       })
   }
   /**

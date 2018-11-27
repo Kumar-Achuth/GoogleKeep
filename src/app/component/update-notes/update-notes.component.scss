@@ -1,17 +1,16 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
+$margin-left:10px;
+
 
 .example-button-row button,
 .example-button-row a {
   margin-right: 4px;
+
 }
 .close
 {
     float: $float;
-}
-mat-card{
-    padding: 8px;
-    width: 330px;
 }
 .click
 {
@@ -33,13 +32,11 @@ mat-card{
 .reset
 {
     @include boxes;
-    width: $width;
     font-weight: bold;
 }
 .edit
 {
    @include boxes;
-    width: $width;
     padding-top: 6%;
 }
 [contentEditable=true]:empty:not(:focus):before{
@@ -58,7 +55,7 @@ mat-card{
 }
 
 .chips{
-    margin-left: 10px;
+    margin-left: $margin-left;
     margin-bottom: 10px;
 }
 .check{
@@ -68,7 +65,7 @@ mat-card{
     cursor: $cursor;
 }
 .spacebetween{
-    margin-left: 10px;
+    margin-left: $margin-left;
 }
 
 

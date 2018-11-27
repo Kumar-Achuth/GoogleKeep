@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   private LastName = new FormControl('', [Validators.required,
   Validators.pattern('[a-zA-Z]*')]);
   private password = new FormControl('', [Validators.required])
-  private model: any = {};
+   model: any = {};
   private service: any;
   cards = [];
   constructor(private userService:UserService, private snackBar: MatSnackBar) { }

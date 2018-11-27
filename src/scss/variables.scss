@@ -1,13 +1,13 @@
 @import "./mixins.scss";
 @import "./mainStyle.scss";
 
-$color:rgb(255,255,255);
-$searchColor:rgb(245, 245, 245);
-$blackColor:rgb(0, 0, 0);
-$blueColor:rgb(0, 0, 255);
-$redColor:rgb(255, 0, 0);
-$greenColor:rgb(0, 128, 0);
-$yellowColor:rgb(255, 255, 0);
+$color:#ffffff;
+$searchColor:#f5f5f5;
+$blackColor:#000000;
+$blueColor:#0000ff;
+$redColor:#ff0000;
+$greenColor:#008000;
+$yellowColor:#ffff00;
 
 
 $width : 100%;
@@ -16,4 +16,4 @@ $float:right;
 $display:flex;
 $font-family: 'Google Sans','Roboto',Arial,sans-serif;
 $font-size: 40px;
-$box-shadow: 0 1px 1px rgba(0,0,0,0.20);
+$box-shadow: 0 1px 1px #00000033;

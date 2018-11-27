@@ -23,6 +23,7 @@ import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil} from 'rxjs/operators'
 import { CollaboratorPageComponent } from '../collaborator-page/collaborator-page.component';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-note-cards',
   templateUrl: './note-cards.component.html',
@@ -68,6 +69,7 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
   openDialog(notes): void {
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',
+      maxWidth:'auto',
       data: notes
     });
     dialogRef.afterClosed().subscribe(() => {
@@ -126,9 +128,6 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
         this.trashEvent.emit({
         })
       })
-    error => {
-      LoggerService.error(error);
-    };
   }
   checkBox(checkList, note) {
     if (checkList.status == "open") {
@@ -165,17 +164,17 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
   openCollaboratorPage(notes){
     const dialogRef = this.dialog.open(CollaboratorPageComponent,{
-      width: '600px',
+      width: '500px',
+      maxWidth:'auto',
       data: notes
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+    dialogRef.close();
   }
-
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

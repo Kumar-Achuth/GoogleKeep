@@ -287,9 +287,6 @@ export class AddNotesComponent implements OnInit, OnDestroy {
                         this.collaborator.splice(i, 1);
                     }
                 }
-                LoggerService.log('Success', response)
-                LoggerService.log(item);
-                //   this.users();
             })
     }
     /**
@@ -301,7 +298,6 @@ export class AddNotesComponent implements OnInit, OnDestroy {
         })
             .pipe(takeUntil(this.destroy$))
             .subscribe(response => {
-                LoggerService.log('Success', response);
                 this.userList = response['data']['details'];
             })
     }
@@ -309,6 +305,15 @@ export class AddNotesComponent implements OnInit, OnDestroy {
         this.searchNames = email;
     }
     enterNewLine(user) {
+        for (let j = 0; j < this.collaborator.length; j++) {
+            if (this.searchNames == this.collaborator[j].email) {
+              this.snackBar.open("Collaborator already exists", "fail", {
+                duration: 3000
+              })
+              this.searchNames = null;
+              return false;
+            }
+          }
         for (let i = 0; i < this.userList.length; i++) {
             if (this.userList[i].email == user) {
                 this.collaborator.push(this.userList[i]);

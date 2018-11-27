@@ -1,8 +1,9 @@
+
 <!-- ************************Pin Condition Check For Note Cards********************* -->
 
 <div *ngIf="pinNote.isPined == false">
-<img src="../../../assets/images/pin.svg" matTooltip="Pin Note" (click)="pinIt()" class="pin">
+    <img src="../../../assets/images/pin.svg" matTooltip="Pin Note" (click)="pinIt()" class="pin">
 </div>
-<div *ngIf ="pinNote.isPined == true">
+<div *ngIf="pinNote.isPined == true">
     <img src="../../../assets/images/pin.svg" matTooltip="Pin Note" (click)="unPinIt()" class="pin">
 </div>

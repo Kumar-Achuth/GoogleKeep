@@ -3,6 +3,8 @@
 $font-weight: 500;
 $padding-left:2%;
 $padding:3%;
+$width:100px;
+$border: none;
 
 .sidenav-container {
   background-color:$color;
@@ -26,7 +28,7 @@ $padding:3%;
 @include titleDisplay;
 }
 .lab{
-  color: rgb(95, 99, 104);
+  color: #5f6368;
   letter-spacing: .07272727em;
   font-family: $font-family;
   font-size: .6875rem;
@@ -40,7 +42,7 @@ $padding:3%;
   font-family: $font-family;
   font-weight: font-weight;
   font-size: .875rem;
-  width: 100px;
+  width:$width;
   letter-spacing: .01785714em;
 }
 .sidenav{
@@ -70,7 +72,7 @@ display:$display;
 } 
 .searchBar{
  flex: 1 1 auto;
- width: 100px;
+ width:$width;
  width: stretch;
  padding-left: $padding-left;
 }
@@ -83,9 +85,9 @@ display:$display;
 }
 .search{
 @include search;
-outline: white;
+outline: $color;
  border-color: transparent;
- border: none;
+ border:$border;
 }
 .searchNew{
   padding-left:$padding-left;
@@ -100,9 +102,9 @@ input:focus
 background-color: $color;
 }
 .profilebutton1{
-  width:100px; 
+  width:$width; 
   height:100px; 
-  border: none;
+  border:$border;
   border-radius: 50%;
   background-color: $color;
   padding: $padding;

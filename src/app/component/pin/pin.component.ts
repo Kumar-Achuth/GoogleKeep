@@ -42,9 +42,6 @@ export class PinComponent implements OnInit, OnDestroy {
         this.pinEvent.emit({
         })
       })
-    error => {
-      LoggerService.error(error);
-    };
   }
    /**
    * @description Post Api call for Unpinning the notse
@@ -59,9 +56,6 @@ export class PinComponent implements OnInit, OnDestroy {
         this.pinEvent.emit({
         })
       })
-    error => {
-      LoggerService.error(error);
-    };
   }
   ngOnDestroy() {
     this.destroy$.next(true);

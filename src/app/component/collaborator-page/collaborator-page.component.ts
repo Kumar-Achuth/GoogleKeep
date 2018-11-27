@@ -10,8 +10,8 @@
 *  @since          : 20-10-2018
 *
 *************************************************************************************************/
-import { Component, OnInit, Inject,OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { DialogData, UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { UserService } from 'src/app/core/services/userServices/user.service';
 import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
@@ -26,24 +26,24 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './collaborator-page.component.html',
   styleUrls: ['./collaborator-page.component.scss']
 })
-export class CollaboratorPageComponent implements OnInit,OnDestroy {
-  destroy$: Subject<boolean> = new Subject<boolean>(); 
+export class CollaboratorPageComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  image =localStorage.getItem('imageUrl')
-  img = environment.apiUrl + this.image;
-  private searchNames:any=[];
-  private userList=[];
-  private collaborator:any=[];
-  email= localStorage.getItem('email');
-  firstName=localStorage.getItem('firstName');
-  lastName=localStorage.getItem('lastName')
-  userId=localStorage.getItem('userId');
-  private owner=this.data["user"];
-  private photo=environment.apiUrl+this.owner.imageUrl
-  constructor(private userService:UserService,private notesService : NotesService,
-     private dialog: MatDialog, 
+  private image = localStorage.getItem('imageUrl')
+  private img = environment.apiUrl + this.image;
+  private searchNames: any = [];
+  private userList = [];
+  private collaborator: any = [];
+  private email = localStorage.getItem('email');
+  private firstName = localStorage.getItem('firstName');
+  private lastName = localStorage.getItem('lastName')
+  private userId = localStorage.getItem('userId');
+  private owner = this.data["user"];
+  private photo = environment.apiUrl + this.owner.imageUrl
+  constructor(private userService: UserService, private notesService: NotesService,
+    private dialog: MatDialog, private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<CollaboratorPageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
 
   ngOnInit() {
@@ -59,74 +59,81 @@ export class CollaboratorPageComponent implements OnInit,OnDestroy {
     });
     dialogRef.afterClosed().subscribe(() => {
     });
-    this.dialogRef.close();  
+    this.dialogRef.close();
   }
   /**
    * @description Add Collaborator Api Call 
    */
-  save(item){
-    this.notesService.postCollaborator(this.data.id,{
-      "email": item.email ,
-      "firstName":item.firstName,
+  save(item) {
+    this.notesService.postCollaborator(this.data.id, {
+      "email": item.email,
+      "firstName": item.firstName,
       "lastName": item.lastName,
-       "userId":item.userId
+      "userId": item.userId
     })
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(response =>{
-      LoggerService.log('Success',response)
-      this.users();
-    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+      })
   }
-  deleteCollaborator(item){
-    this.notesService.collaboratorDelete(this.data.id,item.userId)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(response=>{
-      for(let i=0; i<this.collaborator.length;i++){
-        if(item.userId==this.collaborator[i].userId){
-        this.collaborator.splice(i,1);
+  /**
+   * @description Delete Collaborator Api Call 
+   */
+  deleteCollaborator(item) {
+    this.notesService.collaboratorDelete(this.data.id, item.userId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+        for (let i = 0; i < this.collaborator.length; i++) {
+          if (item.userId == this.collaborator[i].userId) {
+            this.collaborator.splice(i, 1);
+          }
         }
-        }
-      LoggerService.log('Success',response)
-      LoggerService.log(item);
-      this.users();
-    })
+      })
   }
-/**
- * @description Search User List Api Call
- */
-  search(){
+  /**
+   * @description Search User List Api Call
+   */
+  search() {
     this.userService.searchUserList({
       'searchWord': this.searchNames,
     })
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(response =>{
-      LoggerService.log('Success',response);
-      this.userList=response['data']['details'];
-    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(response => {
+        this.userList = response['data']['details'];
+      })
   }
+  /**
+   * @description Remove Duplicates From The List
+   * @param user 
+   */
   enterNewLine(user) {
-    for (let i = 0; i < this.userList.length; i++) {
-        if (this.userList[i].email == user) {
-            this.collaborator.push(this.userList[i]);
-            LoggerService.log(this.collaborator);
-        }
+    for (let j = 0; j < this.collaborator.length; j++) {
+      if (this.searchNames == this.collaborator[j].email) {
+        this.snackBar.open("Collaborator already exists", "fail", {
+          duration: 3000
+        })
+        this.searchNames = null;
+        return false;
+      }
     }
-    this.searchNames=[];
-}
-
-  select(email)
-  {
+    for (let i = 0; i < this.userList.length; i++) {
+      if (this.userList[i].email == user) {
+        this.collaborator.push(this.userList[i]);
+      }
+    }
+    this.searchNames = [];
+  }
+  select(email) {
     this.searchNames = email;
+  }
+  users() {
+    this.collaborator=[];
+    for (let i = 0; i < this.data['collaborators'].length; i++) {
+      this.collaborator.push(this.data['collaborators'][i]);
+    }
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
-}
-users(){
-  this.collaborator=[];
-  for (let i = 0; i < this.data['collaborators'].length; i++) {
-    this.collaborator.push(this.data['collaborators'][i]);
-  }
-}
+  } 
 }

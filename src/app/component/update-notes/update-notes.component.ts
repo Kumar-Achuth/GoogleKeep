@@ -102,9 +102,6 @@ export class UpdateNotesComponent implements OnInit , OnDestroy {
         this.updateEvent.emit({
         })
       })
-    error => {
-      LoggerService.error(error);
-    };
   }
   /**
    * @description CheckBox Array Display Function
@@ -188,12 +185,14 @@ export class UpdateNotesComponent implements OnInit , OnDestroy {
   }
   openCollaboratorPage(data){
     const dialogRef = this.dialog.open(CollaboratorPageComponent,{
-      width: '600px',
+      width: '500px',
+      maxWidth:'auto',
       data: data
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+    this.dialogRef.close();
   }
   ngOnDestroy() {
     this.destroy$.next(true);

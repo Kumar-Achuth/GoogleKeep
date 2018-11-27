@@ -1,6 +1,9 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
 $margin-top:20px;
+$word-break: break-all;
+
+
 .space
 {
     padding-top: 4%;
@@ -45,9 +48,11 @@ $margin-top:20px;
 }
 .description{
     @include titleDescription;
+    word-break:$word-break;
 }
 .title{
     @include titleDescription;
+    word-break:$word-break;
 }
 
 //***************************Flex Responses *********************************
