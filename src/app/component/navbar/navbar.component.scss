@@ -24,6 +24,14 @@ $border: none;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 }
+.noRouterColorActivate{
+  background:#ffffff;
+}
+.routerColorActivate{
+  background:#feefc3;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 .titledisplay{
 @include titleDisplay;
 }

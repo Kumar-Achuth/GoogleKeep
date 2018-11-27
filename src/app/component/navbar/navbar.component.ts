@@ -44,6 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private firstName: any;
   private lastName: any;
   private email: any;
+  private routerColor;
   isHandset$: Observable<boolean> = this.breakpointObserver.
     observe(Breakpoints.Handset)
     .pipe(
@@ -59,7 +60,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.lastName = localStorage.getItem('lastName');
     this.email = localStorage.getItem('email');
     this.getLabels();
-    this.title=localStorage.getItem('title')
+    this.title=localStorage.getItem('title');
+    
+
 
   }
   /**
@@ -142,6 +145,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   gridView() {
     this.data.sendMessage(false);
     this.list = 0;
+  }
+  routerColorActive(label){
+    this.routerColor=label;
   }
   selectedFile = null;
   private image2 = localStorage.getItem('imageUrl');

@@ -171,9 +171,8 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
       data: notes
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      LoggerService.log('The dialog was closed');
     });
-    dialogRef.close();
   }
   ngOnDestroy() {
     this.destroy$.next(true);

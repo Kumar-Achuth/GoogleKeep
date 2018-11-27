@@ -14,7 +14,6 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { DialogData, UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { UserService } from 'src/app/core/services/userServices/user.service';
-import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
 import { environment } from 'src/environments/environment';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
@@ -55,6 +54,7 @@ export class CollaboratorPageComponent implements OnInit, OnDestroy {
   cancel(): void {
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',
+      maxWidth:'auto',
       data: this.data
     });
     dialogRef.afterClosed().subscribe(() => {

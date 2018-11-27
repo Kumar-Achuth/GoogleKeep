@@ -100,15 +100,17 @@
 
             <!-- ***********************Labels Display************************* -->
 
-            <a mat-list-item routerLinkActive="active" > <p class="lab">Labels</p>  </a>
-            <div routerLinkActive="active" *ngFor="let labels of labelArray" 
+            <a mat-list-item> <p class="lab">Labels</p>  </a>
+            <div  *ngFor="let labels of labelArray" 
             (click)="select(labels)">
+            <div [ngClass]="routerColor==labels.label ? 'routerColorActivate' : 'noRouterColorActivate'">
               <div *ngIf="labels.isDeleted==false">
-                <a (click)='aptTitle(labels.label)' routerLinkActive="active" mat-list-item>
+                <a (click)='aptTitle(labels.label);routerColorActive(labels.label)'  mat-list-item>
                 <img src="../../../assets/images/labels.svg">
-                  <span class="bulp" routerLinkActive="active" [innerHTML]="labels.label"></span>
+                  <span class="bulp"  [innerHTML]="labels.label"></span>
                 </a>
               </div>
+            </div>
             </div>
             <a mat-list-item (click)="openDialog()" >
               <img src="../../../assets/images/edit.svg"><div class="bulp" >Edit Labels</div></a>

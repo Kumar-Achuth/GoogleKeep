@@ -19,7 +19,6 @@ import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
 import { UserService } from 'src/app/core/services/userServices/user.service';
 
 @Component({
