@@ -1,7 +1,5 @@
-<div *ngIf="addCollaborator==0" fxFlex = 100 fxLayout='column wrap' fxLayoutAlign="center center" 
+<div *ngIf="addCollaborator==0" fxFlex = 100 fxLayout='row' fxLayoutAlign="center center" 
 style="margin-top:100px; border-radius: 8px">
-<div  fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 >    
-</div>
     <mat-card *ngIf="hide" (click)="hide=!hide">
         <span> Take a Note ...</span>
         <div class="noteButton" fxLayout="row" fxLayoutAlign="space-evenly">
@@ -124,16 +122,14 @@ style="margin-top:100px; border-radius: 8px">
         </div>
         <br>
     </mat-card>
-    <div fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 ></div>
 </div>
 
 
  <!-- ************************Add Collaborators*********************** -->
 
- <div  *ngIf="addCollaborator==1" fxFlex = 100 fxLayout='column wrap' 
+ <div  *ngIf="addCollaborator==1" fxFlex = 100 fxLayout='row' 
    fxLayoutAlign="center center" 
  style="margin-top:100px; border-radius: 8px">
- <div  fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 fxFlex.xl = 10 ></div>
  <mat-card>
         <div class="padding">
                 <div class="collaborator">
@@ -217,8 +213,5 @@ style="margin-top:100px; border-radius: 8px">
               </div>
               </div>
         </mat-card>
-          <div fxLayout = "row" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 5 fxFlex.lg = 5 
-          fxFlex.xl = 10 >
-          </div>
         </div>
        

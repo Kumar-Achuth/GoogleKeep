@@ -3,7 +3,9 @@
 $margin-top:20px;
 $word-break: break-all;
 
-
+.pointTo{
+    cursor: $cursor;
+}
 .space
 {
     padding-top: 4%;

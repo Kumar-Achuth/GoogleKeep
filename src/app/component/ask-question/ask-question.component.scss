@@ -1,0 +1,41 @@
+
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+$margin-bottom:10px;
+$padding-top:4%;
+$border-radius: 8px;
+
+
+
+.cards{
+    margin-left: 80px;
+    margin-bottom: 2%;
+    margin-right: 6%;
+    width:850px
+}
+.left{
+    margin-left: 80px;
+}
+.start{
+    float: left;
+    margin-bottom: 2% 
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+.edit
+{
+    @include edit();
+    margin-bottom: $margin-bottom;
+    word-break: break-all;
+}
+.content{
+    margin-left: 80px;
+}
+.icon{
+    cursor: $cursor;
+}
+.excess
+{
+    font-size: 40px;
+}

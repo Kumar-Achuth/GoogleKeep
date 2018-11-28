@@ -71,3 +71,8 @@
     height: 97vh;
     width: $width;;
 }
+@mixin routerColorActivate(){
+    background:$background;
+    border-top-right-radius:$border-top-right-radius;
+    border-bottom-right-radius:$border-bottom-right-radius;
+  }

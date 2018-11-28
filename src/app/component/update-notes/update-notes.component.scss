@@ -33,11 +33,13 @@ $margin-left:10px;
 {
     @include boxes;
     font-weight: bold;
+    word-break: break-all;
 }
 .edit
 {
    @include boxes;
     padding-top: 6%;
+    word-break: break-all;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)

@@ -84,6 +84,7 @@ import { PinComponent } from './component/pin/pin.component';
 import { InterceptService} from './core/services/interceptor/interceptor.service';
 import { CollaboratorPageComponent } from './component/collaborator-page/collaborator-page.component';
 import { ErrorsHandler } from './core/services/errorHandler/error-handler';
+import { AskQuestionComponent } from './component/ask-question/ask-question.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { ErrorsHandler } from './core/services/errorHandler/error-handler';
     DeleteTrashComponent,
     PinComponent,
     CollaboratorPageComponent,
+    AskQuestionComponent,
   ],
   imports: [
     BrowserModule,

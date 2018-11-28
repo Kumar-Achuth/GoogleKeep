@@ -141,12 +141,19 @@
           </app-collaborator>
           <app-change-color [color]="notes" (changeColor)="deleteEvent($event)">
           </app-change-color>
-          <app-add-photo>
-          </app-add-photo>
           <app-add-archive [archive]="notes" (archiveEmit)="deleteEvent($event)">
           </app-add-archive>
           <app-more [trash]="notes" (deleteCard)="deleteEvent($event)">
           </app-more>
+        </div>
+        <hr>
+        <div>
+          <div>
+            Question Asked
+          </div><br>
+          <div *ngFor="let index of notes.questionAndAnswerNotes" class="pointTo" (click)="goToQA(notes.id)">
+            {{index.message}}
+          </div>
         </div>
       </mat-card>
     </div>

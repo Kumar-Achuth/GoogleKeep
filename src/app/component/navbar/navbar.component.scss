@@ -5,10 +5,13 @@ $padding-left:2%;
 $padding:3%;
 $width:100px;
 $border: none;
+$border-top-right-radius: 20px;
+$border-bottom-right-radius: 20px;
+$background:#feefc3;
 
 .sidenav-container {
   background-color:$color;
-  height:auto;
+  height:90%;
   width: auto;
 }
 .googleKeep{
@@ -20,17 +23,13 @@ $border: none;
   float:$float;
 }
 .mat-nav-list a.active {
-  background:#feefc3;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  @include routerColorActivate;
 }
 .noRouterColorActivate{
   background:#ffffff;
 }
 .routerColorActivate{
-  background:#feefc3;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+@include routerColorActivate;
 }
 .titledisplay{
 @include titleDisplay;

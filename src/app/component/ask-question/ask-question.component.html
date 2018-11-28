@@ -1,0 +1,43 @@
+<div fxLayout='column wrap' fxLayoutAlign="center" 
+style="margin-top:70px; border-radius: 8px;overflow: hidden;">
+<!-- <div fxLayoutAlign="center center" >
+  <h3>Question And Answers</h3>
+</div> -->
+<div class="cards">
+<div>
+  <div fxLayout="row" fxLayoutAlign="space-between end">
+  <div [innerHTML]="title">
+  </div>
+<button mat-button routerLink="/home/notes">Close</button>
+</div>
+<br>
+  <div [innerHTML]="description">
+  </div><br>
+  <div [innerHTML]="labelList">
+  </div>
+  <hr>
+  <div fxLayout="column">
+  <div class="start">
+    Question Asked
+    </div>
+    <div *ngIf = "message != null">
+    <div [innerHTML]="message">
+      </div>
+    </div>
+    <div fxFlex="row"  fxLayoutAlign="space-between end">
+      <div *ngIf = "message == null">
+        <input [(ngModel)]="ask" class="edit" placeholder="Ask Your Question Here"
+         (keydown.enter)="askQuestion(ask)" >
+      </div>
+      <div *ngIf = "message != null">
+        <div class = "excess" [innerHTML]="message"></div>
+      </div>
+        <div class="icon">
+            <mat-icon>done</mat-icon>
+            </div>
+    </div>
+  </div>
+  
+</div>
+</div>
+</div>

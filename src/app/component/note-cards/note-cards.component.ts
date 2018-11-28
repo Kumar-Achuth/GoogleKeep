@@ -65,7 +65,9 @@ export class NoteCardsComponent implements OnInit, OnDestroy {
     this.trashEvent.emit({
     })
   }
-  
+  goToQA(notes){
+    this.router.navigate(['/home/askQuestion/'+notes])
+  }
   openDialog(notes): void {
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
       width: 'fit-content',

@@ -15,8 +15,11 @@ import { LabelsComponent } from './component/labels/labels.component';
 import { NewlabelComponent } from './component/newlabel/newlabel.component';
 import { GlobalSearchComponent } from './component/global-search/global-search.component';
 import { DeleteLabelComponent } from './component/delete-label/delete-label.component';
+import { AskQuestionComponent } from './component/ask-question/ask-question.component';
 
 const routes: Routes = [
+                      { path: '', redirectTo: 'login', pathMatch: 'full'},
+
                        { path : 'signup', component: SignupComponent },
                        { path : 'login', component: LoginComponent  },
                        { path : 'forgotPassword', component : ForgotPasswordComponent},
@@ -28,12 +31,13 @@ const routes: Routes = [
                        { path : 'archive', component : ArchiveComponent},
                        { path : 'trash', component : TrashComponent},
                        { path : 'globalSearch', component : GlobalSearchComponent},
+                       { path : 'askQuestion/:noteId',component : AskQuestionComponent  },
                        { path : '',redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
                        },
                        { path : 'deleteLabel', component : DeleteLabelComponent},
                        { path : 'labels', component : LabelsComponent},                    
-                       {path : 'updateNotes', component : UpdateNotesComponent},
-                       { path: '', redirectTo: 'login', pathMatch: 'full'}
+                       {path : 'updateNotes', component : UpdateNotesComponent}
+
 ];
 @NgModule({
   imports: [

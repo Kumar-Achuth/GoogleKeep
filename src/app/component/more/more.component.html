@@ -9,8 +9,8 @@
     <button mat-button (click)="postToTrash(trash)">Delete Note</button><br>
     <button mat-menu-item [matMenuTriggerFor]="labelMenu"
      (click)="$event.stopPropagation()">AddLabel</button><br>
-    <button mat-button>Add Drawing</button><br>
-    <button mat-button>Show Checkboxes</button><br>
+    <button mat-button (click)="ask()">Ask A Question</button><br>
+  
   </div>
 </mat-menu>
 <div (click)="$event.stopPropagation()">

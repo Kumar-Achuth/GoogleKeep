@@ -15,6 +15,8 @@ import { HttpService } from '../../core/services/httpServices/http.service';
 import { NotesService } from 'src/app/core/services/noteServices/notes.service';
 import { Subject } from 'rxjs';
 import { takeUntil} from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
 @Component({
   selector: 'app-more',
   templateUrl: './more.component.html',
@@ -28,7 +30,7 @@ export class MoreComponent implements OnInit, OnDestroy {
   @Input() trash;
   @Output() deleteCard = new EventEmitter();
   @Output() addEvent = new EventEmitter();
-  constructor(private myHttpService: HttpService,private notesService:NotesService) { }
+  constructor( private router: Router, private notesService:NotesService) { }
 
   ngOnInit() {
     this.getAllLabels();
@@ -64,20 +66,23 @@ export class MoreComponent implements OnInit, OnDestroy {
   /**
    * @description Api call to get all the labels 
    */
-  getAllLabels() {
+  getAllLabels(){
     let newArray = [];
     this.notesService.getLabels()
     .pipe(takeUntil(this.destroy$))  
     .subscribe(data => {
       for (var i = 0; i < data['data']['details'].length; i++) {
-        if (data['data']['details'][i].isDeleted == false) {
+        if (data['data']['details'][i].isDeleted == false){
           newArray.push(data['data']['details'][i])
         }
       }
       this.labelArray = newArray;
     })
   }
-  ngOnDestroy() {
+  ask(){
+    this.router.navigate(['home/askQuestion/'+this.trash.id]);
+  }
+  ngOnDestroy(){
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();

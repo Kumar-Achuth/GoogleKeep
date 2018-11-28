@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { HttpService } from '../httpServices/http.service';
 
 @Injectable({
@@ -91,5 +89,9 @@ export class NotesService {
   }
   collaboratorDelete(id,userId){
     return this.http.deleteTheLabel('notes/'+id+'/removeCollaboratorsNotes/'+userId)
+  }
+  //********************************Question And Answer services****************** */
+  getAskedNotes(id){
+    return this.http.getJSON('notes/getNotesDetail/'+id+'')
   }
 }
