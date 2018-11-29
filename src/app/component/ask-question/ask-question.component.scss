@@ -3,18 +3,17 @@
 @import "../../../scss/variables.scss";
 $margin-bottom:10px;
 $padding-top:4%;
+$margin-left:80px;
 $border-radius: 8px;
 
-
-
 .cards{
-    margin-left: 80px;
+    margin-left:$margin-left;
     margin-bottom: 2%;
     margin-right: 6%;
     width:850px
 }
 .left{
-    margin-left: 80px;
+    margin-left:$margin-left;
 }
 .start{
     float: left;
@@ -23,19 +22,44 @@ $border-radius: 8px;
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
+.like{
+    cursor:$cursor;
+}
+.image{
+    @include image;
+}
 .edit
 {
     @include edit();
     margin-bottom: $margin-bottom;
     word-break: break-all;
 }
+
 .content{
-    margin-left: 80px;
+    margin-left:$margin-left;
 }
 .icon{
     cursor: $cursor;
 }
+.displayMessage{
+    margin-left: 2%;
+    width: 850px;
+}
+.topping{
+    margin-top: 2%;
+    position: relative;
+    float: right;
+}
+.topping1{
+    margin-top: 10%;
+}
 .excess
 {
-    font-size: 40px;
+    font-size: 25px;
+    width: 100%
+}
+.question{
+    color: #5f6368;
+  letter-spacing: .07272727em;
+  font-family: $font-family;
 }

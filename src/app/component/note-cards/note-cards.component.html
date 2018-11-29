@@ -151,8 +151,9 @@
           <div>
             Question Asked
           </div><br>
-          <div *ngFor="let index of notes.questionAndAnswerNotes" class="pointTo" (click)="goToQA(notes.id)">
-            {{index.message}}
+          <div *ngIf=" notes.questionAndAnswerNotes.length!=0" class="pointTo" 
+          (click)="goToQA(notes.id)">
+            {{notes.questionAndAnswerNotes[0].message}}
           </div>
         </div>
       </mat-card>

@@ -11,8 +11,8 @@ $background:#feefc3;
 
 .sidenav-container {
   background-color:$color;
-  height:90%;
-  width: auto;
+  height:auto;
+  width:auto;
 }
 .googleKeep{
   width:31px;
@@ -69,8 +69,8 @@ $background:#feefc3;
 }
 .title-header{
   padding-left: 1%;
-color:$blackColor;
-display:$display;
+  color:$blackColor;
+  display:$display;
 }
 .toggle{
   color: $blackColor;

@@ -1,6 +1,7 @@
 /* html,body{height : 100%; }
 body{margin: 0;font-family: 'Roboto',sans-serif; } */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~ngx-bar-rating/themes/br-default-theme';
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
 .mat-dialog-container{

@@ -85,6 +85,7 @@ import { InterceptService} from './core/services/interceptor/interceptor.service
 import { CollaboratorPageComponent } from './component/collaborator-page/collaborator-page.component';
 import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 import { AskQuestionComponent } from './component/ask-question/ask-question.component';
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   declarations: [
@@ -154,7 +155,8 @@ import { AskQuestionComponent } from './component/ask-question/ask-question.comp
     MatChipsModule,
     MatCheckboxModule,
     ImageCropperModule,
-    MatDialogModule
+    MatDialogModule,
+    BarRatingModule
 
 
   ],
