@@ -1,24 +1,29 @@
 
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
-$margin-bottom:10px;
+// $margin-bottom:10px;
 $padding-top:4%;
 $margin-left:80px;
 $border-radius: 8px;
 
 .cards{
-    margin-left:$margin-left;
+    // margin-left:$margin-left;
     margin-bottom: 2%;
     margin-right: 6%;
-    width:850px
+    margin-top: 30px;
+    width: 900px;
 }
-.left{
-    margin-left:$margin-left;
+.container
+{
+    margin: 50px 0px 20px 0px;
 }
-.start{
-    float: left;
-    margin-bottom: 2% 
-}
+// .left{
+//     margin-left:$margin-left;
+// }
+// .start{
+//     float: left;
+//     margin-bottom: 2% 
+// }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
@@ -26,25 +31,24 @@ $border-radius: 8px;
     cursor:$cursor;
 }
 .image{
-    @include image;
+    @include image();
 }
 .edit
 {
     @include edit();
-    margin-bottom: $margin-bottom;
+    // margin-bottom: $margin-bottom;
     word-break: break-all;
 }
 
-.content{
-    margin-left:$margin-left;
-}
+// .content{
+//     margin-left:$margin-left;
+// }
 .icon{
     cursor: $cursor;
 }
-.displayMessage{
-    margin-left: 2%;
-    width: 850px;
-}
+// .displayMessage{
+//     margin-left: 2%;
+// }
 .topping{
     margin-top: 2%;
     position: relative;

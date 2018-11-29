@@ -1,7 +1,9 @@
-<div fxLayout='column' fxLayoutAlign="center center" style="margin-top:70px;
- border-radius: 8px;overflow: hidden;">
+<div class = "cards container" fxLayout="row" fxFlex=100 fxLayoutAlign="start">
+    <div fxFlex.xs=5% fxFlex.sm=5% fxFlex.md=10% fxFlex.lg=10% fxFlex.xl=15%></div>
+    <div fxLayout="row wrap" fxFlex.xs=90% fxFlex.sm=90% fxFlex.md=80% 
+    fxFlex.lg=80% fxFlex.xl=70%>
   <div class="cards">
-    <div fxLayout="row" fxLayoutAlign="space-between end">
+    <div fxLayout="row" fxLayoutAlign = "space-between end">
       <div [innerHTML]="title">
       </div>
       <button mat-button routerLink="/home/notes">Close</button>
@@ -17,10 +19,10 @@
         Question Asked
       </div>
       <div *ngIf="message != null" class="question">
-        <div [innerHTML]="message">
+        <div [innerHTML]="message">   
         </div>
       </div><br>
-      <div fxLayout="row">
+      <div fxLayout="column"><!--############-->
         <div fxLayout="row">
           <div>
             <div *ngIf="image!=''">
@@ -108,4 +110,6 @@
       </div>
     </div>
   </div>
+</div>
+<div fxFlex.xs=5% fxFlex.sm=5% fxFlex.md=10% fxFlex.lg=10% fxFlex.xl=15%></div>
 </div>
