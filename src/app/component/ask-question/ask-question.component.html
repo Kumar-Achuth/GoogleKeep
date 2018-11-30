@@ -133,6 +133,7 @@
 
 
                   <!-- First Level Reply  -->
+
                     <div *ngIf="replyBack==index.id" class="replied">
                         <div fxLayout="row">
                           <div>
@@ -150,21 +151,21 @@
                             <div *ngIf="image!=''">
                                 <img [ngStyle]="{'background-image':'url('+img+secondIndex.user.imageUrl+')',
                               'background-size':'cover'}"
-                                  class="image">
+                                  class="image2">
                               </div>
                         </div>
                         <div>
                             <div fxLayout="row">
-                                <div class="name">
+                                <div class="name2">
                                 {{secondIndex.user.firstName}}
                                 </div>
-                                <div class="date">
+                                <div class="date2">
                                   {{secondIndex.createdDate | date:'mediumTime'}}
                                 </div>
                               </div>
                         </div>
                         <div>
-                            <div class="messaging">
+                            <div class="messaging2">
                                 {{secondIndex.message}}
                               </div>
                         </div>

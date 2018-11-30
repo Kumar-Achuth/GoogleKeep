@@ -37,7 +37,7 @@ mat-card{
 }
 .messaging{
     padding-left: 5%;
-    width:100%;
+    // width:100%;
     word-break: break-all;
 }
 .cards{
@@ -94,4 +94,25 @@ mat-card{
 }
 .views{
     margin-left: 5%;
+}
+.image2{
+    @include image();
+    margin-left: -264px;
+    margin-top: 60px;
+}
+.name2
+{
+    margin-left: -200px;
+    margin-top: -52px;
+}
+.date2
+{
+    margin-left: 13px;
+    margin-top: -51px;
+    font-size: 11px;
+}
+.messaging2
+{
+    margin-left: -199px;
+    margin-top: -25px;
 }
