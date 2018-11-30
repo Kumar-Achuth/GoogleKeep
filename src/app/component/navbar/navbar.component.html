@@ -91,10 +91,12 @@
           [mode]="(isHandset$ | async) ? 'over' : 'side'" 
           [opened]="(isHandset$ | async)">
           <mat-nav-list class="list">
-            <a (click)='aptTitle("Keep")' mat-list-item routerLinkActive="active" routerLink='/home/notes'>
+            <a (click)='aptTitle("Keep")' mat-list-item routerLinkActive="active" 
+            routerLink='/home/notes'>
               <img src="../../../assets/images/bulp.svg">
               <div class="bulp" >Notes</div></a> 
-            <a (click)='aptTitle("Reminders")' mat-list-item routerLinkActive="active" routerLink='/home/reminder'>
+            <a (click)='aptTitle("Reminders")' mat-list-item routerLinkActive="active" 
+            routerLink='/home/reminder'>
               <img src="../../../assets/images/bell.svg">
               <div class="bulp" >Reminders</div></a><hr>
 

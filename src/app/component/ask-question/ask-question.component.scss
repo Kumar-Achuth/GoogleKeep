@@ -1,29 +1,54 @@
 
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
-// $margin-bottom:10px;
 $padding-top:4%;
 $margin-left:80px;
 $border-radius: 8px;
 
+.date{
+    font-size: 10px;
+    margin-left: 1%;
+}
+mat-card{
+    background-color:#feefc3;
+    border-radius: 8px;
+}
+.name{
+    font-size:15px;
+    margin-left: 5%;
+}
+.replied{
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: 20px;
+}
+.replied{
+    margin-top: 80px;
+    margin-left: -81px;
+    width: 220px;
+}
+.secondLevel{
+    margin-left: 5%;
+}
+.downScroll{
+    max-height:330px;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+}
+.messaging{
+    padding-left: 5%;
+    width:100%;
+    word-break: break-all;
+}
 .cards{
-    // margin-left:$margin-left;
-    margin-bottom: 2%;
     margin-right: 6%;
     margin-top: 30px;
-    width: 900px;
+    width: 1100px;
 }
 .container
 {
     margin: 50px 0px 20px 0px;
 }
-// .left{
-//     margin-left:$margin-left;
-// }
-// .start{
-//     float: left;
-//     margin-bottom: 2% 
-// }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
@@ -36,19 +61,11 @@ $border-radius: 8px;
 .edit
 {
     @include edit();
-    // margin-bottom: $margin-bottom;
     word-break: break-all;
 }
-
-// .content{
-//     margin-left:$margin-left;
-// }
 .icon{
     cursor: $cursor;
 }
-// .displayMessage{
-//     margin-left: 2%;
-// }
 .topping{
     margin-top: 2%;
     position: relative;
@@ -56,14 +73,25 @@ $border-radius: 8px;
 }
 .topping1{
     margin-top: 10%;
+    margin-left: 3%;
+}
+.likesCount{
+    margin-top: 11%;
+    margin-left: 3%;
 }
 .excess
 {
     font-size: 25px;
     width: 100%
 }
+.star{
+    margin-left: 2%;
+}
 .question{
     color: #5f6368;
-  letter-spacing: .07272727em;
-  font-family: $font-family;
+    letter-spacing: .07272727em;
+    font-family: $font-family;
+}
+.views{
+    margin-left: 5%;
 }
