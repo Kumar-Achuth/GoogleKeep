@@ -7,7 +7,21 @@ $border-radius: 8px;
 
 .date{
     font-size: 10px;
-    margin-left: 1%;
+    margin-left: 5px;
+    // width: 57px;
+    margin-top: 3px;
+    font-family: $font-family;
+
+}
+.firstLevel{
+    margin-top: -67px;
+    float: $float;
+    margin-left: -55px;
+}
+.secondLevel{
+    margin-top: -64px;
+    float: $float;
+    margin-left: 46px;
 }
 mat-card{
     background-color:#feefc3;
@@ -17,18 +31,25 @@ mat-card{
     font-size:15px;
     margin-left: 5%;
 }
-.replied{
-    margin-top: 5%;
-    margin-left: 5%;
-    font-size: 20px;
+.firstReply{
+    margin-top: 15px;
+}
+.firstCount{
+    margin-top: 18px;
+    margin-left: 10px;
+}
+.secondCount{
+    margin-top: 18px;
+    margin-left: 10px;
+}
+.firstLike{
+    margin-top: 15px;
 }
 .replied{
     margin-top: 80px;
-    margin-left: -81px;
-    width: 220px;
 }
-.secondLevel{
-    margin-left: 5%;
+.start{
+    font-family: $font-family;
 }
 .downScroll{
     max-height:330px;
@@ -37,13 +58,14 @@ mat-card{
 }
 .messaging{
     padding-left: 5%;
-    // width:100%;
-    word-break: break-all;
+    word-break:break-word;
+    font-family: $font-family;
+
 }
 .cards{
     margin-right: 6%;
     margin-top: 30px;
-    width: 1100px;
+    width: 1050px;
 }
 .container
 {
@@ -63,13 +85,17 @@ mat-card{
     @include edit();
     word-break: break-all;
 }
+.edit1{
+    @include edit();
+    word-break: break-all;
+}
 .icon{
     cursor: $cursor;
 }
 .topping{
     margin-top: 2%;
     position: relative;
-    float: right;
+    float: $float;
 }
 .topping1{
     margin-top: 10%;
@@ -82,10 +108,7 @@ mat-card{
 .excess
 {
     font-size: 25px;
-    width: 100%
-}
-.star{
-    margin-left: 2%;
+    // width: 100%
 }
 .question{
     color: #5f6368;
@@ -94,25 +117,57 @@ mat-card{
 }
 .views{
     margin-left: 5%;
+    margin-top: -20px;
 }
 .image2{
     @include image();
     margin-left: -264px;
     margin-top: 60px;
 }
+.image3{
+    @include image();
+    margin-left: -170px;
+    margin-top: 20px;
+}
 .name2
 {
     margin-left: -200px;
     margin-top: -52px;
+    font-family: $font-family;
 }
 .date2
 {
     margin-left: 13px;
     margin-top: -51px;
     font-size: 11px;
+    font-family: $font-family;
 }
 .messaging2
 {
+    word-break:break-word;
     margin-left: -199px;
     margin-top: -25px;
+    font-family: $font-family;
+}
+.name3
+{
+    margin-left: -102px;
+    margin-top: -54px;
+    font-family: $font-family;
+}
+.date3
+{
+    margin-left: 13px;
+    margin-top: -51px;
+    font-size: 11px;
+    font-family: $font-family;
+}
+.messaging3
+{
+    font-family: $font-family;
+    margin-left: -102px;
+    margin-top: -30px;
+}
+.secondLike{
+    margin-top: 15px;
 }
