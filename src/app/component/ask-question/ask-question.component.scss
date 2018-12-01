@@ -1,173 +1,27 @@
-
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
-$padding-top:4%;
-$margin-left:80px;
-$border-radius: 8px;
 
-.date{
-    font-size: 10px;
-    margin-left: 5px;
-    // width: 57px;
-    margin-top: 3px;
-    font-family: $font-family;
-
-}
-.firstLevel{
-    margin-top: -67px;
-    float: $float;
-    margin-left: -55px;
-}
-.secondLevel{
-    margin-top: -64px;
-    float: $float;
-    margin-left: 46px;
-}
-mat-card{
-    background-color:#feefc3;
-    border-radius: 8px;
-}
-.name{
-    font-size:15px;
-    margin-left: 5%;
-}
-.firstReply{
-    margin-top: 15px;
-}
-.firstCount{
-    margin-top: 18px;
-    margin-left: 10px;
-}
-.secondCount{
-    margin-top: 18px;
-    margin-left: 10px;
-}
-.firstLike{
-    margin-top: 15px;
-}
-.replied{
+.mainCard{
     margin-top: 80px;
 }
 .start{
     font-family: $font-family;
 }
-.downScroll{
-    max-height:330px;
-    overflow-y: auto;
-    overflow-x: hidden !important;
+.question{
+    margin-top: 1%;
 }
-.messaging{
-    padding-left: 5%;
-    word-break:break-word;
-    font-family: $font-family;
-
+.image{
+    @include image;
 }
-.cards{
-    margin-right: 6%;
-    margin-top: 30px;
-    width: 1050px;
+.displayImage{
+    margin-top: 1%;
 }
-.container
-{
-    margin: 50px 0px 20px 0px;
+.icon{
+    cursor:$cursor;
 }
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
-.like{
-    cursor:$cursor;
-}
-.image{
-    @include image();
-}
-.edit
-{
-    @include edit();
-    word-break: break-all;
-}
-.edit1{
-    @include edit();
-    word-break: break-all;
-}
-.icon{
-    cursor: $cursor;
-}
-.topping{
-    margin-top: 2%;
-    position: relative;
-    float: $float;
-}
-.topping1{
-    margin-top: 10%;
-    margin-left: 3%;
-}
-.likesCount{
-    margin-top: 11%;
-    margin-left: 3%;
-}
-.excess
-{
-    font-size: 25px;
-    // width: 100%
-}
-.question{
-    color: #5f6368;
-    letter-spacing: .07272727em;
-    font-family: $font-family;
-}
-.views{
-    margin-left: 5%;
-    margin-top: -20px;
-}
-.image2{
-    @include image();
-    margin-left: -264px;
-    margin-top: 60px;
-}
-.image3{
-    @include image();
-    margin-left: -170px;
-    margin-top: 20px;
-}
-.name2
-{
-    margin-left: -200px;
-    margin-top: -52px;
-    font-family: $font-family;
-}
-.date2
-{
-    margin-left: 13px;
-    margin-top: -51px;
-    font-size: 11px;
-    font-family: $font-family;
-}
-.messaging2
-{
-    word-break:break-word;
-    margin-left: -199px;
-    margin-top: -25px;
-    font-family: $font-family;
-}
-.name3
-{
-    margin-left: -102px;
-    margin-top: -54px;
-    font-family: $font-family;
-}
-.date3
-{
-    margin-left: 13px;
-    margin-top: -51px;
-    font-size: 11px;
-    font-family: $font-family;
-}
-.messaging3
-{
-    font-family: $font-family;
-    margin-left: -102px;
-    margin-top: -30px;
-}
-.secondLike{
-    margin-top: 15px;
+.edit{
+    @include edit;
 }
