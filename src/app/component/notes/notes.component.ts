@@ -25,6 +25,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>(); 
   private cards: NotesInformation[] = [];
   private pinnedNotes: any = [];
+  private show = false;
   constructor(private notesService: NotesService, private router: Router) { }
   ngOnInit() {
     this.getNotes();
@@ -46,11 +47,13 @@ export class NotesComponent implements OnInit, OnDestroy {
             this.cards.push(noteList[i])
           }
         }
+        this.show=true;
       },
         error => {
           ;
         })
   }
+
   /**
    * @description Get Api call for getting pinned Notes
    */
@@ -66,6 +69,7 @@ export class NotesComponent implements OnInit, OnDestroy {
             this.pinnedNotes.push(data["data"]['data'][i])
           }
         }
+        this.show=true;
       },
         error => {
           ;
