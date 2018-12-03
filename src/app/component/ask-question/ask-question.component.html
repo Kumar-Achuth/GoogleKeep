@@ -1,5 +1,4 @@
 <div fxLayout="column">
-
   <div fxLayout="row">
     <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
     <div fxFlex.lg="90" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100 class="mainCard">
@@ -13,10 +12,8 @@
           <div>
             <mat-checkbox [ngModel]="true" *ngIf="list.status=='close' && list.isDeleted==false"></mat-checkbox>
             <span *ngIf="list.status=='close' && list.isDeleted==false">{{list.itemName}}</span>
-
             <mat-checkbox [ngModel]="false" *ngIf="list.status=='open' && list.isDeleted==false"></mat-checkbox>
             <span *ngIf="list.status=='open' && list.isDeleted==false">{{list.itemName}}</span>
-
           </div>
         </div>
         <hr>
@@ -25,12 +22,11 @@
           <div class="question" [innerHTML]="message"></div>
         </div>
       </mat-card>
-
     </div>
   </div>
   <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
-
-  <div fxLayout="row ">
+  <div class="scrollBar">
+  <div fxLayout="row">
     <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
     <div fxFlex.lg="90" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100 class="displayImage" fxLayout='row'>
       <div fxFlex.lg="6">
@@ -45,7 +41,6 @@
         <div>
           {{firstName}}
         </div>
-
         <div *ngIf="message == null">
           <input [(ngModel)]="ask" class="edit" placeholder="Ask Your Question Here" (keydown.enter)="askQuestion(ask)">
         </div>
@@ -59,9 +54,12 @@
           <mat-icon matTooltip="Reply" (click)="replyNow()">reply</mat-icon>
         </div>
         <!--- rate icons -->
-        <div>
-          <bar-rating (click)="rate()" [(rate)]="rate" [max]="5"></bar-rating>
-        </div>
+            <div>
+                <bar-rating *ngIf="replyArray.rate.length!=0" (rateChange)="rate(replyArray.id,$event)" [(rate)]="replyArray.rate[0].rate"
+                  [max]="5"></bar-rating>
+                <bar-rating *ngIf="replyArray.rate.length==0" (rateChange)="rate(replyArray.id,$event)" [max]="5">
+                </bar-rating>
+              </div>
         <!---  like Icon ---->
         <div (click)="like()">
           <img src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
@@ -70,7 +68,6 @@
     </div>
     <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
   </div>
-
   <!-- reply for 1st division ---->
   <div fxLayout="row">
     <div fxFlex.lg="10" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
@@ -86,7 +83,6 @@
     </div>
     <div fxFlex.lg="10" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
   </div>
-
   <!-- Reply for 1st division-->
   <div fxlayout="row">
     <div fxFlex.lg="7" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
@@ -94,219 +90,146 @@
       <div *ngFor="let index of qArray ; let i = index">
         <div *ngIf="i!=0 && parentId==index.parentId">
           <div fxLayout='row'>
-          <div fxFlex.lg="6">
-            <img [ngStyle]="{'background-image':'url('+img+index.user.imageUrl+')',
+            <div fxFlex.lg="6">
+              <img [ngStyle]="{'background-image':'url('+img+index.user.imageUrl+')',
                 'background-size':'cover'}"
-              class="image">
-          </div>
-          <div fxLayout="column" fxFlex.lg="80">
-            <div fxLayout="row">
-              <div class="name" [innerHTML]="index.user.firstName">
-              </div>
-              <div class="date">
-                {{index.createdDate | date:'mediumTime'}}
-              </div>
+                class="image">
             </div>
-            <div  [innerHTML]="index.message">
-            </div>
-          </div>
-          <div fxLayout="row wrap" fxLayoutAlign="end end" class="icon">
-            <div>
-              <mat-icon matTooltip="Reply" (click)="replyBack=index.id">
-                reply
-              </mat-icon>
-            </div>
-            <div class="star">
-              <bar-rating *ngIf="index.rate.length!=0" (rateChange)="rate(index.id,$event)" [(rate)]="index.rate[0].rate"
-                [max]="5"></bar-rating>
-              <bar-rating *ngIf="index.rate.length==0" (rateChange)="rate(index.id,$event)" [max]="5"></bar-rating>
-            </div>
-            <div  (click)="like(index.id)">
-              <img class="like" src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
-            </div>
-            <div class="likesCount">
-              {{index.like.length}}
-            </div>
-          </div>
-        </div>
-          <div *ngIf="replyBack==index.id" class="replied">
+            <div fxLayout="column" fxFlex.lg="80">
               <div fxLayout="row">
-                <div>
-                  <input class="edit"  [(ngModel)]="firstReply"  
-                  placeholder="Reply Here">
+                <div class="name" [innerHTML]="index.user.firstName">
                 </div>
-                <div class="icon">
-                    <mat-icon (click)="replyHere(firstReply,index.id)">done</mat-icon>
-                  </div>
+                <div class="date">
+                  {{index.createdDate | date:'mediumTime'}}
+                </div>
+              </div>
+              <div [innerHTML]="index.message">
               </div>
             </div>
+            <div fxLayout="row wrap" fxLayoutAlign="end end" class="icon">
+              <div>
+                <mat-icon matTooltip="Reply" (click)="replyBack=index.id">
+                  reply
+                </mat-icon>
+              </div>
+              <div>
+                <bar-rating *ngIf="index.rate.length!=0" (rateChange)="rate(index.id,$event)" [(rate)]="index.rate[0].rate"
+                  [max]="5"></bar-rating>
+                <bar-rating *ngIf="index.rate.length==0" (rateChange)="rate(index.id,$event)" [max]="5"></bar-rating>
+              </div>
+              <div (click)="like(index.id)">
+                <img src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
+              </div>
+              <div>
+                {{index.like.length}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="replyBack==index.id" >
+            <div fxLayout="row">
+              <div>
+                <input class="edit" [(ngModel)]="firstReply" placeholder="Reply Here">
+              </div>
+              <div class="icon">
+                <mat-icon (click)="replyHere(firstReply,index.id)">done</mat-icon>
+              </div>
+            </div>
+          </div>
           <!-- Second Reply starts Here -->
           <div style="margin-left:30px" *ngFor="let secondIndex of qArray">
-              <div fxLayout="column"  *ngIf="secondIndex.parentId==index.id">
-                <div fxLayout="row">
-
-               
-                <div>
-                    <!-- <div>
-                        <img [ngStyle]="{'background-image':'url('+img+secondIndex.user.imageUrl+')',
-                      'background-size':'cover'}"
-                          class="image2">
-                      </div> -->
-
-                      <div fxFlex.lg="6">
-                          <img [ngStyle]="{'background-image':'url('+img+secondIndex.user.imageUrl+')',
-                              'background-size':'cover'}"
-                            class="image">
-                        </div>
+            <div fxLayout="column" *ngIf="secondIndex.parentId==index.id">
+              <div fxLayout="row">
+                  <div fxFlex.lg="6">
+                    <img [ngStyle]="{'background-image':'url('+img+secondIndex.user.imageUrl+')',
+                      'background-size':'cover'}" class="image">
                 </div>
-                <div>
-                    <div fxLayout="row">
-                        <div class="name2">
-                        {{secondIndex.user.firstName}}
-                        </div>
-                        <div class="date2">
-                          {{secondIndex.createdDate | date:'mediumTime'}}
-                        </div>
-                      </div>
-                </div>
-                <div >
-                    <div class="messaging2">
-                        {{secondIndex.message}}
-                      </div>
-                </div>
-
-                  <!-- First Level Reply Icons -->
-
-                <div class="firstLevel" fxLayout="row" fxLayoutAlign="start end">
-                    <div class="firstReply" >
-                      <mat-icon matTooltip="Reply" (click)="secondReply=secondIndex.id">
-                        reply
-                      </mat-icon>
+                <div fxLayout="column" fxFlex.lg="80">
+                  <div fxLayout="row">
+                    <div>
+                      {{secondIndex.user.firstName}}
                     </div>
-                    <div >
-                      <bar-rating *ngIf="secondIndex.rate.length!=0" (rateChange)="rate(secondIndex.id,$event)"
-                       [(rate)]="secondIndex.rate[0].rate" [max]="5"></bar-rating>
-                      <bar-rating *ngIf="secondIndex.rate.length==0" (rateChange)="rate(secondIndex.id,$event)" 
+                    <div>
+                      {{secondIndex.createdDate | date:'mediumTime'}}
+                    </div>
+                  </div>
+                  <div>
+                    {{secondIndex.message}}
+                  </div>
+                </div>
+                <!-- First Level Reply Icons -->
+                <div fxLayout="row wrap" fxLayoutAlign="end end">
+                  <div>
+                    <mat-icon matTooltip="Reply" (click)="secondReply=secondIndex.id">
+                      reply
+                    </mat-icon>
+                  </div>
+                  <div>
+                    <bar-rating *ngIf="secondIndex.rate.length!=0" (rateChange)="rate(secondIndex.id,$event)" [(rate)]="secondIndex.rate[0].rate"
                       [max]="5"></bar-rating>
-                    </div>
-                    <div class="firstLike" (click)="like(secondIndex.id)">
-                      <img  src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
-                    </div>
-                    <div class="firstCount">
-                      {{secondIndex.like.length}}
-                    </div>
+                    <bar-rating *ngIf="secondIndex.rate.length==0" (rateChange)="rate(secondIndex.id,$event)" [max]="5"></bar-rating>
+                  </div>
+                  <div (click)="like(secondIndex.id)">
+                    <img src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
+                  </div>
+                  <div>
+                    {{secondIndex.like.length}}
                   </div>
                 </div>
-                  
-                  <div *ngIf="secondReply==secondIndex.id" class="nextReply">
-                      <div fxLayout="row">
-                        <div>
-                          <input class="edit"  [(ngModel)]="nextReply"  
-                          placeholder="Reply Here">
-                        </div>
-                        <div class="icon">
-                            <mat-icon (click)="replyHere(nextReply,secondIndex.id)">done</mat-icon>
-                          </div>
+              </div>
+              <div *ngIf="secondReply==secondIndex.id" >
+                <div fxLayout="row">
+                  <div>
+                    <input class="edit" [(ngModel)]="nextReply" placeholder="Reply Here">
+                  </div>
+                  <div class="icon">
+                    <mat-icon (click)="replyHere(nextReply,secondIndex.id)">done</mat-icon>
+                  </div>
+                </div>
+              </div>
+              <!-- second level reply -->
+              <div style="margin-left:60px" *ngFor="let thirdIndex of qArray">
+                <div  fxLayout="column"  *ngIf="thirdIndex.parentId==secondIndex.id">
+                  <div fxLayout="row">
+                    <div fxFlex.lg="6">
+                      <img [ngStyle]="{'background-image':'url('+img+thirdIndex.user.imageUrl+')',
+                      'background-size':'cover'}" class="image">
+                    </div>
+                    <div fxLayout="column" fxFlex.lg="80">
+                    <div fxLayout="row">
+                      <div >
+                        {{thirdIndex.user.firstName}}
+                      </div>
+                      <div>
+                        {{thirdIndex.createdDate | date:'mediumTime'}}
                       </div>
                     </div>
-
-                    <!-- second level reply -->
-                  
-                    <div style="margin-left:50px" *ngFor="let thirdIndex of qArray">
-                        <div fxLayout="row"  *ngIf="thirdIndex.parentId==secondIndex.id">
-                          <div>
-                              <!-- <div>
-                                  <img [ngStyle]="{'background-image':'url('+img+secondIndex.user.imageUrl+')',
-                                'background-size':'cover'}"
-                                    class="image2">
-                                </div> -->
-          
-                                <div fxFlex.lg="6">
-                                    <img [ngStyle]="{'background-image':'url('+img+thirdIndex.user.imageUrl+')',
-                                        'background-size':'cover'}"
-                                      class="image">
-                                  </div>
-                          </div>
-                          <div>
-                              <div fxLayout="row">
-                                  <div class="name2">
-                                  {{thirdIndex.user.firstName}}
-                                  </div>
-                                  <div class="date2">
-                                    {{thirdIndex.createdDate | date:'mediumTime'}}
-                                  </div>
-                                </div>
-                          </div>
-                          <div >
-                              <div class="messaging2">
-                                  {{thirdIndex.message}}
-                                </div>
-                          </div>
-          
-                            <!-- First Level Reply Icons -->
-          
-                          <div class="firstLevel" fxLayout="row" fxLayoutAlign="start end">
-                              
-                              <div >
-                                <bar-rating *ngIf="thirdIndex.rate.length!=0" (rateChange)="rate(thirdIndex.id,$event)"
-                                 [(rate)]="thirdIndex.rate[0].rate" [max]="5"></bar-rating>
-                                <bar-rating *ngIf="thirdIndex.rate.length==0" (rateChange)="rate(thirdIndex.id,$event)" 
-                                [max]="5"></bar-rating>
-                              </div>
-                              <div class="firstLike" (click)="like(thirdIndex.id)">
-                                <img  src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
-                              </div>
-                              <div class="firstCount">
-                                {{thirdIndex.like.length}}
-                              </div>
-                            </div>
-          
-                            </div>
-                            </div>
-                           
-          
-</div>
-
-
-
+                    <div>
+                      {{thirdIndex.message}}
+                    </div>
+                </div>
+                  <!-- Second Level Reply Icons -->
+                  <div  fxLayout="row wrap" fxLayoutAlign="end end">
+                    <div>
+                      <bar-rating *ngIf="thirdIndex.rate.length!=0" (rateChange)="rate(thirdIndex.id,$event)" [(rate)]="thirdIndex.rate[0].rate"
+                        [max]="5"></bar-rating>
+                      <bar-rating *ngIf="thirdIndex.rate.length==0" (rateChange)="rate(thirdIndex.id,$event)" [max]="5"></bar-rating>
+                    </div>
+                    <div (click)="like(thirdIndex.id)">
+                      <img src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
+                    </div>
+                    <div>
+                      {{thirdIndex.like.length}}
+                    </div>
                   </div>
-
-
-
-
-
-
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
     <div fxFlex.lg="7" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </div>
 </div>
-
-
-
-

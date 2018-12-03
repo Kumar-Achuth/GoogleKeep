@@ -86,6 +86,7 @@ import { CollaboratorPageComponent } from './component/collaborator-page/collabo
 import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 import { AskQuestionComponent } from './component/ask-question/ask-question.component';
 import { BarRatingModule } from "ngx-bar-rating";
+import { ECartComponent } from './component/e-cart/e-cart.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     PinComponent,
     CollaboratorPageComponent,
     AskQuestionComponent,
+    ECartComponent,
   ],
   imports: [
     BrowserModule,

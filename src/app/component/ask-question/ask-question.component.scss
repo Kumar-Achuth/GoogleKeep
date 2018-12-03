@@ -1,5 +1,6 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
+$margin-top:1%;
 
 .mainCard{
     margin-top: 80px;
@@ -7,14 +8,23 @@
 .start{
     font-family: $font-family;
 }
+mat-card{
+    background-color:#feefc3;
+    padding: 10px;
+    box-shadow: 5px 10px 8px #888888;
+}
 .question{
-    margin-top: 1%;
+    margin-top:$margin-top;
+}
+.scrollBar{
+    height: 400px;
+    overflow-y: scroll;
 }
 .image{
     @include image;
 }
 .displayImage{
-    margin-top: 1%;
+    margin-top:$margin-top;
 }
 .icon{
     cursor:$cursor;

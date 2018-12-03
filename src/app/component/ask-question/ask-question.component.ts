@@ -43,6 +43,9 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getAskedNotes();
   }
+  /**
+   * @description Get The Question Asked and Note
+   */
   getAskedNotes() {
     this.notesService.getAskedNotes(this.askedNote[3])
       .pipe(takeUntil(this.destroy$))
@@ -52,8 +55,6 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
         this.description = data['data']['data'][0].description;
         this.qArray = this.result["questionAndAnswerNotes"];
         this.replyArray = this.result["questionAndAnswerNotes"][0];
-        this.ownerName = this.qArray[0].firstName;
-        this.date = this.result["questionAndAnswerNotes"][0].createdDate;
         if (this.result['questionAndAnswerNotes'][0] != undefined) {
           this.message = this.result['questionAndAnswerNotes'][0].message;
           this.parentId = this.result['questionAndAnswerNotes'][0].id;
@@ -66,15 +67,21 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
         LoggerService.log('response', data)
       })
   }
+  /**
+   * @description Post Question Api call
+   * @param ask 
+   */
   askQuestion(ask) {
-    this.askService.askIt({
+    let displayQuestion={
       "message": ask,
       "notesId": this.askedNote[3]
-    })
+    }
+    this.askService.askIt(displayQuestion)
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         LoggerService.log('response', data)
         this.message = ask;
+        this.getAskedNotes();
       })
   }
   replyNow() {
@@ -122,6 +129,8 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
         replyMessage = data["data"]["details"].message;
         this.answer = data["data"]["details"].message;
         LoggerService.log('I am Replied', data)
+        this.getAskedNotes();
+      
       })
   }
   ngOnDestroy() {

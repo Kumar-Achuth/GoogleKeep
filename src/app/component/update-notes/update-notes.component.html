@@ -84,5 +84,15 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div>
+          <div>
+            Question Asked
+          </div><br>
+          <div *ngIf=" data.questionAndAnswerNotes.length!=0" class="pointTo" 
+          (click)="goToQA(data.id)">
+            {{data.questionAndAnswerNotes[0].message}}
+          </div>
+        </div>
     </div>
 </div>
