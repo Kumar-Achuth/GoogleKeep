@@ -45,6 +45,7 @@ import { GlobalSearchComponent } from './component/global-search/global-search.c
 import { LoggerService } from './core/services/loggerService/logger.service';
 import { CropImageComponent } from './component/crop-image/crop-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import {
   FormsModule,
@@ -158,7 +159,9 @@ import { ECartComponent } from './component/e-cart/e-cart.component';
     MatCheckboxModule,
     ImageCropperModule,
     MatDialogModule,
-    BarRatingModule
+    BarRatingModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot() 
 
 
   ],

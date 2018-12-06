@@ -1,7 +1,7 @@
 <div fxLayout="column">
   <div fxLayout="row">
-    <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
-    <div fxFlex.lg="90" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100 class="mainCard">
+    <!-- <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
+    <div fxFlex.lg="100" fxFlex.md=100 fxFlex.sm=80 fxFlex.xs=100 class="mainCard">
       <mat-card>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div class="start" [innerHTML]="title"></div>
@@ -24,11 +24,11 @@
       </mat-card>
     </div>
   </div>
-  <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
+  <!-- <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
   <div class="scrollBar">
   <div fxLayout="row">
-    <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
-    <div fxFlex.lg="90" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100 class="displayImage" fxLayout='row'>
+    <!-- <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
+    <div fxFlex.lg="95" fxFlex.md=95 fxFlex.sm=80 fxFlex.xs=100 class="displayImage" fxLayout='row'>
       <div fxFlex.lg="6">
         <div *ngIf="image!=''">
           <img src="{{profile}}" class="image">
@@ -38,15 +38,36 @@
         </button>
       </div>
       <div fxFlex.lg="80" fxLayout="column">
+        <div  fxLayout="row">
         <div>
           {{firstName}}
         </div>
-        <div *ngIf="message == null">
-          <input [(ngModel)]="ask" class="edit" placeholder="Ask Your Question Here" (keydown.enter)="askQuestion(ask)">
+        <div *ngIf="!showIt" class="viewReply" (click)="viewReply()" >
+            <i class="material-icons">
+                keyboard_arrow_down
+                </i>
+          <div class="viewIt icon">View Replies</div>
         </div>
+        <div *ngIf="showIt"  class="hideReply" (click)="hideReply()">
+            <i class="material-icons">
+                keyboard_arrow_up
+                </i>
+                <div class="viewIt icon">Hide Replies</div>
+        </div>
+      </div>
+        <div *ngIf="message == null">
+          <div [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
+          <div fxLayoutAlign="end end">
+              <i class="material-icons" (click)="askQuestion()">send</i>
+            </div>
+        </div>
+        <div>
         <div *ngIf="message != null">
           <div class="excess" [innerHTML]="message"></div>
         </div>
+       
+      </div>
+
       </div>
       <div fxFlex="row wrap" fxLayoutAlign="end end" class="icon">
         <!-- Reply Icon -->
@@ -55,40 +76,38 @@
         </div>
         <!--- rate icons -->
             <div>
-                <bar-rating *ngIf="replyArray.rate.length!=0" (rateChange)="rate(replyArray.id,$event)" [(rate)]="replyArray.rate[0].rate"
-                  [max]="5"></bar-rating>
-                <bar-rating *ngIf="replyArray.rate.length==0" (rateChange)="rate(replyArray.id,$event)" [max]="5">
-                </bar-rating>
+                <bar-rating [(rate)]="rate" [max]="5"></bar-rating>              
               </div>
         <!---  like Icon ---->
-        <div (click)="like()">
+        <div >
           <img src="../../../assets/images/outline-thumb_up_alt-24px (1).svg">
         </div>
       </div>
     </div>
-    <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
+    <!-- <div fxFlex.lg="5" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
   </div>
   <!-- reply for 1st division ---->
   <div fxLayout="row">
-    <div fxFlex.lg="10" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
-    <div fxFlex.lg="80" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100>
+    <!-- <div fxFlex.lg="10" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
+    <div fxFlex.lg="95" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100>
       <div *ngIf="reply==1">
         <div class="icon">
-          <input fxFlex.lg="70" class="edit" [(ngModel)]="replyMessage" placeholder="Reply Here">
+          <!-- <input fxFlex.lg="70" class="edit" [(ngModel)]="editorContent" placeholder="Reply Here"> -->
+          <div fxFlex.lg="80" [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
           <div fxLayoutAlign="end end">
-            <i class="material-icons" (click)="replyHere(replyMessage, replyArray.id)">send</i>
+            <i class="material-icons" (click)="replyHere(editorContent, replyArray.id)">send</i>
           </div>
         </div>
       </div>
     </div>
-    <div fxFlex.lg="10" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
+    <!-- <div fxFlex.lg="10" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
   </div>
   <!-- Reply for 1st division-->
-  <div fxlayout="row">
-    <div fxFlex.lg="7" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
-    <div fxFlex.lg="86" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100 fxLayout="column">
+  <div *ngIf="hideThem==1" fxlayout="row">
+    <!-- <div fxFlex.lg="7" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
+    <div fxFlex.lg="95" fxFlex.md=90 fxFlex.sm=80 fxFlex.xs=100 fxLayout="column">
       <div *ngFor="let index of qArray ; let i = index">
-        <div *ngIf="i!=0 && parentId==index.parentId">
+        <div *ngIf="i!=0 && parentId==index.parentId && index.isApproved==true">
           <div fxLayout='row'>
             <div fxFlex.lg="6">
               <img [ngStyle]="{'background-image':'url('+img+index.user.imageUrl+')',
@@ -128,16 +147,18 @@
           <div *ngIf="replyBack==index.id" >
             <div fxLayout="row">
               <div>
-                <input class="edit" [(ngModel)]="firstReply" placeholder="Reply Here">
+                  <div fxFlex.lg="80" [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
+                <!-- <input class="edit" [(ngModel)]="editorContent" placeholder="Reply Here"> -->
               </div>
-              <div class="icon">
-                <mat-icon (click)="replyHere(firstReply,index.id)">done</mat-icon>
+              <div class="icon" fxLayoutAlign="end end">
+                <!-- <mat-icon (click)="replyHere(editorContent,index.id)">done</mat-icon> -->
+                <i class="material-icons" (click)="replyHere(editorContent,index.id)">send</i>
               </div>
             </div>
           </div>
           <!-- Second Reply starts Here -->
           <div style="margin-left:30px" *ngFor="let secondIndex of qArray">
-            <div fxLayout="column" *ngIf="secondIndex.parentId==index.id">
+            <div fxLayout="column" *ngIf="secondIndex.parentId==index.id && secondIndex.isApproved==true">
               <div fxLayout="row">
                   <div fxFlex.lg="6">
                     <img [ngStyle]="{'background-image':'url('+img+secondIndex.user.imageUrl+')',
@@ -152,8 +173,8 @@
                       {{secondIndex.createdDate | date:'mediumTime'}}
                     </div>
                   </div>
-                  <div>
-                    {{secondIndex.message}}
+                  <div  [innerHTML]="secondIndex.message">
+                    <!-- {{secondIndex.message}} -->
                   </div>
                 </div>
                 <!-- First Level Reply Icons -->
@@ -179,16 +200,18 @@
               <div *ngIf="secondReply==secondIndex.id" >
                 <div fxLayout="row">
                   <div>
-                    <input class="edit" [(ngModel)]="nextReply" placeholder="Reply Here">
+                    <!-- <input class="edit" [(ngModel)]="editorContent" placeholder="Reply Here"> -->
+                    <div fxFlex.lg="70" [froalaEditor]="options" [(froalaModel)]="editorContent" ></div>
                   </div>
-                  <div class="icon">
-                    <mat-icon (click)="replyHere(nextReply,secondIndex.id)">done</mat-icon>
+                  <div class="icon" fxLayoutAlign="end end">
+                    <!-- <mat-icon (click)="replyHere(editorContent,secondIndex.id)">done</mat-icon> -->
+                    <i class="material-icons" (click)="replyHere(editorContent,secondIndex.id)">send</i>
                   </div>
                 </div>
               </div>
               <!-- second level reply -->
               <div style="margin-left:60px" *ngFor="let thirdIndex of qArray">
-                <div  fxLayout="column"  *ngIf="thirdIndex.parentId==secondIndex.id">
+                <div  fxLayout="column"  *ngIf="thirdIndex.parentId==secondIndex.id && thirdIndex.isApproved==true">
                   <div fxLayout="row">
                     <div fxFlex.lg="6">
                       <img [ngStyle]="{'background-image':'url('+img+thirdIndex.user.imageUrl+')',
@@ -203,8 +226,8 @@
                         {{thirdIndex.createdDate | date:'mediumTime'}}
                       </div>
                     </div>
-                    <div>
-                      {{thirdIndex.message}}
+                    <div [innerHTML]="thirdIndex.message">
+                      <!-- {{thirdIndex.message}} -->
                     </div>
                 </div>
                   <!-- Second Level Reply Icons -->
@@ -229,7 +252,7 @@
         </div>
       </div>
     </div>
-    <div fxFlex.lg="7" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div>
+    <!-- <div fxFlex.lg="7" fxFlex.md=5 fxFlex.sm=10 fxFlex.xs=0></div> -->
   </div>
   </div>
 </div>

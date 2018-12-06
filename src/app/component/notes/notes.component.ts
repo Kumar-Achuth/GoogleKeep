@@ -48,10 +48,7 @@ export class NotesComponent implements OnInit, OnDestroy {
           }
         }
         this.show=true;
-      },
-        error => {
-          ;
-        })
+      })
   }
 
   /**
@@ -70,10 +67,7 @@ export class NotesComponent implements OnInit, OnDestroy {
           }
         }
         this.show=true;
-      },
-        error => {
-          ;
-        })
+      })
   }
   eventEntry(event) {
     if (event) {

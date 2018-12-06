@@ -36,12 +36,32 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
   private date;
   private parentId;
   private replyArray;
+  private showIt = false;
+  private hideThem = 0;
+  public editorContent: string
   private askedNote = this.url.split('/')
   constructor(private notesService: NotesService, private router: Router,
     private askService: QuestionAnswersService) { }
 
   ngOnInit() {
+    console.log();
     this.getAskedNotes();
+  }
+  public options: Object = {
+    charCounterCount: false,
+    toolbarButtons: 	['fullscreen', 'bold', 'italic', 'underline', '|','fontSize', 'color', 'inlineClass', 'inlineStyle', 'paragraphStyle', 'lineHeight', '|',
+     'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote',  '|', 'emoticons', 'fontAwesome',
+     'specialCharacters', 'selectAll', 'clearFormatting', '|', 'undo', 'redo'],
+    toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline']
+
+  };
+  viewReply() {
+    this.showIt = true;
+    this.hideThem = 1;
+  }
+  hideReply() {
+    this.showIt = false;
+    this.hideThem = 0;
   }
   /**
    * @description Get The Question Asked and Note
@@ -71,16 +91,16 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
    * @description Post Question Api call
    * @param ask 
    */
-  askQuestion(ask) {
-    let displayQuestion={
-      "message": ask,
+  askQuestion() {
+    let displayQuestion = {
+      "message": this.editorContent,
       "notesId": this.askedNote[3]
     }
     this.askService.askIt(displayQuestion)
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         LoggerService.log('response', data)
-        this.message = ask;
+        this.message = this.editorContent;
         this.getAskedNotes();
       })
   }
@@ -130,7 +150,7 @@ export class AskQuestionComponent implements OnInit, OnDestroy {
         this.answer = data["data"]["details"].message;
         LoggerService.log('I am Replied', data)
         this.getAskedNotes();
-      
+
       })
   }
   ngOnDestroy() {
