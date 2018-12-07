@@ -4,6 +4,7 @@ $height: 70%;
 $width :70%;
 
 
+
 .heading{
   @include heading;
     }
@@ -13,42 +14,42 @@ $width :70%;
 .mat-radio-button ~ .mat-radio-button {
       padding-right: 16px;
 }
-.select{
-      cursor:$cursor;
-      background-color: #90ee90;
-      height:$height;
-      width :$width ;
-}
-.notSelect{
-      cursor: $cursor;
-      background-color:#87cefa ;
-      height: $height;
-      width : $width ;
-}
+// .select{
+//       cursor:$cursor;
+//       background-color: #90ee90;
+//       height:$height;
+//       width :$width ;
+// }
+// .notSelect{
+//       cursor: $cursor;
+//       background-color:#87cefa ;
+//       height: $height;
+//       width : $width ;
+// }
 .letter1{
-      color : $blueColor;
+      color :$maincolor;
     font-size:$font-size;
 }
 .letter2{
-  color : $redColor;
+  color :$maincolor;
   font-size :$font-size;
 }
 .letter3{
-color : $greenColor;
+color :$maincolor;
 font-size:$font-size;
 }
 .letter4{
- color : $blueColor;
+ color :$maincolor;
   font-size: $font-size;
 }
 .letter5{
     font-size: $font-size;
-color : $redColor;
+color :$maincolor;
   }
 .letter6
 {
   font-size:$font-size;
-color : $yellowColor;
+color :$maincolor;
 }
 .caps
 {
@@ -56,5 +57,69 @@ color : $yellowColor;
 }
 .google{
   font-family: $font-family;
+}
+
+
+
+
+
+
+.ecommerce_header{
+  margin-top: 40px;
+}
+.package{
+  font-family:$font-family;
+  font-size:17px;
+}
+.cartAlign{
+  margin-top: 80px;
+}
+ul.details {
+  list-style-type: square;   
+//  margin-left: -14%;
+ font-family: $font-family;
+//  line-height: 200%;
+}
+.cartMatCard{
+  width: 120px;
+  height: 180px;
+}
+.basic{
+  color: blue;
+  padding: 1%;
+  font-family: $font-family;
+}
+.cartSize{
+  margin-top: -42px;
+  margin-left: -14%;
+}
+.alignCart{
+  margin-top: 10%;
+  margin-left: -8%;
+}
+.cartTitle{
+  padding: 5px;
+  font-family:$font-family;
+  cursor: $cursor;
+}
+.heading{
+      font-size: 25px;
+      font-family:$font-family;
+      color: #5f6368;  
+  }
+  .select{
+      cursor:$cursor;
+      width: 131px;
+      height: 220px;
+      background-color: #fb0;
+}
+.notSelect{
+      cursor: $cursor;
+      width: 129px;
+      height: 212px;
+      background-color: grey;
+}
+.notSelect:hover{
+  background-color: #fb0;
 }
   

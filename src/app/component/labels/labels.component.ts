@@ -37,7 +37,7 @@ export class LabelsComponent implements OnInit,OnDestroy {
   @ViewChild('labelId') labelId: ElementRef;
   @Output() newEvent = new EventEmitter();
   @Input() trash;
-  constructor(private data: GlobalSearchService, private myHttpService: HttpService,
+  constructor(private data: GlobalSearchService,
     private notesService: NotesService,
     private dialogRef: MatDialogRef<NavbarComponent>, private dialog: MatDialog) { }
 

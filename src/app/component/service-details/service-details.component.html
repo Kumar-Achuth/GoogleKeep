@@ -1,0 +1,29 @@
+<div class="ecommerce_main">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="text">{{data.name | titlecase }} Pack Details</div>
+    <div class="text">
+      {{data.price | currency}}/month
+    </div>
+  </mat-toolbar>
+</div>
+<div fxLayout="column" fxLayoutGap="160px">
+<div>
+  <mat-tab-group [backgroundColor]="warn">
+    <mat-tab label="Feature 1" class="text">{{data.description}} </mat-tab>
+    <mat-tab label="Feature 2" class="text">{{data.description}} </mat-tab>
+    <mat-tab label="Feature 3" class="text">{{data.description}} </mat-tab>
+  </mat-tab-group>
+</div>
+<div fxLayout="row" class="buttons" fxLayoutAlign="space-between end">
+  <div>
+    <button mat-raised-button color="primary" class="text" (click)="remove()">
+      Remove
+    </button>
+  </div>
+  <div>
+    <button mat-raised-button class="text" color="primary" (click)="proceed()">
+    Proceed To Checkout
+    </button>
+  </div>
+</div>
+</div>

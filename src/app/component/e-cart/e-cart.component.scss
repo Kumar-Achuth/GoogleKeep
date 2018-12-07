@@ -1,45 +1,62 @@
 @import "../../../scss/mixins.scss";
 @import "../../../scss/variables.scss";
-
-.mainCard{
-    margin-top: 100px;
+.ecommerce_header{
+    margin-top: 40px;
 }
-.textBox{
+.package{
+    font-family:$font-family;
+    font-size:20px;
+}
+.cartAlign{
     margin-top: 80px;
 }
-.box{
-    width:250px;
-    height:350px;
-    border: 1px solid black;
-    background-color:#ffffff;
-    box-shadow:20px 20px grey; 
-    border-radius: 2px;
+ul.details {
+    list-style-type: square;   
+   margin-left: -14%;
+   font-family: $font-family;
+   line-height: 200%;
 }
-.box:hover {
-    box-shadow:20px 40px #fb0;
-    border: 1px solid black;
-    background-color:#ffffff;
-    border-radius: 2px;
+.cartMatCard{
+    width: 170px;
+    height: 250px;
 }
 .basic{
-    padding: 10px;
-    font-family: $font-family;
-}
-.details{
-    font-family: $font-family;
-}
-.heading{
-    font-size: 25px;
-    font-family:$font-family;
-    color: #5f6368;
-    
-}
-.advanced{
-    padding: 10px;
     color: blue;
     font-family: $font-family;
-    font-size: 12px;
 }
-.select{
-    cursor:$cursor;
+.cartSize{
+    margin-top: -42px;
+    margin-left: -14%;
 }
+.alignCart{
+    margin-top: 10%;
+    margin-left: -8%;
+}
+.cartTitle{
+    padding: 5px;
+    font-family:$font-family;
+    cursor: $cursor;
+}
+.heading{
+        font-size: 25px;
+        font-family:$font-family;
+        color: #5f6368;  
+    }
+    .select{
+        cursor:$cursor;
+        width: 189px;
+        height: 300px;
+        background-color: #fb0;
+  }
+  mat-toolbar{
+      background-color: #fb0;
+  }
+  .notSelect{
+        cursor: $cursor;
+        width: 179px;
+        height: 290px;
+        background-color: grey;
+  }
+  .notSelect:hover{
+    background-color: #fb0;
+  }

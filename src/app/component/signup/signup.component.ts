@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpService } from '../../core/services/httpServices/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSnackBar } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/userServices/user.service';
 import { Subject } from 'rxjs';
-import { takeUntil} from 'rxjs/operators'
+import { takeUntil } from 'rxjs/operators'
+import { Router } from '@angular/router';
+import { ProductCartServiceService } from 'src/app/core/services/productCartServices/product-cart-service.service';
+import { LoggerService } from 'src/app/core/services/loggerService/logger.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -31,7 +33,7 @@ import { takeUntil} from 'rxjs/operators'
   ]
 })
 export class SignupComponent implements OnInit, OnDestroy {
-  destroy$: Subject<boolean> = new Subject<boolean>(); 
+  destroy$: Subject<boolean> = new Subject<boolean>();
   private hide = true;
   private records = {};
   private basic: any;
@@ -40,6 +42,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   private value = true;
   private value1 = true;
   private form: any = {};
+  private cartId = localStorage.getItem('cartId')
   private Email = new FormControl('', [Validators.required,
   Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]);
   private FirstName = new FormControl('', [Validators.required,
@@ -47,11 +50,14 @@ export class SignupComponent implements OnInit, OnDestroy {
   private LastName = new FormControl('', [Validators.required,
   Validators.pattern('[a-zA-Z]*')]);
   private password = new FormControl('', [Validators.required])
-   model: any = {};
+  model: any = {};
   private service: any;
   cards = [];
-  constructor(private userService:UserService, private snackBar: MatSnackBar) { }
+  private getIt : any=[];
+  constructor(private userService: UserService, private snackBar: MatSnackBar,
+    private cartService : ProductCartServiceService, private router: Router) { }
   ngOnInit() {
+    this.getcartId();
     // this.users();
     this.records = this.userService.getService().subscribe(data => {
       for (var i = 0; i < data["data"].data.length; i++) {
@@ -60,10 +66,10 @@ export class SignupComponent implements OnInit, OnDestroy {
       }
     })
   }
-/** 
- * @param card 
- * @description Function to Select Basic and Advanced Services Cards
- */
+  /** 
+   * @param card 
+   * @description Function to Select Basic and Advanced Services Cards
+   */
   selectCards(card) {
     this.service = card.name;
     card.select = true;
@@ -73,6 +79,13 @@ export class SignupComponent implements OnInit, OnDestroy {
       }
       this.cards[i].select = false;
     }
+  }
+  getcartId(){
+    this.getIt=[];
+    this.cartService.cartId(this.cartId).subscribe(data => {
+      LoggerService.log('Success',data)
+      this.getIt=data['data'].productId
+    })
   }
 
   getErrorMessage() {
@@ -108,8 +121,8 @@ export class SignupComponent implements OnInit, OnDestroy {
         "emailVerified": true,
         "password": this.model.password,
       })
-      .pipe(takeUntil(this.destroy$))  
-      .subscribe(
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
           () => {
             this.snackBar.open("Registration", "Successful", {
               duration: 1000
@@ -122,16 +135,21 @@ export class SignupComponent implements OnInit, OnDestroy {
             });
             this.message = "Registration UnSuccessful ";
           }
+          
         )
+        this.router.navigate(['/paymentPortal'])
     }
     else {
-        this.snackBar.open("Registration", "Unsuccessful", {
-          duration: 1000
-        });
+      this.snackBar.open("Registration", "Unsuccessful", {
+        duration: 1000
+      });
     }
   }
   onSubmit() {
     alert('Success' + JSON.stringify(this.model))
+  }
+  goTocart() {
+    this.router.navigate(['/eCart'])
   }
   ngOnDestroy() {
     this.destroy$.next(true);

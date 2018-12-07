@@ -69,6 +69,7 @@ import {
   MatCardModule,
   MatRadioModule,
   MatStepperModule,
+  MatTabsModule,
   MatSidenavModule,
   MatMenuModule,
   MatExpansionModule,
@@ -88,6 +89,8 @@ import { ErrorsHandler } from './core/services/errorHandler/error-handler';
 import { AskQuestionComponent } from './component/ask-question/ask-question.component';
 import { BarRatingModule } from "ngx-bar-rating";
 import { ECartComponent } from './component/e-cart/e-cart.component';
+import { ServiceDetailsComponent } from './component/service-details/service-details.component';
+import { PaymentPortalComponent } from './component/payment-portal/payment-portal.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +126,8 @@ import { ECartComponent } from './component/e-cart/e-cart.component';
     CollaboratorPageComponent,
     AskQuestionComponent,
     ECartComponent,
+    ServiceDetailsComponent,
+    PaymentPortalComponent,
   ],
   imports: [
     BrowserModule,
@@ -144,6 +149,7 @@ import { ECartComponent } from './component/e-cart/e-cart.component';
     HttpClientInMemoryWebApiModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatTabsModule,
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     LayoutModule,
     MatListModule,
@@ -176,7 +182,7 @@ import { ECartComponent } from './component/e-cart/e-cart.component';
   }],
   bootstrap: [AppComponent],
   entryComponents: [DeleteLabelComponent, DeleteTrashComponent, CropImageComponent,
-    CollaboratorPageComponent],
+    CollaboratorPageComponent,ServiceDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -13,6 +13,7 @@
         <div class="clas">
           <mat-card>
             <mat-card-title>
+              <div fxLayout="row" fxLayoutAlign="space-between center">
               <div class="letters" fxLayout="row">
                 <div class="letter1">F</div>
                 <div class="letter2">U</div>
@@ -21,7 +22,10 @@
                 <div class="letter5">O</div>
                 <div class="letter6">O</div>
               </div>
-              <br>
+              <button mat-raised-button color="primary" (click)="goTocart()">
+                Go To Cart
+              </button>
+            </div>
               <div  class="google">
                 Create your Google Account
               </div>
@@ -62,8 +66,8 @@
                 <mat-error *ngIf="password.invalid">{{getErrorMessagepassword()}}
                 </mat-error>
               </mat-form-field>
-              <h4> Select Your Service</h4>
-              <div class="size" fxLayout="row" fxLayoutAlign="space-between">
+              <h4> Select Your Service</h4><br>
+              <!-- <div class="size" fxLayout="row" fxLayoutAlign="space-between">
                 <span *ngFor="let card of cards" style="padding : 15px;">
                   <mat-card (click)="selectCards(card)"
                    [ngClass]="card.select ? 'select' : 'notSelect'">
@@ -73,7 +77,33 @@
                     <h5>{{card.description}}</h5>
                   </mat-card>
                 </span>
-              </div>
+              </div> -->
+              <div>
+                  <!-- <div fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="0"></div> -->
+                  <div *ngFor="let index of cards" fxFlex.lg="60" 
+                   fxLayout.lg="row" fxLayoutAlign="space-around center">
+                    <div>
+                        <mat-card 
+                        [ngClass]="getIt==index.id ? 'select' : 'notSelect'">
+                          <div class="alignCart" >
+                      <mat-card class="cartMatCard cartSize">
+                        <div class="package">{{index.price | currency}} per month</div>
+                        <div class="basic" >{{index.name | uppercase}}</div>
+                        <div>
+                            <ul class="details">
+                                <li> {{index.description}}</li>
+                              </ul>
+                        </div>
+                      </mat-card><br>
+                      <div *ngIf="getIt!=index.id" class="cartTitle">ADD TO CART</div>
+                      <div *ngIf="getIt==index.id" class="cartTitle"> Selected</div>
+                    </div>
+                    </mat-card>
+                    </div>
+                  </div>
+                  <!-- <div fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" fxFlex.xs="0"></div> -->
+                </div>
+
             </mat-card-content>
             <div class=buttons fxLayout="row" fxLayoutAlign="space-between">
               <a routerLink="/login">Existing User</a>

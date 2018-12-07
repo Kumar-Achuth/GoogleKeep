@@ -1,0 +1,15 @@
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+
+mat-toolbar{
+    background-color: #fb0;
+}
+mat-tab{
+    color: #fb0
+}
+.buttons{
+    padding: 2%;
+}
+.text{
+    font-family: $font-family;
+}

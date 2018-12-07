@@ -10,35 +10,30 @@
   align-content: center;
 }
 
-.letter1
-{
-  color : $blueColor;
+.letter1{
+  color :$maincolor;
 font-size:$font-size;
 }
-.letter2
-{
-color : $redColor;
+.letter2{
+color :$maincolor;
 font-size :$font-size;
 }
-.letter3
-{
-color : $greenColor;
+.letter3{
+color :$maincolor;
 font-size:$font-size;
 }
-.letter4
-{
-  color : $blueColor;
-  font-size:$font-size;
+.letter4{
+color :$maincolor;
+font-size: $font-size;
 }
-.letter5
-{
-font-size:$font-size;
-color : $redColor;
+.letter5{
+font-size: $font-size;
+color :$maincolor;
 }
 .letter6
 {
 font-size:$font-size;
-color : $yellowColor;
+color :$maincolor;
 }
 .login{
   font-family: $font-family;

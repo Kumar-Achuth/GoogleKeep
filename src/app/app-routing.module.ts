@@ -17,9 +17,10 @@ import { GlobalSearchComponent } from './component/global-search/global-search.c
 import { DeleteLabelComponent } from './component/delete-label/delete-label.component';
 import { AskQuestionComponent } from './component/ask-question/ask-question.component';
 import { ECartComponent } from './component/e-cart/e-cart.component';
+import { PaymentPortalComponent } from './component/payment-portal/payment-portal.component';
 
 const routes: Routes = [
-                      { path: '', redirectTo: 'login', pathMatch: 'full'},
+                      { path: '', redirectTo: 'eCart', pathMatch: 'full'},
 
                        { path : 'signup', component: SignupComponent },
                        { path : 'login', component: LoginComponent  },
@@ -33,9 +34,11 @@ const routes: Routes = [
                        { path : 'trash', component : TrashComponent},
                        { path : 'globalSearch', component : GlobalSearchComponent},
                        { path : 'askQuestion/:noteId',component : AskQuestionComponent  },
-                       { path : 'eCart', component : ECartComponent},
+                    
                        { path : '',redirectTo : 'notes' , pathMatch : 'full',canActivate : [AuthGuard] }]
                        },
+                       { path : 'eCart', component : ECartComponent},
+                       { path : 'paymentPortal' , component : PaymentPortalComponent  },
                        { path : 'deleteLabel', component : DeleteLabelComponent},
                        { path : 'labels', component : LabelsComponent},                    
                        {path : 'updateNotes', component : UpdateNotesComponent}

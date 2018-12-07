@@ -1,0 +1,7 @@
+@import "../../../scss/mixins.scss";
+@import "../../../scss/variables.scss";
+
+mat-toolbar{
+    background-color: #fb0;
+    font-family: $font-family;
+}
